@@ -1,0 +1,95 @@
+name: Wiki — sync on PR
+
+on:
+  pull_request:
+    types: [opened, closed]
+    branches: [main]
+
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    # Skip PRs created by the wiki bot itself to avoid an infinite loop
+    if: >
+      github.event.pull_request.user.login != 'github-actions[bot]' &&
+      (github.event.action == 'opened' ||
+       (github.event.action == 'closed' && github.event.pull_request.merged == true))
+
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install anthropic
+
+      - name: Ingest PR into wiki
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GITHUB_TOKEN:      ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          PR_NUMBER:    ${{ github.event.pull_request.number }}
+          PR_TITLE:     ${{ github.event.pull_request.title }}
+          PR_BODY:      ${{ github.event.pull_request.body }}
+          PR_AUTHOR:    ${{ github.event.pull_request.user.login }}
+          PR_HEAD_REF:  ${{ github.event.pull_request.head.ref }}
+          PR_BASE_REF:  ${{ github.event.pull_request.base.ref }}
+          PR_URL:       ${{ github.event.pull_request.html_url }}
+          PR_ACTION:    ${{ github.event.action }}
+          PR_MERGED:    ${{ github.event.pull_request.merged }}
+        run: python .github/scripts/ingest_pr.py
+
+      - name: Commit wiki changes and auto-merge into main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER:    ${{ github.event.pull_request.number }}
+          PR_TITLE:     ${{ github.event.pull_request.title }}
+        run: |
+          git config user.name  "Wiki Bot"
+          git config user.email "wiki-bot@kickstartai.nl"
+          git add wiki/
+          if git diff --staged --quiet; then
+            echo "No wiki changes — nothing to commit."
+            exit 0
+          fi
+
+          BRANCH="wiki/pr-${PR_NUMBER}"
+          git checkout -b "$BRANCH"
+          git commit -m "wiki: ingest PR #${PR_NUMBER} — ${PR_TITLE}"
+          git push origin "$BRANCH"
+
+          # Create the PR
+          PR_RESP=$(curl -s -X POST \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls" \
+            -H "Authorization: Bearer ${GITHUB_TOKEN}" \
+            -H "Content-Type: application/json" \
+            -d "{
+              \"title\": \"wiki: ingest PR #${PR_NUMBER} — ${PR_TITLE}\",
+              \"head\":  \"wiki/pr-${PR_NUMBER}\",
+              \"base\":  \"main\",
+              \"body\":  \"Auto-generated wiki update for PR #${PR_NUMBER}.\"
+            }")
+
+          WIKI_PR_NUM=$(echo "$PR_RESP" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('number',''))" 2>/dev/null)
+          echo "Wiki PR number: ${WIKI_PR_NUM}"
+
+          if [ -n "$WIKI_PR_NUM" ]; then
+            # Immediately merge — works if branch protection has no required reviews
+            MERGE_RESP=$(curl -s -X PUT \
+              "https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/${WIKI_PR_NUM}/merge" \
+              -H "Authorization: Bearer ${GITHUB_TOKEN}" \
+              -H "Content-Type: application/json" \
+              -d "{\"merge_method\": \"squash\", \"commit_title\": \"wiki: ingest PR #${PR_NUMBER} — ${PR_TITLE}\"}")
+            echo "Merge result: $MERGE_RESP"
+          fi

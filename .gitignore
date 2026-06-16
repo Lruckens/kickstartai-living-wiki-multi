@@ -1,0 +1,30 @@
+# Environment variables — never commit API keys
+.env
+.env.local
+.env.*.local
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+env/
+
+# Node / frontend
+node_modules/
+dist/
+build/
+.next/
+.vite/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Obsidian — share the vault config, ignore per-user workspace/session state
+wiki/.obsidian/workspace.json
+wiki/.obsidian/workspace-mobile.json
+wiki/.obsidian/workspace*.json
+wiki/.obsidian/cache
+wiki/.trash/

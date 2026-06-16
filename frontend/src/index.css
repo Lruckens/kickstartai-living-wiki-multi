@@ -1,0 +1,148 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Primary — KickstartAI purple #66269B */
+    --primary:            273 61% 38%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow:       217 91% 58%;   /* blue glow */
+    --primary-deep:       273 65% 15%;
+
+    /* Secondary — soft purple-tinted gray */
+    --secondary:          273 20% 94%;
+    --secondary-foreground: 273 35% 22%;
+
+    /* Accent — KickstartAI orange */
+    --accent:             24 95% 53%;
+    --accent-warm:        18 95% 48%;
+    --accent-foreground:  0 0% 100%;
+    --accent-soft:        24 100% 94%;
+
+    /* Neutral */
+    --foreground:         273 35% 12%;
+    --muted:              273 15% 96%;
+    --muted-foreground:   273 10% 50%;
+    --card:               0 0% 100%;
+    --card-foreground:    273 35% 12%;
+    --border:             273 20% 88%;
+    --input:              273 20% 84%;
+
+    /* Destructive */
+    --destructive:        0 84% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Page background */
+    --soft:               273 25% 97%;
+  }
+}
+
+@layer base {
+  body {
+    @apply bg-soft text-foreground antialiased;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+
+  * {
+    @apply border-border;
+  }
+}
+
+@layer utilities {
+  .ring-glow {
+    box-shadow: 0 0 0 3px hsl(var(--primary) / 0.18), 0 0 12px hsl(var(--primary-glow) / 0.15);
+  }
+
+  .shadow-elegant {
+    box-shadow: 0 4px 24px -4px hsl(var(--primary) / 0.15), 0 1px 4px -1px hsl(var(--border) / 0.60);
+  }
+
+  .shadow-soft {
+    box-shadow: 0 2px 12px -2px hsl(var(--primary) / 0.08), 0 1px 3px -1px hsl(var(--border) / 0.40);
+  }
+
+  .bg-hero {
+    background: linear-gradient(135deg, hsl(var(--primary-deep)) 0%, hsl(var(--primary)) 50%, hsl(217 91% 45%) 100%);
+  }
+
+  .bg-soft {
+    background-color: hsl(var(--soft));
+  }
+
+  .bg-accent-gradient {
+    background: linear-gradient(135deg, hsl(var(--accent)) 0%, hsl(var(--accent-warm)) 100%);
+  }
+
+  .bg-accent-soft {
+    background-color: hsl(var(--accent-soft));
+  }
+
+  .text-primary-glow {
+    color: hsl(var(--primary-glow));
+  }
+
+  .text-primary-deep {
+    color: hsl(var(--primary-deep));
+  }
+
+  .accent-primary {
+    accent-color: hsl(var(--primary));
+  }
+}
+
+/* Wiki markdown prose styles */
+.wiki-prose h1 {
+  @apply text-2xl font-bold text-foreground mb-4 mt-0 pb-3 border-b border-border;
+}
+.wiki-prose h2 {
+  @apply text-lg font-semibold text-foreground mb-3 mt-8;
+}
+.wiki-prose h3 {
+  @apply text-base font-semibold text-foreground mb-2 mt-6;
+}
+.wiki-prose p {
+  @apply text-sm text-foreground/85 leading-relaxed mb-4;
+}
+.wiki-prose ul {
+  @apply list-disc pl-5 mb-4 space-y-1;
+}
+.wiki-prose ol {
+  @apply list-decimal pl-5 mb-4 space-y-1;
+}
+.wiki-prose li {
+  @apply text-sm text-foreground/85 leading-relaxed;
+}
+.wiki-prose strong {
+  @apply font-semibold text-foreground;
+}
+.wiki-prose blockquote {
+  @apply border-l-4 border-primary/30 pl-4 py-1 my-4 text-sm text-muted-foreground italic bg-secondary/50 rounded-r-lg;
+}
+.wiki-prose code {
+  @apply text-xs font-mono bg-secondary text-primary px-1.5 py-0.5 rounded;
+}
+.wiki-prose pre {
+  @apply bg-primary-deep/90 text-primary-foreground text-xs font-mono p-4 rounded-xl overflow-x-auto mb-4;
+}
+.wiki-prose pre code {
+  @apply bg-transparent text-inherit p-0;
+}
+.wiki-prose hr {
+  @apply border-border my-6;
+}
+.wiki-prose table {
+  @apply w-full text-sm border-collapse mb-4;
+}
+.wiki-prose th {
+  @apply bg-secondary text-foreground font-semibold text-left px-3 py-2 border border-border text-xs uppercase tracking-wide;
+}
+.wiki-prose td {
+  @apply px-3 py-2 border border-border text-foreground/80 text-sm;
+}
+.wiki-prose tr:nth-child(even) td {
+  @apply bg-secondary/40;
+}
+.wiki-prose input[type="checkbox"] {
+  @apply mr-2 accent-primary;
+}

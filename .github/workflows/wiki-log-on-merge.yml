@@ -1,0 +1,48 @@
+name: Wiki — log merged PRs
+
+# Deterministically append a wiki/log.md entry whenever a PR is merged into main.
+# This is the reliable, no-LLM counterpart to wiki-sync-pr.yml (which does richer
+# content ingestion). It only records that the merge happened.
+
+on:
+  pull_request:
+    types: [closed]
+    branches: [main]
+
+jobs:
+  log:
+    runs-on: ubuntu-latest
+    # Only merged PRs. Skip the wiki bot's own auto-generated wiki PRs (titles start
+    # with "wiki:") and anything authored by the bot — avoids noise and any loop.
+    # It commits straight to main (a push, not a PR), so it never re-triggers itself.
+    if: >
+      github.event.pull_request.merged == true &&
+      github.event.pull_request.user.login != 'github-actions[bot]' &&
+      !startsWith(github.event.pull_request.title, 'wiki:')
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Append log entry for the merged PR
+        env:
+          GH_TOKEN:     ${{ secrets.GITHUB_TOKEN }}
+          REPO:         ${{ github.repository }}
+          PR_NUMBER:    ${{ github.event.pull_request.number }}
+          PR_TITLE:     ${{ github.event.pull_request.title }}
+          PR_AUTHOR:    ${{ github.event.pull_request.user.login }}
+          PR_URL:       ${{ github.event.pull_request.html_url }}
+          PR_MERGED_AT: ${{ github.event.pull_request.merged_at }}
+        run: python3 .github/scripts/log_merged_pr.py
