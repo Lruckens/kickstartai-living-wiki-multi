@@ -6,7 +6,7 @@ import {
 } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { authFetch, getSession } from "./api";
+import { authFetch, withProject } from "./api";
 
 type WikiPage = {
   path: string; title: string; category: string; slug: string;
@@ -47,9 +47,9 @@ const ROOT_ICONS: Record<string, React.ElementType> = {
   "log.md":       ScrollText,
 };
 
-export const WikiViewer = ({ onNavigate, initialPath }: { onNavigate: (view: string, wikiPath?: string) => void; initialPath?: string }) => {
+export const WikiViewer = ({ onNavigate, initialPath, project }: { onNavigate: (view: string, wikiPath?: string) => void; initialPath?: string; project: string }) => {
   const [pages, setPages]               = useState<WikiPage[]>([]);
-  const [selectedPath, setSelectedPath] = useState(initialPath || "_overview.md");
+  const [selectedPath, setSelectedPath] = useState(initialPath || `${project}/_overview.md`);
   const [content, setContent]           = useState("");
   const [loadingPages, setLoadingPages] = useState(true);
   const [loadingPage, setLoadingPage]   = useState(false);
@@ -58,17 +58,17 @@ export const WikiViewer = ({ onNavigate, initialPath }: { onNavigate: (view: str
   const [expanded, setExpanded]         = useState<Set<string>>(
     new Set(Object.keys(CATEGORIES))
   );
-  // Per-project tabs — only the projects this user belongs to (e.g. Carla Visser = UvA + Bakkie).
-  const myProjects = getSession()?.projects ?? [];
-  const [activeProject, setActiveProject] = useState<string>("all");
 
-  // Load page list (already filtered to this user's permissions by the backend)
+  // Load page list for the active project (re-fetch when the project changes;
+  // backend already filters to this user's permissions).
   useEffect(() => {
-    authFetch("/wiki/pages")
+    setLoadingPages(true);
+    setSelectedPath(initialPath || `${project}/_overview.md`);
+    authFetch(withProject("/wiki/pages", project))
       .then((r) => r.json())
       .then((data) => { setPages(data); setLoadingPages(false); })
       .catch((e) => { setError(e.message); setLoadingPages(false); });
-  }, []);
+  }, [project]);
 
   // Load page content
   useEffect(() => {
@@ -99,16 +99,11 @@ export const WikiViewer = ({ onNavigate, initialPath }: { onNavigate: (view: str
 
   const grouped = useMemo(() => {
     const q = search.toLowerCase();
-    let filtered = pages;
-    // Project tab: a project's view = its own pages plus shared org pages (public/internal, untagged).
-    if (activeProject !== "all") {
-      filtered = filtered.filter((p) => p.project_id === activeProject || p.project_id == null);
-    }
-    if (q) filtered = filtered.filter((p) => p.title.toLowerCase().includes(q));
+    const filtered = q ? pages.filter((p) => p.title.toLowerCase().includes(q)) : pages;
     const out: Record<string, WikiPage[]> = {};
     filtered.forEach((p) => { (out[p.category] ??= []).push(p); });
     return out;
-  }, [pages, search, activeProject]);
+  }, [pages, search]);
 
   const activeTitle = pages.find((p) => p.path === selectedPath)?.title ?? "";
 
@@ -151,25 +146,6 @@ export const WikiViewer = ({ onNavigate, initialPath }: { onNavigate: (view: str
         {/* Sidebar */}
         <aside className="w-72 shrink-0 bg-card border-r border-border flex flex-col overflow-hidden">
           <div className="p-4 border-b border-border space-y-3">
-            {myProjects.length > 0 && (
-              <div className="flex items-center gap-1 overflow-x-auto" role="tablist" aria-label="Project">
-                {[{ id: "all", name: "All" }, ...myProjects].map((proj) => (
-                  <button
-                    key={proj.id}
-                    role="tab"
-                    aria-selected={activeProject === proj.id}
-                    onClick={() => setActiveProject(proj.id)}
-                    className={`shrink-0 px-2.5 py-1 rounded-md text-xs font-medium transition-colors ${
-                      activeProject === proj.id
-                        ? "bg-primary text-primary-foreground"
-                        : "text-muted-foreground hover:bg-secondary"
-                    }`}
-                  >
-                    {proj.name}
-                  </button>
-                ))}
-              </div>
-            )}
             <div className="relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground pointer-events-none" />
               <input

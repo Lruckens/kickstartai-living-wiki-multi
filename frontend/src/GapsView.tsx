@@ -4,7 +4,7 @@ import {
   FileText, Network, Sparkles, TrendingUp, AlertTriangle, CheckCircle2,
   Search, Clock, ListChecks, Link2, GitBranch, LayoutDashboard, Gauge,
 } from "lucide-react";
-import { authFetch, GapReport, RankedGap } from "./api";
+import { authFetch, withProject, GapReport, RankedGap } from "./api";
 
 // ===========================================================================
 // Adapter — the 6-layer GapReport → the view model the Lovable design renders.
@@ -118,12 +118,12 @@ const ImpactBar = ({ score }: { score: number }) => (
 // ===========================================================================
 // cache + small helpers
 // ===========================================================================
-const CACHE_KEY = "wiki_gaps_cache_v2";
+const cacheKey = (project: string) => `wiki_gaps_cache_v2_${project}`;
 type Cache = { wiki_version: string; report: GapReport; saved_at: string };
-const loadCache = (): Cache | null => {
-  try { const r = sessionStorage.getItem(CACHE_KEY); return r ? JSON.parse(r) : null; } catch { return null; }
+const loadCache = (project: string): Cache | null => {
+  try { const r = sessionStorage.getItem(cacheKey(project)); return r ? JSON.parse(r) : null; } catch { return null; }
 };
-const saveCache = (c: Cache) => { try { sessionStorage.setItem(CACHE_KEY, JSON.stringify(c)); } catch { /* ignore */ } };
+const saveCache = (project: string, c: Cache) => { try { sessionStorage.setItem(cacheKey(project), JSON.stringify(c)); } catch { /* ignore */ } };
 type WikiPageRef = { path: string; title: string };
 
 // ===========================================================================
@@ -131,7 +131,7 @@ type WikiPageRef = { path: string; title: string };
 // ===========================================================================
 type SubView = "dashboard" | "report";
 
-export const GapsView = ({ onNavigate }: { onNavigate: (view: string, wikiPath?: string) => void }) => {
+export const GapsView = ({ onNavigate, project }: { onNavigate: (view: string, wikiPath?: string) => void; project: string }) => {
   const [available, setAvailable] = useState<boolean | null>(null);
   const [report, setReport]       = useState<GapReport | null>(null);
   const [savedAt, setSavedAt]     = useState<string | null>(null);
@@ -144,19 +144,19 @@ export const GapsView = ({ onNavigate }: { onNavigate: (view: string, wikiPath?:
   const polling = useRef(false);
 
   useEffect(() => {
-    authFetch("/wiki/pages").then((r) => (r.ok ? r.json() : [])).then((pages: WikiPageRef[]) => {
+    authFetch(withProject("/wiki/pages", project)).then((r) => (r.ok ? r.json() : [])).then((pages: WikiPageRef[]) => {
       const m: Record<string, string> = {};
       pages.forEach((p) => { m[p.title.trim().toLowerCase()] = p.path; });
       setPageMap(m);
     }).catch(() => setPageMap({}));
-  }, []);
+  }, [project]);
   const resolvePath = useCallback((title: string) => pageMap[title.trim().toLowerCase()], [pageMap]);
 
   const runAnalysis = useCallback(async () => {
     if (polling.current) return;
     polling.current = true; setAnalyzing(true); setError(null); setStale(false);
     try {
-      const a = await authFetch("/gaps/analyze", { method: "POST" });
+      const a = await authFetch(withProject("/gaps/analyze", project), { method: "POST" });
       if (!a.ok) throw new Error((await a.json().catch(() => ({})))?.detail ?? "Could not start the analysis.");
       const { job_id, wiki_version } = await a.json();
       for (let i = 0; i < 200; i++) {
@@ -171,7 +171,7 @@ export const GapsView = ({ onNavigate }: { onNavigate: (view: string, wikiPath?:
           const at = new Date().toISOString();
           setReport(body.report); setSavedAt(at);
           analyzedVersion.current = wiki_version;
-          saveCache({ wiki_version, report: body.report, saved_at: at });
+          saveCache(project, { wiki_version, report: body.report, saved_at: at });
           return;
         }
       }
@@ -179,34 +179,35 @@ export const GapsView = ({ onNavigate }: { onNavigate: (view: string, wikiPath?:
     } catch (e: any) {
       setError(e?.message ?? "Analysis failed.");
     } finally { setAnalyzing(false); polling.current = false; }
-  }, []);
+  }, [project]);
 
   useEffect(() => {
     (async () => {
+      setReport(null); setSavedAt(null); setStale(false); analyzedVersion.current = null;
       let health: any = {};
       try { health = await (await authFetch("/gaps/health")).json(); } catch { health = { available: false }; }
       if (!health.available) { setAvailable(false); return; }
       setAvailable(true);
       let version = "";
-      try { version = (await (await authFetch("/gaps/version")).json()).wiki_version; } catch { /* ignore */ }
-      const cache = loadCache();
+      try { version = (await (await authFetch(withProject("/gaps/version", project))).json()).wiki_version; } catch { /* ignore */ }
+      const cache = loadCache(project);
       if (cache && cache.wiki_version === version) {
         setReport(cache.report); setSavedAt(cache.saved_at); analyzedVersion.current = cache.wiki_version;
       } else { runAnalysis(); }
     })();
-  }, [runAnalysis]);
+  }, [runAnalysis, project]);
 
   useEffect(() => {
     if (available !== true) return;
     const id = setInterval(async () => {
       if (polling.current) return;
       try {
-        const v = (await (await authFetch("/gaps/version")).json()).wiki_version;
+        const v = (await (await authFetch(withProject("/gaps/version", project))).json()).wiki_version;
         if (analyzedVersion.current && v !== analyzedVersion.current) setStale(true);
       } catch { /* ignore */ }
     }, 45000);
     return () => clearInterval(id);
-  }, [available]);
+  }, [available, project]);
 
   const gaps = useMemo(
     () => (report?.gaps ?? []).map((g) => adaptGap(g, resolvePath)),

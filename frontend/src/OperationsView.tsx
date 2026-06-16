@@ -6,7 +6,7 @@ import {
 } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { authFetch, Project } from "./api";
+import { authFetch, withProject } from "./api";
 
 type Tab = "ingest" | "query" | "lint" | "audit";
 
@@ -196,21 +196,12 @@ const StreamOutput = ({
 // ---------------------------------------------------------------------------
 const ACCEPTED = ".pdf,.md,.txt,.docx,.pptx";
 
-const IngestTab = ({ onNavigate }: { onNavigate: (view: string) => void }) => {
+const IngestTab = ({ onNavigate, project }: { onNavigate: (view: string) => void; project: string }) => {
   const fileRef  = useRef<HTMLInputElement>(null);
   const [dragOver,  setDragOver]  = useState(false);
   const [uploading, setUploading] = useState(false);
   const [filename,  setFilename]  = useState<string | null>(null);
   const [visibility,  setVisibility]  = useState<"public" | "internal" | "restricted">("internal");
-  const [projectId,   setProjectId]   = useState("");
-  const [allProjects, setAllProjects] = useState<Project[]>([]);
-
-  useEffect(() => {
-    authFetch("/projects")
-      .then((r) => (r.ok ? r.json() : { all: [] }))
-      .then((d) => setAllProjects(d.all ?? []))
-      .catch(() => setAllProjects([]));
-  }, []);
   const [running,     setRunning]     = useState(false);
   const [text,        setText]        = useState("");
   const [applying,    setApplying]    = useState(false);
@@ -235,10 +226,6 @@ const IngestTab = ({ onNavigate }: { onNavigate: (view: string) => void }) => {
   };
 
   const uploadAndIngest = useCallback(async (file: File) => {
-    if (visibility === "restricted" && !projectId) {
-      setError("Please choose which project this document belongs to.");
-      return;
-    }
     setUploading(true);
     setError(null);
     setText("");
@@ -250,8 +237,8 @@ const IngestTab = ({ onNavigate }: { onNavigate: (view: string) => void }) => {
     try {
       const form = new FormData();
       form.append("file", file);
+      form.append("project", project);
       form.append("label", visibility);
-      if (visibility === "restricted") form.append("project_id", projectId);
       const up = await authFetch(`/sources/upload`, { method: "POST", body: form });
       if (!up.ok) {
         const e = await up.json().catch(() => ({}));
@@ -273,7 +260,7 @@ const IngestTab = ({ onNavigate }: { onNavigate: (view: string) => void }) => {
       const resp = await authFetch(`/ingest`, {
         method:  "POST",
         headers: { "Content-Type": "application/json" },
-        body:    JSON.stringify({ filename: uploadedName }),
+        body:    JSON.stringify({ filename: uploadedName, project }),
       });
       if (!resp.ok) {
         const e = await resp.json().catch(() => ({}));
@@ -297,7 +284,7 @@ const IngestTab = ({ onNavigate }: { onNavigate: (view: string) => void }) => {
     } finally {
       setRunning(false);
     }
-  }, [visibility, projectId]);
+  }, [visibility, project]);
 
   const handleFiles = (files: FileList | null) => {
     if (!files || files.length === 0) return;
@@ -337,16 +324,12 @@ const IngestTab = ({ onNavigate }: { onNavigate: (view: string) => void }) => {
                 {opt.label}
               </button>
             ))}
-            {visibility === "restricted" && (
-              <select value={projectId} onChange={(e) => setProjectId(e.target.value)}
-                className="text-sm px-3 py-2 rounded-lg border border-input bg-secondary/50 focus:outline-none focus:border-primary transition-colors">
-                <option value="">Choose a project…</option>
-                {allProjects.map((p) => (
-                  <option key={p.id} value={p.id}>{p.name}</option>
-                ))}
-              </select>
-            )}
           </div>
+          {visibility === "restricted" && (
+            <p className="text-xs text-muted-foreground mt-2">
+              Restricted to the active project — only its members will see this document and the pages made from it.
+            </p>
+          )}
         </div>
       )}
 
@@ -437,7 +420,7 @@ const IngestTab = ({ onNavigate }: { onNavigate: (view: string) => void }) => {
 // ---------------------------------------------------------------------------
 // Query tab
 // ---------------------------------------------------------------------------
-const QueryTab = () => {
+const QueryTab = ({ project }: { project: string }) => {
   const [question, setQuestion] = useState("");
   const [running,  setRunning]  = useState(false);
   const [text,     setText]     = useState("");
@@ -451,7 +434,7 @@ const QueryTab = () => {
     setSaving(true);
     setSaveError(null);
     try {
-      const resp = await authFetch(`/query/save`, {
+      const resp = await authFetch(withProject(`/query/save`, project), {
         method:  "POST",
         headers: { "Content-Type": "application/json" },
         body:    JSON.stringify({ question: asked, answer: text }),
@@ -478,7 +461,7 @@ const QueryTab = () => {
     setSaveError(null);
     setAsked(question.trim());
     try {
-      const resp = await authFetch(`/query`, {
+      const resp = await authFetch(withProject(`/query`, project), {
         method:  "POST",
         headers: { "Content-Type": "application/json" },
         body:    JSON.stringify({ question }),
@@ -494,7 +477,7 @@ const QueryTab = () => {
     } finally {
       setRunning(false);
     }
-  }, [question]);
+  }, [question, project]);
 
   const emptyState = (
     <div className="text-center py-20">
@@ -568,7 +551,7 @@ const QueryTab = () => {
 // ---------------------------------------------------------------------------
 // Lint tab
 // ---------------------------------------------------------------------------
-const LintTab = () => {
+const LintTab = ({ project }: { project: string }) => {
   const [running, setRunning] = useState(false);
   const [text,    setText]    = useState("");
   const [error,   setError]   = useState<string | null>(null);
@@ -590,7 +573,7 @@ const LintTab = () => {
     setPushed(false);
     setPushError(null);
     try {
-      const resp = await authFetch(`/lint`, { method: "POST" });
+      const resp = await authFetch(withProject(`/lint`, project), { method: "POST" });
       if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
       for await (const event of readSSE(resp)) {
         if (event.type === "text")     setText((p) => p + event.content);
@@ -607,7 +590,7 @@ const LintTab = () => {
     } finally {
       setRunning(false);
     }
-  }, []);
+  }, [project]);
 
   const emptyState = (
     <div className="text-center py-20">
@@ -727,7 +710,7 @@ const AuditLogTab = () => {
 // ---------------------------------------------------------------------------
 // Main component
 // ---------------------------------------------------------------------------
-export const OperationsView = ({ onNavigate }: { onNavigate: (view: string) => void }) => {
+export const OperationsView = ({ onNavigate, project }: { onNavigate: (view: string) => void; project: string }) => {
   const [tab, setTab] = useState<Tab>("query");
 
   const TABS: { id: Tab; icon: React.ElementType; label: string }[] = [
@@ -788,9 +771,9 @@ export const OperationsView = ({ onNavigate }: { onNavigate: (view: string) => v
           ))}
         </div>
 
-        {tab === "ingest" && <IngestTab onNavigate={onNavigate} />}
-        {tab === "query"  && <QueryTab />}
-        {tab === "lint"   && <LintTab />}
+        {tab === "ingest" && <IngestTab onNavigate={onNavigate} project={project} />}
+        {tab === "query"  && <QueryTab project={project} />}
+        {tab === "lint"   && <LintTab project={project} />}
         {tab === "audit"  && <AuditLogTab />}
       </main>
     </div>

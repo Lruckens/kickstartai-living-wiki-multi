@@ -13,6 +13,17 @@ export default function App() {
   const [view, setView] = useState<View>("wiki");
   const [wikiTarget, setWikiTarget] = useState<string | undefined>(undefined);
   const [user, setUser] = useState<SessionUser | null>(getSession());
+  // Active project — every operation acts on this project's subtree (wiki/<project>/).
+  const [project, setProject] = useState<string>(() => {
+    const ids = (getSession()?.projects ?? []).map((p) => p.id);
+    const saved = localStorage.getItem("wiki_active_project");
+    return saved && ids.includes(saved) ? saved : (ids[0] ?? "uva");
+  });
+  const changeProject = (p: string) => {
+    setProject(p);
+    localStorage.setItem("wiki_active_project", p);
+    setWikiTarget(undefined);  // drop a stale per-project deep-link target
+  };
   const nav = (v: string, wikiPath?: string) => {
     if (wikiPath) setWikiTarget(wikiPath);
     setView(v as View);
@@ -45,10 +56,25 @@ export default function App() {
         </button>
       </div>
 
-      {view === "wiki"       ? <WikiViewer     onNavigate={nav} initialPath={wikiTarget} />
-      : view === "operations" ? <OperationsView onNavigate={nav} />
-      : view === "gaps"       ? <GapsView       onNavigate={nav} />
-      :                         <ArtifactView   onNavigate={nav} />}
+      {/* Active-project switcher — every view/operation acts on this project */}
+      {user.projects.length > 0 && (
+        <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 flex items-center gap-1 bg-card/95 backdrop-blur border border-border rounded-full shadow-soft px-1.5 py-1 text-xs">
+          <span className="px-2 text-muted-foreground">Project</span>
+          {user.projects.map((p) => (
+            <button key={p.id} onClick={() => changeProject(p.id)}
+              className={`px-2.5 py-1 rounded-full font-medium transition-colors ${
+                project === p.id ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-secondary"
+              }`}>
+              {p.name}
+            </button>
+          ))}
+        </div>
+      )}
+
+      {view === "wiki"       ? <WikiViewer     onNavigate={nav} initialPath={wikiTarget} project={project} />
+      : view === "operations" ? <OperationsView onNavigate={nav} project={project} />
+      : view === "gaps"       ? <GapsView       onNavigate={nav} project={project} />
+      :                         <ArtifactView   onNavigate={nav} project={project} />}
     </div>
   );
 }

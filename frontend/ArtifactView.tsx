@@ -7,7 +7,7 @@ import {
   Mail, Loader2, Info, Lock, UserPlus, Globe2, AlertCircle,
   ShieldCheck, ShieldAlert, ShieldX,
 } from "lucide-react";
-import { authFetch, getSession, Project } from "./src/api";
+import { authFetch, withProject, getSession, Project } from "./src/api";
 
 const BACKEND_URL = "http://localhost:8000";
 
@@ -106,9 +106,9 @@ const callBackendAPI = async (params: {
   outputId: string; progressVariant: string; stakeholderName: string;
   stakeholderRole: string; tone: number; length: number;
   include: string[]; exclude: string[]; outputTitle: string;
-  projectScope: string | null;
+  projectScope: string | null; project: string;
 }): Promise<{ text: string | null; pages: string[]; audit: AuditResult | null }> => {
-  const response = await authFetch(`/generate`, {
+  const response = await authFetch(withProject(`/generate`, params.project), {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -137,7 +137,7 @@ const callBackendAPI = async (params: {
 // ---------------------------------------------------------------------------
 // Main component
 // ---------------------------------------------------------------------------
-export const ArtifactView = ({ onNavigate }: { onNavigate?: (view: string) => void }) => {
+export const ArtifactView = ({ onNavigate, project }: { onNavigate?: (view: string) => void; project: string }) => {
   const [showModal,       setShowModal]       = useState(false);
   const [selectedOutput,  setSelectedOutput]  = useState("summary");
   const [progressVariant, setProgressVariant] = useState<ProgressVariant>("progress-tech");
@@ -275,6 +275,7 @@ export const ArtifactView = ({ onNavigate }: { onNavigate?: (view: string) => vo
         exclude:         genExclude,
         outputTitle:     activeOutput.title,
         projectScope:    selectedOutput === "linkedin" ? null : (projectScope || null),
+        project,
       });
       setAudit(audit);
       setPagesConsulted(pages);
@@ -318,7 +319,7 @@ export const ArtifactView = ({ onNavigate }: { onNavigate?: (view: string) => vo
   const handleSave = async () => {
     setSaving(true);
     try {
-      const response = await authFetch(`/save`, {
+      const response = await authFetch(withProject(`/save`, project), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
