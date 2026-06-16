@@ -1,4 +1,34 @@
 {
-  "wiki": {},
-  "sources": {}
+  "wiki": {
+    "bakkie/decisions/2026-06-16-build-citizen-chatbot.md": {
+      "label": "internal",
+      "project_id": null
+    },
+    "bakkie/meetings/2026-06-16-kickoff.md": {
+      "label": "internal",
+      "project_id": null
+    },
+    "bakkie/entities/gemeente-westerwoude.md": {
+      "label": "internal",
+      "project_id": null
+    },
+    "bakkie/entities/sanne-wielinga.md": {
+      "label": "internal",
+      "project_id": null
+    },
+    "bakkie/entities/joost-de-vries.md": {
+      "label": "internal",
+      "project_id": null
+    },
+    "bakkie/concepts/rag-pipeline.md": {
+      "label": "internal",
+      "project_id": null
+    }
+  },
+  "sources": {
+    "bakkie/bakkie-note.md": {
+      "label": "internal",
+      "project_id": null
+    }
+  }
 }

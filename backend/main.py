@@ -19,11 +19,11 @@ import permission
 load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), "..", ".env"))
 
 BASE_DIR    = Path(__file__).parent.parent
-WIKI_DIR    = BASE_DIR / "wiki"
-SOURCES_DIR = BASE_DIR / "sources"
+WIKI_DIR    = BASE_DIR / "wiki"        # one subtree per project: wiki/<project>/
+SOURCES_DIR = BASE_DIR / "sources"     # one subtree per project: sources/<project>/
+SOURCE_DIR  = SOURCES_DIR              # legacy alias
+WIKI_DIR.mkdir(exist_ok=True)
 SOURCES_DIR.mkdir(exist_ok=True)
-WIKI_DIR   = Path(__file__).parent.parent / "wiki"
-SOURCE_DIR = Path(__file__).parent.parent / "sources"
 
 app = FastAPI(title="Living Wiki Generator API")
 
@@ -35,6 +35,17 @@ app.add_middleware(
 )
 
 client = Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
+
+
+def project_dirs(project: Optional[str]) -> tuple[Path, Path]:
+    """(wiki_dir, sources_dir) for a project subtree; validates the project id.
+
+    Each project lives in its own subtree — wiki/<project>/ and sources/<project>/ —
+    so multiple projects (e.g. uva + bakkie) coexist in one repo with separate
+    index/_overview/_gaps and separate source folders."""
+    if not project or project not in permission.PROJECTS:
+        raise HTTPException(status_code=400, detail="Please choose a valid project.")
+    return WIKI_DIR / project, SOURCES_DIR / project
 
 
 # ---------------------------------------------------------------------------
@@ -189,12 +200,15 @@ def gaps_report(job_id: str, user: dict = Depends(team_member)):
 # Helpers
 # ---------------------------------------------------------------------------
 
-def read_all_wiki() -> str:
+def read_all_wiki(project: Optional[str] = None) -> str:
+    """Concatenated wiki context. Scoped to one project's subtree when given."""
+    base = (WIKI_DIR / project) if project else WIKI_DIR
+    prefix = f"wiki/{project}/" if project else "wiki/"
     parts = []
-    for path in sorted(WIKI_DIR.rglob("*.md")):
-        rel = path.relative_to(WIKI_DIR)
+    for path in sorted(base.rglob("*.md")):
+        rel = path.relative_to(base)
         try:
-            parts.append(f"=== wiki/{rel} ===\n{path.read_text(encoding='utf-8')}")
+            parts.append(f"=== {prefix}{rel} ===\n{path.read_text(encoding='utf-8')}")
         except Exception:
             pass
     return "\n\n".join(parts)
@@ -238,12 +252,14 @@ def git_push_wiki_to_main(commit_msg: str, extra_source: Optional[str] = None) -
         try:
             # Copy wiki directory into the worktree
             shutil.copytree(WIKI_DIR, wt / "wiki", dirs_exist_ok=True)
-            # Copy the source file as well, when ingesting one
+            # Copy the source file as well, when ingesting one (extra_source is
+            # project-relative, e.g. "bakkie/notes.pdf").
             if extra_source:
                 src = SOURCES_DIR / extra_source
                 if src.exists():
-                    (wt / "sources").mkdir(exist_ok=True)
-                    shutil.copy2(src, wt / "sources" / extra_source)
+                    dest = wt / "sources" / extra_source
+                    dest.parent.mkdir(parents=True, exist_ok=True)
+                    shutil.copy2(src, dest)
 
             subprocess.run(["git", "add", "wiki/"], cwd=wt, check=True, capture_output=True)
             if extra_source:
@@ -567,13 +583,14 @@ async def generate(req: GenerateRequest, user: dict = Depends(current_user)):
 # ---------------------------------------------------------------------------
 
 @app.get("/wiki/pages")
-def list_wiki_pages(user: dict = Depends(current_user)):
+def list_wiki_pages(project: str, user: dict = Depends(current_user)):
+    wdir, _ = project_dirs(project)
     pages = []
-    for path in sorted(WIKI_DIR.rglob("*.md")):
-        rel   = path.relative_to(WIKI_DIR)
-        parts = rel.parts
-        rel_str = "/".join(parts)
-        access = permission.page_access(rel_str)
+    for path in sorted(wdir.rglob("*.md")):
+        rel     = path.relative_to(wdir)          # project-relative, e.g. decisions/foo.md
+        parts   = rel.parts
+        full    = f"{project}/{'/'.join(parts)}"  # access-label key + /wiki/page path
+        access  = permission.page_access(full)
         if not permission.user_can_see(access, user):
             continue
         category = parts[0] if len(parts) > 1 else "root"
@@ -583,12 +600,13 @@ def list_wiki_pages(user: dict = Depends(current_user)):
             path.stem.replace("-", " ").title(),
         )
         pages.append({
-            "path":       rel_str,
+            "path":       full,
             "title":      title,
             "category":   category,
             "slug":       path.stem,
             "access":     permission.access_badge(access),
             "label":      access.get("label", "internal"),
+            "project":    project,
             "project_id": access.get("project_id"),
         })
     return pages
@@ -611,40 +629,40 @@ def get_wiki_page(path: str, user: dict = Depends(current_user)):
 # ---------------------------------------------------------------------------
 
 @app.get("/sources")
-def list_sources(user: dict = Depends(team_member)):
+def list_sources(project: str, user: dict = Depends(team_member)):
+    _, sdir = project_dirs(project)
     skip = {".gitkeep"}
-    files = [
-        f.name for f in sorted(SOURCE_DIR.iterdir())
-        if f.is_file() and f.name not in skip
-    ]
-    return files
+    if not sdir.exists():
+        return []
+    return [f.name for f in sorted(sdir.iterdir()) if f.is_file() and f.name not in skip]
 
 
 @app.post("/sources/upload")
 async def upload_source(
     file: UploadFile = File(...),
+    project: str = Form(...),
     label: str = Form("internal"),
-    project_id: Optional[str] = Form(None),
     user: dict = Depends(team_member),
 ):
+    # `project` = which project the artefact belongs to (drives the source folder +
+    # wiki subtree). `label` = visibility (public/internal/restricted) — orthogonal.
     if label not in ("public", "internal", "restricted"):
         raise HTTPException(400, "Unknown visibility option.")
-    if label == "restricted":
-        if not project_id or project_id not in permission.PROJECTS:
-            raise HTTPException(400, "Please choose which project this document belongs to.")
-        if project_id not in user["projects"]:
-            raise HTTPException(403, "You can only add restricted documents to your own projects.")
-    else:
-        project_id = None
+    _, sdir = project_dirs(project)
+    if project not in user["projects"]:
+        raise HTTPException(403, "You can only add documents to your own projects.")
+    project_id = project if label == "restricted" else None
     filename = Path(file.filename).name  # strip any path components
-    safe = (SOURCE_DIR / filename).resolve()
-    if not str(safe).startswith(str(SOURCE_DIR.resolve())):
+    sdir.mkdir(parents=True, exist_ok=True)
+    safe = (sdir / filename).resolve()
+    if not str(safe).startswith(str(sdir.resolve())):
         raise HTTPException(400, "Invalid filename")
     content = await file.read()
     safe.write_bytes(content)
-    permission.set_source_access(filename, label, project_id)
+    permission.set_source_access(f"{project}/{filename}", label, project_id)
     return {
         "filename": filename,
+        "project": project,
         "access": permission.access_badge({"label": label, "project_id": project_id}),
     }
 
@@ -933,6 +951,7 @@ async def lint_wiki(user: dict = Depends(team_member)):
 
 class IngestRequest(BaseModel):
     filename: str
+    project: str
 
 
 INGEST_ANALYSIS_SYSTEM = """You are the wiki maintainer for the KickstartAI Living Project Wiki.
@@ -991,40 +1010,50 @@ INGEST_FILES_SCHEMA = {
 }
 
 
-def apply_ingest_files(files: list[dict]) -> tuple[list[str], list[str]]:
+def apply_ingest_files(files: list[dict], project: str) -> tuple[list[str], list[str]]:
+    """Write LLM-produced pages into the project's subtree (wiki/<project>/…).
+
+    The model emits project-relative paths (decisions/foo.md, index.md); we write
+    them under wiki/<project>/ and return full project-relative keys
+    (<project>/decisions/foo.md) for the access-label store."""
+    wdir = WIKI_DIR / project
     created, updated = [], []
     for f in files:
         raw_path = f.get("path", "").lstrip("/")
-        # Strip accidental "wiki/" prefix that Claude sometimes adds
         if raw_path.startswith("wiki/"):
             raw_path = raw_path[len("wiki/"):]
+        if raw_path.startswith(f"{project}/"):       # strip an accidental project prefix
+            raw_path = raw_path[len(project) + 1:]
         content  = f.get("content", "")
-        target   = (WIKI_DIR / raw_path).resolve()
-        # Security: must stay inside wiki dir
-        if not str(target).startswith(str(WIKI_DIR.resolve())):
+        target   = (wdir / raw_path).resolve()
+        # Security: must stay inside this project's wiki subtree
+        if not str(target).startswith(str(wdir.resolve())):
             continue
         target.parent.mkdir(parents=True, exist_ok=True)
         existed = target.exists()
         target.write_text(content, encoding="utf-8")
-        (updated if existed else created).append(raw_path)
+        (updated if existed else created).append(f"{project}/{raw_path}")
     return created, updated
 
 
 @app.post("/ingest")
 async def ingest_source(req: IngestRequest, user: dict = Depends(team_member)):
-    source_path = (SOURCE_DIR / req.filename).resolve()
-    if not str(source_path).startswith(str(SOURCE_DIR.resolve())):
+    wdir, sdir = project_dirs(req.project)
+    if req.project not in user["projects"]:
+        raise HTTPException(403, "You can only ingest into your own projects.")
+    source_path = (sdir / req.filename).resolve()
+    if not str(source_path).startswith(str(sdir.resolve())):
         raise HTTPException(400, "Invalid filename")
     if not source_path.exists():
         raise HTTPException(404, "Source file not found")
 
-    source_access = permission.source_access(req.filename)
+    source_access = permission.source_access(f"{req.project}/{req.filename}")
     if source_access.get("label") == "restricted" and \
             source_access.get("project_id") not in user["projects"]:
         raise HTTPException(403, "This document belongs to a project you're not part of.")
 
     source_content = read_source_file(source_path)
-    wiki_context   = read_all_wiki()
+    wiki_context   = read_all_wiki(req.project)
 
     analysis_parts: list[str] = []
 
@@ -1096,7 +1125,7 @@ async def ingest_source(req: IngestRequest, user: dict = Depends(team_member)):
             raw = re.sub(r"^```json\s*", "", raw)
             raw = re.sub(r"\s*```$", "", raw)
             data    = json.loads(raw)
-            created, updated = apply_ingest_files(data.get("files", []))
+            created, updated = apply_ingest_files(data.get("files", []), req.project)
             # Pages created from this source inherit its visibility
             for page_path in created:
                 permission.set_page_access(
@@ -1113,8 +1142,8 @@ async def ingest_source(req: IngestRequest, user: dict = Depends(team_member)):
         yield sse({"type": "pushing"})
         try:
             n = len(created) + len(updated)
-            msg = f"wiki: ingest {req.filename} ({n} page{'s' if n != 1 else ''})"
-            git_push_wiki_to_main(msg, extra_source=req.filename)
+            msg = f"wiki: ingest {req.project}/{req.filename} ({n} page{'s' if n != 1 else ''})"
+            git_push_wiki_to_main(msg, extra_source=f"{req.project}/{req.filename}")
             yield sse({"type": "pushed"})
         except Exception as e:
             yield sse({"type": "push_error", "message": str(e)})
