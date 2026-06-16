@@ -15,15 +15,19 @@ def read_wiki_context(
     output_id: str,
     progress_variant: str,
     allowed: Optional[Callable[[str], bool]] = None,
+    base: Optional[Path] = None,
 ) -> tuple[str, list[str]]:
     """Assemble the wiki context for a generation request.
 
     `allowed` is an optional predicate over wiki-relative paths (e.g.
     "decisions/foo.md") injected by the permission layer to pre-filter the
     source pool before any LLM call. When omitted, behaviour is unchanged.
+    `base` scopes reading to one project's subtree (wiki/<project>/); defaults
+    to the whole wiki.
     """
     if allowed is None:
         allowed = lambda _path: True
+    WIKI_DIR = base or globals()["WIKI_DIR"]
 
     sections = []
     pages: list[str] = []

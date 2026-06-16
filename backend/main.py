@@ -122,23 +122,26 @@ GAP_CORPUS_ROOT_FILES = ("_overview.md",)
 _gap_jobs: dict[str, dict] = {}  # job_id -> {status, report?, error?}
 
 
-def _all_wiki_pages() -> list[dict]:
-    """Every wiki markdown page {path, content} — needed for the link graph + ledger."""
-    return [{"path": "/".join(p.relative_to(WIKI_DIR).parts),
+def _all_wiki_pages(project: str) -> list[dict]:
+    """Every page {path, content} in a project's subtree — paths are PROJECT-RELATIVE
+    (e.g. decisions/foo.md) so the detector's category + ledger logic works unchanged."""
+    wdir = WIKI_DIR / project
+    return [{"path": "/".join(p.relative_to(wdir).parts),
              "content": p.read_text(encoding="utf-8")}
-            for p in sorted(WIKI_DIR.rglob("*.md"))]
+            for p in sorted(wdir.rglob("*.md"))]
 
 
-def _gap_corpus_paths(user: dict) -> set[str]:
-    """Paths to report gaps on (compiled knowledge layer, permission-filtered)."""
+def _gap_corpus_paths(user: dict, project: str) -> set[str]:
+    """Project-relative paths to report gaps on (permission-filtered)."""
+    wdir = WIKI_DIR / project
     paths = set()
     for rf in GAP_CORPUS_ROOT_FILES:
-        if (WIKI_DIR / rf).exists() and permission.user_can_see(permission.page_access(rf), user):
+        if (wdir / rf).exists() and permission.user_can_see(permission.page_access(f"{project}/{rf}"), user):
             paths.add(rf)
     for d in GAP_CORPUS_DIRS:
-        for p in sorted((WIKI_DIR / d).glob("*.md")):
+        for p in sorted((wdir / d).glob("*.md")):
             rel = f"{d}/{p.name}"
-            if permission.user_can_see(permission.page_access(rel), user):
+            if permission.user_can_see(permission.page_access(f"{project}/{rel}"), user):
                 paths.add(rel)
     return paths
 
@@ -165,16 +168,18 @@ def gaps_health(user: dict = Depends(team_member)):
 
 
 @app.get("/gaps/version")
-def gaps_version(user: dict = Depends(team_member)):
-    return {"wiki_version": _wiki_version(_all_wiki_pages(), _gap_corpus_paths(user))}
+def gaps_version(project: str, user: dict = Depends(team_member)):
+    project_dirs(project)
+    return {"wiki_version": _wiki_version(_all_wiki_pages(project), _gap_corpus_paths(user, project))}
 
 
 @app.post("/gaps/analyze")
-def gaps_analyze(background_tasks: BackgroundTasks, user: dict = Depends(team_member)):
+def gaps_analyze(project: str, background_tasks: BackgroundTasks, user: dict = Depends(team_member)):
     if not os.getenv("ANTHROPIC_API_KEY"):
         raise HTTPException(503, "Gap analysis is not configured (missing API key).")
-    pages = _all_wiki_pages()
-    corpus_paths = _gap_corpus_paths(user)
+    project_dirs(project)
+    pages = _all_wiki_pages(project)
+    corpus_paths = _gap_corpus_paths(user, project)
     if not corpus_paths:
         raise HTTPException(400, "No wiki pages available to analyse.")
     version = _wiki_version(pages, corpus_paths)
@@ -382,8 +387,8 @@ def _slugify(text: str) -> str:
     return re.sub(r"[^a-z0-9]+", "-", text.lower()).strip("-")
 
 
-def _update_index(slug: str, title: str, output_type: str, date_str: str) -> None:
-    index_path = WIKI_DIR / "index.md"
+def _update_index(slug: str, title: str, output_type: str, date_str: str, project: str) -> None:
+    index_path = WIKI_DIR / project / "index.md"
     content = index_path.read_text(encoding="utf-8") if index_path.exists() else ""
     entry = f"- [[{slug}]] — {title} — type: {output_type} — date: {date_str}\n"
     section_header = "## Generated outputs\n"
@@ -402,12 +407,12 @@ def _update_index(slug: str, title: str, output_type: str, date_str: str) -> Non
     index_path.write_text(content, encoding="utf-8")
 
 
-def _append_log(slug: str, output_type: str, variant: str, stakeholder: str, date_str: str, pages: list[str]) -> None:
-    log_path = WIKI_DIR / "log.md"
+def _append_log(slug: str, output_type: str, variant: str, stakeholder: str, date_str: str, pages: list[str], project: str) -> None:
+    log_path = WIKI_DIR / project / "log.md"
     pages_str = ", ".join(f"[[{Path(p).stem}]]" for p in pages) if pages else "none"
     entry = (
         f"\n## [{date_str}] generate | {output_type} — {stakeholder}\n\n"
-        f"**File:** `wiki/generator/{slug}.md`\n"
+        f"**File:** `wiki/{project}/generator/{slug}.md`\n"
         f"**Output type:** {output_type}\n"
         f"**Variant:** {variant}\n"
         f"**Stakeholder:** {stakeholder}\n"
@@ -427,7 +432,8 @@ def health():
 
 
 @app.post("/save")
-async def save(req: SaveRequest, user: dict = Depends(team_member)):
+async def save(req: SaveRequest, project: str, user: dict = Depends(team_member)):
+    project_dirs(project)
     # Saving is publishing — only audit-cleared drafts may be saved, and the
     # deterministic blacklist gate is re-run server-side.
     level = permission.target_level(req.output_id, req.project_scope)
@@ -454,8 +460,8 @@ async def save(req: SaveRequest, user: dict = Depends(team_member)):
     variant = VARIANT_LABELS.get(req.progress_variant, "N/A") if req.output_id == "progress" else "N/A"
     pages_inline = ", ".join(f"[[{Path(p).stem}]]" for p in req.pages) if req.pages else "_to be documented_"
 
-    generator_dir = WIKI_DIR / "generator"
-    generator_dir.mkdir(exist_ok=True)
+    generator_dir = WIKI_DIR / project / "generator"
+    generator_dir.mkdir(parents=True, exist_ok=True)
 
     output_path = generator_dir / f"{slug}.md"
     counter = 2
@@ -477,16 +483,17 @@ async def save(req: SaveRequest, user: dict = Depends(team_member)):
     )
     output_path.write_text(page_content, encoding="utf-8")
 
-    _update_index(output_path.stem, req.output_title, output_type, today)
-    _append_log(output_path.stem, output_type, variant, req.stakeholder_name, today, req.pages)
+    _update_index(output_path.stem, req.output_title, output_type, today, project)
+    _append_log(output_path.stem, output_type, variant, req.stakeholder_name, today, req.pages, project)
 
-    return {"path": f"wiki/generator/{output_path.name}", "slug": output_path.stem}
+    return {"path": f"wiki/{project}/generator/{output_path.name}", "slug": output_path.stem}
 
 
 @app.post("/generate")
-async def generate(req: GenerateRequest, user: dict = Depends(current_user)):
+async def generate(req: GenerateRequest, project: str, user: dict = Depends(current_user)):
     if not os.getenv("ANTHROPIC_API_KEY"):
         raise HTTPException(status_code=500, detail="ANTHROPIC_API_KEY not set in .env")
+    project_dirs(project)
 
     # --- Permission layer: target level + access checks --------------------
     level = permission.target_level(req.output_id, req.project_scope)
@@ -510,7 +517,8 @@ async def generate(req: GenerateRequest, user: dict = Depends(current_user)):
     allowed_meta = permission.context_filter(level, req.project_scope, user)
     wiki_context, pages = read_wiki_context(
         req.output_id, req.progress_variant,
-        allowed=lambda rel: allowed_meta(permission.page_access(rel)),
+        allowed=lambda rel: allowed_meta(permission.page_access(f"{project}/{rel}")),
+        base=WIKI_DIR / project,
     )
     if level == "public":
         # Input-side wrap: audience rules ride along with the filtered context
@@ -683,8 +691,9 @@ Rules:
 
 
 @app.post("/query")
-async def query_wiki(req: QueryRequest, user: dict = Depends(team_member)):
-    wiki = read_all_wiki()
+async def query_wiki(req: QueryRequest, project: str, user: dict = Depends(team_member)):
+    project_dirs(project)
+    wiki = read_all_wiki(project)
 
     async def stream():
         try:
@@ -711,8 +720,8 @@ class QuerySaveRequest(BaseModel):
     answer: str
 
 
-def _update_index_entry(section_header: str, entry: str, date_str: str) -> None:
-    index_path = WIKI_DIR / "index.md"
+def _update_index_entry(section_header: str, entry: str, date_str: str, project: str) -> None:
+    index_path = WIKI_DIR / project / "index.md"
     content = index_path.read_text(encoding="utf-8") if index_path.exists() else ""
     if section_header in content:
         idx = content.index(section_header) + len(section_header)
@@ -728,14 +737,15 @@ def _update_index_entry(section_header: str, entry: str, date_str: str) -> None:
 
 
 @app.post("/query/save")
-async def save_query(req: QuerySaveRequest, user: dict = Depends(team_member)):
+async def save_query(req: QuerySaveRequest, project: str, user: dict = Depends(team_member)):
     if not req.question.strip() or not req.answer.strip():
         raise HTTPException(400, "Nothing to save yet — ask a question first.")
+    project_dirs(project)
     today = dt_date.today().isoformat()
     slug = f"{today}-{_slugify(req.question)[:60].rstrip('-')}"
 
-    queries_dir = WIKI_DIR / "queries"
-    queries_dir.mkdir(exist_ok=True)
+    queries_dir = WIKI_DIR / project / "queries"
+    queries_dir.mkdir(parents=True, exist_ok=True)
     output_path = queries_dir / f"{slug}.md"
     counter = 2
     while output_path.exists():
@@ -756,6 +766,7 @@ async def save_query(req: QuerySaveRequest, user: dict = Depends(team_member)):
         "## Saved queries\n",
         f"- [[{output_path.stem}]] — {req.question.strip()} — date: {today}\n",
         today,
+        project,
     )
     log_entry = (
         f"\n## [{today}] query | {req.question.strip()}\n\n"
@@ -764,7 +775,7 @@ async def save_query(req: QuerySaveRequest, user: dict = Depends(team_member)):
         f"**Filed to wiki:** yes → [[{output_path.stem}]]\n\n"
         f"---\n"
     )
-    with open(WIKI_DIR / "log.md", "a", encoding="utf-8") as f:
+    with open(WIKI_DIR / project / "log.md", "a", encoding="utf-8") as f:
         f.write(log_entry)
 
     return {"path": f"wiki/queries/{output_path.name}", "slug": output_path.stem}
@@ -824,7 +835,7 @@ LINT_RESULT_SCHEMA = {
 }
 
 
-def apply_lint_results(result: dict) -> tuple[list[str], int]:
+def apply_lint_results(result: dict, project: str) -> tuple[list[str], int]:
     """Append a lint entry to log.md and any new gaps to _gaps.md (append-only,
     deterministic — the LLM only classifies; Python writes). Returns (updated, n_gaps)."""
     today = dt_date.today().isoformat()
@@ -835,7 +846,7 @@ def apply_lint_results(result: dict) -> tuple[list[str], int]:
 
     # 1) _gaps.md — append new gaps not already tracked (dedupe by description overlap)
     gaps_added = 0
-    gaps_path = WIKI_DIR / "_gaps.md"
+    gaps_path = WIKI_DIR / project / "_gaps.md"
     new_gaps = result.get("new_gaps") or []
     if new_gaps and gaps_path.exists():
         existing = gaps_path.read_text(encoding="utf-8")
@@ -858,7 +869,7 @@ def apply_lint_results(result: dict) -> tuple[list[str], int]:
             updated.append("_gaps.md")
 
     # 2) log.md — append the lint entry (append-only)
-    log_path = WIKI_DIR / "log.md"
+    log_path = WIKI_DIR / project / "log.md"
     orphans = result.get("orphan_pages") or []
     orphan_str = ", ".join(f"[[{o}]]" for o in orphans) if orphans else "none"
     pages_updated = "[[log]]" + (", [[_gaps]]" if gaps_added else "")
@@ -882,8 +893,9 @@ def apply_lint_results(result: dict) -> tuple[list[str], int]:
 
 
 @app.post("/lint")
-async def lint_wiki(user: dict = Depends(team_member)):
-    wiki = read_all_wiki()
+async def lint_wiki(project: str, user: dict = Depends(team_member)):
+    project_dirs(project)
+    wiki = read_all_wiki(project)
     report_parts: list[str] = []
 
     async def stream():
@@ -925,7 +937,7 @@ async def lint_wiki(user: dict = Depends(team_member)):
             raw = re.sub(r"^```json\s*", "", raw)
             raw = re.sub(r"\s*```$", "", raw)
             result = json.loads(raw)
-            updated, gaps_added = apply_lint_results(result)
+            updated, gaps_added = apply_lint_results(result, project)
             yield sse({"type": "applied", "created": [], "updated": updated})
         except Exception as e:
             yield sse({"type": "error", "message": f"Logging the lint failed: {e}"})
@@ -936,7 +948,7 @@ async def lint_wiki(user: dict = Depends(team_member)):
         yield sse({"type": "pushing"})
         try:
             git_push_wiki_to_main(
-                f"wiki: lint health check ({gaps_added} gap{'s' if gaps_added != 1 else ''} added)"
+                f"wiki: lint {project} ({gaps_added} gap{'s' if gaps_added != 1 else ''} added)"
             )
             yield sse({"type": "pushed"})
         except Exception as e:
