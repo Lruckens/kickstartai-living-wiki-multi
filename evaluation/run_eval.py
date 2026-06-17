@@ -45,7 +45,7 @@ def score_answer(metric_names, metrics, tc) -> dict:
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--limit", type=int, default=0, help="cap number of questions (0 = all)")
-    ap.add_argument("--conditions", nargs="+", default=["C0", "C1", "C2"])
+    ap.add_argument("--conditions", nargs="+", default=["C0", "C1", "C1r", "C2"])
     ap.add_argument("--project", default="", help="project subtree for the multi-app layout (e.g. uva); empty = flat repo")
     ap.add_argument("--out", default=str(HERE / "results.json"))
     args = ap.parse_args()

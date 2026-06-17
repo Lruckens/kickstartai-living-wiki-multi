@@ -46,8 +46,13 @@ def build_metrics(judge):
 # Metrics per condition. Faithfulness needs a context (skip C0); Contextual Recall is
 # only a meaningful signal for C2 (selective retrieval) — for the dump conditions
 # C1/C2full it's trivially ~1.0, so we don't run it there.
+# Correctness (vs human reference) is the PRIMARY outcome. Faithfulness is a SECONDARY
+# diagnostic: it measures grounding in the *provided context*, which differs per condition —
+# an answer can be faithful to the wiki while the wiki is wrong, so it ≠ factual correctness.
+# Contextual Recall is meaningful only for the retrieval conditions (C1r/C2).
 CORE_FOR = {
-    "C0": ["answer_relevancy", "correctness"],
-    "C1": ["faithfulness", "answer_relevancy", "correctness"],
-    "C2": ["faithfulness", "contextual_recall", "answer_relevancy", "correctness"],
+    "C0":  ["answer_relevancy", "correctness"],
+    "C1":  ["faithfulness", "answer_relevancy", "correctness"],                      # raw dumped
+    "C1r": ["faithfulness", "contextual_recall", "answer_relevancy", "correctness"], # raw + retrieval
+    "C2":  ["faithfulness", "contextual_recall", "answer_relevancy", "correctness"], # wiki + retrieval
 }

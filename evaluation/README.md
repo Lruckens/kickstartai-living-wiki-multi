@@ -5,21 +5,31 @@ Headline experiment from the plan in [`wiki/deliverables/wiki-engine.md`](../wik
 
 ## Conditions (same model + prompt; only the context differs)
 - **C0** closed-book — no context (hallucination floor)
-- **C1** raw context — all raw `sources/` documents (the "give context each time" baseline)
-- **C2** wiki-grounded — **index → top-k page retrieval** (the artifact; bounded context, what makes the wiki scale)
+- **C1** raw-dump — all raw `sources/` artifacts dumped (the "feed everything each time" baseline)
+- **C1r** raw + retrieval — top-k retrieved *raw-document chunks* (same retrieval as C2, over raw text)
+- **C2** wiki + retrieval — top-k retrieved *wiki pages* (the artifact)
 
-Smoke test on one question: C2-retrieval used **~14k** input tokens vs **~44k** for raw-context
-C1 — retrieval keeps the wiki's context bounded as the corpus grows (H2). (A whole-wiki-dump
-condition was tried but dropped — ~87k tokens, too token-heavy and lowest relevancy.)
+**Why C1r exists (Sanne's point).** C2-vs-C1 conflates two effects — the wiki is *both*
+compiled *and* retrieved over, while C1 dumps everything. So a cheaper/better C2 could just
+mean "retrieval helps," not "the wiki helps." **C1r vs C2 holds retrieval constant** (both
+retrieve top-k) so the only difference is *compiled wiki vs raw source* — that's the clean
+test of the wiki's value. **C1 vs C1r** separately shows what retrieval alone buys.
 
-## Metrics (lean set)
-RAG backbone (DeepEval / RAGAS): **Faithfulness** (grounded / no hallucination — needs a
-context, so C1/C2/C2full) and **Answer Relevancy**. Plus **Contextual Recall** as a **C2-only**
-retrieval diagnostic (did index-retrieval fetch the right page; trivially ~1.0 for the
-dump conditions, so not run there). Core G-Eval: **Correctness** vs the human gold answer
-(all conditions — the truth metric that catches confident hallucination, incl. C0). On T3
-(unanswerable) questions we also record **abstention** (did it correctly decline?).
-The judge is **Claude Sonnet** (≠ the answer model, Opus) to reduce self-preference bias.
+## Metrics
+- **Correctness vs the human reference — PRIMARY outcome.** This is "is the answer factually
+  right." It's the metric the wiki claim rests on.
+- **Faithfulness — SECONDARY diagnostic.** It measures grounding in the *provided context*,
+  which differs per condition; an answer can be faithful to the wiki while the wiki is wrong,
+  so faithfulness ≠ correctness. Use it to locate *where* errors come from, not as the outcome.
+- **Answer Relevancy** (all conditions); **Contextual Recall** for the retrieval conditions
+  (C1r/C2 — did retrieval fetch what the answer needed). **Abstention** recorded on T3.
+- Judge = **Claude Sonnet** (≠ the answer model, Opus) to reduce self-preference bias.
+
+## Reference answers (provenance matters — Sanne's point)
+Correctness vs reference is the main metric, so the references must be **written from the
+underlying sources, independently, and before seeing any system output** — NOT derived from
+the wiki (that would unfairly favour C2). The seed answers in `questions.json` are provisional
+and should be re-grounded in the sources before the real run.
 
 ## Run
 ```bash
@@ -39,13 +49,22 @@ not the context size.
 
 **Scaling (H2):** re-run at points *during* ingestion (e.g. after 5, 15, 30 artifacts) and
 plot `avg_tokens_fed` per condition vs corpus size — C1 grows with the corpus while
-C2-retrieval stays bounded.
+C1r/C2 retrieval stay bounded.
+
+## Reading the results
+The **headline claim** is **C1r vs C2 on Correctness** (retrieval held constant → isolates the
+wiki). **C1 vs C1r** shows what retrieval alone buys. C0 is the hallucination floor.
+Faithfulness is read as a *diagnostic* alongside Correctness, not as the outcome.
+
+> The 1-question numbers in this repo's history are **only a smoke test that the harness runs
+> end-to-end** — not a directional finding. The **~30-question run is the result.** (API budget
+> for that confirmed OK with the mentor.)
 
 ## Files
 - `questions.json` — the question set (T1 single-fact · T2 synthesis · T3 unanswerable),
   each with a human reference answer + gold pages. **Expand this to ~30 (≈10 per type)** — it is the
-  ground truth the whole experiment rests on.
-- `pipelines.py` — C0/C1/C2 answer generators (+ token/latency telemetry).
+  ground truth the whole experiment rests on (write the answers from sources, before seeing outputs).
+- `pipelines.py` — C0/C1/C1r/C2 answer generators (+ token/latency telemetry).
 - `metrics.py` — the metric definitions.
 - `judge.py` — the Claude DeepEval judge wrapper.
 - `run_eval.py` — runner → `results.json` + a per-condition summary.

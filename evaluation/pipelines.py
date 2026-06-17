@@ -102,6 +102,66 @@ def _retrieve_wiki(question: str, project: str, k: int = 6):
     return ctx, paths
 
 
+def _chunk(text: str, words: int = 600) -> list:
+    w = text.split()
+    return [" ".join(w[i:i + words]) for i in range(0, len(w), words)] or [text]
+
+
+_CHUNKS_BY_PROJECT: dict = {}
+
+
+def _source_chunks(project: str) -> list:
+    """Raw artifacts split into page-sized chunks → [(chunk_id, text)] (cached per project)."""
+    if project in _CHUNKS_BY_PROJECT:
+        return _CHUNKS_BY_PROJECT[project]
+    chunks = []
+    for p in sorted(_sources_dir(project).rglob("*")):
+        if not p.is_file() or p.name == ".gitkeep" or p.suffix.lower() not in ARTIFACT_EXTS:
+            continue
+        try:
+            if p.suffix.lower() == ".pdf":
+                import pdfplumber
+                with pdfplumber.open(p) as pdf:
+                    txt = "\n".join(pg.extract_text() or "" for pg in pdf.pages)
+            else:
+                txt = p.read_text(encoding="utf-8")
+        except Exception:
+            continue
+        for i, ch in enumerate(_chunk(txt)):
+            chunks.append((f"{p.name}#{i}", ch))
+    _CHUNKS_BY_PROJECT[project] = chunks
+    return chunks
+
+
+def _retrieve_raw(question: str, project: str, k: int = 8):
+    """C1r retrieval: SAME mechanism as C2 but over raw-document chunks instead of wiki pages.
+    Comparing C1r vs C2 holds retrieval constant and isolates compiled-wiki vs raw-source."""
+    import json
+    import re
+    chunks = _source_chunks(project)
+    if not chunks:
+        return "", []
+    listing = "\n".join(f"{cid} — {' '.join(text.split()[:20])}" for cid, text in chunks)
+    sel = _client.messages.create(
+        model=RETRIEVAL_MODEL, max_tokens=400,
+        messages=[{"role": "user", "content": (
+            f"From this list of raw document chunks, choose the chunk ids most relevant to "
+            f"answering the question. Return ONLY a JSON array of up to {k} ids, most relevant first.\n\n"
+            f"## Chunks\n{listing}\n\n## Question\n{question}"
+        )}],
+    )
+    raw = next((b.text for b in sel.content if b.type == "text"), "[]")
+    m = re.search(r"\[.*\]", raw, re.DOTALL)
+    try:
+        ids = json.loads(m.group(0)) if m else []
+    except Exception:
+        ids = []
+    by_id = dict(chunks)
+    ids = [i for i in ids if i in by_id][:k]
+    ctx = "\n\n".join(f"=== {cid} ===\n{by_id[cid]}" for cid in ids)
+    return ctx, ids
+
+
 def _ask(question: str, context: Optional[str], cache_context: bool) -> dict:
     """Answer with the given context. When cache_context, the context block is marked for
     Anthropic prompt caching so an identical context (e.g. C1's) is processed once and reused."""
@@ -136,10 +196,15 @@ _RAW_BY_PROJECT: dict = {}   # artifact context, read once per project
 def answer(question: str, condition: str, project: str = "") -> dict:
     if condition == "C0":                       # closed-book
         return _ask(question, None, cache_context=False)
-    if condition == "C1":                       # project artifacts (cached — fed/analysed once)
+    if condition == "C1":                       # project artifacts dumped (cached — fed/analysed once)
         if project not in _RAW_BY_PROJECT:
             _RAW_BY_PROJECT[project] = _read_sources(project)
         return _ask(question, _RAW_BY_PROJECT[project], cache_context=True)
+    if condition == "C1r":                      # raw chunks + retrieval (vs C2 = compiled wiki + retrieval)
+        ctx, ids = _retrieve_raw(question, project)
+        res = _ask(question, ctx, cache_context=False)
+        res["retrieved_pages"] = ids
+        return res
     if condition == "C2":                       # wiki + retrieval (index → top-k pages)
         ctx, pages = _retrieve_wiki(question, project)
         res = _ask(question, ctx, cache_context=False)   # context varies per question → caching N/A
