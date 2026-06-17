@@ -56,9 +56,10 @@ export default function App() {
         </button>
       </div>
 
-      {/* Active-project switcher — every view/operation acts on this project */}
+      {/* Active-project switcher — every view/operation acts on this project.
+          Bottom-left (mirrors the bottom-right session strip) so it never covers the top nav. */}
       {user.projects.length > 0 && (
-        <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 flex items-center gap-1 bg-card/95 backdrop-blur border border-border rounded-full shadow-soft px-1.5 py-1 text-xs">
+        <div className="fixed bottom-4 left-4 z-50 flex items-center gap-1 bg-card/95 backdrop-blur border border-border rounded-full shadow-soft px-1.5 py-1 text-xs">
           <span className="px-2 text-muted-foreground">Project</span>
           {user.projects.map((p) => (
             <button key={p.id} onClick={() => changeProject(p.id)}
