@@ -108,8 +108,10 @@ step occurs between phases.
 
 Triggered when the user asks a question against the wiki.
 
-**Backend mode:** The full wiki (all `.md` files under `/wiki`) is loaded as context
-in a single LLM call. The model synthesises an answer from the complete wiki content.
+**Backend mode:** Retrieval-based, following the Interactive-mode steps below — the index
+(page catalog) is read first to select the relevant pages, and only those pages are loaded
+as context for the answer (not the whole wiki). This keeps context bounded as the corpus
+grows and yields more specific, less-padded answers.
 
 **Interactive mode:**
 1. **Read `index.md` first** to identify relevant pages.

@@ -219,6 +219,45 @@ def read_all_wiki(project: Optional[str] = None) -> str:
     return "\n\n".join(parts)
 
 
+RETRIEVAL_MODEL = "claude-haiku-4-5"   # cheap model for index→page selection
+
+
+def retrieve_wiki_context(project: str, question: str, user: dict, k: int = 8):
+    """Interactive-mode Query (per CLAUDE.md): read the index/catalog, pick the relevant
+    pages, return ONLY those as context — instead of dumping the whole wiki. Permission-aware
+    (only pages the reader may see enter the catalog). Returns (context, [page_paths])."""
+    wdir = WIKI_DIR / project
+    catalog = []
+    for p in sorted(wdir.rglob("*.md")):
+        rel = "/".join(p.relative_to(wdir).parts)
+        if not permission.user_can_see(permission.page_access(f"{project}/{rel}"), user):
+            continue
+        txt = p.read_text(encoding="utf-8")
+        title = next((l[2:].strip() for l in txt.splitlines() if l.startswith("# ")), p.stem)
+        catalog.append((rel, title))
+    if not catalog:
+        return "", []
+    listing = "\n".join(f"{rel} — {title}" for rel, title in catalog)
+    sel = client.messages.create(
+        model=RETRIEVAL_MODEL, max_tokens=400,
+        messages=[{"role": "user", "content": (
+            f"From this wiki page catalog, choose the file paths most relevant to answering the "
+            f"question. Return ONLY a JSON array of up to {k} paths, most relevant first.\n\n"
+            f"## Catalog\n{listing}\n\n## Question\n{question}"
+        )}],
+    )
+    raw = next((b.text for b in sel.content if b.type == "text"), "[]")
+    m = re.search(r"\[.*\]", raw, re.DOTALL)
+    try:
+        paths = json.loads(m.group(0)) if m else []
+    except Exception:
+        paths = []
+    valid = {rel for rel, _ in catalog}
+    paths = [p for p in paths if p in valid][:k]
+    ctx = "\n\n".join(f"=== {project}/{rel} ===\n{(wdir / rel).read_text(encoding='utf-8')}" for rel in paths)
+    return ctx, paths
+
+
 def read_source_file(path: Path) -> str:
     suffix = path.suffix.lower()
     if suffix == ".pdf":
@@ -693,15 +732,17 @@ Rules:
 @app.post("/query")
 async def query_wiki(req: QueryRequest, project: str, user: dict = Depends(team_member)):
     project_dirs(project)
-    wiki = read_all_wiki(project)
+    # Interactive-mode retrieval (CLAUDE.md): index → relevant pages, not the whole wiki.
+    wiki, used_pages = retrieve_wiki_context(project, req.question, user)
 
     async def stream():
+        yield sse({"type": "pages", "pages": used_pages})  # which pages were retrieved
         try:
             with client.messages.stream(
                 model="claude-opus-4-8",
                 max_tokens=16000,
                 system=QUERY_SYSTEM,
-                messages=[{"role": "user", "content": f"Wiki content:\n\n{wiki}\n\n---\n\nQuestion: {req.question}"}],
+                messages=[{"role": "user", "content": f"Retrieved wiki pages:\n\n{wiki}\n\n---\n\nQuestion: {req.question}"}],
             ) as s:
                 for text in s.text_stream:
                     yield sse({"type": "text", "content": text})
