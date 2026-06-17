@@ -1,6 +1,7 @@
 // Shared backend access + session handling for the permission layer.
 
-export const BACKEND_URL = "http://localhost:8000";
+// Backend base URL — override with VITE_BACKEND_URL (e.g. to run on an alt port).
+export const BACKEND_URL = (import.meta as any).env?.VITE_BACKEND_URL ?? "http://localhost:8000";
 
 export type Project = { id: string; name: string };
 export type SessionUser = {
