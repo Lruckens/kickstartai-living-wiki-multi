@@ -1,14 +1,32 @@
 # Wiki index — Living Wiki (UvA)
 
 Last updated: 2026-06-16
-Total pages: 0
+Total pages: 12
 
-> Maintained by Claude. Empty project — ingest the first source to populate.
+> Maintained by Claude.
 
 ## Decisions
+
 ## Entities
+- [[kickstartai]]
+- [[uva-ai4business-lab]]
+
 ## Concepts
+- [[living-wiki]]
+- [[user-journeys]]
+- [[permission-model]]
+- [[evaluation-framework]]
+
 ## Meetings
+
 ## Deliverables
+- [[ingestion-pipeline]]
+- [[wiki-generation-engine]]
+- [[generator-module]]
+- [[gap-detector]]
+- [[permission-layer]]
+- [[evaluation-deliverable]]
+
 ## Saved queries
+
 ## Generated outputs
