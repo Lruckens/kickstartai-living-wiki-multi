@@ -1,65 +1,34 @@
 [
-  {
-    "id": "T1-1",
-    "type": "T1",
-    "question": "Which platform was chosen to deploy the Living Wiki app, and what was it chosen over?",
-    "reference_answer": "Vercel, chosen over an enterprise cloud option.",
-    "gold_pages": ["decisions/decision-vercel-deployment.md"]
-  },
-  {
-    "id": "T1-2",
-    "type": "T1",
-    "question": "Who is the UvA thesis supervisor for the project?",
-    "reference_answer": "Hongyi Zhu (H. Zhu).",
-    "gold_pages": ["entities/h-zhu.md"]
-  },
-  {
-    "id": "T1-3",
-    "type": "T1",
-    "question": "What authentication approach was chosen for the prototype, and why not full auth?",
-    "reference_answer": "Dummy accounts (fake names and passwords) for the prototype; real auth / 2FA is future work.",
-    "gold_pages": ["decisions/decision-dummy-account-authentication.md"]
-  },
-  {
-    "id": "T2-1",
-    "type": "T2",
-    "question": "Why was the gap detector reworked, and what changed?",
-    "reference_answer": "Run as-is it produced ~514 unrepresentative, mostly-high gaps because it was tuned on generic document templates rather than the actual wiki. It was re-grounded in the CLAUDE.md page schema, the [[wikilink]] graph, and the _gaps.md ledger, which cut it to ~25 representative gaps.",
-    "gold_pages": ["decisions/decision-gap-detector-wiki-native.md", "deliverables/gap-detector.md"]
-  },
-  {
-    "id": "T2-2",
-    "type": "T2",
-    "question": "How does the system decide who can see a generated output such as a LinkedIn post?",
-    "reference_answer": "The permission layer maps the output type to a target level (a LinkedIn post is public), pre-filters the source pool to paragraphs allowed at that level, generates, then runs a post-generation audit (blacklist regex + an LLM audit) before publishing.",
-    "gold_pages": ["concepts/permission-model.md", "deliverables/permission-layer.md"]
-  },
-  {
-    "id": "T2-3",
-    "type": "T2",
-    "question": "Who owns which of the six sub-deliverables on the team?",
-    "reference_answer": "Laurenz: 1+2 (ingestion + wiki engine); Quinten: 3 (generator); Cara: 4 (gap detector); Xiaojing: 5 (permission layer); all students: 6 (evaluation, individual).",
-    "gold_pages": ["decisions/decision-subdeliverable-ownership-revised.md"]
-  },
-  {
-    "id": "T3-1",
-    "type": "T3",
-    "question": "What is the project's annual marketing budget?",
-    "reference_answer": "UNANSWERABLE — not documented in the corpus; the system should decline rather than guess.",
-    "gold_pages": []
-  },
-  {
-    "id": "T3-2",
-    "type": "T3",
-    "question": "Which AWS region hosts the production database?",
-    "reference_answer": "UNANSWERABLE — not documented in the corpus; the system should decline rather than guess.",
-    "gold_pages": []
-  },
-  {
-    "id": "T3-3",
-    "type": "T3",
-    "question": "How many paying customers does the wiki currently have?",
-    "reference_answer": "UNANSWERABLE — not documented in the corpus; the system should decline rather than guess.",
-    "gold_pages": []
-  }
+  { "id": "T1-1",  "type": "T1", "question": "Which platform was chosen to deploy the Living Wiki app, and what was it chosen over?", "reference_answer": "", "gold_pages": ["decisions/decision-vercel-deployment.md"] },
+  { "id": "T1-2",  "type": "T1", "question": "Who is the UvA thesis supervisor for the project?", "reference_answer": "", "gold_pages": ["entities/h-zhu.md"] },
+  { "id": "T1-3",  "type": "T1", "question": "What authentication approach was chosen for the prototype, and why not full auth?", "reference_answer": "", "gold_pages": ["decisions/decision-dummy-account-authentication.md"] },
+  { "id": "T1-4",  "type": "T1", "question": "Who is the KickstartAI technical mentor / main contact for the project?", "reference_answer": "", "gold_pages": ["entities/sanne-wielinga.md"] },
+  { "id": "T1-5",  "type": "T1", "question": "Which process methodology was adopted for the project phases?", "reference_answer": "", "gold_pages": ["concepts/crisp-dm-framework.md", "decisions/decision-crisp-dm-adoption.md"] },
+  { "id": "T1-6",  "type": "T1", "question": "On what date was the project kickoff meeting?", "reference_answer": "", "gold_pages": ["meetings/2026-04-13-kickoff.md"] },
+  { "id": "T1-7",  "type": "T1", "question": "Which LLM does the system use, and is it fine-tuned?", "reference_answer": "", "gold_pages": ["concepts/llm-wiki.md", "_overview.md"] },
+  { "id": "T1-8",  "type": "T1", "question": "When is the final demo and thesis deadline?", "reference_answer": "", "gold_pages": ["_overview.md"] },
+  { "id": "T1-9",  "type": "T1", "question": "What interface/tooling layer does the team use to operate the wiki?", "reference_answer": "", "gold_pages": ["deliverables/wiki-engine.md", "_overview.md"] },
+  { "id": "T1-10", "type": "T1", "question": "What is sub-deliverable 4 and who owns it?", "reference_answer": "", "gold_pages": ["deliverables/gap-detector.md", "entities/cara-cheng.md"] },
+
+  { "id": "T2-1",  "type": "T2", "question": "Who owns each of the six sub-deliverables on the team?", "reference_answer": "", "gold_pages": ["decisions/decision-subdeliverable-ownership-revised.md"] },
+  { "id": "T2-2",  "type": "T2", "question": "Why was the gap detector reworked, and what specifically changed?", "reference_answer": "", "gold_pages": ["decisions/decision-gap-detector-wiki-native.md", "deliverables/gap-detector.md"] },
+  { "id": "T2-3",  "type": "T2", "question": "How does the permission layer decide who can see a generated output such as a LinkedIn post?", "reference_answer": "", "gold_pages": ["concepts/permission-model.md", "deliverables/permission-layer.md"] },
+  { "id": "T2-4",  "type": "T2", "question": "How does the three-layer architecture (/sources, CLAUDE.md, /wiki) work?", "reference_answer": "", "gold_pages": ["_overview.md", "deliverables/wiki-engine.md"] },
+  { "id": "T2-5",  "type": "T2", "question": "What are the steps the pipeline follows when a new source document is ingested?", "reference_answer": "", "gold_pages": ["deliverables/wiki-engine.md"] },
+  { "id": "T2-6",  "type": "T2", "question": "What is the relationship between KickstartAI and the UvA AI4Business Lab on this project?", "reference_answer": "", "gold_pages": ["entities/kickstartai.md", "entities/uva-ai4business-lab.md"] },
+  { "id": "T2-7",  "type": "T2", "question": "How did the scope of the permission layer change over the course of the project?", "reference_answer": "", "gold_pages": ["decisions/decision-permission-layer-scope.md", "deliverables/permission-layer.md"] },
+  { "id": "T2-8",  "type": "T2", "question": "What deployment/hosting concern is still open for the system, and why?", "reference_answer": "", "gold_pages": ["decisions/decision-vercel-deployment.md", "_gaps.md"] },
+  { "id": "T2-9",  "type": "T2", "question": "What is the team's evaluation approach for the knowledge pipeline (ingestion + wiki engine)?", "reference_answer": "", "gold_pages": ["deliverables/wiki-engine.md", "concepts/evaluation-framework.md"] },
+  { "id": "T2-10", "type": "T2", "question": "Which Anthropic model is the system migrating to, and what is uncertain about it?", "reference_answer": "", "gold_pages": ["decisions/decision-claude-model-migration.md", "_gaps.md"] },
+
+  { "id": "T3-1",  "type": "T3", "question": "What is the project's annual marketing budget?", "reference_answer": "UNANSWERABLE — not in the corpus; the system should decline rather than guess.", "gold_pages": [] },
+  { "id": "T3-2",  "type": "T3", "question": "Which AWS region hosts the production database?", "reference_answer": "UNANSWERABLE — not in the corpus; the system should decline rather than guess.", "gold_pages": [] },
+  { "id": "T3-3",  "type": "T3", "question": "How many paying customers does the wiki currently have?", "reference_answer": "UNANSWERABLE — not in the corpus; the system should decline rather than guess.", "gold_pages": [] },
+  { "id": "T3-4",  "type": "T3", "question": "What is the revenue target for next quarter?", "reference_answer": "UNANSWERABLE — not in the corpus; the system should decline rather than guess.", "gold_pages": [] },
+  { "id": "T3-5",  "type": "T3", "question": "Which venture-capital firm funds the project?", "reference_answer": "UNANSWERABLE — not in the corpus; the system should decline rather than guess.", "gold_pages": [] },
+  { "id": "T3-6",  "type": "T3", "question": "What is Sanne Wielinga's personal phone number?", "reference_answer": "UNANSWERABLE — not in the corpus (and a privacy ask); the system should decline.", "gold_pages": [] },
+  { "id": "T3-7",  "type": "T3", "question": "What uptime SLA does the system guarantee to users?", "reference_answer": "UNANSWERABLE — not in the corpus; the system should decline rather than guess.", "gold_pages": [] },
+  { "id": "T3-8",  "type": "T3", "question": "Which competitor products were benchmarked against the wiki?", "reference_answer": "UNANSWERABLE — not in the corpus; the system should decline rather than guess.", "gold_pages": [] },
+  { "id": "T3-9",  "type": "T3", "question": "What is the on-call support rotation schedule?", "reference_answer": "UNANSWERABLE — not in the corpus; the system should decline rather than guess.", "gold_pages": [] },
+  { "id": "T3-10", "type": "T3", "question": "How many GitHub stars does the repository have?", "reference_answer": "UNANSWERABLE — not in the corpus; the system should decline rather than guess.", "gold_pages": [] }
 ]

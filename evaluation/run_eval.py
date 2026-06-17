@@ -54,6 +54,14 @@ def main() -> None:
     if args.limit:
         questions = questions[: args.limit]
 
+    # Correctness needs reference answers — and they must be written from the SOURCES,
+    # independently, before running (not derived from the wiki). Refuse to run on blanks.
+    missing = [q["id"] for q in questions if not str(q.get("reference_answer", "")).strip()]
+    if missing:
+        print(f"✗ {len(missing)} question(s) have no reference answer — write them from the "
+              f"source documents first (do not derive from the wiki):\n  {', '.join(missing)}")
+        raise SystemExit(1)
+
     judge = ClaudeJudge()
     metrics = build_metrics(judge)
     results = []
