@@ -28,3 +28,6 @@ wiki/.obsidian/workspace-mobile.json
 wiki/.obsidian/workspace*.json
 wiki/.obsidian/cache
 wiki/.trash/
+
+# Evaluation run outputs
+evaluation/results.json

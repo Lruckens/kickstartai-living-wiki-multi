@@ -1,0 +1,65 @@
+[
+  {
+    "id": "T1-1",
+    "type": "T1",
+    "question": "Which platform was chosen to deploy the Living Wiki app, and what was it chosen over?",
+    "reference_answer": "Vercel, chosen over an enterprise cloud option.",
+    "gold_pages": ["decisions/decision-vercel-deployment.md"]
+  },
+  {
+    "id": "T1-2",
+    "type": "T1",
+    "question": "Who is the UvA thesis supervisor for the project?",
+    "reference_answer": "Hongyi Zhu (H. Zhu).",
+    "gold_pages": ["entities/h-zhu.md"]
+  },
+  {
+    "id": "T1-3",
+    "type": "T1",
+    "question": "What authentication approach was chosen for the prototype, and why not full auth?",
+    "reference_answer": "Dummy accounts (fake names and passwords) for the prototype; real auth / 2FA is future work.",
+    "gold_pages": ["decisions/decision-dummy-account-authentication.md"]
+  },
+  {
+    "id": "T2-1",
+    "type": "T2",
+    "question": "Why was the gap detector reworked, and what changed?",
+    "reference_answer": "Run as-is it produced ~514 unrepresentative, mostly-high gaps because it was tuned on generic document templates rather than the actual wiki. It was re-grounded in the CLAUDE.md page schema, the [[wikilink]] graph, and the _gaps.md ledger, which cut it to ~25 representative gaps.",
+    "gold_pages": ["decisions/decision-gap-detector-wiki-native.md", "deliverables/gap-detector.md"]
+  },
+  {
+    "id": "T2-2",
+    "type": "T2",
+    "question": "How does the system decide who can see a generated output such as a LinkedIn post?",
+    "reference_answer": "The permission layer maps the output type to a target level (a LinkedIn post is public), pre-filters the source pool to paragraphs allowed at that level, generates, then runs a post-generation audit (blacklist regex + an LLM audit) before publishing.",
+    "gold_pages": ["concepts/permission-model.md", "deliverables/permission-layer.md"]
+  },
+  {
+    "id": "T2-3",
+    "type": "T2",
+    "question": "Who owns which of the six sub-deliverables on the team?",
+    "reference_answer": "Laurenz: 1+2 (ingestion + wiki engine); Quinten: 3 (generator); Cara: 4 (gap detector); Xiaojing: 5 (permission layer); all students: 6 (evaluation, individual).",
+    "gold_pages": ["decisions/decision-subdeliverable-ownership-revised.md"]
+  },
+  {
+    "id": "T3-1",
+    "type": "T3",
+    "question": "What is the project's annual marketing budget?",
+    "reference_answer": "UNANSWERABLE — not documented in the corpus; the system should decline rather than guess.",
+    "gold_pages": []
+  },
+  {
+    "id": "T3-2",
+    "type": "T3",
+    "question": "Which AWS region hosts the production database?",
+    "reference_answer": "UNANSWERABLE — not documented in the corpus; the system should decline rather than guess.",
+    "gold_pages": []
+  },
+  {
+    "id": "T3-3",
+    "type": "T3",
+    "question": "How many paying customers does the wiki currently have?",
+    "reference_answer": "UNANSWERABLE — not documented in the corpus; the system should decline rather than guess.",
+    "gold_pages": []
+  }
+]
