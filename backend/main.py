@@ -6,7 +6,7 @@ from anthropic import Anthropic
 from dotenv import load_dotenv
 import os, json, shutil, re, subprocess, tempfile
 from pathlib import Path
-from datetime import date as dt_date
+from datetime import date as dt_date, datetime
 from pathlib import Path
 import os
 import json
@@ -1089,6 +1089,47 @@ def apply_ingest_files(files: list[dict], project: str) -> tuple[list[str], list
     return created, updated
 
 
+TOKEN_USAGE_FILE = BASE_DIR / "token_usage.md"
+TOKEN_USAGE_HEADER = (
+    "# Ingestion token usage\n\n"
+    "Append-only ledger of Claude token usage per ingestion (read from the API `usage` "
+    "field). `Total fed` = input + cache-read + cache-write — the true context size the "
+    "model processed; prompt caching lowers the *bill*, not the context size.\n\n"
+    "| Timestamp | Project | Source | Pages | Input | Output | Cache read | Cache write | Total fed |\n"
+    "|---|---|---|---|---|---|---|---|---|\n"
+)
+
+
+def _usage_tokens(u) -> dict:
+    """Pull token counts off an Anthropic usage object (missing fields → 0)."""
+    if u is None:
+        return {"input": 0, "output": 0, "cache_read": 0, "cache_write": 0}
+    return {
+        "input":       getattr(u, "input_tokens", 0) or 0,
+        "output":      getattr(u, "output_tokens", 0) or 0,
+        "cache_read":  getattr(u, "cache_read_input_tokens", 0) or 0,
+        "cache_write": getattr(u, "cache_creation_input_tokens", 0) or 0,
+    }
+
+
+def record_ingest_usage(project: str, filename: str, n_pages: int, usages: list) -> dict:
+    """Sum usage across the ingest's API calls, append a row to token_usage.md, return totals."""
+    agg = {"input": 0, "output": 0, "cache_read": 0, "cache_write": 0}
+    for u in usages:
+        t = _usage_tokens(u)
+        for k in agg:
+            agg[k] += t[k]
+    agg["total_fed"] = agg["input"] + agg["cache_read"] + agg["cache_write"]
+    if not TOKEN_USAGE_FILE.exists():
+        TOKEN_USAGE_FILE.write_text(TOKEN_USAGE_HEADER, encoding="utf-8")
+    row = (f"| {datetime.now():%Y-%m-%d %H:%M} | {project} | {filename} | {n_pages} | "
+           f"{agg['input']:,} | {agg['output']:,} | {agg['cache_read']:,} | "
+           f"{agg['cache_write']:,} | {agg['total_fed']:,} |\n")
+    with TOKEN_USAGE_FILE.open("a", encoding="utf-8") as fh:
+        fh.write(row)
+    return agg
+
+
 @app.post("/ingest")
 async def ingest_source(req: IngestRequest, user: dict = Depends(team_member)):
     wdir, sdir = project_dirs(req.project)
@@ -1108,9 +1149,24 @@ async def ingest_source(req: IngestRequest, user: dict = Depends(team_member)):
     source_content = read_source_file(source_path)
     wiki_context   = read_all_wiki(req.project)
 
+    # The wiki + source is identical across both ingest phases (analysis, then apply), so send
+    # it as one cached system block: the apply phase re-reads it from cache at ~10% cost
+    # instead of paying the full prompt twice. Phase-specific instructions go in a second,
+    # uncached system block after the breakpoint, so the cached prefix matches between calls.
+    shared_context = (
+        f"## Existing wiki\n\n{wiki_context}\n\n"
+        f"---\n\n## Source document: {req.filename}\n\n{source_content}"
+    )
+    cached_context_block = {
+        "type": "text", "text": shared_context,
+        "cache_control": {"type": "ephemeral"},
+    }
+
     analysis_parts: list[str] = []
+    analysis_usage = None
 
     async def stream():
+        nonlocal analysis_usage
         # Restricted document → refresh that project's protection list first
         if source_access.get("label") == "restricted" and source_access.get("project_id"):
             added = permission.update_blacklist(source_access["project_id"], source_content)
@@ -1121,19 +1177,18 @@ async def ingest_source(req: IngestRequest, user: dict = Depends(team_member)):
             with client.messages.stream(
                 model="claude-opus-4-8",
                 max_tokens=16000,
-                system=INGEST_ANALYSIS_SYSTEM,
+                system=[cached_context_block,
+                        {"type": "text", "text": INGEST_ANALYSIS_SYSTEM}],
                 messages=[{
                     "role": "user",
-                    "content": (
-                        f"## Existing wiki\n\n{wiki_context}\n\n"
-                        f"---\n\n## Source document: {req.filename}\n\n{source_content}"
-                    ),
+                    "content": "Analyse the source document above against the existing wiki, and plan the wiki updates.",
                 }],
             ) as s:
                 for text in s.text_stream:
                     analysis_parts.append(text)
                     yield sse({"type": "text", "content": text})
                 analysis_final = s.get_final_message()
+                analysis_usage = analysis_final.usage
             if analysis_final.stop_reason == "max_tokens":
                 yield sse({"type": "text", "content": "\n\n> ⚠️ _Analysis hit the token limit and was truncated._"})
         except Exception as e:
@@ -1144,17 +1199,21 @@ async def ingest_source(req: IngestRequest, user: dict = Depends(team_member)):
         yield sse({"type": "applying"})
         analysis = "".join(analysis_parts)
         try:
+            # NOTE: do NOT add output_config/structured-outputs here. It lives in the
+            # `tools` layer of the prompt-cache key (above `system`), so it would stop this
+            # phase from reading the analysis phase's cached wiki block — doubling the
+            # ingest's input cost. JSON is enforced via INGEST_APPLY_SYSTEM + the fence-
+            # stripping below instead. (Verified: with output_config, phase-2 cache_read=0.)
             with client.messages.stream(
                 model="claude-opus-4-8",
                 max_tokens=64000,
-                system=INGEST_APPLY_SYSTEM,
-                output_config={"format": {"type": "json_schema", "schema": INGEST_FILES_SCHEMA}},
+                system=[cached_context_block,
+                        {"type": "text", "text": INGEST_APPLY_SYSTEM}],
                 messages=[{
                     "role": "user",
                     "content": (
-                        f"## Existing wiki\n\n{wiki_context}\n\n"
-                        f"---\n\n## Source document: {req.filename}\n\n{source_content}\n\n"
-                        f"---\n\n## Analysis (use this to decide what to write)\n\n{analysis}"
+                        f"## Analysis (use this to decide what to write)\n\n{analysis}\n\n"
+                        f"Now output the JSON file changes for the wiki above."
                     ),
                 }],
             ) as apply_stream:
@@ -1169,6 +1228,7 @@ async def ingest_source(req: IngestRequest, user: dict = Depends(team_member)):
                         yield sse({"type": "apply_progress", "chars": apply_chars})
                 raw = "".join(apply_chunks).strip()
                 final = apply_stream.get_final_message()
+                apply_usage = final.usage
             if final.stop_reason == "max_tokens":
                 raise ValueError(
                     f"output truncated at {apply_chars:,} chars — the wiki update was too large "
@@ -1186,6 +1246,12 @@ async def ingest_source(req: IngestRequest, user: dict = Depends(team_member)):
                     source_access.get("project_id"),
                 )
             yield sse({"type": "applied", "created": created, "updated": updated})
+            # Record real token usage (both phases) to the append-only ledger + the UI
+            usage = record_ingest_usage(
+                req.project, req.filename, len(created) + len(updated),
+                [analysis_usage, apply_usage],
+            )
+            yield sse({"type": "usage", **usage})
         except Exception as e:
             yield sse({"type": "error", "message": f"Apply phase failed: {e}"})
             yield sse({"type": "done"})
