@@ -35,6 +35,26 @@ ANSWER_SYSTEM = (
 
 ARTIFACT_EXTS = (".md", ".txt", ".pdf")   # genuine project artifacts (markdown after conversion)
 
+# --- Corpus hygiene (UvA-only, defensible comparison) -----------------------------
+# Keep C1 (raw) and C2 (wiki) on the same UvA knowledge corpus. Exclude:
+#  - cross-project content (Westerwoude/Bakkie) — a different project,
+#  - raw source dumps misplaced inside the wiki tree (wiki/sources/**) — not real pages,
+#  - saved query pages — prior LLM answers to near-identical eval questions (circular → unfair to C2),
+#  - a stray, un-templated page.
+SOURCE_EXCLUDE_SUBSTR = ("westerwoude", "bakkie")
+WIKI_EXCLUDE_PREFIXES = ("sources/", "queries/")
+WIKI_EXCLUDE_NAMES    = ("Meeting notes 14-5-2026.pdf.md",)
+
+
+def _keep_source(p: Path) -> bool:
+    return not any(s in p.name.lower() for s in SOURCE_EXCLUDE_SUBSTR)
+
+
+def _keep_wiki(rel: str) -> bool:
+    if rel in WIKI_EXCLUDE_NAMES:
+        return False
+    return not any(rel.startswith(pre) for pre in WIKI_EXCLUDE_PREFIXES)
+
 
 def _sources_dir(project: str) -> Path:
     return BASE_DIR / "sources" / project if project else BASE_DIR / "sources"
@@ -49,6 +69,8 @@ def _read_sources(project: str) -> str:
     parts = []
     for p in sorted(_sources_dir(project).rglob("*")):
         if not p.is_file() or p.name == ".gitkeep" or p.suffix.lower() not in ARTIFACT_EXTS:
+            continue
+        if not _keep_source(p):
             continue
         try:
             if p.suffix.lower() == ".pdf":
@@ -69,6 +91,8 @@ def _wiki_catalog(project: str) -> list:
     cat = []
     for p in sorted(wdir.rglob("*.md")):
         rel = "/".join(p.relative_to(wdir).parts)
+        if not _keep_wiki(rel):
+            continue
         txt = p.read_text(encoding="utf-8")
         title = next((l[2:].strip() for l in txt.splitlines() if l.startswith("# ")), p.stem)
         cat.append((rel, title))
@@ -117,6 +141,8 @@ def _source_chunks(project: str) -> list:
     chunks = []
     for p in sorted(_sources_dir(project).rglob("*")):
         if not p.is_file() or p.name == ".gitkeep" or p.suffix.lower() not in ARTIFACT_EXTS:
+            continue
+        if not _keep_source(p):
             continue
         try:
             if p.suffix.lower() == ".pdf":

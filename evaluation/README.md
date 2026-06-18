@@ -34,12 +34,15 @@ and should be re-grounded in the sources before the real run.
 ## Run
 ```bash
 pip install -r evaluation/requirements.txt
-python evaluation/run_eval.py --limit 1                 # smoke test (flat repo)
-python evaluation/run_eval.py --project uva             # multi-app: sources/uva/ + wiki/uva/
-python evaluation/run_eval.py --project bakkie          # the other project
+python evaluation/run_eval.py            # FULL run — flat repo (the UvA experiment)
+python evaluation/run_eval.py --limit 1  # smoke test (1 question)
 ```
-`ANTHROPIC_API_KEY` is read from `../.env`. `--project` scopes to the per-project subtree
-(the multi-project app); omit it for a flat single-project repo.
+`ANTHROPIC_API_KEY` is read from `../.env`. The question set + gold pages are authored
+against the **flat repo** (this corpus: ~23 sources, ~59 wiki pages), so run it **without**
+`--project`. The multi-app `--project uva` subtree is **not** populated (most gold pages
+missing, 1 source) — don't run there until its sources are ingested. The runner refuses to
+start until every T1/T2 `reference_answer` is filled in `questions.json` (write them from
+the source documents first).
 
 **Cost / "fed once":** C1's artifact context is identical every question, so it's sent with
 **Anthropic prompt caching** — processed once, then reused at ~10% cost for the rest of the
