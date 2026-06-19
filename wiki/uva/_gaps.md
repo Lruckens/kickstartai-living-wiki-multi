@@ -5,7 +5,7 @@ Underdocumented areas and open questions.
 ## Surfaced from founding brief (2026-04-02)
 - **Project-team mapping — largely resolved (2026-04-10 thread)** — The working team is now named (see [[project-team]]): Sanne Wielinga is the KickstartAI **point of contact**, Evertjan Peer made the **introduction**. Remaining nuance: neither is formally labeled "technical mentor" (see below).
 - **UvA student team — largely resolved (2026-04-10 thread)** — Four UvA students named: Quinten van den Heuvel (coordinator), Laurenz Ruckensteiner, plus two appearing as email aliases. See [[project-team]] and the name-mapping gap below.
-- **Timeline/milestones — partially resolved** — Kickoff (2026-04-13) and Assignment 1 presentation (~2026-04-22) are now anchored (see [[_overview]], [[assignment-1-project-definition]]). Overall duration, later milestones, and end date remain undocumented.
+- **Timeline/milestones — partially evidenced, not resolved** — Kickoff (2026-04-13) and Assignment 1 presentation (~2026-04-22) are anchored (see [[_overview]], [[assignment-1-project-definition]]). A **Gantt chart artifact now demonstrably exists** (dated 2026-04-13, see [[project-timeline]]) — but it was ingested as an image only, so the actual phases/milestones/durations/end date remain unread. Distinguish "a schedule artifact exists" from "the timeline is known." See the Gantt-chart section below.
 - **Tech stack undecided** — No LLM choice, vector store, ingestion connectors, or hosting documented.
 - **Source connectors** — Which internal drives/tools (GitHub, transcription tools, email) will be connected is unspecified. Note: a community Slack channel is now a live project channel — see below.
 - **Regeneration cadence** — "Configurable schedule" (daily?) stated as an example, not decided.
@@ -21,6 +21,11 @@ Underdocumented areas and open questions.
 - **Kickoff meeting notes not ingested** — Gemini-generated kick-off notes (2026-04-13) and kickoff slides (`20260413 UvA.pdf`, `KickstartAI x UvA - Kick-off.pdf`) are referenced as attachments but their *content* is not ingested; decisions made at kickoff are undocumented.
 - **Assignment 1 content not ingested** — `Assignment 1 - project definition.pdf` and the team's presentation (`Living Project Wiki.pptx`) are referenced but bodies not ingested; the actual project-definition scope/decisions are unread. See [[assignment-1-project-definition]].
 - **Slack as a communication/source channel** — The KickstartAI community Slack is now a live project channel; whether it will be an ingestion source for the Living Wiki is unspecified.
+
+## Surfaced from Gantt chart ingest (2026-04-13; ingested 2026-06-19)
+- **Gantt chart content not ingested (image-only)** — The source `2026-04-13-Gantt_chart.md` is a single embedded JPG (CDN-hosted) with no extractable text. Project phases, task breakdown, durations, dependencies, milestones, and **end date** remain undocumented. No timeline content was fabricated from the image. Flag for re-ingest via OCR/transcription or a text/structured version of the schedule. See [[project-timeline]].
+- **Timeline gap now partially evidenced, not resolved** — A schedule *artifact* demonstrably exists (dated 2026-04-13), but the actual milestones beyond kickoff (2026-04-13) and Assignment 1 (~2026-04-22) are still unread. "Artifact exists" ≠ "timeline known."
+- **Gantt ↔ Assignment 1 association unconfirmed** — Whether the Gantt chart is part of, accompanies, or is separate from the Assignment 1 project-definition deliverable is inferred from shared dating, not stated by any source. See [[project-timeline]], [[assignment-1-project-definition]].
 
 ## Surfaced from KickstartAI homepage ingest (2026-05-07 clipping)
 - **Pillar terminology drift** — KickstartAI uses two parallel vocabularies for its three pillars ("We do / We share / We connect" vs "Apply / Amplify / Activate"). Documented as equivalent on [[kickstartai]] based on semantic mapping, but this equivalence is *inferred, not stated* by any source. Flag for confirmation.
