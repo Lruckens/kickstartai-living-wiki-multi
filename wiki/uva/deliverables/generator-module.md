@@ -7,7 +7,12 @@
 A module that produces periodic outputs from the wiki — weekly project digests, stakeholder summaries, or draft blog posts — aligned with a configurable tone and audience.
 
 ## Details
-Serves the Summarizer and Content Generator user journeys. It transforms information from a continuously evolving project knowledge base into coherent, up-to-date content tailored to different audiences, with configurable tone and level of detail. Blog post drafts should be written in KickstartAI's voice and evaluated against a human-written baseline (see [[evaluation-deliverable]]). Tone/voice specification is not yet defined — see [[_gaps]].
+Serves the Summarizer and Content Generator user journeys. It transforms project knowledge into coherent, up-to-date content tailored to different audiences, with configurable tone and level of detail. Blog post drafts should be written in KickstartAI's voice and evaluated against a human-written baseline (see [[evaluation-deliverable]]). Tone/voice specification is not yet defined — see [[_gaps]].
+
+> ⚠️ **Sourcing approach — OPEN design question (2026-05-14).** Earlier framing implied the generator produces outputs *from the wiki* (the compiled knowledge base). At the 2026-05-14 development-phase meeting (see [[team-meeting-2026-05-14]]) Quinten raised this as an **undecided design choice**: should the generator generate content **based on the wiki**, or **search through the underlying source documents** the wiki is built from and then generate? This is not yet settled — the "from the wiki" phrasing should be read as one of two open options, not a decided fact. See [[_gaps]].
+
+### Integration with the system architecture (2026-05-14)
+**Laurenz and Quinten** are to work out a way to **combine the generator module with the GitHub wiki architecture** (the first MVP — see [[wiki-generation-engine]], [[team-meeting-2026-05-14]]).
 
 ### Generation strategies (Assignment 1a report, 2026-04-22)
 The Member 2 RQ investigates **multiple LLM-based generation strategies**, named explicitly in the report: **direct prompting, retrieval-augmented generation (RAG), and template-driven generation**. Output quality is systematically evaluated across factual accuracy, freshness, coverage, and usefulness. See [[assignment-1-report-2026-04-22]].
@@ -29,6 +34,8 @@ Both are noted as possibilities only, not assertions — see [[_gaps]].
 ## Related
 - [[user-journeys]]
 - [[evaluation-deliverable]]
+- [[wiki-generation-engine]]
+- [[team-meeting-2026-05-14]]
 - [[assignment-1-presentation-2026-04-22]]
 - [[assignment-1-report-2026-04-22]]
 - [[project-team]]
@@ -44,3 +51,4 @@ Both are noted as possibilities only, not assertions — see [[_gaps]].
 - KickstartAI_News.md (https://kickstart.ai/news, created 2026-05-07)
 - 2026-04-22-presentation-slides.md (Assignment 1 project-definition presentation deck, text-extractable)
 - 2026-04-22-problem-definition.md (Assignment 1a written project-definition report, text-extractable)
+- 2026-05-14-meeting-notes.md (internal UvA team working meeting notes, development phase)

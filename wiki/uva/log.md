@@ -129,7 +129,7 @@ Append-only. One entry per operation: ingest, query, or lint.
 **Action:** Ingested the **written Assignment 1a report** — the prose companion to the deck and the long-flagged Assignment 1 PDF body. Created dedicated artifact page [[assignment-1-report-2026-04-22]] (literature grounding, GAPS framework, design principles, five-components-plus-shared-evaluation framing, per-member RQ expansions, author list w/ student numbers). Created concept stub [[gaps-diagram]] identifying the GAPS/DAPS framework (de Mast & Lokkerbol 2024). **Resolved** three long-standing gaps: "Assignment 1 PDF body unread," "DAPS framework unexplained," and the "Meng" name discrepancy (reconciled to Meng Cheng = Cara/Carac M. Cheng). **Downgraded** the permission-layer division-scheme conflict to resolved-by-precedence (two agreeing student-authored sources vs. one supervisor-kickoff note). Reconciled Laurenz → Ruckensteiner-Geyer; added student numbers.
 **Pages created:** [[assignment-1-report-2026-04-22]], [[gaps-diagram]]
 **Pages updated:** assignment-1-project-definition.md, user-journeys.md, project-team.md, uva-ai4business-lab.md, permission-layer.md, evaluation-framework.md, evaluation-deliverable.md, living-wiki.md, wiki-generation-engine.md, ingestion-pipeline.md, generator-module.md, gap-detector.md, _overview.md, _gaps.md, index.md
-**Notes:** ⚠️ Conflicts handled by precedence, not silent overwrite: (a) permission-layer ownership → Member 4 individual + evaluation collaborative (deck + report agree); (b) "Meng Cheng" ↔ "Cara/Carac M. Cheng" reconciled as same person, alias inferred not stated; (c) DAPS → GAPS (de Mast method) — a resolution, not contradiction; (d) Laurenz fuller surname. GAPS diagram image still not legible (contents-pending). Total pages now 26.
+**Notes:** ⚠️ Conflicts handled by precedence, not silent overwrite. GAPS diagram image still not legible (contents-pending). Total pages now 26.
 
 ---
 
@@ -138,4 +138,13 @@ Append-only. One entry per operation: ingest, query, or lint.
 **Action:** Ingested the post-presentation check-in scheduling thread — the first source from after the April 22 milestone. Created correspondence page [[checkin-scheduling-2026-04-30]] capturing the concrete check-in call (Thursday 11:00), the Delft office-visit invitation, the spring-break timeline gap, and the new "both groups" / second-UvA-group observation. Refined the check-in-cadence gap (one-off scheduled; recurring cadence still open). Updated [[project-team]], [[uva-ai4business-lab]], [[_overview]], [[_gaps]].
 **Pages created:** [[checkin-scheduling-2026-04-30]]
 **Pages updated:** project-team.md, uva-ai4business-lab.md, _overview.md, _gaps.md, index.md
-**Notes:** Low-substance scheduling source, handled conservatively. No facts over-asserted — the **second UvA group** is recorded as an observation/gap, not a new entity. Xiaojing↔lee89953 alias re-corroborated. Total pages now 27.
+**Notes:** Low-substance scheduling source, handled conservatively. Second UvA group recorded as observation/gap, not a new entity. Total pages now 27.
+
+---
+
+## 2026-06-19 — INGEST
+**Source:** 2026-05-14-meeting-notes.md (internal UvA team working meeting notes, development phase)
+**Action:** Ingested the first **development-phase** team meeting. Created Meetings page [[team-meeting-2026-05-14]] capturing the first GitHub MVP demo (Laurenz), open technical questions (LLM choice/feasibility, agentic-vs-pipeline, generator sourcing, data-understanding scope), and design decisions (admin-per-project governance; one-page-per-project / shared-topic linking) + the shared-thesis work split (Xiaojing→business understanding, Laurenz→data understanding, Laurenz+Quinten→generator/architecture integration). Updated [[wiki-generation-engine]] (MVP + open questions), [[generator-module]] (softened sourcing phrasing → open question), [[permission-layer]] (privacy concern + admin-per-project), [[project-team]] (shared-thesis split + soft member-1 signal), [[_reuse]] (cross-project design choices), [[_overview]] (status → development phase), [[_gaps]].
+**Pages created:** [[team-meeting-2026-05-14]]
+**Pages updated:** wiki-generation-engine.md, generator-module.md, permission-layer.md, project-team.md, _reuse.md, _overview.md, _gaps.md, index.md
+**Notes:** ⚠️ Noted (non-hard) conflicts: generator sourcing recorded as open question (phrasing softened, not overwritten); one-page-per-project vs. per-topic granularity recorded precisely. LLM/agents/admin-mechanism kept as open questions, not new entities. Person↔member mapping soft signal (Laurenz=M1) recorded but not asserted. GitHub repo flagged for future ingest. Total pages now 28.
