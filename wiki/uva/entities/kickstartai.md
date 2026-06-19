@@ -20,7 +20,7 @@ KickstartAI describes its work through three pillars. Note that **two parallel v
 3. **We connect** ≈ **Activate** — Act as bridge-builders, bringing together business leaders and policymakers to turn AI capabilities into a joint national advantage through direct action and knowledge exchange.
 
 ### Strategic positioning / societal mission (kickoff intro deck, 2026-04-13)
-A KickstartAI intro/strategy slide deck (`2026-04-13-KAI-Intro.md`, dated kickoff day) frames the foundation's *why*. The deck is **heavily image-based** — only slide titles, stat captions, and bullet fragments are legibly extractable; most diagrams (the adoption model, the partner-ripple diagram, the challenge→solution mappings) are embedded images and **not ingested**. See [[_gaps]].
+A KickstartAI intro/strategy slide deck (`2026-04-13-KAI-Intro.md`, dated kickoff day) frames the foundation's *why*. The deck is **heavily image-based** — only slide titles, stat captions, and bullet fragments are legibly extractable; most diagrams (the adoption model, the partner-ripple diagram, the challenge→solution mappings) are embedded images and **not ingested**. See [[_gaps]]. The 2026-04-13 kickoff meeting notes (see [[kickoff-meeting-2026-04-13]]) **verbally corroborate** this framing.
 
 - **Five named Dutch societal challenges → five aspirational AI futures:**
   - *Slipping productivity* → **Autonomous workforce** (agentic AI, high-precision robotics).
@@ -28,6 +28,7 @@ A KickstartAI intro/strategy slide deck (`2026-04-13-KAI-Intro.md`, dated kickof
   - *Rising healthcare costs* → **Precision care & prevention** (AI drafting medical notes, predictive diagnostics, at-home monitoring).
   - *Deteriorating climate* → **Regenerative intelligence** (smart greenhouses, planet digital twins, circular supply chains).
   - *Stagnating infrastructure* → **Cognitive infrastructure** (dynamic grid balancing, AI-controlled traffic swarms, predictive maintenance for bridges/rails).
+  - *(Kickoff notes corroborate verbally: tripling healthcare costs, reduced GDP growth, strained infrastructure, rising income inequality, climate impact → practical AI roles like AI tutors, predictive diagnostics, smart infrastructure; solutions intended to be "adopted and replicated across the Netherlands and beyond.")*
 - **Three strategic aspirations** (a strategy-deck framing, *adjacent to but not asserted equivalent to* the three pillars — see [[_gaps]]):
   - *"Be the lighthouse for applied AI"*
   - *"Mobilize leaders to take AI actions that matter"*
@@ -54,7 +55,7 @@ KickstartAI runs a portfolio of applied AI projects with industry, government, a
 - **Projects** — A public project portfolio at https://kickstart.ai/projects. See [[kickstartai-projects]].
 
 ### Role in this project
-Originator of the Living Wiki brief; provides a technical mentor (TBD) and access to its engineering team. The Living Wiki architecture is intended for reuse across all KickstartAI projects. Named staff are listed on [[kickstartai-team]] (no individual is yet confirmed as the project mentor — see [[_gaps]]).
+Originator of the Living Wiki brief; provides a main point of contact (Sanne Wielinga — see [[project-team]]) and access to its engineering team. Per the kickoff notes the project was handed over to Sanne "from Averion" (an unidentified party — possibly a transcription artifact for "Evertjan"; see [[_gaps]]). The Living Wiki architecture is intended for reuse across all KickstartAI projects. Named staff are listed on [[kickstartai-team]].
 
 ## Related
 - [[kickstartai-team]]
@@ -65,6 +66,7 @@ Originator of the Living Wiki brief; provides a technical mentor (TBD) and acces
 - [[uva-ai4business-lab]]
 - [[living-wiki]]
 - [[generator-module]]
+- [[kickoff-meeting-2026-04-13]]
 
 ## Sources
 - 2026-04-02-UvA-AI4BusinessLab-Living-Wiki-Brief.md
@@ -73,3 +75,4 @@ Originator of the Living Wiki brief; provides a technical mentor (TBD) and acces
 - KickstartAI_News.md (https://kickstart.ai/news, created 2026-05-07)
 - KickstartAI_Projects.md (https://kickstart.ai/projects, created 2026-05-07)
 - 2026-04-13-KAI-Intro.md (KickstartAI intro/strategy deck, kickoff day; image-heavy, diagrams not ingested)
+- 2026-04-13-KAI-UvA-Kickoff-meeting-notes.md (Gemini-generated kickoff meeting notes)
