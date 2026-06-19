@@ -175,3 +175,13 @@ Append-only. One entry per operation: ingest, query, or lint.
 **Pages created:** [[xiaojing-sanne-permission-email-2026-06-07]]
 **Pages updated:** permission-layer.md, permission-model.md, project-team.md, wiki-generation-engine.md, user-journeys.md, evaluation-deliverable.md, _overview.md, _gaps.md, index.md
 **Notes:** ⚠️ Two settledness/consistency conflicts handled by flag, not overwrite: (1) the built-and-evaluated PoC exceeds the MoSCoW "Won't-Have working layer" framing — recorded as a thesis-level PoC, MoSCoW record kept; (2) gpt-5.1-via-UvA-API is an *evaluation* environment kept cleanly distinct from the production Claude Code + Anthropic API stack. Permission-mechanism gap downgraded to "concrete design proposed & evaluated"; new gaps added (aggregation leakage, label correctness, eval scale, cross-model audit, markdown-config durability). Xiaojing↔M4 self-asserted; M1/M2/M3 remain inferential. Total pages now 33.
+
+## [2026-06-19] lint | Wiki health check
+
+**Contradictions found:** 1
+**Orphan pages:** [[2026-06-19-project-onboarding-summary]]
+**Stale pages:** 3
+**Gaps added:** 15
+**Reuse opportunities flagged:** 5
+**Pages updated:** [[log]], [[_gaps]]
+**Notes:** The wiki is unusually disciplined and well-connected with no true orphans, but one badly stale onboarding summary contradicts current project state on multiple facts, and there are notable gaps in decision documentation, concept pages, and reuse capture.

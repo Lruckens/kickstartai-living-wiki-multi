@@ -118,3 +118,18 @@ Underdocumented areas and open questions.
 - **Additional collaborator orgs undocumented** — **bol**, **Philips**, and **NL4AI** recur as collaborators but are not described; their relationship to KickstartAI and the founders is unspecified.
 - **Project portfolio is non-exhaustive / point-in-time** — 11 projects listed vs "15+ completed"; no "as-of" date on the source. The list will drift.
 - **No Living Wiki project listed** — Expected; it is in scoping/internal, so the public list excludes it.
+- [ ] **stale-output-tracking** — The stale onboarding summary's superseded state is not yet tracked as a gap and should be flagged or resolved by regeneration. — source: [[lint]] — flagged: 2026-06-19
+- [ ] **missing-concept-page** — Aggregation/inference leakage is the most-discussed open hard problem yet lacks its own concept page. — source: [[lint]] — flagged: 2026-06-19
+- [ ] **missing-concept-page** — RAG (Retrieval-Augmented Generation) is the core technical lineage but has no dedicated concept page. — source: [[lint]] — flagged: 2026-06-19
+- [ ] **missing-concept-page** — CRISP-DM and Design Science Research dual methodology is referenced on 6+ pages without a concept page. — source: [[lint]] — flagged: 2026-06-19
+- [ ] **missing-concept-page** — Claude Code is the confirmed production backend but is only described inline without its own entity page. — source: [[lint]] — flagged: 2026-06-19
+- [ ] **undocumented-decision** — The 'one wiki page = one project' information architecture decision lacks a structured rationale/alternatives record. — source: [[lint]] — flagged: 2026-06-19
+- [ ] **undocumented-decision** — Admin-per-project governance has no decision page documenting mechanism, rationale, or alternatives. — source: [[lint]] — flagged: 2026-06-19
+- [ ] **undocumented-decision** — The Claude Code + Anthropic API tech-stack choice lacks a decision page explaining why it was chosen over alternatives. — source: [[lint]] — flagged: 2026-06-19
+- [ ] **undocumented-decision** — The permission model design lacks a record of rejected alternatives such as pure RBAC or document-level ACL. — source: [[lint]] — flagged: 2026-06-19
+- [ ] **missing-cross-reference** — gap-detector does not link to student-materials-corpus despite the corpus being its ground-truth evaluation source. — source: [[lint]] — flagged: 2026-06-19
+- [ ] **open-question** — It is unspecified who assigns paragraph tier labels at ingestion and whether the process is automated, blocking deployment claims. — source: [[lint]] — flagged: 2026-06-19
+- [ ] **open-question** — The underlying vector store, embedding model, and RAG framework of the engine remain unspecified. — source: [[lint]] — flagged: 2026-06-19
+- [ ] **open-question** — It is unclear whether the UI is a thesis deliverable or convenience layer, requiring a scope ruling against MoSCoW. — source: [[lint]] — flagged: 2026-06-19
+- [ ] **open-question** — Whether the onboarding summary is auto-regenerated on a schedule needs verification to test the generator's freshness dimension. — source: [[lint]] — flagged: 2026-06-19
+- [ ] **methodology-reconciliation** — Cara's claim that her component 'already delivers a final product' conflicts with the CRISP-DM mock-up-to-MVP progression and needs reconciliation. — source: [[lint]] — flagged: 2026-06-19
