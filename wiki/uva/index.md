@@ -1,7 +1,7 @@
 # Wiki index — Living Wiki (UvA)
 
 Last updated: 2026-06-19
-Total pages: 26
+Total pages: 27
 
 > Maintained by Claude.
 
@@ -28,6 +28,7 @@ Total pages: 26
 ## Meetings
 - [[kickoff-meeting-2026-04-13]]
 - [[supervisor-kickoff-2026-04-16]]
+- [[checkin-scheduling-2026-04-30]]
 
 ## Deliverables
 - [[ingestion-pipeline]]

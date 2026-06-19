@@ -3,20 +3,20 @@
 **Last updated:** 2026-06-19
 
 ## Summary
-The actual working team for the Living Wiki project, established by the 2026-04-10 → 2026-04-20 kickoff email thread, substantially clarified by the **2026-04-13 kickoff meeting notes** (see [[kickoff-meeting-2026-04-13]]), further resolved by the **2026-04-16 UvA supervisor kickoff** (see [[supervisor-kickoff-2026-04-16]]), and refined by the **2026-04-22 Assignment 1 presentation + written report** (see [[assignment-1-presentation-2026-04-22]], [[assignment-1-report-2026-04-22]]). This page consolidates the *project* team (UvA students + KickstartAI contacts + UvA supervisor), kept deliberately distinct from the KickstartAI organization roster on [[kickstartai-team]]. The student identities and the supervisor are now resolved; the written report’s author list largely reconciles the long-open “Meng” name, and the “Averion” handover remains flagged — see [[_gaps]].
+The actual working team for the Living Wiki project, established by the 2026-04-10 → 2026-04-20 kickoff email thread, substantially clarified by the **2026-04-13 kickoff meeting notes** (see [[kickoff-meeting-2026-04-13]]), further resolved by the **2026-04-16 UvA supervisor kickoff** (see [[supervisor-kickoff-2026-04-16]]), refined by the **2026-04-22 Assignment 1 presentation + written report** (see [[assignment-1-presentation-2026-04-22]], [[assignment-1-report-2026-04-22]]), and supplemented by a **2026-04-30 check-in scheduling thread** (see [[checkin-scheduling-2026-04-30]]). This page consolidates the *project* team (UvA students + KickstartAI contacts + UvA supervisor), kept deliberately distinct from the KickstartAI organization roster on [[kickstartai-team]]. The student identities and the supervisor are now resolved; the written report’s author list largely reconciles the long-open “Meng” name, and the “Averion” handover remains flagged — see [[_gaps]].
 
 ## Details
 ### UvA AI4Business Lab students (4)
 All four are **business analytics students** doing this as a **thesis project** (BSc Business Analytics). The 2026-04-22 written report (see [[assignment-1-report-2026-04-22]]) supplies the official author list with student numbers:
 - **Quinten van den Heuvel** (#15150658; quintenvdheuvel12@gmail.com) — Dutch; interested in AI in the Dutch business sector. Acts as the team's **coordinator / spokesperson** (sends slides, summaries, schedules, assignment descriptions; shared the Gantt chart at kickoff).
-- **Xiaojing Li** (#14851199; "XiaoJing", **lee89953@gmail.com**) — from China; interested in AI, LLMs, and mathematics; raised in-person discussions in Delft. The 2026-04-16 supervisor meeting participant list **explicitly maps lee89953@gmail.com → Xiaojing Li**.
+- **Xiaojing Li** (#14851199; "XiaoJing", **lee89953@gmail.com**) — from China; interested in AI, LLMs, and mathematics; raised in-person discussions in Delft. The 2026-04-16 supervisor meeting participant list **explicitly maps lee89953@gmail.com → Xiaojing Li**, and the 2026-04-30 scheduling thread independently corroborates it (she signs "Xiaojing" from that address). See [[checkin-scheduling-2026-04-30]].
 - **Laurenz Ruckensteiner-Geyer** (#13762931; laurenz.ruckensteiner@gmail.com) — from Barcelona; prior data-scientist intern experience. *(The report gives the fuller hyphenated surname “Ruckensteiner-Geyer”; earlier sources used the shorter “Ruckensteiner.”)*
 - **Meng Cheng** (#14025906; carac.m.cheng@gmail.com) — originally from China; switched from business administration to business analytics. The written report’s author list gives **“Meng Cheng”** in the exact roster slot earlier sources gave **“Cara” / “Carac M. Cheng”** (same surname Cheng). Near-certain to be the same person; **“Meng Cheng”** appears to be the official thesis name, with “Cara”/“Carac M. Cheng” an informal/anglicised variant. The alias relationship is inferred (same slot, same surname, same email), not explicitly stated — see [[_gaps]].
 
 > Name-reconciliation note: The 2026-04-10 greeting named **“Meng,”** which had no roster match until the report’s author list surfaced **“Meng Cheng.”** This largely reconciles the long-open “Meng” discrepancy: the greeting almost certainly referred to **Meng Cheng** (= “Cara”/“Carac M. Cheng”). The explicit alias mapping remains inferred. See [[_gaps]].
 
 ### UvA academic supervisor
-- **Hongyi Zhu** (h.zhu@uva.nl) — **UvA academic supervisor** (role **confirmed** via the 2026-04-16 supervisor kickoff and re-confirmed on the report’s title page). **Individual progress meetings** with Hongyi Zhu are to be scheduled **after the April 22 presentation** (specific dates TBD — see [[_gaps]]).
+- **Hongyi Zhu** (h.zhu@uva.nl) — **UvA academic supervisor** (role **confirmed** via the 2026-04-16 supervisor kickoff and re-confirmed on the report’s title page). **Individual progress meetings** with Hongyi Zhu are to be scheduled **after the April 22 presentation** (specific dates TBD — see [[_gaps]]). Note: Hongyi Zhu is **not** included on the KickstartAI-side check-in thread (company comms route via Sanne; UvA-internal via Zhu).
 
 ### KickstartAI contacts
 - **Sanne Wielinga** — Senior Machine Learning Engineer; **main point of contact** for the project (also named as the company contact on the report title page). The project was **handed over to Sanne from “Averion”** per the kickoff notes — “Averion” is unidentified in any other source and may be a transcription artifact for “Evertjan”; see ambiguity note below. Also on the org roster ([[kickstartai-team]]).
@@ -39,8 +39,12 @@ Both student-authored artifacts assign the build components to **four members** 
 > **Residual:** which *named student* is Member 1/2/3/4 is **not stated** in either artifact — owners-by-component resolved, owners-by-person still open. See [[_gaps]].
 
 ### Cadence & process
-- **Regular check-ins** (with KickstartAI/Sanne) agreed in principle — **weekly or bi-weekly**; specific frequency TBD and to be emailed to Sanne. See [[kickoff-meeting-2026-04-13]], [[_gaps]].
+- **Regular check-ins** (with KickstartAI/Sanne) agreed in principle — **weekly or bi-weekly**; specific recurring frequency **still TBD** (to be emailed to Sanne). See [[kickoff-meeting-2026-04-13]], [[_gaps]].
+- **First concrete post-presentation check-in scheduled (2026-04-30 thread):** after the spring break, Sanne and the group arranged a one-off check-in call for **Thursday at 11:00 AM** (calendar invite to follow). This does **not** settle the standing weekly/bi-weekly cadence — that remains open. See [[checkin-scheduling-2026-04-30]], [[_gaps]].
+- **Delft office visit invited (2026-04-30 thread):** Sanne invited "both groups" to visit the KickstartAI office in **Delft** for a day; date(s) TBD. See [[checkin-scheduling-2026-04-30]], [[_gaps]].
 - **Individual supervisor progress meetings** to be scheduled after the April 22 presentation (UvA-side; see [[supervisor-kickoff-2026-04-16]]).
+
+> **Second UvA group — observation, unconfirmed.** Sanne's 2026-04-30 email references **"both groups" / "the other group,"** implying a **second UvA team** working with KickstartAI in parallel (beyond this four-person Living Wiki team). Identity, project, and relationship are unknown; recorded as an observation, no entity created. See [[checkin-scheduling-2026-04-30]], [[_gaps]].
 
 ### Communication channels
 - **KickstartAI community Slack** — students added via the community signup form and confirmed to be added at kickoff. Whether it becomes a Living Wiki ingestion source is unspecified — see [[_gaps]].
@@ -51,6 +55,7 @@ Both student-authored artifacts assign the build components to **four members** 
 - [[kickstartai]]
 - [[kickoff-meeting-2026-04-13]]
 - [[supervisor-kickoff-2026-04-16]]
+- [[checkin-scheduling-2026-04-30]]
 - [[assignment-1-presentation-2026-04-22]]
 - [[assignment-1-report-2026-04-22]]
 - [[assignment-1-project-definition]]
@@ -63,3 +68,4 @@ Both student-authored artifacts assign the build components to **four members** 
 - 2026-04-16-supervisor-kickoff.md (UvA-internal student↔supervisor kickoff meeting notes, 2026-04-16)
 - 2026-04-22-presentation-slides.md (Assignment 1 project-definition presentation deck, text-extractable)
 - 2026-04-22-problem-definition.md (Assignment 1a written project-definition report, text-extractable)
+- 2026-04-30-group-Sanne-email-content.md (KickstartAI x UvA check-in scheduling email thread, 2026-04-30 → 2026-05-04)

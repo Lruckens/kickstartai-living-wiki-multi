@@ -130,3 +130,12 @@ Append-only. One entry per operation: ingest, query, or lint.
 **Pages created:** [[assignment-1-report-2026-04-22]], [[gaps-diagram]]
 **Pages updated:** assignment-1-project-definition.md, user-journeys.md, project-team.md, uva-ai4business-lab.md, permission-layer.md, evaluation-framework.md, evaluation-deliverable.md, living-wiki.md, wiki-generation-engine.md, ingestion-pipeline.md, generator-module.md, gap-detector.md, _overview.md, _gaps.md, index.md
 **Notes:** ⚠️ Conflicts handled by precedence, not silent overwrite: (a) permission-layer ownership → Member 4 individual + evaluation collaborative (deck + report agree); (b) "Meng Cheng" ↔ "Cara/Carac M. Cheng" reconciled as same person, alias inferred not stated; (c) DAPS → GAPS (de Mast method) — a resolution, not contradiction; (d) Laurenz fuller surname. GAPS diagram image still not legible (contents-pending). Total pages now 26.
+
+---
+
+## 2026-06-19 — INGEST
+**Source:** 2026-04-30-group-Sanne-email-content.md (KickstartAI x UvA check-in scheduling email thread, 2026-04-30 → 2026-05-04)
+**Action:** Ingested the post-presentation check-in scheduling thread — the first source from after the April 22 milestone. Created correspondence page [[checkin-scheduling-2026-04-30]] capturing the concrete check-in call (Thursday 11:00), the Delft office-visit invitation, the spring-break timeline gap, and the new "both groups" / second-UvA-group observation. Refined the check-in-cadence gap (one-off scheduled; recurring cadence still open). Updated [[project-team]], [[uva-ai4business-lab]], [[_overview]], [[_gaps]].
+**Pages created:** [[checkin-scheduling-2026-04-30]]
+**Pages updated:** project-team.md, uva-ai4business-lab.md, _overview.md, _gaps.md, index.md
+**Notes:** Low-substance scheduling source, handled conservatively. No facts over-asserted — the **second UvA group** is recorded as an observation/gap, not a new entity. Xiaojing↔lee89953 alias re-corroborated. Total pages now 27.

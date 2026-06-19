@@ -2,6 +2,12 @@
 
 Underdocumented areas and open questions.
 
+## Surfaced from check-in scheduling thread ingest (2026-04-30 → 2026-05-04; ingested 2026-06-19)
+- **Second UvA group ("both groups" / "the other group") — NEW, UNRESOLVED.** Sanne's 2026-04-30 email references **two groups** working with KickstartAI in parallel — strongly implying a **second UvA team** beyond the four-person Living Wiki team. Its identity, project, relationship to the Living Wiki team, and whether it shares the [[uva-ai4business-lab]] context are all **unknown**. Recorded as an observation; no entity created. See [[checkin-scheduling-2026-04-30]], [[project-team]].
+- **Delft office visit — date TBD.** A KickstartAI Delft office visit was invited for "both groups"; specific date(s) not yet set (to be coordinated with the other group and the office manager). The kickoff's earlier "in-person discussions in Delft" reference is now explained by this invite. See [[checkin-scheduling-2026-04-30]].
+- **Standing check-in cadence — still open (refined).** A concrete one-off post-break check-in call (Thursday 11:00 AM) was scheduled via the 2026-04-30 thread, but the **recurring** weekly-vs-bi-weekly cadence agreed "in principle" at kickoff remains **undecided**. See [[checkin-scheduling-2026-04-30]], [[project-team]].
+- **Xiaojing ↔ lee89953@gmail.com alias — RE-CORROBORATED.** The thread independently corroborates the alias (she signs "Xiaojing" from lee89953@gmail.com); no new identity facts. See [[project-team]].
+
 ## Surfaced from Assignment 1 written report ingest (2026-04-22; ingested 2026-06-19)
 - **Member ↔ named-student mapping (#1–4) — STILL OPEN.** Both the presentation deck and the written report map RQs/components to **"Member 1–4"** but neither binds each Member number to a *named student*. Owners-by-component resolved; owners-by-person still open. See [[user-journeys]], [[project-team]], [[assignment-1-report-2026-04-22]].
 - **Permission-layer division-scheme conflict — RESOLVED-BY-PRECEDENCE.** Two later, mutually-consistent student-authored sources (deck + written report) assign the **Permission Layer to Member 4 individually** and name the **evaluation framework as the collaborative deliverable**, against the single supervisor-kickoff (2026-04-16) note that called the Permission Layer "collaborative." Treated as confirmed; the superseded note is recorded, not deleted. See [[permission-layer]], [[user-journeys]], [[project-team]].
@@ -30,7 +36,7 @@ Underdocumented areas and open questions.
 
 ## Surfaced / updated from kickoff email thread + supervisor kickoff ingests
 - **UvA supervisor — RESOLVED** — h.zhu@uva.nl is **Hongyi Zhu**, **confirmed as the UvA academic supervisor** (supervisor kickoff + report title page). See [[supervisor-kickoff-2026-04-16]].
-- **lee89953@gmail.com — RESOLVED** — The 2026-04-16 supervisor participant list **explicitly maps lee89953@gmail.com → Xiaojing Li**. See [[project-team]].
+- **lee89953@gmail.com — RESOLVED** — The 2026-04-16 supervisor participant list **explicitly maps lee89953@gmail.com → Xiaojing Li**, re-corroborated by the 2026-04-30 scheduling thread. See [[project-team]].
 - **"Meng" — RECONCILED (alias inferred)** — The 2026-04-10 greeting named "Meng," now reconciled to **Meng Cheng** (= "Cara"/"Carac M. Cheng") via the report's author list. Alias relationship inferred, not stated. See above.
 - **"Mentor" role still not explicitly assigned** — Sanne is the explicit *main contact* and Evertjan the *introducer*, but no source names either "technical mentor."
 - **Slack as a communication/source channel** — The KickstartAI community Slack is a live project channel; whether it will be an ingestion source for the Living Wiki is unspecified.
@@ -52,11 +58,11 @@ Underdocumented areas and open questions.
 ## Surfaced from kickoff slide deck ingest (2026-04-13; text-extractable)
 - **Five-vs-six deliverable framing — RECONCILED** — The report's framing settles this: **five member-owned components (ingestion+wiki engine = one) + the evaluation framework as the collaborative/shared deliverable = 6 deliverables**. See [[user-journeys]].
 - **"Day one" source set** — The specific **lab-materials set** (UvA AI4Business Lab docs) remains un-ingested/unspecified. See [[ingestion-pipeline]], [[uva-ai4business-lab]].
-- **Collaboration model deliberately open** — Check-in cadence (weekly vs bi-weekly) still TBD.
+- **Collaboration model deliberately open** — Check-in cadence (weekly vs bi-weekly) still TBD (a concrete one-off call was scheduled 2026-04-30; recurring cadence still open — see above).
 
 ## Surfaced from kickoff meeting notes ingest (2026-04-13)
 - **"Averion" handover unexplained** — The kickoff notes state the project was handed over to Sanne "from Averion." No other source mentions "Averion." Possibly a transcription error for "Evertjan," possibly a genuine predecessor party. **Unconfirmed; no entity created.** See [[project-team]], [[kickoff-meeting-2026-04-13]].
-- **Check-in cadence undecided** — Weekly vs bi-weekly agreed in principle; specific frequency TBD (to be emailed to Sanne). See [[project-team]].
+- **Check-in cadence undecided** — Weekly vs bi-weekly agreed in principle; specific frequency TBD (see refined note above). See [[project-team]].
 - **Evaluation data / knowledge base pending** — Sanne is to check whether additional evaluation criteria or a knowledge base can be provided; outcome pending. See [[evaluation-framework]].
 - **Legal / project documents unsigned** — A signature process for project legal documents is pending; the specific documents are unspecified.
 - **Embedded screenshots not ingested** — The meeting notes contain 3 CDN-hosted JPGs (likely the same image-locked deck/Gantt diagrams already flagged); contents not ingested, not fabricated.
