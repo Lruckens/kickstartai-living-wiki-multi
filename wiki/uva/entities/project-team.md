@@ -3,14 +3,14 @@
 **Last updated:** 2026-06-19
 
 ## Summary
-The actual working team for the Living Wiki project, established by the 2026-04-10 → 2026-04-20 kickoff email thread, substantially clarified by the **2026-04-13 kickoff meeting notes** (see [[kickoff-meeting-2026-04-13]]), further resolved by the **2026-04-16 UvA supervisor kickoff** (see [[supervisor-kickoff-2026-04-16]]), refined by the **2026-04-22 Assignment 1 presentation + written report** (see [[assignment-1-presentation-2026-04-22]], [[assignment-1-report-2026-04-22]]), supplemented by a **2026-04-30 check-in scheduling thread** (see [[checkin-scheduling-2026-04-30]]), updated by the **2026-05-14 development-phase team meeting** (see [[team-meeting-2026-05-14]]), the **2026-05-15 demo follow-up thread** (see [[laurenz-sanne-email-2026-05-15]]), the **2026-06-04 team meeting** (see [[team-meeting-2026-06-04]]), and the **2026-06-07 permission-layer design review** (see [[xiaojing-sanne-permission-email-2026-06-07]]). This page consolidates the *project* team (UvA students + KickstartAI contacts + UvA supervisor), kept deliberately distinct from the KickstartAI organization roster on [[kickstartai-team]]. The student identities and the supervisor are now resolved; the written report’s author list largely reconciles the long-open “Meng” name, and the “Averion” handover remains flagged — see [[_gaps]].
+The actual working team for the Living Wiki project, established by the 2026-04-10 → 2026-04-20 kickoff email thread, substantially clarified by the **2026-04-13 kickoff meeting notes** (see [[kickoff-meeting-2026-04-13]]), further resolved by the **2026-04-16 UvA supervisor kickoff** (see [[supervisor-kickoff-2026-04-16]]), refined by the **2026-04-22 Assignment 1 presentation + written report** (see [[assignment-1-presentation-2026-04-22]], [[assignment-1-report-2026-04-22]]), supplemented by a **2026-04-30 check-in scheduling thread** (see [[checkin-scheduling-2026-04-30]]), updated by the **2026-05-14 development-phase team meeting** (see [[team-meeting-2026-05-14]]), the **2026-05-15 demo follow-up thread** (see [[laurenz-sanne-email-2026-05-15]]), the **2026-06-04 team meeting** (see [[team-meeting-2026-06-04]]), the **2026-06-07 permission-layer design review** (see [[xiaojing-sanne-permission-email-2026-06-07]]), and the **2026-06-11 team meeting** (see [[team-meeting-2026-06-11]]). This page consolidates the *project* team (UvA students + KickstartAI contacts + UvA supervisor), kept deliberately distinct from the KickstartAI organization roster on [[kickstartai-team]]. The student identities and the supervisor are now resolved; the written report’s author list largely reconciles the long-open “Meng” name, and the “Averion” handover remains flagged — see [[_gaps]].
 
 ## Details
 ### UvA AI4Business Lab students (4)
 All four are **business analytics students** doing this as a **thesis project** (BSc Business Analytics). The 2026-04-22 written report (see [[assignment-1-report-2026-04-22]]) supplies the official author list with student numbers:
 - **Quinten van den Heuvel** (#15150658; quintenvdheuvel12@gmail.com) — Dutch; interested in AI in the Dutch business sector. Acts as the team's **coordinator / spokesperson** (sends slides, summaries, schedules, assignment descriptions; shared the Gantt chart at kickoff).
 - **Xiaojing Li** (#14851199; "XiaoJing", **lee89953@gmail.com**) — from China; interested in AI, LLMs, and mathematics; raised in-person discussions in Delft. The 2026-04-16 supervisor meeting participant list **explicitly maps lee89953@gmail.com → Xiaojing Li**, re-corroborated by the 2026-04-30 scheduling thread and again by the 2026-06-07 permission-layer thread. See [[checkin-scheduling-2026-04-30]], [[xiaojing-sanne-permission-email-2026-06-07]].
-- **Laurenz Ruckensteiner-Geyer** (#13762931; laurenz.ruckensteiner@gmail.com) — from Barcelona; prior data-scientist intern experience. *(The report gives the fuller hyphenated surname “Ruckensteiner-Geyer”; earlier sources used the shorter “Ruckensteiner.”)* Holds/owns the project **GitHub repo** (`github.com/Lruckens/kickstartai-living-wiki`) and is the KickstartAI-facing contact for it (see [[laurenz-sanne-email-2026-05-15]]).
+- **Laurenz Ruckensteiner-Geyer** (#13762931; laurenz.ruckensteiner@gmail.com) — from Barcelona; prior data-scientist intern experience. *(The report gives the fuller hyphenated surname “Ruckensteiner-Geyer”; earlier sources used the shorter “Ruckensteiner.”)* Holds/owns the project **GitHub repo** (`github.com/Lruckens/kickstartai-living-wiki`) and is the KickstartAI-facing contact for it (see [[laurenz-sanne-email-2026-05-15]]); also acts as the **integration owner** merging the other members' modules (2026-06-11, via Claude + VS Code).
 - **Meng Cheng** (#14025906; carac.m.cheng@gmail.com) — originally from China; switched from business administration to business analytics. The written report’s author list gives **“Meng Cheng”** in the exact roster slot earlier sources gave **“Cara” / “Carac M. Cheng”** (same surname Cheng). Near-certain to be the same person; **“Meng Cheng”** appears to be the official thesis name, with “Cara”/“Carac M. Cheng” an informal/anglicised variant. The alias relationship is inferred (same slot, same surname, same email), not explicitly stated — see [[_gaps]].
 
 > Name-reconciliation note: The 2026-04-10 greeting named **“Meng,”** which had no roster match until the report’s author list surfaced **“Meng Cheng.”** This largely reconciles the long-open “Meng” discrepancy: the greeting almost certainly referred to **Meng Cheng** (= “Cara”/“Carac M. Cheng”). The explicit alias mapping remains inferred. See [[_gaps]].
@@ -52,10 +52,19 @@ Per-member build progress at the 2026-06-04 meeting (see [[team-meeting-2026-06-
 - **Xiaojing** — working on the **permission layer** (proposing a **user-id connection**). Consistent with **Member 4 (Permission Layer)**.
 - **Cara / Meng Cheng** — reports an **MVP is not feasible** for her component because she "already delivers a final product" (a methodology-friction point — see [[_gaps]]). No component named; by elimination this *would* leave **Member 3 (Gap Detector)**, but there is no positive evidence.
 
+### Integration & evaluation work split (2026-06-11 dev meeting)
+Per the 2026-06-11 meeting (see [[team-meeting-2026-06-11]]) the team moved into integration + the evaluation phase:
+- **Quinten & Laurenz** — their modules (generator + wiki architecture) are **already integrated and functional**.
+- **Laurenz** — acts as **integration owner**, merging **Cara's** and **Xiaojing's** MVPs into the wiki architecture **using Claude and VS Code**. (Robustness/repeatability of this manual merge unspecified — see [[_gaps]].)
+- **Cara & Xiaojing** — to **share their MVPs + precise descriptions** for Laurenz to merge, and to **fold Sanne's 2026-06-07 feedback** into the version they send.
+- **Quinten** — shifting to **evaluation metrics** for the [[evaluation-framework]] (sharing a list of options); can already apply metrics since his module is integrated.
+- **Two evaluation "families":** Laurenz + Quinten (LLM text-generation modules → comparable frameworks) vs. Cara + Xiaojing (different frameworks). See [[evaluation-deliverable]].
+These reinforce the same person↔component soft signals (Quinten→M2, Laurenz→M1, Xiaojing→M4, Cara→M3 by elimination) **without** asserting them.
+
 ### Permission-layer ownership self-asserted (2026-06-07)
 In the 2026-06-07 → 2026-06-08 design-review thread (see [[xiaojing-sanne-permission-email-2026-06-07]]), **Xiaojing self-identifies as the permission-layer owner** ("my design about the permission layer"), presenting a built-and-evaluated two-layer architecture. This moves **Xiaojing ↔ Member 4** from a build-activity soft signal to **self-asserted ownership** — the strongest person↔component evidence to date for any member (still not an explicit course "Member 4" label).
 
-> **Person↔member mapping — status.** As of 2026-06-07: **Xiaojing ↔ Permission Layer (Member 4)** is now **self-asserted**. **Laurenz ↔ M1** and **Quinten ↔ M2** remain **build-activity soft signals**; **Cara ↔ M3** remains a **by-elimination inference with no positive evidence**. The full mapping is not formally asserted. See [[user-journeys]], [[_gaps]].
+> **Person↔member mapping — status.** As of 2026-06-11: **Xiaojing ↔ Permission Layer (Member 4)** is **self-asserted**. **Laurenz ↔ M1** and **Quinten ↔ M2** remain **build/integration-activity soft signals** (reinforced 2026-06-11); **Cara ↔ M3** remains a **by-elimination inference with no positive evidence** (her component is still unnamed even as she shares an MVP). The full mapping is not formally asserted. See [[user-journeys]], [[_gaps]].
 
 ### Cadence & process
 - **Regular check-ins** (with KickstartAI/Sanne) agreed in principle — **weekly or bi-weekly**; specific recurring frequency **still TBD** (to be emailed to Sanne). See [[kickoff-meeting-2026-04-13]], [[_gaps]].
@@ -78,6 +87,7 @@ In the 2026-06-07 → 2026-06-08 design-review thread (see [[xiaojing-sanne-perm
 - [[checkin-scheduling-2026-04-30]]
 - [[team-meeting-2026-05-14]]
 - [[team-meeting-2026-06-04]]
+- [[team-meeting-2026-06-11]]
 - [[xiaojing-sanne-permission-email-2026-06-07]]
 - [[laurenz-sanne-email-2026-05-15]]
 - [[assignment-1-presentation-2026-04-22]]
@@ -97,3 +107,4 @@ In the 2026-06-07 → 2026-06-08 design-review thread (see [[xiaojing-sanne-perm
 - 2026-05-15-Laurenz-Sanne-email-content.md (KickstartAI x UvA demo follow-up email thread, 2026-05-15 → 2026-05-18)
 - 2026-06-04-meeting-notes.md (internal UvA team working meeting notes, development phase)
 - 2026-06-07-Xiaojing-Sanne-email-content.md (Xiaojing ↔ Sanne permission-layer design review email thread, 2026-06-07 → 2026-06-08)
+- 2026-06-11-meeting-notes.md (internal UvA team working meeting notes, development phase)

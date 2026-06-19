@@ -174,7 +174,7 @@ Append-only. One entry per operation: ingest, query, or lint.
 **Action:** Ingested the **first detailed permission-layer design** review thread — a landmark, high-substance source. Created correspondence page [[xiaojing-sanne-permission-email-2026-06-07]]. Transformed [[permission-layer]] from the vaguest deliverable into the most concretely specified one: two leakage types (vertical/horizontal), three paragraph-level tiers (public/internal/restricted via `project_id`), Layer 1 pre-filtering (markdown-config in Claude Code) + Layer 2 self-audit (regex blacklist + LLM judge, severity escalation, logging), and a 20-scenario evaluation. Captured Sanne's five expert critiques (same-model audit blind spot, aggregation/inference leakage, label-correctness risk, cross-project-vs-filtering tension, eval scale). **Strengthened** Xiaojing↔Member-4 from build-activity soft signal to **self-asserted ownership**. Updated [[permission-model]] (paragraph-level tier/ACL mechanism), [[wiki-generation-engine]] (pre-filtering + markdown-config + gpt-5.1 eval-env note), [[user-journeys]] (M4 realized), [[evaluation-deliverable]] (component-level eval example), [[project-team]], [[_overview]], [[_gaps]].
 **Pages created:** [[xiaojing-sanne-permission-email-2026-06-07]]
 **Pages updated:** permission-layer.md, permission-model.md, project-team.md, wiki-generation-engine.md, user-journeys.md, evaluation-deliverable.md, _overview.md, _gaps.md, index.md
-**Notes:** ⚠️ Two settledness/consistency conflicts handled by flag, not overwrite: (1) the built-and-evaluated PoC exceeds the MoSCoW "Won't-Have working layer" framing — recorded as a thesis-level PoC, MoSCoW record kept; (2) gpt-5.1-via-UvA-API is an *evaluation* environment kept cleanly distinct from the production Claude Code + Anthropic API stack. Permission-mechanism gap downgraded to "concrete design proposed & evaluated"; new gaps added (aggregation leakage, label correctness, eval scale, cross-model audit, markdown-config durability). Xiaojing↔M4 self-asserted; M1/M2/M3 remain inferential. Total pages now 33.
+**Notes:** ⚠️ Two settledness/consistency conflicts handled by flag, not overwrite. Permission-mechanism gap downgraded; new gaps added. Xiaojing↔M4 self-asserted; M1/M2/M3 remain inferential. Total pages now 33.
 
 ## [2026-06-19] lint | Wiki health check
 
@@ -185,3 +185,12 @@ Append-only. One entry per operation: ingest, query, or lint.
 **Reuse opportunities flagged:** 5
 **Pages updated:** [[log]], [[_gaps]]
 **Notes:** The wiki is unusually disciplined and well-connected with no true orphans, but one badly stale onboarding summary contradicts current project state on multiple facts, and there are notable gaps in decision documentation, concept pages, and reuse capture.
+
+---
+
+## 2026-06-19 — INGEST
+**Source:** 2026-06-11-meeting-notes.md (internal UvA team working meeting notes, development phase)
+**Action:** Ingested the **third development-phase team meeting** — an integration milestone and the start of the evaluation phase. Created [[team-meeting-2026-06-11]]. **RESOLVED** the generator↔GitHub integration risk: Quinten's generator module and Laurenz's wiki architecture are now **integrated and functional**. Recorded the integration plan for the remaining modules (Laurenz merging Cara's & Xiaojing's MVPs via Claude + VS Code, folding in Sanne's 2026-06-07 feedback) and the **evaluation-phase kickoff** (Quinten leading metric selection; the two evaluation "families": Laurenz+Quinten comparable LLM-text frameworks vs. Cara+Xiaojing different frameworks).
+**Pages created:** [[team-meeting-2026-06-11]]
+**Pages updated:** generator-module.md, wiki-generation-engine.md, evaluation-framework.md, evaluation-deliverable.md, permission-layer.md, project-team.md, team-meeting-2026-06-04.md, _overview.md, _gaps.md, index.md
+**Notes:** ⚠️ Generator-integration risk marked resolved (settledness update, not deleted). New gaps: integration tooling/durability (manual Claude+VS Code merge), evaluation metric selection / two-family split, Cara's still-unnamed component. Cara MVP-feasibility status evolved. Person↔member signals reinforced (3/4) but NOT asserted. Total pages now 34.

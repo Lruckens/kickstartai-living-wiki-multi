@@ -1,13 +1,16 @@
 # Deliverable: Permission Layer
 
 **Last updated:** 2026-06-19
-**Status:** scoped (Assignment-1 MoSCoW: design = Should, fully-working = Won't); **a two-layer proof-of-concept is now BUILT & EVALUATED (Xiaojing, 2026-06-07)**
+**Status:** scoped (Assignment-1 MoSCoW: design = Should, fully-working = Won't); **a two-layer proof-of-concept is now BUILT & EVALUATED (Xiaojing, 2026-06-07)**; **being integrated into the wiki architecture (2026-06-11)**
 
 ## Summary
 Design (and now a working proof-of-concept implementation) of document-level access control so the system is ready for sensitive projects. The 2026-04-13 kickoff clarified the permission layer **need not be a fully working architecture** — but the students **must design** how it would handle sensitive data from the start. The Assignment 1 presentation and written report (2026-04-22) confirm this via **MoSCoW**: permission-layer **design** is a **Should Have**, while a **completely working permission layer** is explicitly a **Won't Have** (this iteration). As of **2026-06-07**, Xiaojing has gone beyond "design-only" and built **and evaluated** a concrete two-layer permission architecture (pre-filtering + self-audit) — see below. See [[assignment-1-presentation-2026-04-22]], [[assignment-1-report-2026-04-22]], [[xiaojing-sanne-permission-email-2026-06-07]].
 
 ## Details
 Privacy and permissions are a first-class concern. The design should allow deployment to a sensitive project via configuration, not a rewrite. See concept page [[permission-model]] for design intent.
+
+### Integration into the wiki architecture (2026-06-11)
+At the 2026-06-11 team meeting (see [[team-meeting-2026-06-11]]) the permission layer entered **integration**: **Xiaojing shares her MVP + a precise description** of what it does, and **Laurenz merges it** into the wiki architecture (using **Claude and VS Code**). Xiaojing is to **fold Sanne's 2026-06-07 feedback** (the five critiques below) into the version she sends to Laurenz before integration. See [[wiki-generation-engine]], [[_gaps]].
 
 ### Concrete two-layer design — BUILT & EVALUATED (Xiaojing, 2026-06-07)
 The most detailed source on this component to date is the 2026-06-07 → 2026-06-08 design-review thread between Xiaojing and Sanne (see [[xiaojing-sanne-permission-email-2026-06-07]]). Xiaojing **self-identifies as the permission-layer owner** and presents a fully-articulated, evaluated proof-of-concept. This realizes the 2026-06-04 "user-id connection" hint as `user_id` + `project_id` pre-filtering.
@@ -54,6 +57,7 @@ The most detailed source on this component to date is the 2026-06-07 → 2026-06
 - [[supervisor-kickoff-2026-04-16]]
 - [[team-meeting-2026-05-14]]
 - [[team-meeting-2026-06-04]]
+- [[team-meeting-2026-06-11]]
 - [[laurenz-sanne-email-2026-05-15]]
 - [[wiki-generation-engine]]
 - [[evaluation-deliverable]]
@@ -72,3 +76,4 @@ The most detailed source on this component to date is the 2026-06-07 → 2026-06
 - 2026-05-15-Laurenz-Sanne-email-content.md (KickstartAI x UvA demo follow-up email thread, 2026-05-15 → 2026-05-18)
 - 2026-06-04-meeting-notes.md (internal UvA team working meeting notes, development phase)
 - 2026-06-07-Xiaojing-Sanne-email-content.md (Xiaojing ↔ Sanne permission-layer design review email thread, 2026-06-07 → 2026-06-08)
+- 2026-06-11-meeting-notes.md (internal UvA team working meeting notes, development phase)

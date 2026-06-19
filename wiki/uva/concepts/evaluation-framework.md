@@ -3,7 +3,7 @@
 **Last updated:** 2026-06-19
 
 ## Summary
-Framework to measure wiki quality across four dimensions: coverage, freshness, accuracy, and usefulness, with human-in-the-loop feedback to improve generation over time. The kickoff meeting (2026-04-13) emphasized that this framework should **run throughout** the project. The Assignment 1a report confirms it as the team’s **collaboratively designed and executed shared deliverable**.
+Framework to measure wiki quality across four dimensions: coverage, freshness, accuracy, and usefulness, with human-in-the-loop feedback to improve generation over time. The kickoff meeting (2026-04-13) emphasized that this framework should **run throughout** the project. The Assignment 1a report confirms it as the team’s **collaboratively designed and executed shared deliverable**. As of **2026-06-11** the team has begun the evaluation phase (Quinten leading metric selection).
 
 ## Details
 Four dimensions (verbatim from the Assignment 1a report — see [[assignment-1-report-2026-04-22]]):
@@ -13,6 +13,14 @@ Four dimensions (verbatim from the Assignment 1a report — see [[assignment-1-r
 - **Usefulness** — Do users find what they need?
 
 Human feedback / evaluation logs collected during the project refine generation quality. The blog post draft (see [[generator-module]]) is specifically to be evaluated against a human-written version to make the creativity/opinion angle measurable.
+
+### Evaluation phase begins — development status (2026-06-11)
+At the 2026-06-11 team meeting (see [[team-meeting-2026-06-11]]) the team began operationalizing the evaluation framework:
+- **Quinten leads evaluation-metric selection** — he will **share a list of metric options** that can be implemented for the framework, and can **already start applying metrics** because his [[generator-module]] is integrated into the wiki and functional.
+- **Two evaluation "families" (NEW structural insight):**
+  - **Laurenz + Quinten** — can use **comparable evaluation frameworks** because both modules **generate text using LLMs**.
+  - **Cara + Xiaojing** — both use **different frameworks** (their components do not generate text the same way).
+The **specific metrics** mapping to the four dimensions are not yet chosen — see [[_gaps]].
 
 ### MoSCoW prioritization (Assignment 1, 2026-04-22)
 A **basic framework (accuracy + freshness)** is a **Must Have**, while the fuller comparative (generated-vs-human) evaluation and HITL feedback are **Could Have** stretch goals. See [[evaluation-deliverable]], [[assignment-1-presentation-2026-04-22]].
@@ -30,6 +38,7 @@ This concept is also tracked as a deliverable — see [[evaluation-deliverable]]
 ## Related
 - [[evaluation-deliverable]]
 - [[generator-module]]
+- [[team-meeting-2026-06-11]]
 - [[kickoff-meeting-2026-04-13]]
 - [[supervisor-kickoff-2026-04-16]]
 - [[assignment-1-presentation-2026-04-22]]
@@ -41,3 +50,4 @@ This concept is also tracked as a deliverable — see [[evaluation-deliverable]]
 - 2026-04-16-supervisor-kickoff.md (UvA-internal student↔supervisor kickoff meeting notes, 2026-04-16)
 - 2026-04-22-presentation-slides.md (Assignment 1 project-definition presentation deck, text-extractable)
 - 2026-04-22-problem-definition.md (Assignment 1a written project-definition report, text-extractable)
+- 2026-06-11-meeting-notes.md (internal UvA team working meeting notes, development phase)

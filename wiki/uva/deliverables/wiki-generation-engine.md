@@ -1,7 +1,7 @@
 # Deliverable: Wiki Generation Engine
 
 **Last updated:** 2026-06-19
-**Status:** scoped (Must Have); first MVP exists (GitHub, 2026-05-14); LLM backend confirmed (Claude Code + Anthropic API); **UI layer planned (2026-06-04)**
+**Status:** scoped (Must Have); first MVP exists (GitHub, 2026-05-14); LLM backend confirmed (Claude Code + Anthropic API); UI layer planned (2026-06-04); **generator module integrated (2026-06-11)**
 
 ## Summary
 An LLM-powered, **RAG-grounded** system that processes ingested documents into structured, interlinked wiki pages organized by topic. Pages regenerate or update on a configurable schedule (e.g., daily) as source material changes. It is the **persistent, compiled knowledge layer** that distinguishes the Living Wiki from stateless RAG (see [[living-wiki]]).
@@ -20,8 +20,8 @@ An LLM-powered, **RAG-grounded** system that processes ingested documents into s
 ### Permission-layer integration (2026-06-07)
 The [[permission-layer]] operates on the **source paragraph pool before generation** — pre-filtering to only the paragraphs a target user is authorized to see (by `project_id` + `user_id`), so the engine never receives unauthorized content. In the **current Claude Code implementation**, Claude reads the updated permission configuration from a **markdown file** (vs SQL paragraph-table updates in a full pipeline). See [[permission-layer]], [[xiaojing-sanne-permission-email-2026-06-07]].
 
-### Generator integration (2026-06-04)
-The [[generator-module]] (built by Quinten) must integrate with this GitHub architecture. As of 2026-06-04 the integration is an **active, explicitly at-risk** task — the team anticipates problems connecting the generator to the existing GitHub. See [[generator-module]], [[team-meeting-2026-06-04]], [[_gaps]].
+### Module integration (2026-06-04 → 2026-06-11)
+The [[generator-module]] (built by Quinten) had to integrate with this GitHub architecture. As of **2026-06-11** (see [[team-meeting-2026-06-11]]) **Quinten's and Laurenz's modules are integrated and functional** — the earlier at-risk integration task is **resolved**. Integration of the **remaining modules** (the [[permission-layer]] and Cara's component) is now underway: **Cara and Xiaojing share their MVPs** + precise descriptions and **Laurenz merges them** — doing the integration **using Claude and VS Code**. The robustness/repeatability of this manual, Claude-assisted merge process is unspecified — see [[generator-module]], [[team-meeting-2026-06-11]], [[_gaps]].
 
 ### Deployment / backend configurability (2026-05-15)
 For sensitive-project deployment, Sanne suggested a **configurable backend** that can swap in a **self-hosted or VPC-deployed model** when needed while keeping the rest of the architecture intact — a direction that ties the engine's LLM backend to the [[permission-layer]] and the configuration-not-rewrite reuse model (see [[_reuse]]). See [[laurenz-sanne-email-2026-05-15]].
@@ -37,6 +37,7 @@ For sensitive-project deployment, Sanne suggested a **configurable backend** tha
 - [[gap-detector]]
 - [[team-meeting-2026-05-14]]
 - [[team-meeting-2026-06-04]]
+- [[team-meeting-2026-06-11]]
 - [[xiaojing-sanne-permission-email-2026-06-07]]
 - [[laurenz-sanne-email-2026-05-15]]
 - [[permission-layer]]
@@ -53,3 +54,4 @@ For sensitive-project deployment, Sanne suggested a **configurable backend** tha
 - 2026-05-15-Laurenz-Sanne-email-content.md (KickstartAI x UvA demo follow-up email thread, 2026-05-15 → 2026-05-18)
 - 2026-06-04-meeting-notes.md (internal UvA team working meeting notes, development phase)
 - 2026-06-07-Xiaojing-Sanne-email-content.md (Xiaojing ↔ Sanne permission-layer design review email thread, 2026-06-07 → 2026-06-08)
+- 2026-06-11-meeting-notes.md (internal UvA team working meeting notes, development phase)

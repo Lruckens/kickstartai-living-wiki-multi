@@ -1,7 +1,7 @@
 # Deliverable: Generator Module
 
 **Last updated:** 2026-06-19
-**Status:** scoped (Should Have for digests/summaries; blog drafts a Could Have); **in active development (2026-06-04, untested)**
+**Status:** scoped (Should Have for digests/summaries; blog drafts a Could Have); **integrated into the wiki architecture & functional (2026-06-11)**
 
 ## Summary
 A module that produces periodic outputs from the wiki — weekly project digests, stakeholder summaries, or draft blog posts — aligned with a configurable tone and audience.
@@ -9,15 +9,15 @@ A module that produces periodic outputs from the wiki — weekly project digests
 ## Details
 Serves the Summarizer and Content Generator user journeys. It transforms project knowledge into coherent, up-to-date content tailored to different audiences, with configurable tone and level of detail. Blog post drafts should be written in KickstartAI's voice and evaluated against a human-written baseline (see [[evaluation-deliverable]]). Tone/voice specification is not yet defined — see [[_gaps]].
 
-### Build status (2026-06-04)
-**Quinten** is actively building the generator module (see [[team-meeting-2026-06-04]]). As of 2026-06-04 it is **not yet tested** — Quinten wants to create a **new version before adjusting the mock-up**. (This corroborates Quinten ≈ Member 2 as a *soft signal*, not an assertion — see [[project-team]], [[_gaps]].)
+### Build status (2026-06-04 → 2026-06-11)
+**Quinten** built the generator module (see [[team-meeting-2026-06-04]]). As of **2026-06-11** it is **integrated into the wiki architecture and functional** (see [[team-meeting-2026-06-11]]) — the earlier integration risk is **resolved** (see below). Because his module is integrated and functional, Quinten can **already start applying evaluation metrics** and is now leading **evaluation-metric selection** for the [[evaluation-framework]]. (This corroborates Quinten ≈ Member 2 as a *soft signal*, not an assertion — see [[project-team]], [[_gaps]].)
 
-> ⚠️ **Generator↔GitHub integration — now an active, at-risk task (2026-06-04).** Earlier framing (2026-05-14) recorded "Laurenz and Quinten are to work out a way to combine the generator module with the GitHub architecture" as a clean forward task. The 2026-06-04 notes show Quinten building it **solo for now** and the team **explicitly anticipating problems connecting the generator module to Laurenz's existing GitHub**. The integration is therefore an **open, at-risk** task rather than a settled plan. See [[wiki-generation-engine]], [[team-meeting-2026-06-04]], [[_gaps]].
+> ✅ **Generator↔GitHub integration — RESOLVED (2026-06-11).** Earlier framing (2026-05-14, 2026-06-04) recorded the integration of the generator module with Laurenz's GitHub architecture as an **active, at-risk** task. The 2026-06-11 meeting (see [[team-meeting-2026-06-11]]) confirms **Quinten's and Laurenz's modules are already integrated** and the generator is **functional within the wiki**. The at-risk warning is therefore **resolved**, not a standing risk. See [[wiki-generation-engine]], [[_gaps]].
 
 > ⚠️ **Sourcing approach — OPEN design question (2026-05-14).** Earlier framing implied the generator produces outputs *from the wiki* (the compiled knowledge base). At the 2026-05-14 development-phase meeting (see [[team-meeting-2026-05-14]]) Quinten raised this as an **undecided design choice**: should the generator generate content **based on the wiki**, or **search through the underlying source documents** the wiki is built from and then generate? This is not yet settled — the "from the wiki" phrasing should be read as one of two open options, not a decided fact. See [[_gaps]].
 
-### Integration with the system architecture (2026-05-14 / 2026-05-15)
-**Laurenz and Quinten** are to work out a way to **combine the generator module with the GitHub wiki architecture** (the first MVP — see [[wiki-generation-engine]], [[team-meeting-2026-05-14]]). The architecture runs on **Claude Code + Anthropic API** (repo `github.com/Lruckens/kickstartai-living-wiki` — see [[laurenz-sanne-email-2026-05-15]]), which is the platform the generator must integrate with. As of 2026-06-04 this integration is being actively worked but is flagged as at-risk (see above).
+### Integration with the system architecture (2026-05-14 → 2026-06-11)
+**Laurenz and Quinten** worked out how to **combine the generator module with the GitHub wiki architecture** (the first MVP — see [[wiki-generation-engine]], [[team-meeting-2026-05-14]]). The architecture runs on **Claude Code + Anthropic API** (repo `github.com/Lruckens/kickstartai-living-wiki` — see [[laurenz-sanne-email-2026-05-15]]). As of **2026-06-11** the two modules are **integrated and functional** (see [[team-meeting-2026-06-11]]).
 
 ### Generation strategies (Assignment 1a report, 2026-04-22)
 The Member 2 RQ investigates **multiple LLM-based generation strategies**, named explicitly in the report: **direct prompting, retrieval-augmented generation (RAG), and template-driven generation**. Output quality is systematically evaluated across factual accuracy, freshness, coverage, and usefulness. See [[assignment-1-report-2026-04-22]].
@@ -42,6 +42,7 @@ Both are noted as possibilities only, not assertions — see [[_gaps]].
 - [[wiki-generation-engine]]
 - [[team-meeting-2026-05-14]]
 - [[team-meeting-2026-06-04]]
+- [[team-meeting-2026-06-11]]
 - [[laurenz-sanne-email-2026-05-15]]
 - [[assignment-1-presentation-2026-04-22]]
 - [[assignment-1-report-2026-04-22]]
@@ -61,3 +62,4 @@ Both are noted as possibilities only, not assertions — see [[_gaps]].
 - 2026-05-14-meeting-notes.md (internal UvA team working meeting notes, development phase)
 - 2026-05-15-Laurenz-Sanne-email-content.md (KickstartAI x UvA demo follow-up email thread, 2026-05-15 → 2026-05-18)
 - 2026-06-04-meeting-notes.md (internal UvA team working meeting notes, development phase)
+- 2026-06-11-meeting-notes.md (internal UvA team working meeting notes, development phase)
