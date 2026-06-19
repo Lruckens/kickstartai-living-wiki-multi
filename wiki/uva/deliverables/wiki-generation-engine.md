@@ -1,7 +1,7 @@
 # Deliverable: Wiki Generation Engine
 
 **Last updated:** 2026-06-19
-**Status:** scoped (Must Have); first MVP exists (GitHub, 2026-05-14); LLM backend confirmed (Claude Code + Anthropic API); **UI built — React/Vite + FastAPI (2026-06-12)**; generator module integrated (2026-06-11)
+**Status:** scoped (Must Have); first MVP exists (GitHub, 2026-05-14); LLM backend confirmed (Claude Code + Anthropic API); **UI built — React/Vite + FastAPI (2026-06-12)**; generator module integrated (2026-06-11); **fully integrated wiki demoed (2026-06-15)**
 
 ## Summary
 An LLM-powered, **RAG-grounded** system that processes ingested documents into structured, interlinked wiki pages organized by topic. Pages regenerate or update on a configurable schedule (e.g., daily) as source material changes. It is the **persistent, compiled knowledge layer** that distinguishes the Living Wiki from stateless RAG (see [[living-wiki]]).
@@ -9,6 +9,7 @@ An LLM-powered, **RAG-grounded** system that processes ingested documents into s
 ## Details
 - **First MVP exists (2026-05-14):** At the 2026-05-14 development-phase team meeting (see [[team-meeting-2026-05-14]]), **Laurenz demoed a GitHub repo** containing the **wiki architecture and a first MVP of the system** — the first concrete evidence the system exists in code.
 - **MVP finished; UI built (2026-06-04 planned → 2026-06-12 built):** At the 2026-06-04 meeting (see [[team-meeting-2026-06-04]]), Laurenz had **finished his MVP version** and planned to **build a UI on top of the GitHub**. As of **2026-06-12** that UI is **built** — see the architecture below and [[mockup-artifact-2026-06-12]]. Whether the UI is a graded thesis deliverable or a convenience layer remains partly open — see [[_gaps]].
+- **Fully integrated wiki demoed (2026-06-15):** At the 2026-06-15 meeting (see [[team-meeting-2026-06-15]]), **Laurenz demoed the fully integrated wiki** — with the [[generator-module]], [[gap-detector]] (a dashboard + report page), and [[permission-layer]] (a login landing page) all wired into one UI. The integration effort tracked across 06-11/06-12 is now realized in one demoed artifact.
 - **GitHub repo — URL known (2026-05-15):** The repo is `https://github.com/Lruckens/kickstartai-living-wiki` (shared in the demo follow-up thread — see [[laurenz-sanne-email-2026-05-15]]). The repo schema/mechanics are now substantially revealed by the 2026-06-12 artifact (see below); the full code body remains un-ingested. See [[_gaps]].
 - **LLM backend — RESOLVED (2026-05-15):** The repo is **directly linked to Claude Code** (Anthropic's terminal-based agent), which **performs all operations and generates the wiki pages**; ingested documents are passed to **Anthropic's LLM via API**. The engine runs on **Anthropic (Claude) via Claude Code**, and it is working. See [[laurenz-sanne-email-2026-05-15]], [[_gaps]].
   - ⚠️ **Note — permission-layer evaluation used a *different* model.** Xiaojing's permission-layer experiments (2026-06-07) ran on **gpt-5.1 via the UvA API**, not Claude — an *experimental/evaluation* environment, distinct from this production backend. Production intends Claude end-to-end. See [[permission-layer]], [[xiaojing-sanne-permission-email-2026-06-07]], [[_gaps]].
@@ -27,11 +28,18 @@ The 2026-06-12 mock-up artifact (see [[mockup-artifact-2026-06-12]]) reveals the
 - **GitHub push — "Wiki Bot" via git worktree:** the backend fetches `origin/main`, checks it out into a **temporary git worktree**, copies the updated `wiki/` + new source file in, commits as a dedicated **Wiki Bot** identity, pushes `HEAD:main`, then deletes the worktree — keeping the developer's working branch untouched while `main` always reflects the latest knowledge, with an attributable, append-only commit history. A reusable pattern — see [[_reuse]].
 - ⚠️ **Deployment durability:** component backends (e.g. the generator) currently run on **individual laptops**; Sanne suggested **Vercel** for central URL-hosted deployment (out of scope but to be attempted). See [[_gaps]].
 
-### Permission-layer integration (2026-06-07 → 2026-06-12)
-The [[permission-layer]] operates on the **source paragraph pool before generation** — pre-filtering to only the paragraphs a target user is authorized to see (by `project_id` + `user_id`/email), so the engine never receives unauthorized content. In the **current Claude Code implementation**, Claude reads the updated permission configuration from a **markdown file** (vs SQL paragraph-table updates in a full pipeline). A **UI + email-based login** layer was added 2026-06-12. See [[permission-layer]], [[xiaojing-sanne-permission-email-2026-06-07]], [[mockup-artifact-2026-06-12]].
+### Integrated UI + collaboration workflow (2026-06-15)
+At the 2026-06-15 meeting (see [[team-meeting-2026-06-15]]) the integrated wiki was demoed and a concrete collaboration workflow adopted:
+- **Integrated surfaces:** the UI now bundles the wiki read/write views, the **Generator** config UI, the **Gap Detector** as a **dashboard + report page**, and the **Permission Layer** as a **login landing page** (log in before entering the wiki).
+- **Branch-per-member workflow:** the UI runs on **any member's laptop** by creating a **separate branch** of the GitHub repo + downloading the repo docs locally. Members work on **their own branches**; **always ask Laurenz before a pull request / merge to `main`** — Laurenz is the **integration/merge gatekeeper**. This **partially mitigates** the single-laptop-owner durability risk (any member can run the integrated UI locally) but is **not** central/URL deployment — the **Vercel/central-deployment gap remains open**. See [[_gaps]].
+- **State of the live wiki:** currently holds **only public + internal pages** — **restricted pages still need to be added** to test the permission layer's full functionality (see [[permission-layer]], [[_gaps]]).
+- ⚠️ **Token-cost caution (Sanne):** to avoid exhausting the Anthropic API quota before the final new-project test ingestions, **pre-parse/convert source docs into a lighter format** — **PDFs especially** waste tokens (processed as text *and* converted to an image). See [[ingestion-pipeline]], [[_gaps]].
 
-### Module integration (2026-06-04 → 2026-06-12)
-The [[generator-module]] (built by Quinten) integrates with this GitHub architecture. As of **2026-06-11** (see [[team-meeting-2026-06-11]]) **Quinten's and Laurenz's modules are integrated and functional** (the generator merged via PR into `main`, per [[mockup-artifact-2026-06-12]]) — the earlier at-risk integration task is **resolved**. Integration of the **remaining modules** (the [[permission-layer]] and Cara's [[gap-detector]]) is underway: **Cara and Xiaojing share their MVPs** + precise descriptions and **Laurenz merges them** — doing the integration **using Claude and VS Code**. Sanne flagged **integrating each component's separate UI/backend into one working system** as the biggest challenge. The robustness/repeatability of the manual, Claude-assisted merge is unspecified — see [[_gaps]].
+### Permission-layer integration (2026-06-07 → 2026-06-15)
+The [[permission-layer]] operates on the **source paragraph pool before generation** — pre-filtering to only the paragraphs a target user is authorized to see (by `project_id` + `user_id`/email), so the engine never receives unauthorized content. In the **current Claude Code implementation**, Claude reads the updated permission configuration from a **markdown file** (vs SQL paragraph-table updates in a full pipeline). A **UI + email-based login** layer was added 2026-06-12 and wired as a **login landing page** in the integrated demo (2026-06-15). See [[permission-layer]], [[xiaojing-sanne-permission-email-2026-06-07]], [[mockup-artifact-2026-06-12]].
+
+### Module integration (2026-06-04 → 2026-06-15)
+The [[generator-module]] (built by Quinten) integrates with this GitHub architecture. As of **2026-06-11** (see [[team-meeting-2026-06-11]]) **Quinten's and Laurenz's modules are integrated and functional** (the generator merged via PR into `main`, per [[mockup-artifact-2026-06-12]]) — the earlier at-risk integration task is **resolved**. Integration of the **remaining modules** (the [[permission-layer]] and Cara's [[gap-detector]]) was completed by 2026-06-15, when Laurenz **demoed the fully integrated wiki** (see [[team-meeting-2026-06-15]]); Cara and Xiaojing shared their MVPs + precise descriptions and Laurenz merged them **using Claude and VS Code**. Sanne flagged **integrating each component's separate UI/backend into one working system** as the biggest challenge. The robustness/repeatability of the manual, Claude-assisted merge is unspecified — see [[_gaps]].
 
 ### Deployment / backend configurability (2026-05-15)
 For sensitive-project deployment, Sanne suggested a **configurable backend** that can swap in a **self-hosted or VPC-deployed model** when needed while keeping the rest of the architecture intact — tying the engine's LLM backend to the [[permission-layer]] and the configuration-not-rewrite reuse model (see [[_reuse]]). See [[laurenz-sanne-email-2026-05-15]].
@@ -49,6 +57,7 @@ For sensitive-project deployment, Sanne suggested a **configurable backend** tha
 - [[team-meeting-2026-05-14]]
 - [[team-meeting-2026-06-04]]
 - [[team-meeting-2026-06-11]]
+- [[team-meeting-2026-06-15]]
 - [[xiaojing-sanne-permission-email-2026-06-07]]
 - [[laurenz-sanne-email-2026-05-15]]
 - [[permission-layer]]
@@ -67,3 +76,4 @@ For sensitive-project deployment, Sanne suggested a **configurable backend** tha
 - 2026-06-07-Xiaojing-Sanne-email-content.md (Xiaojing ↔ Sanne permission-layer design review email thread, 2026-06-07 → 2026-06-08)
 - 2026-06-11-meeting-notes.md (internal UvA team working meeting notes, development phase)
 - 2026-06-12-mock-up-artifact.md (Living Wiki UI mock-up artifact description + Sanne feedback, development phase)
+- 2026-06-15-meeting-notes.md (internal UvA team working meeting notes, development → evaluation phase transition)

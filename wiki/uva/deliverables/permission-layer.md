@@ -1,13 +1,16 @@
 # Deliverable: Permission Layer
 
 **Last updated:** 2026-06-19
-**Status:** scoped (Assignment-1 MoSCoW: design = Should, fully-working = Won't); **two-layer leakage PoC BUILT & EVALUATED (Xiaojing, 2026-06-07)**; **UI + auth layer BUILT (2026-06-12)**; **being integrated into the wiki architecture (2026-06-11)**
+**Status:** scoped (Assignment-1 MoSCoW: design = Should, fully-working = Won't); **two-layer leakage PoC BUILT & EVALUATED (Xiaojing, 2026-06-07)**; **UI + auth layer BUILT (2026-06-12)**; **integrated as a login landing page (2026-06-15)**
 
 ## Summary
-Design (and now a working proof-of-concept implementation with a UI) of document-level access control so the system is ready for sensitive projects. The 2026-04-13 kickoff clarified the permission layer **need not be a fully working architecture** — but the students **must design** how it would handle sensitive data from the start. The Assignment 1 presentation and written report (2026-04-22) confirm this via **MoSCoW**: permission-layer **design** is a **Should Have**, while a **completely working permission layer** is explicitly a **Won't Have** (this iteration). As of **2026-06-07**, Xiaojing built **and evaluated** a concrete two-layer permission architecture (pre-filtering + self-audit); as of **2026-06-12** she has also built a **UI + authentication layer** (see below). See [[assignment-1-presentation-2026-04-22]], [[assignment-1-report-2026-04-22]], [[xiaojing-sanne-permission-email-2026-06-07]], [[mockup-artifact-2026-06-12]].
+Design (and now a working proof-of-concept implementation with a UI) of document-level access control so the system is ready for sensitive projects. The 2026-04-13 kickoff clarified the permission layer **need not be a fully working architecture** — but the students **must design** how it would handle sensitive data from the start. The Assignment 1 presentation and written report (2026-04-22) confirm this via **MoSCoW**: permission-layer **design** is a **Should Have**, while a **completely working permission layer** is explicitly a **Won't Have** (this iteration). As of **2026-06-07**, Xiaojing built **and evaluated** a concrete two-layer permission architecture (pre-filtering + self-audit); as of **2026-06-12** she has also built a **UI + authentication layer**; by **2026-06-15** it is integrated into the wiki as a **login landing page**. See [[assignment-1-presentation-2026-04-22]], [[assignment-1-report-2026-04-22]], [[xiaojing-sanne-permission-email-2026-06-07]], [[mockup-artifact-2026-06-12]], [[team-meeting-2026-06-15]].
 
 ## Details
 Privacy and permissions are a first-class concern. The design should allow deployment to a sensitive project via configuration, not a rewrite. See concept page [[permission-model]] for design intent.
+
+### Integrated as a login landing page (2026-06-15)
+At the 2026-06-15 meeting (see [[team-meeting-2026-06-15]]) the permission layer was wired into the integrated wiki as a **login landing page** — users must **log in before entering the wiki**. **Dummy accounts** are used for the demo, with a suggestion to add **group members + Sanne** as real users in the wiki. ⚠️ Crucially, the live wiki currently contains **only public + internal pages** — **restricted pages still need to be added** to test the full leakage-prevention functionality end-to-end in the live app. See [[_gaps]].
 
 ### UI + authentication layer — BUILT (2026-06-12)
 The 2026-06-12 mock-up artifact (see [[mockup-artifact-2026-06-12]]) adds a concrete **UI + auth** dimension on top of the two-layer leakage design:
@@ -18,7 +21,7 @@ The 2026-06-12 mock-up artifact (see [[mockup-artifact-2026-06-12]]) adds a conc
 - Sanne's 2026-06-07 suggestions folded in: **email-as-user-id** and **dummy accounts** (Sanne advised against assigning separate IDs/passwords to every member for this thesis).
 
 ### Integration into the wiki architecture (2026-06-11)
-At the 2026-06-11 team meeting (see [[team-meeting-2026-06-11]]) the permission layer entered **integration**: **Xiaojing shares her MVP + a precise description** of what it does, and **Laurenz merges it** into the wiki architecture (using **Claude and VS Code**). Xiaojing is to **fold Sanne's 2026-06-07 feedback** (the five critiques below) into the version she sends to Laurenz before integration. See [[wiki-generation-engine]], [[_gaps]].
+At the 2026-06-11 team meeting (see [[team-meeting-2026-06-11]]) the permission layer entered **integration**: **Xiaojing shares her MVP + a precise description** of what it does, and **Laurenz merges it** into the wiki architecture (using **Claude and VS Code**). Xiaojing is to **fold Sanne's 2026-06-07 feedback** (the five critiques below) into the version she sends to Laurenz before integration. Integration was realized in the 2026-06-15 fully-integrated demo (see [[team-meeting-2026-06-15]]). See [[wiki-generation-engine]], [[_gaps]].
 
 ### Concrete two-layer design — BUILT & EVALUATED (Xiaojing, 2026-06-07)
 The most detailed source on this component is the 2026-06-07 → 2026-06-08 design-review thread between Xiaojing and Sanne (see [[xiaojing-sanne-permission-email-2026-06-07]]). Xiaojing **self-identifies as the permission-layer owner** and presents a fully-articulated, evaluated proof-of-concept. This realizes the 2026-06-04 "user-id connection" hint as `user_id` + `project_id` pre-filtering.
@@ -56,12 +59,13 @@ The most detailed source on this component is the 2026-06-07 → 2026-06-08 desi
 - **Ownership — RESOLVED-BY-PRECEDENCE (Member 4 individual), self-asserted:** The 2026-04-16 supervisor kickoff recorded sub-deliverable #5 as **collaborative**. Both later student-authored sources (deck + report) assign it **individually to Member 4** and name the **evaluation framework** as the collaborative deliverable. The 2026-06-07 thread adds **self-asserted ownership by Xiaojing**. See [[project-team]], [[user-journeys]], [[_gaps]].
 - **Design principles grounding (report):** security, privacy & data protection grounded in GDPR (EU 2016), NIST SP 800-53, ISO/IEC 27001:2013, and Kroll et al. (2017). See [[assignment-1-report-2026-04-22]].
 - **Critical-thinking emphasis:** Sanne advised the students **not to rely solely on LLMs** here — corroborated by her detailed 2026-06-07 critique.
-- **Mechanism — now substantially specified:** effectively a **paragraph-level tier model (public/internal/restricted) + pre-filtering ACL by `project_id`/`user_id` + LLM self-audit**, with an **email-based login + project-scoped UI**. Open refinements (aggregation leakage, label correctness, eval scale, cross-model audit, usability for non-technical staff) — see [[_gaps]].
+- **Mechanism — now substantially specified:** effectively a **paragraph-level tier model (public/internal/restricted) + pre-filtering ACL by `project_id`/`user_id` + LLM self-audit**, with an **email-based login + project-scoped UI** (a login landing page in the integrated app). Open refinements (aggregation leakage, label correctness, eval scale, cross-model audit, usability for non-technical staff, restricted pages not yet added to the live wiki) — see [[_gaps]].
 
 ## Related
 - [[permission-model]]
 - [[xiaojing-sanne-permission-email-2026-06-07]]
 - [[mockup-artifact-2026-06-12]]
+- [[team-meeting-2026-06-15]]
 - [[kickoff-meeting-2026-04-13]]
 - [[supervisor-kickoff-2026-04-16]]
 - [[team-meeting-2026-05-14]]
@@ -87,3 +91,4 @@ The most detailed source on this component is the 2026-06-07 → 2026-06-08 desi
 - 2026-06-07-Xiaojing-Sanne-email-content.md (Xiaojing ↔ Sanne permission-layer design review email thread, 2026-06-07 → 2026-06-08)
 - 2026-06-11-meeting-notes.md (internal UvA team working meeting notes, development phase)
 - 2026-06-12-mock-up-artifact.md (Living Wiki UI mock-up artifact description + Sanne feedback, development phase)
+- 2026-06-15-meeting-notes.md (internal UvA team working meeting notes, development → evaluation phase transition)

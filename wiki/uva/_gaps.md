@@ -2,15 +2,24 @@
 
 Underdocumented areas and open questions.
 
+## Surfaced from 2026-06-15 team-meeting ingest (ingested 2026-06-19)
+- **Restricted-tier pages not yet implemented — NEW.** The integrated live wiki currently holds only **public + internal** pages; **restricted pages must be added** to test the permission layer's full leakage-prevention functionality end-to-end. See [[permission-layer]], [[team-meeting-2026-06-15]].
+- **Anthropic API budget / token-cost management — NEW (operational risk).** Risk of exhausting the Anthropic API quota before the final new-project test ingestions; mitigation = pre-parse/convert source docs to lighter formats (PDFs especially expensive — processed as text *and* image). Durability/reproducibility consideration for the final demo. See [[ingestion-pipeline]], [[team-meeting-2026-06-15]].
+- **Evaluation-metric shortlist proposed but not finalized/applied — NEW (advances existing gap).** Candidates: **Self-BLEU, BERTScore, LLM-as-Judge** (coherence / faithfulness / stakeholder-appropriateness). Final selection, thresholds, and mapping to the four dimensions (coverage/freshness/accuracy/usefulness) still pending. See [[evaluation-framework]], [[evaluation-deliverable]], [[team-meeting-2026-06-15]].
+- **New-project use-case experiment design — NEW.** Plan to re-ingest all docs into an empty wiki, then ingest a **fake KickstartAI project** to test generalization; experiment specifics (success criteria, what's measured during ingestion) to be designed 17.06. See [[evaluation-deliverable]], [[team-meeting-2026-06-15]].
+- **Gap-detector "Team confirmed" label unclear — NEW (minor UX).** The label's meaning/behavior in the Gap Detector dashboard is unclear and should be clarified. See [[gap-detector]], [[team-meeting-2026-06-15]].
+- **Branch-per-member workflow durability — NEW (partial mitigation note).** Any member can run the UI via a personal branch + local repo, with Laurenz gatekeeping merges to main; mitigates single-laptop-owner risk but is **not** central/URL deployment (Vercel gap still open). Robustness/repeatability of local runs unspecified. See [[wiki-generation-engine]], [[project-team]], [[team-meeting-2026-06-15]].
+- **Final-demo / thesis-defence date PINNED — NEW (resolves part of the timeline gap).** **Monday 2026-06-22** = final artifact demo + individual thesis defences; anchors the previously-unpinned Phase 3 end / project end date. See [[project-timeline]], [[team-meeting-2026-06-15]].
+
 ## Surfaced from 2026-06-12 mock-up artifact ingest (ingested 2026-06-19)
 - **Cara's component = Gap Detector — RESOLVED (positively confirmed).** The long-standing "Cara's component still unnamed" gap is **closed**: the 2026-06-12 mock-up artifact attributes a full **6-layer hybrid Gap Detector** design to Cara/Meng Cheng. Cara ↔ Member 3 is now **positively evidenced**, not by-elimination. See [[gap-detector]], [[mockup-artifact-2026-06-12]], [[project-team]], [[user-journeys]].
 - **UI scope/existence — substantially RESOLVED (residual on deliverable status).** The 2026-06-04 "UI planned" gap is resolved: a **React/Vite + FastAPI UI is built** (Wiki + Operations + Generator + Permission + Gap surfaces). Residual: is the UI a **graded thesis deliverable or a convenience layer**? Still partly open. See [[wiki-generation-engine]], [[mockup-artifact-2026-06-12]].
 - **Generator sourcing approach — RESOLVED toward "from the wiki."** The 2026-05-14 wiki-vs-source-documents question is answered for the implemented MVP: a **wiki-reader module** gathers wiki pages/content as generation context. See [[generator-module]].
 - **GitHub repo schema/mechanics — substantially RESOLVED.** The artifact reveals the repo mechanics: **markdown-on-disk (no DB)**, 3-phase Ingest (Analyse/Apply/Push), **git-worktree "Wiki Bot" push** to `main`, FastAPI thin layer. Residual: full code body still un-ingested. See [[wiki-generation-engine]].
-- **Backend deployment / laptop-local dependency — NEW (key durability risk).** The generator (and likely permission/gap) backends run **on individual laptops**; the system only works while the owner runs it. Sanne suggested **Vercel** (free plan likely sufficient); deployment is out of scope but to be attempted. Track outcome. See [[generator-module]], [[wiki-generation-engine]], [[project-team]].
-- **Multi-component integration into one system — NEW.** Each component has its own UI/backend; Sanne and the team flag **integrating them into one working system** as the biggest challenge (extends the Claude + VS Code manual-merge durability gap). See [[wiki-generation-engine]].
+- **Backend deployment / laptop-local dependency — NEW (key durability risk; partially mitigated 2026-06-15).** The generator (and likely permission/gap) backends run **on individual laptops**; the system only works while the owner runs it. Sanne suggested **Vercel** (free plan likely sufficient); deployment is out of scope but to be attempted. The 2026-06-15 **branch-per-member workflow** lets any member run the integrated UI locally (partial mitigation) but is not central deployment. Track outcome. See [[generator-module]], [[wiki-generation-engine]], [[project-team]].
+- **Multi-component integration into one system — SUBSTANTIALLY RESOLVED (demoed 2026-06-15).** Each component had its own UI/backend; Sanne flagged **integrating them into one working system** as the biggest challenge. Laurenz **demoed the fully integrated wiki** on 2026-06-15. Residual: robustness/repeatability of the manual Claude+VS-Code merge. See [[wiki-generation-engine]], [[team-meeting-2026-06-15]].
 - **Gap-detector scoring transparency — NEW (Sanne's feedback).** Manually-defined weights (0.45/0.40/0.15) + risk multipliers + Precision/Recall/F1 thresholds lack empirical/justified basis; importance vs. confidence are conflated and should be separated. See [[gap-detector]], [[evaluation-deliverable]].
-- **Evaluation metric selection — refined (Sanne, ~3 metrics).** Sanne advises picking **circa three metrics** from academic/internet sources and applying them; systematic evaluation may be hard. Refines the existing metric-selection gap (alongside Quinten's options list). See [[evaluation-deliverable]], [[evaluation-framework]].
+- **Evaluation metric selection — refined (Sanne, ~3 metrics; shortlist proposed 2026-06-15).** Sanne advises picking **circa three metrics** from academic/internet sources and applying them; a concrete shortlist (Self-BLEU, BERTScore, LLM-as-Judge) is now under research. See [[evaluation-deliverable]], [[evaluation-framework]], [[team-meeting-2026-06-15]].
 - **Vercel deployment direction — NEW.** A concrete (out-of-scope-but-attempted) deployment direction; track the outcome. See [[wiki-generation-engine]].
 - **Usability vs. technicality — NEW (UX requirement).** Sanne's warning that the tool must be usable by non-technical company staff (esp. gap detector + permission layer) is now on record. See [[gap-detector]], [[permission-layer]].
 - **Production authentication out of scope — NEW.** The permission-layer UI uses **passwordless demo accounts**; real password/access-control integration is explicitly future work for KickstartAI. See [[permission-layer]].
@@ -72,7 +81,7 @@ Underdocumented areas and open questions.
 
 ## Surfaced from Assignment 1 presentation ingest (2026-04-22; ingested 2026-06-19)
 - **5 embedded JPGs not ingested (deck).** GAPS/DAPS diagram + 4 "Core Problem" icons. See [[assignment-1-presentation-2026-04-22]].
-- **12-week timeline vs. un-OCR'd Gantt.** Absolute start/end dates not pinned. See [[project-timeline]].
+- **12-week timeline vs. un-OCR'd Gantt.** Absolute start dates not pinned; end pinned to 2026-06-22 (see 2026-06-15 entry). See [[project-timeline]].
 - **MoSCoW Could-haves are stretch goals.** HITL feedback, blog-draft tone alignment, comparative generated-vs-human evaluation. See [[evaluation-deliverable]], [[generator-module]].
 
 ## Surfaced from founding brief (2026-04-02)
@@ -132,16 +141,18 @@ Underdocumented areas and open questions.
 - **Additional collaborator orgs undocumented** — bol, Philips, NL4AI.
 - **Project portfolio is non-exhaustive / point-in-time.**
 - **No Living Wiki project listed** — expected (internal/scoping).
-- [ ] **stale-output-tracking** — The stale onboarding summary's superseded state is not yet resolved by regeneration; now contradicts even more facts (UI built, all four components, team mapped). — source: [[lint]] / [[mockup-artifact-2026-06-12]] — flagged: 2026-06-19
+- [ ] **stale-output-tracking** — The stale onboarding summary's superseded state is not yet resolved by regeneration; now contradicts even more facts (UI built, all four components, team mapped, fully integrated demo, dated final-demo schedule). — source: [[lint]] / [[mockup-artifact-2026-06-12]] / [[team-meeting-2026-06-15]] — flagged: 2026-06-19
 - [ ] **missing-concept-page** — Aggregation/inference leakage lacks its own concept page. — source: [[lint]] — flagged: 2026-06-19
 - [ ] **missing-concept-page** — RAG (Retrieval-Augmented Generation) has no dedicated concept page. — source: [[lint]] — flagged: 2026-06-19
 - [ ] **missing-concept-page** — CRISP-DM and Design Science Research dual methodology is referenced on 6+ pages without a concept page. — source: [[lint]] — flagged: 2026-06-19
 - [ ] **missing-concept-page** — Claude Code is the confirmed production backend but is only described inline. — source: [[lint]] — flagged: 2026-06-19
+- [ ] **missing-concept-page** — Evaluation metrics (Self-BLEU, BERTScore, LLM-as-Judge) could warrant a dedicated concept page once finalized. — source: [[team-meeting-2026-06-15]] — flagged: 2026-06-19
 - [ ] **undocumented-decision** — The 'one wiki page = one project' information architecture decision lacks a structured rationale/alternatives record. — source: [[lint]] — flagged: 2026-06-19
 - [ ] **undocumented-decision** — Admin-per-project governance has no decision page. — source: [[lint]] — flagged: 2026-06-19
 - [ ] **undocumented-decision** — The Claude Code + Anthropic API tech-stack choice lacks a decision page. — source: [[lint]] — flagged: 2026-06-19
 - [ ] **undocumented-decision** — The permission model design lacks a record of rejected alternatives. — source: [[lint]] — flagged: 2026-06-19
 - [ ] **undocumented-decision** — The markdown-on-disk / git-worktree "Wiki Bot" architecture choice lacks a decision page. — source: [[mockup-artifact-2026-06-12]] — flagged: 2026-06-19
+- [ ] **undocumented-decision** — The branch-per-member collaboration workflow (Laurenz as merge gatekeeper) lacks a decision page. — source: [[team-meeting-2026-06-15]] — flagged: 2026-06-19
 - [ ] **missing-cross-reference** — gap-detector does not link to student-materials-corpus despite the corpus being its ground-truth evaluation source. — source: [[lint]] — flagged: 2026-06-19
 - [ ] **open-question** — It is unspecified who assigns paragraph tier labels at ingestion and whether the process is automated. — source: [[lint]] — flagged: 2026-06-19
 - [ ] **open-question** — The underlying vector store, embedding model, and RAG framework remain partly unspecified. — source: [[lint]] — flagged: 2026-06-19

@@ -1,6 +1,6 @@
 # Living Wiki (UvA) — Overview
 
-**Status:** scoping complete → **development phase: all four components built & integrating; UI built; evaluation phase underway** (Assignment 1 presented ~2026-04-22; first system MVP demoed 2026-05-14; tech stack confirmed 2026-05-15; per-member builds 2026-06-04; permission-layer PoC built & evaluated 2026-06-07; generator+wiki-engine integrated & evaluation phase started 2026-06-11; **integrated UI + all four components showcased 2026-06-12**)
+**Status:** scoping complete → **development phase complete; fully integrated system demoed; evaluation phase underway; final demo + thesis defence scheduled 2026-06-22** (Assignment 1 presented ~2026-04-22; first system MVP demoed 2026-05-14; tech stack confirmed 2026-05-15; per-member builds 2026-06-04; permission-layer PoC built & evaluated 2026-06-07; generator+wiki-engine integrated 2026-06-11; integrated UI + all four components showcased 2026-06-12; **fully integrated wiki demoed 2026-06-15**)
 **Last updated:** 2026-06-19
 
 ## What this project is about
@@ -11,9 +11,13 @@ The recursive twist: the first project this system documents is *itself* (the pr
 The project is run for [[kickstartai]] by students at the [[uva-ai4business-lab]] (a BSc Business Analytics thesis project). The architecture is explicitly designed for reuse across all KickstartAI projects once the initial use case is complete.
 
 ## Current status
-The team is **deep in the development phase (Phase 2) and into the evaluation phase (Phase 3)**, with a **working integrated system**. The **2026-06-12 mock-up artifact** (see [[mockup-artifact-2026-06-12]]) is the highest-substance build source to date: it describes a **built React/Vite + FastAPI web UI** (Wiki view + Operations view with Ingest/Query/Lint + Generator + Permission/Gap surfaces), exposes the **git-worktree "Wiki Bot" push architecture** (markdown-on-disk, no database), and concretely documents all four member components — crucially **positively confirming Cara/Meng Cheng's component as the [[gap-detector]]** (a 6-layer hybrid framework), resolving the last standing person↔component gap.
+The team has a **fully integrated, demoed system** and is **in the evaluation phase (Phase 3)**, working toward a **final demo + individual thesis defence on 2026-06-22**.
 
-Earlier development-phase milestones: the **2026-06-11 meeting** (see [[team-meeting-2026-06-11]]) marked an **integration milestone** — Quinten's generator and Laurenz's wiki architecture **integrated and functional**, with Laurenz merging Cara's and Xiaojing's MVPs (via Claude + VS Code) and the **evaluation phase begun** (Quinten on metrics; two evaluation families). The **2026-06-07 permission-layer design review** (see [[xiaojing-sanne-permission-email-2026-06-07]]) turned the [[permission-layer]] into the most concretely specified deliverable (paragraph-level tiers + pre-filtering + self-audit; 20-scenario evaluation), now joined by a **built UI + email-based login** (2026-06-12).
+The **2026-06-15 meeting** (see [[team-meeting-2026-06-15]]) is the latest milestone: **Laurenz demoed the fully integrated wiki** — the [[generator-module]], [[gap-detector]] (a dashboard + report page), and [[permission-layer]] (a login landing page) all wired into one UI. The team adopted a **git-branch-per-member workflow** (Laurenz as merge gatekeeper), set a concrete **demo/evaluation run-up** (17–22 June), produced a **first concrete evaluation-metric shortlist** (Self-BLEU, BERTScore, LLM-as-Judge: coherence/faithfulness/stakeholder-appropriateness), and recorded an **Anthropic API budget caution** (pre-parse source docs, esp. PDFs, to save tokens).
+
+The **2026-06-12 mock-up artifact** (see [[mockup-artifact-2026-06-12]]) is the highest-substance build source: a **built React/Vite + FastAPI web UI** (Wiki view + Operations view with Ingest/Query/Lint + Generator + Permission/Gap surfaces), the **git-worktree "Wiki Bot" push architecture** (markdown-on-disk, no database), and all four member components — **positively confirming Cara/Meng Cheng's component as the [[gap-detector]]** (a 6-layer hybrid framework), resolving the last person↔component gap.
+
+Earlier milestones: the **2026-06-11 meeting** (integration of Quinten's generator + Laurenz's wiki architecture; evaluation phase begun; two evaluation families) and the **2026-06-07 permission-layer design review** (paragraph-level tiers + pre-filtering + self-audit; 20-scenario evaluation), now joined by a **built UI + email-based login**.
 
 Sanne's 2026-06-12 feedback adds direction: she was **"impressed"** the system is this far/functioning; warned it must be **usable by non-technical staff**; recommended **Vercel** for central deployment (component backends currently run on laptops); flagged **integration into one system** as the biggest challenge; and advised picking **~3 evaluation metrics** from literature and applying them.
 
@@ -27,27 +31,34 @@ Both student-authored Assignment 1 artifacts remain ingested: the **presentation
 - 2026-04-30 → 2026-05-04 — post-presentation check-in scheduling thread.
 - 2026-05-14 — internal team meeting; **first MVP demoed** (GitHub wiki architecture).
 - 2026-05-15 → 2026-05-18 — demo follow-up thread; **tech stack confirmed (Claude Code + Anthropic API)**; test corpus + PM Ops folder delivered.
-- 2026-06-04 — internal team meeting; **per-member build progress** (UI plan, generator build, permission-layer user-id, Cara MVP-feasibility issue).
+- 2026-06-04 — internal team meeting; **per-member build progress**.
 - 2026-06-07 → 2026-06-08 — permission-layer design review; **two-layer permission design built & evaluated**; Xiaojing self-asserts Member-4 ownership.
 - 2026-06-11 — internal team meeting; **generator + wiki-engine integrated**; evaluation phase begins.
-- ~2026-06-12 — **mock-up artifact + feedback**: integrated **UI built**; all four components showcased; **Cara = Gap Detector confirmed**; Sanne feedback (Vercel, ~3 metrics, usability) — **ingested** (see [[mockup-artifact-2026-06-12]]).
-- **Project plan:** 12 weeks / 3 phases — Phase 1 (wks 1–4) design; Phase 2 (wks 5–9) development; Phase 3 (wks 10–12) evaluation & synthesis (week numbers only; absolute dates not pinned).
+- ~2026-06-12 — **mock-up artifact + feedback**: integrated **UI built**; all four components showcased; **Cara = Gap Detector confirmed**; Sanne feedback (Vercel, ~3 metrics, usability).
+- 2026-06-15 — internal team meeting; **fully integrated wiki demoed**; branch-per-member workflow; evaluation-metric shortlist; demo/eval run-up scheduled.
+- 2026-06-17 — Quinten + Laurenz design the evaluation framework / ingestion-evaluation experiment.
+- 2026-06-18 — demo to Sanne + final feedback; re-ingest project docs into an empty wiki.
+- 2026-06-19 — ingest a fake KickstartAI project as a new-project use-case.
+- **2026-06-22 — final demo of the artifact + individual thesis defence.**
+- **Project plan:** 12 weeks / 3 phases — Phase 1 (wks 1–4) design; Phase 2 (wks 5–9) development; Phase 3 (wks 10–12) evaluation & synthesis.
 
 ## Key decisions
-- Privacy/permissions are a first-class design concern; the [[permission-layer]] is **design-required** (MoSCoW: design = Should, fully-working = Won't), but a **built-and-evaluated two-layer PoC + UI/auth layer** now exists (paragraph-level tiers + pre-filtering + self-audit; email-based login + project-scoped access), being **integrated** into the wiki architecture.
+- Privacy/permissions are a first-class design concern; the [[permission-layer]] is **design-required** (MoSCoW: design = Should, fully-working = Won't), but a **built-and-evaluated two-layer PoC + UI/auth layer** now exists (paragraph-level tiers + pre-filtering + self-audit; email-based login landing page), **integrated** into the wiki architecture. (Only public + internal pages exist in the live wiki so far; restricted pages still to be added — see [[_gaps]].)
 - **Document the project itself first** — avoids sensitive data and gives an intuitive evaluation method.
 - Blog post drafts evaluated against a human-written baseline (MoSCoW: a **Could** stretch goal).
-- **Don't rely solely on LLMs** for the core tool — critical thinking required (reinforced by Sanne's 2026-06-07/06-12 critiques).
+- **Don't rely solely on LLMs** for the core tool — critical thinking required.
 - **Methodology:** **Design Science Research (DSR; Hevner 2007)** layered with **CRISP-DM**.
 - **Architecture:** **five member-owned components** (ingestion+wiki engine under Member 1) **+ the evaluation framework as the collaborative/shared deliverable**.
 - **Tech stack (2026-05-15):** **Claude Code + Anthropic API** (repo `github.com/Lruckens/kickstartai-living-wiki`). Permission-layer *evaluation* used gpt-5.1 via the UvA API (experimental).
 - **UI / backend (2026-06-12):** **React/Vite frontend + FastAPI backend**, **markdown-on-disk (no database)**, **git-worktree "Wiki Bot" push** to `main`, SSE-streamed Ingest/Query/Lint operations.
-- **Integration (2026-06-11/12):** done by **Laurenz** (Claude + VS Code / PR merges); generator already integrated.
+- **Collaboration (2026-06-15):** **branch-per-member workflow**; Laurenz is the merge gatekeeper (ask before any PR to `main`).
+- **Evaluation (2026-06-15):** candidate metrics **Self-BLEU, BERTScore, LLM-as-Judge** (coherence/faithfulness/stakeholder-appropriateness); evaluation by re-ingesting all docs from scratch + a fake-project use-case; gap detector & permission layer evaluated at component level.
+- **Token budget (2026-06-15):** pre-parse/convert source docs (esp. PDFs) before ingestion to conserve the Anthropic API quota.
 - **Deployment (2026-06-12):** investigate **Vercel** for central backend hosting (currently laptop-local); production auth out of scope.
 - **Deployment governance (2026-05-14):** **admin-per-project**; **one wiki page = one project**, linked by shared topics.
 
 ## Open questions
-See [[_gaps]] for the full list (Member 1/Member 2 person-mapping (Laurenz/Quinten still soft signals; M3 Cara & M4 Xiaojing now confirmed), backend/multi-component deployment durability (laptop-local; Vercel), integration into one system, vector store/embedding model, gap-detector scoring transparency, permission-layer open problems (aggregation/inference leakage, paragraph-label assignment, eval scale, cross-model audit, gpt-5.1 eval environment), evaluation-metric selection (~3 metrics), UI deliverable-status, usability-for-non-technical-staff, un-ingested screenshots/Gantt/GAPS-diagram, un-ingested student-materials corpus & PM Ops folder, recurring check-in cadence, second UvA group, the "Averion" handover, etc.).
+See [[_gaps]] for the full list (Member 1/Member 2 person-mapping soft signals; backend/multi-component deployment durability (laptop-local; Vercel; branch-per-member partial mitigation); integration into one system; vector store/embedding model; gap-detector scoring transparency; permission-layer open problems (aggregation/inference leakage, paragraph-label assignment, eval scale, cross-model audit, gpt-5.1 eval environment, restricted pages not yet added); evaluation-metric finalization (~3 metrics; shortlist proposed); Anthropic API budget/token-cost; new-project use-case experiment design; UI deliverable-status; usability-for-non-technical-staff; un-ingested screenshots/Gantt/GAPS-diagram; un-ingested student-materials corpus & PM Ops folder; recurring check-in cadence; second UvA group; the "Averion" handover; etc.).
 
 ## Key concepts
 - [[living-wiki]] — the core self-updating LLM Wiki concept

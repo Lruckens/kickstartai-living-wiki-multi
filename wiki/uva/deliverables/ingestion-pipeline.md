@@ -19,6 +19,12 @@ The kickoff meeting and deck specified concrete starting sources:
 
 The specific "lab materials" set (UvA AI4Business Lab docs) remains un-ingested/unspecified — see [[_gaps]]. This aligns with the "document itself first" strategy (see [[living-wiki]], [[kickoff-meeting-2026-04-13]]).
 
+### Token-cost / pre-parsing requirement (2026-06-15)
+At the 2026-06-15 meeting (see [[team-meeting-2026-06-15]]) Sanne cautioned that the team must **avoid exhausting the Anthropic API quota** before the final new-project test ingestions. Mitigation: **pre-parse / convert all source documents into a lighter format** before ingestion. **PDFs (and similar formats) are especially expensive** — the model processes both the extracted text **and** converts the document into an **image**, consuming a lot of (unnecessary) tokens. This is an operational/durability consideration for the final demo and the re-ingest-from-scratch evaluation run. See [[evaluation-deliverable]], [[_gaps]].
+
+### Full re-ingest evaluation run (2026-06-15)
+The final-artifact evaluation plan involves **re-ingesting all source documents from scratch into an empty wiki** (Thu 18.06), then **ingesting a fake KickstartAI project** as a new-project use-case (Fri 19.06) — stress-testing the ingestion pipeline end-to-end and on a previously-unseen project. See [[team-meeting-2026-06-15]], [[evaluation-deliverable]].
+
 ### Dedicated test corpus delivered (2026-05-18)
 Sanne delivered a **purpose-built ingestion test corpus** — `llm-wiki-student-materials` (~65K), a **fictional but realistic ~7-month** project corpus including the **"Bakkie"** sub-corpus with example meeting notes (see [[student-materials-corpus]], [[laurenz-sanne-email-2026-05-15]]). Key handling notes:
 - It is a **separate** representative test set, **not** the team's own project documents (the "document itself first" cold-start corpus) — a *second* corpus, recorded to avoid conflation.
@@ -38,6 +44,8 @@ Sanne delivered a **purpose-built ingestion test corpus** — `llm-wiki-student-
 - [[kickoff-meeting-2026-04-13]]
 - [[kickoff-deck-2026-04-13]]
 - [[laurenz-sanne-email-2026-05-15]]
+- [[team-meeting-2026-06-15]]
+- [[evaluation-deliverable]]
 - [[assignment-1-presentation-2026-04-22]]
 - [[assignment-1-report-2026-04-22]]
 
@@ -48,3 +56,4 @@ Sanne delivered a **purpose-built ingestion test corpus** — `llm-wiki-student-
 - 2026-04-22-presentation-slides.md (Assignment 1 project-definition presentation deck, text-extractable)
 - 2026-04-22-problem-definition.md (Assignment 1a written project-definition report, text-extractable)
 - 2026-05-15-Laurenz-Sanne-email-content.md (KickstartAI x UvA demo follow-up email thread, 2026-05-15 → 2026-05-18)
+- 2026-06-15-meeting-notes.md (internal UvA team working meeting notes, development → evaluation phase transition)

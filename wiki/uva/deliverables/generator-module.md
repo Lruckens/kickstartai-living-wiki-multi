@@ -1,7 +1,7 @@
 # Deliverable: Generator Module
 
 **Last updated:** 2026-06-19
-**Status:** scoped (Should Have for digests/summaries; blog drafts a Could Have); **integrated into the wiki architecture & functional (2026-06-11)**; **UI built + working MVP (2026-06-12)**
+**Status:** scoped (Should Have for digests/summaries; blog drafts a Could Have); **integrated into the wiki architecture & functional (2026-06-11)**; **UI built + working MVP (2026-06-12)**; **prompt-engineering test planned (2026-06-15)**
 
 ## Summary
 A module that produces periodic outputs from the wiki — weekly project digests, stakeholder summaries, or draft blog posts — aligned with a configurable tone and audience.
@@ -16,6 +16,9 @@ The 2026-06-12 mock-up artifact (see [[mockup-artifact-2026-06-12]]) describes t
 - **Technical stack:** the `generate` operation + instructions (based on Quinten's thesis functional design) are added to **CLAUDE.md**; generated outputs are saved to `wiki/generator`; the **KickstartAI-provided Anthropic API key** is stored in a gitignored `.env` (with `.env.example` template); a separate **wiki-reader Python module** gathers relevant wiki pages/content so the LLM has real project context; the **FastAPI backend** sends a prompt (CLAUDE.md instructions + relevant wiki context + UI config) to Anthropic and passes the result back to the UI.
 - **Integration:** the transformations were sent in a **pull request to Laurenz's main GitHub**, integrating into the actual wiki (corroborates [[team-meeting-2026-06-11]]).
 - ⚠️ **Deployment problem:** the backend runs **locally on Quinten's laptop** — the generator only works while he runs it. Central deployment (Sanne suggested **Vercel**) is the next step; otherwise each member needs the right installations. See [[wiki-generation-engine]], [[_gaps]].
+
+### Prompt-engineering test planned (2026-06-15)
+At the 2026-06-15 meeting (see [[team-meeting-2026-06-15]]), **Quinten will run a prompt-engineering test**, after which the **backend may be updated**. Separately, the **branch-per-member workflow** adopted at that meeting (any member can run the integrated UI via a personal branch + local repo, with Laurenz gatekeeping merges to `main`) **partially mitigates** the laptop-local deployment gap — though it is not the central/URL deployment that Vercel would provide. See [[wiki-generation-engine]], [[_gaps]].
 
 ### Build status (2026-06-04 → 2026-06-11)
 **Quinten** built the generator module (see [[team-meeting-2026-06-04]]). As of **2026-06-11** it is **integrated into the wiki architecture and functional** (see [[team-meeting-2026-06-11]]) — the earlier integration risk is **resolved** (see below). Because his module is integrated and functional, Quinten can **already start applying evaluation metrics** and is now leading **evaluation-metric selection** for the [[evaluation-framework]]. (This corroborates Quinten ≈ Member 2 as a *soft signal*, not an assertion — see [[project-team]], [[_gaps]].)
@@ -52,6 +55,7 @@ Both are noted as possibilities only, not assertions — see [[_gaps]].
 - [[team-meeting-2026-05-14]]
 - [[team-meeting-2026-06-04]]
 - [[team-meeting-2026-06-11]]
+- [[team-meeting-2026-06-15]]
 - [[laurenz-sanne-email-2026-05-15]]
 - [[assignment-1-presentation-2026-04-22]]
 - [[assignment-1-report-2026-04-22]]
@@ -73,3 +77,4 @@ Both are noted as possibilities only, not assertions — see [[_gaps]].
 - 2026-06-04-meeting-notes.md (internal UvA team working meeting notes, development phase)
 - 2026-06-11-meeting-notes.md (internal UvA team working meeting notes, development phase)
 - 2026-06-12-mock-up-artifact.md (Living Wiki UI mock-up artifact description + Sanne feedback, development phase)
+- 2026-06-15-meeting-notes.md (internal UvA team working meeting notes, development → evaluation phase transition)
