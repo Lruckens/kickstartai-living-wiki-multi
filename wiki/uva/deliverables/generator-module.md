@@ -1,7 +1,7 @@
 # Deliverable: Generator Module
 
-**Last updated:** 2026-06-16
-**Status:** scoped
+**Last updated:** 2026-06-19
+**Status:** scoped (Should Have for digests/summaries; blog drafts a Could Have)
 
 ## Summary
 A module that produces periodic outputs from the wiki — weekly project digests, stakeholder summaries, or draft blog posts — aligned with a configurable tone and audience.
@@ -9,11 +9,16 @@ A module that produces periodic outputs from the wiki — weekly project digests
 ## Details
 Serves the Summarizer and Content Generator user journeys. Blog post drafts should be written in KickstartAI's voice and evaluated against a human-written baseline (see [[evaluation-deliverable]]). Tone/voice specification is not yet defined — see [[_gaps]].
 
+### MoSCoW & ownership (Assignment 1 presentation, 2026-04-22)
+- **Should Have:** generator module producing **weekly digests + stakeholder summaries**.
+- **Could Have:** **blog-post draft generation with tone alignment** (a stretch goal this iteration).
+- **Ownership:** Assigned to **Member 2**. The Member 2 RQ ties generation and evaluation together: "How can different LLM-based generation methods effectively produce periodic, stakeholder-specific project outputs, and how can the quality of these outputs be systematically evaluated?" See [[assignment-1-presentation-2026-04-22]], [[project-team]].
+
 The content-generation rationale aligns directly with KickstartAI's "We share" pillar (publicly labeled **"Amplify"** on the homepage) — openly sharing learnings and replicable patterns with the Dutch ecosystem (see [[kickstartai]]). KickstartAI has a Content Strategist on staff (Ioanna Lykiardopoulou — see [[kickstartai-team]]) who is a possible owner of the "KickstartAI voice" spec, though this is unconfirmed.
 
 ### Publication venues (possibilities only)
 No source connects the Living Wiki's generated output to any specific channel. Two plausible public venues are documented:
-- **[[kickstartai-blog]]** — KickstartAI's public news/blog. As a real, recurring text-content channel it is the *more plausible* venue for generated blog posts. Its existing **"GenAI project management lessons"** theme and technical write-ups are concrete examples of the target genre and voice.
+- **[[kickstartai-blog]]** — KickstartAI's public news/blog. The *more plausible* venue for generated blog posts; its existing **"GenAI project management lessons"** theme is a concrete example of the target genre and voice.
 - **[[techdays]]** — KickstartAI's flagship conference; a possible venue, but more event- than article-oriented.
 
 Both are noted as possibilities only, not assertions — see [[_gaps]].
@@ -21,6 +26,8 @@ Both are noted as possibilities only, not assertions — see [[_gaps]].
 ## Related
 - [[user-journeys]]
 - [[evaluation-deliverable]]
+- [[assignment-1-presentation-2026-04-22]]
+- [[project-team]]
 - [[kickstartai]]
 - [[kickstartai-team]]
 - [[kickstartai-blog]]
@@ -31,3 +38,4 @@ Both are noted as possibilities only, not assertions — see [[_gaps]].
 - KickstartAI_About_us.md (https://kickstart.ai/about-us, created 2026-05-07)
 - KickstartAI_homepage.md (https://kickstart.ai/, created 2026-05-07)
 - KickstartAI_News.md (https://kickstart.ai/news, created 2026-05-07)
+- 2026-04-22-presentation-slides.md (Assignment 1 project-definition presentation deck, text-extractable)

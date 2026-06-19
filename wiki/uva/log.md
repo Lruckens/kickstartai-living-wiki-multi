@@ -11,22 +11,22 @@ Append-only. One entry per operation: ingest, query, or lint.
 **Action:** First ingest into empty wiki. Populated `_overview.md` skeleton; added gaps to `_gaps.md`; seeded `_reuse.md`.
 **Pages created:** [[living-wiki]], [[user-journeys]], [[permission-model]], [[evaluation-framework]], [[kickstartai]], [[uva-ai4business-lab]], [[ingestion-pipeline]], [[wiki-generation-engine]], [[generator-module]], [[gap-detector]], [[permission-layer]], [[evaluation-deliverable]]
 **Pages updated:** _overview.md, index.md, _gaps.md, _reuse.md
-**Notes:** This is the founding charter for the project itself (the recursive "first project the system documents is itself"). Total pages now 12.
+**Notes:** This is the founding charter for the project itself. Total pages now 12.
 
 ---
 
 ## 2026-06-16 — INGEST
 **Source:** KickstartAI_About_us.md (public "About us" web clipping, https://kickstart.ai/about-us, created 2026-05-07)
-**Action:** Low-risk enrichment ingest of KickstartAI organizational profile. Enriched [[kickstartai]] with mission, three pillars (do/share/connect), 2019 founding → 2022 independent non-profit history, ~7,500-professional community. Created roster page. Refined team and tone gaps; added cross-references on [[generator-module]].
+**Action:** Low-risk enrichment ingest of KickstartAI organizational profile. Enriched [[kickstartai]]; created roster page. Refined team and tone gaps; added cross-references on [[generator-module]].
 **Pages created:** [[kickstartai-team]]
 **Pages updated:** kickstartai.md, generator-module.md, _gaps.md, index.md
-**Notes:** No conflicts. Deliberately avoided inferring any named person as the Living Wiki technical mentor. Total pages now 13.
+**Notes:** No conflicts. Total pages now 13.
 
 ---
 
 ## 2026-06-16 — INGEST
 **Source:** KickstartAI_homepage.md (public homepage web clipping, https://kickstart.ai/, created 2026-05-07)
-**Action:** Low-risk enrichment ingest of the KickstartAI homepage. Reconciled the two parallel pillar vocabularies on [[kickstartai]]; added impact-in-numbers stats; created TechDays entity stub; added gaps.
+**Action:** Low-risk enrichment ingest of the KickstartAI homepage. Reconciled the two parallel pillar vocabularies; added impact stats; created TechDays entity stub; added gaps.
 **Pages created:** [[techdays]]
 **Pages updated:** kickstartai.md, generator-module.md, _gaps.md, index.md
 **Notes:** No substantive conflicts. Total pages now 14.
@@ -90,25 +90,34 @@ Append-only. One entry per operation: ingest, query, or lint.
 
 ## 2026-06-19 — INGEST
 **Source:** 2026-04-13-KAI-UvA-Kickoff-meeting-notes.md (Gemini-generated kickoff meeting notes/transcript summary, 2026-04-13)
-**Action:** Ingested the kickoff meeting notes — the first ingested source carrying actual kickoff decisions, participant backgrounds, technical guidance, and action items (long-flagged as a pending artifact). Created the first **Meetings** page [[kickoff-meeting-2026-04-13]]. **Resolved standing student-identity gaps:** "XiaoJing" = **Xiaojing Li** (China; AI/LLMs/maths); "Cara" ≈ **Carac M. Cheng** (China; business→analytics); Quinten (Dutch, coordinator), Laurenz (Barcelona, ex-data-scientist intern) — all four business-analytics thesis students. Refined [[project-team]] and [[uva-ai4business-lab]] rosters. Updated [[assignment-1-project-definition]], [[project-timeline]], [[permission-layer]], [[ingestion-pipeline]], [[living-wiki]], [[evaluation-framework]], [[kickstartai]], [[_overview]], [[_gaps]].
+**Action:** Ingested the kickoff meeting notes. Created the first **Meetings** page [[kickoff-meeting-2026-04-13]]. Resolved standing student-identity gaps. Refined [[project-team]] and [[uva-ai4business-lab]] rosters. Updated many deliverable/concept pages.
 **Pages created:** [[kickoff-meeting-2026-04-13]]
 **Pages updated:** project-team.md, uva-ai4business-lab.md, assignment-1-project-definition.md, project-timeline.md, permission-layer.md, ingestion-pipeline.md, living-wiki.md, evaluation-framework.md, kickstartai.md, _overview.md, _gaps.md, index.md
-**Notes:** ⚠️ Two ambiguities deliberately NOT over-asserted: "Averion" handover and "Meng" discrepancy. The Cara↔Carac M. Cheng mapping is strong but inferred. The 3 embedded screenshots are image-only and were not ingested/fabricated. No hard factual conflicts. Total pages now 21.
+**Notes:** "Averion" and "Meng" deliberately not over-asserted. Total pages now 21.
 
 ---
 
 ## 2026-06-19 — INGEST
 **Source:** 2026-04-13-KAI-UvA-Kickoff.md (KickstartAI x UvA kickoff slide deck, dated 2026-04-13 — text-extractable)
-**Action:** Ingested the **text-extractable** kickoff pitch/framing deck — the legible twin of previously image-locked kickoff material. Created artifact page [[kickoff-deck-2026-04-13]] (verbatim problem statement, Living Wiki concept framing, five-module build ask, "How we'll work together – TBD" slide). **Resolved** the long-standing "kickoff-deck identity unconfirmed" gap: this deck **is** `KickstartAI x UvA - Kick-off.pdf`, distinct from the image-heavy `KAI-Intro` strategy deck. Strengthened [[living-wiki]]. Added the deck's explicit cross-project-reuse articulation to [[_reuse]]. Corroborated initial-input framing on [[ingestion-pipeline]]. Noted the verbatim five-module list on [[user-journeys]]. Updated [[assignment-1-project-definition]], [[kickoff-meeting-2026-04-13]], [[_overview]], [[_gaps]].
+**Action:** Ingested the text-extractable kickoff pitch/framing deck. Created artifact page [[kickoff-deck-2026-04-13]]. Resolved the kickoff-deck identity gap. Strengthened [[living-wiki]], [[_reuse]], [[ingestion-pipeline]], [[user-journeys]].
 **Pages created:** [[kickoff-deck-2026-04-13]]
 **Pages updated:** living-wiki.md, _reuse.md, ingestion-pipeline.md, user-journeys.md, assignment-1-project-definition.md, kickoff-meeting-2026-04-13.md, _overview.md, _gaps.md, index.md
-**Notes:** Primarily a corroboration + gap-resolution ingest. No factual conflicts. `KAI-Intro` ↔ `20260413 UvA.pdf` mapping remains separately open. Total pages now 22.
+**Notes:** Corroboration + gap-resolution ingest. Total pages now 22.
 
 ---
 
 ## 2026-06-19 — INGEST
 **Source:** 2026-04-16-supervisor-kickoff.md (UvA-internal student↔supervisor kickoff meeting notes, 2026-04-16)
-**Action:** Ingested the UvA-internal supervisor kickoff — the first source confirming a student↔supervisor meeting and resolving several identity gaps. Created the second **Meetings** page [[supervisor-kickoff-2026-04-16]]. **Resolved:** h.zhu@uva.nl → **Hongyi Zhu**, confirmed **UvA academic supervisor**; **lee89953@gmail.com → Xiaojing Li** hard-confirmed (was by-elimination). Recorded the agreed **task-division scheme** (sub-deliverables 1–4 individual, 5 collaborative, 6 individual-method-per-member into theses) and the cold-start data note. Updated [[project-team]], [[uva-ai4business-lab]], [[assignment-1-project-definition]], [[permission-layer]], [[evaluation-deliverable]], [[evaluation-framework]], [[user-journeys]], [[_overview]], [[_gaps]].
+**Action:** Ingested the UvA-internal supervisor kickoff. Created [[supervisor-kickoff-2026-04-16]]. Resolved h.zhu→Hongyi Zhu and lee89953@→Xiaojing Li. Recorded the agreed task-division scheme.
 **Pages created:** [[supervisor-kickoff-2026-04-16]]
 **Pages updated:** project-team.md, uva-ai4business-lab.md, assignment-1-project-definition.md, permission-layer.md, evaluation-deliverable.md, evaluation-framework.md, user-journeys.md, _overview.md, _gaps.md, index.md
-**Notes:** No hard conflicts. "Meng" discrepancy narrowed (alias resolved to Xiaojing Li) but "Meng" remains unmapped — flagged, not asserted. Work division advanced to a *scheme*; specific #1–4 owners still TBD. No standalone entity page created for Hongyi Zhu (folded into [[project-team]]/[[uva-ai4business-lab]]). Total pages now 23.
+**Notes:** "Meng" narrowed but still unmapped. Total pages now 23.
+
+---
+
+## 2026-06-19 — INGEST
+**Source:** 2026-04-22-presentation-slides.md (Assignment 1 project-definition presentation deck, text-extractable; 5 embedded JPGs image-only)
+**Action:** Ingested the **team's own Assignment 1 presentation deck** — the first student-authored scoping artifact. Created dedicated artifact page [[assignment-1-presentation-2026-04-22]] capturing the six-component architecture, **member↔component mapping** (M1 Ingestion+Wiki Engine, M2 Generator, M3 Gap Detector, M4 Permission Layer), **MoSCoW prioritization**, **DSR + CRISP-DM** methodology, **12-week / 3-phase timeline**, group + per-member **research questions**, and the explicit deliverables list. **Resolved** the long-flagged #1–4 sub-deliverable↔module mapping (by component). Major update to [[assignment-1-project-definition]]; resolved mapping on [[user-journeys]]; recorded per-member ownership + RQs and flagged the **division-scheme discrepancy** vs. supervisor kickoff on [[project-team]] and [[permission-layer]]; added 12-week/3-phase structure to [[project-timeline]]; added RAG-grounded detail to [[wiki-generation-engine]]; added MoSCoW/ownership to [[ingestion-pipeline]], [[generator-module]], [[gap-detector]], [[evaluation-deliverable]], [[evaluation-framework]]; enriched [[living-wiki]] with the "Meta-Twist" framing.
+**Pages created:** [[assignment-1-presentation-2026-04-22]]
+**Pages updated:** assignment-1-project-definition.md, user-journeys.md, project-team.md, project-timeline.md, permission-layer.md, wiki-generation-engine.md, ingestion-pipeline.md, generator-module.md, gap-detector.md, evaluation-deliverable.md, evaluation-framework.md, living-wiki.md, _overview.md, _gaps.md, index.md
+**Notes:** ⚠️ One genuine conflict carefully reconciled: the deck assigns the **Permission Layer individually to Member 4**, conflicting with the supervisor-kickoff "collaborative" scheme — documented as the later/more-authoritative split but flagged, not silently overwritten. New gaps: member↔named-student mapping (#1–4), DAPS framework/diagram (5 image-only JPGs), 12-week-vs-Gantt reconciliation, tech-stack narrowed but open. Total pages now 24.

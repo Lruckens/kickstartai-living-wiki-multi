@@ -2,53 +2,58 @@
 
 Underdocumented areas and open questions.
 
+## Surfaced from Assignment 1 presentation ingest (2026-04-22; ingested 2026-06-19)
+- **Member ↔ named-student mapping (#1–4) — OPEN.** The presentation maps build components to **"Member 1–4"** (M1 = Ingestion+Wiki Engine, M2 = Generator, M3 = Gap Detector, M4 = Permission Layer) but does **not** state which *named student* is Member 1/2/3/4. Owners-by-component resolved; owners-by-person still open. See [[user-journeys]], [[project-team]], [[assignment-1-presentation-2026-04-22]].
+- **Division-scheme discrepancy — OPEN/CONFLICT.** The supervisor kickoff (2026-04-16) recorded "sub-deliverables 1–4 individual, **5 (Permission Layer) collaborative**, 6 per-member-into-thesis." The presentation (2026-04-22) instead assigns the **Permission Layer individually to Member 4** and bundles ingestion + wiki engine under Member 1. The presentation is later/more authoritative on component ownership, but the "collaborative permission layer" note was **not explicitly retracted** — which governs? Flagged, not silently overwritten. See [[permission-layer]], [[project-team]], [[user-journeys]].
+- **5 embedded JPGs not ingested.** The presentation contains 5 image-only JPGs — the **DAPS diagram** + 4 "Core Problem" icons. The DAPS layer structure (**Data-Analytic Problem Layer** / **Persistent Artifact Layer**) is not legible. Flag for OCR/re-ingest; contents not fabricated. See [[assignment-1-presentation-2026-04-22]].
+- **DAPS framework — unexplained.** "Data-Analytic Problem Layer / Persistent Artifact Layer" newly named but image-locked; its content, structure, and origin are undocumented.
+- **12-week timeline vs. un-OCR'd Gantt.** The presentation gives a **3-phase / 12-week** structure (Phase 1 wks 1–4, Phase 2 wks 5–9, Phase 3 wks 10–12). Whether this matches the still-unread (revised) Gantt image is unconfirmed; **absolute start/end dates are not pinned** (week numbers only). See [[project-timeline]].
+- **Tech stack — narrowed, still open.** The deck names **"RAG-grounded" / "LLM-powered"** and a daily-refresh wiki engine, but no specific **LLM, vector store, or RAG framework** is chosen. See [[wiki-generation-engine]].
+- **MoSCoW Could-haves are stretch goals.** HITL feedback integration, blog-draft tone alignment, and comparative generated-vs-human evaluation are **Could Have** — track whether they survive scoping. See [[evaluation-deliverable]], [[generator-module]].
+- **Assignment 1 PDF body still unread.** The presentation deck is ingested, but `Assignment 1 - project definition.pdf` itself remains un-ingested; any additional written project-definition detail there is unread. See [[assignment-1-project-definition]].
+
 ## Surfaced from founding brief (2026-04-02)
 - **Project-team mapping — largely resolved** — The working team is named (see [[project-team]]): Sanne Wielinga is the KickstartAI **main contact**, Evertjan Peer made the **introduction**.
 - **UvA student team — resolved** — Four UvA business-analytics students named and identified: Quinten van den Heuvel (coordinator), Xiaojing Li (lee89953@), Laurenz Ruckensteiner, "Cara" ≈ Carac M. Cheng. See [[project-team]] and the residual "Meng" note below.
-- **Timeline/milestones — partially evidenced** — Kickoff (2026-04-13), supervisor kickoff (2026-04-16), and Assignment 1 presentation (~2026-04-22, main goals + roles) are anchored. The Gantt chart artifact exists (dated 2026-04-13) and its **methodology is now known** (CRISP-DM, assumed April-1 start, needs revision) — but the chart image's specific phases/durations/milestones/end date remain un-OCR'd. See [[project-timeline]].
-- **Tech stack undecided** — No LLM choice, vector store, ingestion connectors, or hosting documented.
+- **Tech stack undecided** — No specific LLM choice, vector store, ingestion connectors, or hosting documented (RAG/LLM approach named at high level — see above).
 - **Source connectors** — Kickoff named initial public sources (KickstartAI website scrape + LinkedIn posts, two-pager, slides) and ongoing internal sources (PRs, meeting notes, design decisions, presentations), but the specific connectors/tooling are unspecified. Slack is a live project channel — see below.
-- **Regeneration cadence** — "Configurable schedule" (daily?) stated as an example, not decided.
+- **Regeneration cadence** — Presentation sets **daily refresh** as a Must and **sub-daily/real-time** as Won't, but exact cadence config not finalized.
 - **Tone/voice spec** — "KickstartAI's voice" for content generation is referenced but not defined. A Content Strategist (Ioanna Lykiardopoulou — see [[kickstartai-team]]) exists on staff, but whether the voice spec will come from them is unconfirmed. See [[generator-module]].
-- **Human baseline for blog eval** — Required but no baseline document exists yet. KickstartAI's published blogs (see [[kickstartai-blog]]) are a *candidate* source, but no specific article has been selected or ingested. (Possibility only.)
-- **Permission model specifics** — Design approach (RBAC? doc-level ACLs?) not yet specified. Kickoff confirmed a **design-only** deliverable is acceptable (need not be fully working); sub-deliverable 5 is a **team-collaborative** task. The mechanism is undecided. See [[permission-model]], [[permission-layer]].
+- **Human baseline for blog eval** — Required but no baseline document exists yet (now a Could-Have comparative eval). KickstartAI's published blogs (see [[kickstartai-blog]]) are a *candidate* source, but no specific article has been selected or ingested. (Possibility only.)
+- **Permission model specifics** — Design approach (RBAC? doc-level ACLs?) not yet specified. Design-only deliverable confirmed (MoSCoW: design = Should, fully working = Won't). The mechanism is undecided. See [[permission-model]], [[permission-layer]].
 - **Pending source material** — The KickstartAI two-pager and UvA AI4Business Lab documentation are referenced as data sources but not yet ingested. The supervisor kickoff confirmed a **cold-start** situation (only the two-pager + website org info available so far).
 
 ## Surfaced / updated from kickoff email thread + supervisor kickoff ingests
-- **UvA supervisor — RESOLVED** — h.zhu@uva.nl is **Hongyi Zhu**, **confirmed as the UvA academic supervisor** via the 2026-04-16 supervisor kickoff (see [[supervisor-kickoff-2026-04-16]]). The "academic supervisor, not participant" reading is now confirmed.
-- **lee89953@gmail.com — RESOLVED** — The 2026-04-16 supervisor participant list **explicitly maps lee89953@gmail.com → Xiaojing Li**, hard-confirming the prior by-elimination inference. See [[project-team]].
+- **UvA supervisor — RESOLVED** — h.zhu@uva.nl is **Hongyi Zhu**, **confirmed as the UvA academic supervisor** via the 2026-04-16 supervisor kickoff (see [[supervisor-kickoff-2026-04-16]]).
+- **lee89953@gmail.com — RESOLVED** — The 2026-04-16 supervisor participant list **explicitly maps lee89953@gmail.com → Xiaojing Li**. See [[project-team]].
 - **"Meng" discrepancy — narrowed, still open** — The 2026-04-10 greeting named "Meng," who appears in no roster. With lee89953@ now firmly Xiaojing Li, "Meng" remains an unmapped greeting name (likely a superseded informal/preferred name or transcription discrepancy). Documented, not asserted.
 - **"Mentor" role still not explicitly assigned** — Sanne is the explicit *main contact* and Evertjan the *introducer*, but no source names either "technical mentor."
-- **Slack as a communication/source channel** — The KickstartAI community Slack is a live project channel (students added at kickoff); whether it will be an ingestion source for the Living Wiki is unspecified.
+- **Slack as a communication/source channel** — The KickstartAI community Slack is a live project channel; whether it will be an ingestion source for the Living Wiki is unspecified.
 
 ## Surfaced from supervisor kickoff ingest (2026-04-16)
-- **Work division — partially resolved** — A division *scheme* is agreed (sub-deliverables 1–4 one member each, 5 collaborative, 6 individual-method-per-member into theses). **Residual:** *which* student owns which of sub-deliverables #1–4 is **not yet assigned** (expected at/after the Apr 22 presentation). See [[project-team]], [[supervisor-kickoff-2026-04-16]].
-- **Sub-deliverable #1–4 numbering ↔ module mapping** — The supervisor note enumerates six sub-deliverables and names #5 (Permission Layer) and #6 (Evaluation Method), but does **not** enumerate #1–4 by name. The likely order (ingestion / generation engine / generator / gap detector) is **inferred, not stated**. See [[user-journeys]].
+- **Sub-deliverable #1–4 numbering ↔ module mapping — RESOLVED (by component)** — The Assignment 1 presentation now maps components to members (see top section). The residual question is which *named student* is each member.
 - **Individual supervisor progress meetings** — Scheduled "after next week's presentation" (i.e., after Apr 22); specific dates/cadence unspecified. See [[project-team]].
 
 ## Surfaced from Gantt chart ingest (2026-04-13)
-- **Gantt chart image not OCR'd** — `2026-04-13-Gantt_chart.md` is a single embedded JPG with no extractable text. The chart's specific task breakdown, durations, dependencies, milestone dates, and **end date** remain undocumented. The kickoff notes now supply the *methodology* (CRISP-DM, assumed April-1 start, needs revision) textually, but the visual schedule remains unread. Flag for OCR/re-ingest. See [[project-timeline]].
-- **Gantt is a draft needing revision** — Per the kickoff notes the plan needs updating due to a project-selection delay; the 2026-04-13 chart is not finalized.
-- **Gantt ↔ Assignment 1 association unconfirmed** — Whether the Gantt is part of, accompanies, or is separate from the Assignment 1 deliverable is inferred from shared dating, not stated. See [[project-timeline]], [[assignment-1-project-definition]].
+- **Gantt chart image not OCR'd** — `2026-04-13-Gantt_chart.md` is a single embedded JPG with no extractable text. The presentation now supplies a 3-phase/12-week structure textually, but the visual Gantt's specific task breakdown, durations, dependencies, and milestone dates remain unread. Flag for OCR/re-ingest. See [[project-timeline]].
+- **Gantt is a draft needing revision** — Per the kickoff notes the plan needs updating due to a project-selection delay.
 
 ## Surfaced from KickstartAI intro deck ingest (2026-04-13)
 - **Deck is largely image-only** — Substantive content (six-phase adoption model, partner-ripple diagram, challenge→solution mappings) is embedded as JPGs with no extractable text. Diagram contents **not ingested**, **not fabricated**. Flag for OCR/re-ingest. See [[kickstartai]], [[adoption-journey]].
 - **Six-phase adoption model contents unknown** — Named in the deck but its phases/order/structure are image-locked. [[adoption-journey]] is a contents-pending stub.
-- **`KAI-Intro` ↔ `20260413 UvA.pdf` mapping unconfirmed** — The image-heavy `KAI-Intro` strategy deck is *distinct from* the now-ingested text deck `KickstartAI x UvA - Kick-off.pdf` (see [[kickoff-deck-2026-04-13]]). Whether `KAI-Intro` corresponds to the other named kickoff file `20260413 UvA.pdf` remains inferred from shared dating, not stated. See [[assignment-1-project-definition]].
-- **Societal stats are point-in-time / undated-source** — ~2024 snapshots from a pitch deck; they will drift and are not authoritative. See [[kickstartai]].
+- **`KAI-Intro` ↔ `20260413 UvA.pdf` mapping unconfirmed** — Whether the image-heavy `KAI-Intro` strategy deck corresponds to the named kickoff file `20260413 UvA.pdf` remains inferred from shared dating, not stated. See [[assignment-1-project-definition]].
+- **Societal stats are point-in-time / undated-source** — ~2024 snapshots from a pitch deck; they will drift. See [[kickstartai]].
 - **Strategy framing vs. pillar vocabulary** — The deck's three strategic aspirations are *adjacent to but not asserted equivalent to* the documented three pillars. Relationship unconfirmed.
 
-## Surfaced from kickoff slide deck ingest (2026-04-13; text-extractable; ingested 2026-06-19)
-- **Kickoff-deck identity — partially resolved** — The text-extractable deck is confirmed as **`KickstartAI x UvA - Kick-off.pdf`** (see [[kickoff-deck-2026-04-13]]), resolving its prior inferred-only identity. The mapping of the *image-heavy* `KAI-Intro` to `20260413 UvA.pdf` remains separately open (see above).
-- **Five-vs-six deliverable framing** — The deck names **five build modules** (ingestion, generation engine, generator, gap detector, permission layer) and omits the **evaluation framework**, which "runs throughout." The supervisor kickoff independently enumerates **six sub-deliverables** with #6 = Evaluation Method, reinforcing the 5 build modules + 1 cross-cutting framework = 6 deliverables reading. See [[user-journeys]], [[kickoff-deck-2026-04-13]], [[supervisor-kickoff-2026-04-16]].
-- **"Day one" source set** — The deck says ingestion "starts with KickstartAI docs and lab materials on day one"; the specific **lab-materials set** (UvA AI4Business Lab docs) remains un-ingested/unspecified. See [[ingestion-pipeline]], [[uva-ai4business-lab]].
-- **Collaboration model deliberately open** — The deck's closing "How we'll work together – TBD" slide confirms cadence/collaboration was deliberately left open at kickoff; specific check-in frequency still TBD (already tracked).
+## Surfaced from kickoff slide deck ingest (2026-04-13; text-extractable)
+- **Five-vs-six deliverable framing** — The kickoff deck names **five build modules** and omits the **evaluation framework** ("runs throughout"); the supervisor kickoff and the Assignment 1 presentation both enumerate **six** components/sub-deliverables (with evaluation as #6). 5 build modules + 1 cross-cutting framework = 6 deliverables. See [[user-journeys]].
+- **"Day one" source set** — The specific **lab-materials set** (UvA AI4Business Lab docs) remains un-ingested/unspecified. See [[ingestion-pipeline]], [[uva-ai4business-lab]].
+- **Collaboration model deliberately open** — Check-in cadence (weekly vs bi-weekly) still TBD.
 
-## Surfaced from kickoff meeting notes ingest (2026-04-13; ingested 2026-06-19)
-- **"Averion" handover unexplained** — The kickoff notes state the project was handed over to Sanne Wielinga "from Averion." No other source mentions "Averion." Possibly a transcription error for "Evertjan" (the documented introducer), possibly a genuine predecessor party/org. **Unconfirmed; no entity created.** See [[project-team]], [[kickoff-meeting-2026-04-13]].
-- **Cara ↔ Carac M. Cheng mapping inferred** — "Cara" (originally from China, moved from business administration to business analytics) strongly maps to Carac M. Cheng, and the carac.m.cheng@gmail.com address recurs across both kickoff sources, but the explicit Cara↔Carac mapping is inferred, not stated.
+## Surfaced from kickoff meeting notes ingest (2026-04-13)
+- **"Averion" handover unexplained** — The kickoff notes state the project was handed over to Sanne "from Averion." No other source mentions "Averion." Possibly a transcription error for "Evertjan," possibly a genuine predecessor party. **Unconfirmed; no entity created.** See [[project-team]], [[kickoff-meeting-2026-04-13]].
+- **Cara ↔ Carac M. Cheng mapping inferred** — Strong but inferred, not explicitly stated.
 - **Check-in cadence undecided** — Weekly vs bi-weekly agreed in principle; specific frequency TBD (to be emailed to Sanne). See [[project-team]].
-- **CRISP-DM ↔ deliverables mapping** — The CRISP-DM methodology is adopted, but how its phases map onto the six deliverables is not detailed.
 - **Evaluation data / knowledge base pending** — Sanne is to check whether additional evaluation criteria or a knowledge base can be provided; outcome pending. See [[evaluation-framework]].
 - **Legal / project documents unsigned** — A signature process for project legal documents is pending; the specific documents are unspecified.
 - **Embedded screenshots not ingested** — The meeting notes contain 3 CDN-hosted JPGs (likely the same image-locked deck/Gantt diagrams already flagged); contents not ingested, not fabricated.

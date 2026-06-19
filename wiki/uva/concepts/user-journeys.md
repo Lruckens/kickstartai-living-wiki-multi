@@ -13,7 +13,7 @@ The five defining user journeys (product requirements) for the Living Wiki.
 5. **The Gap Detector** — Tell the project lead what's underdocumented: decisions without rationale, PRs without explanations, meetings without recorded outcomes.
 
 ### Module framing (kickoff deck, 2026-04-13)
-The kickoff deck (see [[kickoff-deck-2026-04-13]]) names **five modules to build** verbatim: ingestion pipeline, wiki generation engine, generator module, gap detector, permission layer. The **evaluation framework is not in this list** — consistent with the kickoff notes' "runs throughout" framing. The wiki tracks **6 deliverables = 5 build modules + 1 cross-cutting framework** — see [[_gaps]].
+The kickoff deck (see [[kickoff-deck-2026-04-13]]) names **five modules to build** verbatim: ingestion pipeline, wiki generation engine, generator module, gap detector, permission layer. The **evaluation framework is not in this list** — consistent with the kickoff notes' "runs throughout" framing. The wiki tracks **6 deliverables = 5 build modules + 1 cross-cutting framework**.
 
 ### Six sub-deliverables — numbering confirmed (supervisor kickoff, 2026-04-16)
 The 2026-04-16 UvA supervisor kickoff (see [[supervisor-kickoff-2026-04-16]]) **explicitly enumerates six sub-deliverables** and assigns a task-division scheme:
@@ -21,7 +21,17 @@ The 2026-04-16 UvA supervisor kickoff (see [[supervisor-kickoff-2026-04-16]]) **
 - **Sub-deliverable 5 (Permission Layer):** collaborative.
 - **Sub-deliverable 6 (Evaluation Method):** each member a different method, into their own thesis.
 
-This second-source numbering (with #5 = Permission Layer, #6 = Evaluation Method) **reinforces the 5-build-modules + 1-cross-cutting-framework = 6-deliverable reading**. The exact 1↔module mapping for #1–4 is **not stated** by the source (inferred order: ingestion / generation engine / generator / gap detector) — see [[_gaps]].
+### Member ↔ component mapping — RESOLVED (Assignment 1 presentation, 2026-04-22)
+The Assignment 1 presentation deck (see [[assignment-1-presentation-2026-04-22]]) **explicitly maps the build components to four members**, resolving the previously-inferred #1–4 ordering:
+- **Member 1** — **Ingestion Pipeline + Wiki Engine** (two modules folded together)
+- **Member 2** — **Generator Module**
+- **Member 3** — **Gap Detector**
+- **Member 4** — **Permission Layer**
+- **Evaluation Method** (#6) — group framework + each member a different method into their own thesis.
+
+This is a **4-member ↔ component split**, reconciling the 6-deliverable architecture with 4 students by (a) bundling ingestion + wiki engine under Member 1 and (b) folding evaluation into the group/thesis layer. It **conflicts with** the supervisor-kickoff scheme on the Permission Layer: the presentation assigns it **individually to Member 4**, whereas the supervisor kickoff called it **collaborative**. Documented as the later, more authoritative split, with the discrepancy flagged — see [[_gaps]], [[permission-layer]], [[project-team]].
+
+The deck does **not** name which student is Member 1/2/3/4 — owners-by-component are resolved, but owners-by-person remain open. See [[_gaps]].
 
 ## Related
 - [[living-wiki]]
@@ -29,8 +39,10 @@ This second-source numbering (with #5 = Permission Layer, #6 = Evaluation Method
 - [[gap-detector]]
 - [[kickoff-deck-2026-04-13]]
 - [[supervisor-kickoff-2026-04-16]]
+- [[assignment-1-presentation-2026-04-22]]
 
 ## Sources
 - 2026-04-02-UvA-AI4BusinessLab-Living-Wiki-Brief.md
 - 2026-04-13-KAI-UvA-Kickoff.md (KickstartAI x UvA kickoff slide deck, text-extractable)
 - 2026-04-16-supervisor-kickoff.md (UvA-internal student↔supervisor kickoff meeting notes, 2026-04-16)
+- 2026-04-22-presentation-slides.md (Assignment 1 project-definition presentation deck, text-extractable)

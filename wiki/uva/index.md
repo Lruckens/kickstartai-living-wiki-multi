@@ -1,7 +1,7 @@
 # Wiki index — Living Wiki (UvA)
 
 Last updated: 2026-06-19
-Total pages: 23
+Total pages: 24
 
 > Maintained by Claude.
 
@@ -36,6 +36,7 @@ Total pages: 23
 - [[permission-layer]]
 - [[evaluation-deliverable]]
 - [[assignment-1-project-definition]]
+- [[assignment-1-presentation-2026-04-22]]
 - [[project-timeline]]
 
 ## Saved queries
