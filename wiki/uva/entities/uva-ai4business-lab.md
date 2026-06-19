@@ -6,14 +6,14 @@
 The University of Amsterdam AI4Business Lab — the academic partner / context where students build the Living Wiki for KickstartAI.
 
 ## Details
-- **Role:** Provides the students who build the system as an applied AI project.
-- **Student team (4 business analytics students, thesis project):** identities resolved via the 2026-04-13 kickoff meeting notes and the 2026-04-16 supervisor kickoff (see [[kickoff-meeting-2026-04-13]], [[supervisor-kickoff-2026-04-16]]):
-  - **Quinten van den Heuvel** (coordinator) — Dutch.
-  - **Xiaojing Li** ("XiaoJing", lee89953@gmail.com) — from China; AI/LLMs/mathematics.
-  - **Laurenz Ruckensteiner** — from Barcelona; prior data-scientist intern.
-  - **"Cara"** ≈ **Carac M. Cheng** (carac.m.cheng@gmail.com) — originally from China; moved from business administration to business analytics.
-  The 2026-04-16 supervisor participant list **hard-confirms lee89953@gmail.com → Xiaojing Li**. The 2026-04-10 greeting named "Meng," who appears in no roster — the residual "Meng" discrepancy is flagged on [[project-team]] and [[_gaps]].
-- **Academic supervisor:** **Hongyi Zhu** (h.zhu@uva.nl) — **confirmed** as the UvA academic supervisor via the 2026-04-16 supervisor kickoff (see [[supervisor-kickoff-2026-04-16]]). Previously cc'd throughout the email thread and invited to kickoff but role unconfirmed; now resolved. Individual student progress meetings with Hongyi Zhu are to be scheduled after the April 22 presentation.
+- **Role:** Provides the students who build the system as an applied AI project (BSc Business Analytics thesis).
+- **Student team (4 business analytics students, thesis project):** identities resolved via the 2026-04-13 kickoff meeting notes, the 2026-04-16 supervisor kickoff, and the 2026-04-22 written report’s author list (see [[kickoff-meeting-2026-04-13]], [[supervisor-kickoff-2026-04-16]], [[assignment-1-report-2026-04-22]]):
+  - **Quinten van den Heuvel** (#15150658, coordinator) — Dutch.
+  - **Xiaojing Li** (#14851199; "XiaoJing", lee89953@gmail.com) — from China; AI/LLMs/mathematics.
+  - **Laurenz Ruckensteiner-Geyer** (#13762931) — from Barcelona; prior data-scientist intern. *(Report gives fuller surname; earlier sources used “Ruckensteiner.”)*
+  - **Meng Cheng** (#14025906; carac.m.cheng@gmail.com) — originally from China; moved from business administration to business analytics. The report’s author list gives **“Meng Cheng”** in the slot earlier sources gave **“Cara” / “Carac M. Cheng”** — near-certainly the same person; “Cara”/“Carac M. Cheng” an informal/anglicised variant (alias inferred, not stated — see [[_gaps]]).
+  The 2026-04-16 supervisor participant list **hard-confirms lee89953@gmail.com → Xiaojing Li**. The report’s author list largely reconciles the long-open “Meng” greeting-name discrepancy (= Meng Cheng) — see [[project-team]], [[_gaps]].
+- **Academic supervisor:** **Hongyi Zhu** (h.zhu@uva.nl) — **confirmed** as the UvA academic supervisor via the 2026-04-16 supervisor kickoff and the report title page. Individual student progress meetings with Hongyi Zhu are to be scheduled after the April 22 presentation.
 - Its documentation is one of the initial data sources to be ingested (pending — see [[_gaps]]).
 
 ## Related
@@ -21,9 +21,11 @@ The University of Amsterdam AI4Business Lab — the academic partner / context w
 - [[project-team]]
 - [[kickoff-meeting-2026-04-13]]
 - [[supervisor-kickoff-2026-04-16]]
+- [[assignment-1-report-2026-04-22]]
 
 ## Sources
 - 2026-04-02-UvA-AI4BusinessLab-Living-Wiki-Brief.md
 - 2026-04-10-Intro-email.md (KickstartAI x UvA kickoff email thread, 2026-04-10 → 2026-04-20)
 - 2026-04-13-KAI-UvA-Kickoff-meeting-notes.md (Gemini-generated kickoff meeting notes)
 - 2026-04-16-supervisor-kickoff.md (UvA-internal student↔supervisor kickoff meeting notes, 2026-04-16)
+- 2026-04-22-problem-definition.md (Assignment 1a written project-definition report, text-extractable)

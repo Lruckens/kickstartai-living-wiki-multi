@@ -21,17 +21,20 @@ The 2026-04-16 UvA supervisor kickoff (see [[supervisor-kickoff-2026-04-16]]) **
 - **Sub-deliverable 5 (Permission Layer):** collaborative.
 - **Sub-deliverable 6 (Evaluation Method):** each member a different method, into their own thesis.
 
-### Member ↔ component mapping — RESOLVED (Assignment 1 presentation, 2026-04-22)
-The Assignment 1 presentation deck (see [[assignment-1-presentation-2026-04-22]]) **explicitly maps the build components to four members**, resolving the previously-inferred #1–4 ordering:
-- **Member 1** — **Ingestion Pipeline + Wiki Engine** (two modules folded together)
+### Member ↔ component mapping — RESOLVED (Assignment 1 presentation + report, 2026-04-22)
+Both student-authored Assignment 1 artifacts — the presentation deck (see [[assignment-1-presentation-2026-04-22]]) and the written report (see [[assignment-1-report-2026-04-22]]) — **map the build components to four members**, resolving the previously-inferred #1–4 ordering:
+- **Member 1** — **Ingestion Pipeline + Wiki Engine** (counted as one component)
 - **Member 2** — **Generator Module**
 - **Member 3** — **Gap Detector**
 - **Member 4** — **Permission Layer**
-- **Evaluation Method** (#6) — group framework + each member a different method into their own thesis.
+- **Evaluation Framework** — the **collaborative/shared deliverable** (all four design & execute it; each contributes component-level results into their own thesis).
 
-This is a **4-member ↔ component split**, reconciling the 6-deliverable architecture with 4 students by (a) bundling ingestion + wiki engine under Member 1 and (b) folding evaluation into the group/thesis layer. It **conflicts with** the supervisor-kickoff scheme on the Permission Layer: the presentation assigns it **individually to Member 4**, whereas the supervisor kickoff called it **collaborative**. Documented as the later, more authoritative split, with the discrepancy flagged — see [[_gaps]], [[permission-layer]], [[project-team]].
+The report’s cleanest framing: **five member-owned components + the evaluation framework as the shared/collaborative deliverable**. This reconciles the 6-deliverable architecture with 4 students by (a) bundling ingestion + wiki engine under Member 1 and (b) treating evaluation as a group deliverable rather than a sixth member-owned module.
 
-The deck does **not** name which student is Member 1/2/3/4 — owners-by-component are resolved, but owners-by-person remain open. See [[_gaps]].
+### Division-scheme discrepancy — RESOLVED-BY-PRECEDENCE
+The supervisor-kickoff scheme (2026-04-16) recorded the **Permission Layer as collaborative** and **evaluation as per-member-into-thesis**. The two later, mutually-consistent student-authored sources (deck + report) instead assign the **Permission Layer to Member 4 individually** and name the **evaluation framework as the collaborative deliverable**. With two agreeing student-authored sources against one supervisor-kickoff note, the **Member-4-individual / evaluation-collaborative** split is treated as **confirmed**; the superseded supervisor-kickoff note is recorded (not deleted). See [[_gaps]], [[permission-layer]], [[project-team]].
+
+Neither artifact names which *named student* is Member 1/2/3/4 — owners-by-component are resolved, but owners-by-person remain open. See [[_gaps]].
 
 ## Related
 - [[living-wiki]]
@@ -40,9 +43,11 @@ The deck does **not** name which student is Member 1/2/3/4 — owners-by-compone
 - [[kickoff-deck-2026-04-13]]
 - [[supervisor-kickoff-2026-04-16]]
 - [[assignment-1-presentation-2026-04-22]]
+- [[assignment-1-report-2026-04-22]]
 
 ## Sources
 - 2026-04-02-UvA-AI4BusinessLab-Living-Wiki-Brief.md
 - 2026-04-13-KAI-UvA-Kickoff.md (KickstartAI x UvA kickoff slide deck, text-extractable)
 - 2026-04-16-supervisor-kickoff.md (UvA-internal student↔supervisor kickoff meeting notes, 2026-04-16)
 - 2026-04-22-presentation-slides.md (Assignment 1 project-definition presentation deck, text-extractable)
+- 2026-04-22-problem-definition.md (Assignment 1a written project-definition report, text-extractable)
