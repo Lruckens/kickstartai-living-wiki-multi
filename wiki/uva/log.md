@@ -21,3 +21,12 @@ Append-only. One entry per operation: ingest, query, or lint.
 **Pages created:** [[kickstartai-team]]
 **Pages updated:** kickstartai.md, generator-module.md, _gaps.md, index.md
 **Notes:** No conflicts — partner list consistent with prior entry. Deliberately avoided inferring any named person as the Living Wiki technical mentor; the brief leaves it TBD and this source does not connect anyone to the project. Kept staff roster distinct from the (still-TBD) project team. Total pages now 13.
+
+---
+
+## 2026-06-16 — INGEST
+**Source:** KickstartAI_homepage.md (public homepage web clipping, https://kickstart.ai/, created 2026-05-07)
+**Action:** Low-risk enrichment ingest of the KickstartAI homepage. Reconciled the two parallel pillar vocabularies on [[kickstartai]] ("We do/share/connect" ↔ "Apply/Amplify/Activate"); added the impact-in-numbers stats (10+ partners, 7,407+ community, 15+ projects) with a 2026-05-07 snapshot note; reconciled the community figure (~7,500 / 7,407+). Created a TechDays entity stub. Added "Amplify" alias and TechDays cross-reference to [[generator-module]]. Added three new gaps.
+**Pages created:** [[techdays]]
+**Pages updated:** kickstartai.md, generator-module.md, _gaps.md, index.md
+**Notes:** No substantive conflicts. One minor numeric reconciliation: ~7,500 (marketing) vs 7,407+ (impact counter) — consistent, documented both with snapshot date rather than overwriting. Pillar-label equivalence is inferred, not stated by source — flagged in [[_gaps]]. TechDays kept as standalone stub (consistent with separating [[kickstartai-team]] from [[kickstartai]]); its relevance to the project's content outputs noted only as a possibility. Total pages now 14.

@@ -9,14 +9,16 @@ A module that produces periodic outputs from the wiki — weekly project digests
 ## Details
 Serves the Summarizer and Content Generator user journeys. Blog post drafts should be written in KickstartAI's voice and evaluated against a human-written baseline (see [[evaluation-deliverable]]). Tone/voice specification is not yet defined — see [[_gaps]].
 
-The content-generation rationale aligns directly with KickstartAI's "We share" pillar — openly sharing learnings and replicable patterns with the Dutch ecosystem (see [[kickstartai]]). KickstartAI has a Content Strategist on staff (Ioanna Lykiardopoulou — see [[kickstartai-team]]) who is a possible owner of the "KickstartAI voice" spec, though this is unconfirmed.
+The content-generation rationale aligns directly with KickstartAI's "We share" pillar (publicly labeled **"Amplify"** on the homepage) — openly sharing learnings and replicable patterns with the Dutch ecosystem (see [[kickstartai]]). KickstartAI has a Content Strategist on staff (Ioanna Lykiardopoulou — see [[kickstartai-team]]) who is a possible owner of the "KickstartAI voice" spec, though this is unconfirmed. A possible publication venue for such content is [[techdays]], KickstartAI's flagship conference — noted as a possibility only, not an assertion (see [[_gaps]]).
 
 ## Related
 - [[user-journeys]]
 - [[evaluation-deliverable]]
 - [[kickstartai]]
 - [[kickstartai-team]]
+- [[techdays]]
 
 ## Sources
 - 2026-04-02-UvA-AI4BusinessLab-Living-Wiki-Brief.md
 - KickstartAI_About_us.md (https://kickstart.ai/about-us, created 2026-05-07)
+- KickstartAI_homepage.md (https://kickstart.ai/, created 2026-05-07)

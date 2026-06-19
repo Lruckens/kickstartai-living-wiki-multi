@@ -13,3 +13,8 @@ Underdocumented areas and open questions.
 - **Human baseline for blog eval** — Required but no baseline document exists yet.
 - **Permission model specifics** — Design approach (RBAC? doc-level ACLs?) not yet specified. See [[permission-model]].
 - **Pending source material** — The KickstartAI two-pager and UvA AI4Business Lab documentation are referenced as data sources but not yet ingested.
+
+## Surfaced from KickstartAI homepage ingest (2026-05-07 clipping)
+- **Pillar terminology drift** — KickstartAI uses two parallel vocabularies for its three pillars ("We do / We share / We connect" vs "Apply / Amplify / Activate"). Documented as equivalent on [[kickstartai]] based on semantic mapping, but this equivalence is *inferred, not stated* by any source. Flag for confirmation.
+- **Impact stats are point-in-time** — Impact numbers (10+ partners, 7,407+ community, 15+ projects completed) are a 2026-05-07 snapshot; the source carries no "as-of" / last-refresh date, so the figures will drift.
+- **TechDays relevance to project undocumented** — Whether the Living Wiki's generated blog content ([[generator-module]]) is intended to feed [[techdays]] or KickstartAI's public channels is unspecified (possibility only).
