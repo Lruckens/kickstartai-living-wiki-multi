@@ -3,16 +3,24 @@
 Underdocumented areas and open questions.
 
 ## Surfaced from founding brief (2026-04-02)
-- **Project-team mapping unconfirmed** — KickstartAI staff names are now known (see [[kickstartai-team]]), e.g. Evertjan Peer (Tech Lead), several ML Engineers, Content Strategists. But *which* of them serves as the Living Wiki technical mentor / engineering contact is still undocumented. (Reframes the earlier "Team unknown" gap.)
-- **UvA student team still entirely unknown** — No named UvA AI4Business Lab students or mentor on the project side. The About-us source is KickstartAI-only and does not cover UvA.
-- **Timeline/milestones** — No dates beyond the 2026-04-02 brief; project duration and milestones undocumented.
+- **Project-team mapping — largely resolved (2026-04-10 thread)** — The working team is now named (see [[project-team]]): Sanne Wielinga is the KickstartAI **point of contact**, Evertjan Peer made the **introduction**. Remaining nuance: neither is formally labeled "technical mentor" (see below).
+- **UvA student team — largely resolved (2026-04-10 thread)** — Four UvA students named: Quinten van den Heuvel (coordinator), Laurenz Ruckensteiner, plus two appearing as email aliases. See [[project-team]] and the name-mapping gap below.
+- **Timeline/milestones — partially resolved** — Kickoff (2026-04-13) and Assignment 1 presentation (~2026-04-22) are now anchored (see [[_overview]], [[assignment-1-project-definition]]). Overall duration, later milestones, and end date remain undocumented.
 - **Tech stack undecided** — No LLM choice, vector store, ingestion connectors, or hosting documented.
-- **Source connectors** — Which internal drives/tools (GitHub, transcription tools, email) will be connected is unspecified.
+- **Source connectors** — Which internal drives/tools (GitHub, transcription tools, email) will be connected is unspecified. Note: a community Slack channel is now a live project channel — see below.
 - **Regeneration cadence** — "Configurable schedule" (daily?) stated as an example, not decided.
 - **Tone/voice spec** — "KickstartAI's voice" for content generation is referenced but not defined. A Content Strategist (Ioanna Lykiardopoulou — see [[kickstartai-team]]) exists on staff, but whether the voice spec will come from them is unconfirmed. KickstartAI's published blogs (see [[kickstartai-blog]]) are candidate exemplars of the voice, but their bodies are not yet ingested. See [[generator-module]].
 - **Human baseline for blog eval** — Required but no baseline document exists yet. KickstartAI's published technical/domain blogs (see [[kickstartai-blog]]) are a *candidate* source for the human-written baseline, but no specific article has been selected or ingested as the baseline. (Possibility only.)
 - **Permission model specifics** — Design approach (RBAC? doc-level ACLs?) not yet specified. See [[permission-model]].
 - **Pending source material** — The KickstartAI two-pager and UvA AI4Business Lab documentation are referenced as data sources but not yet ingested.
+
+## Surfaced from kickoff email thread ingest (2026-04-10 → 2026-04-20; ingested 2026-06-19)
+- **Student name↔email mapping ambiguous** — Sanne greets "Quinten, XiaoJing, Laurenz, and Meng," but two team members appear only as email aliases (`lee89953@gmail.com`, `carac.m.cheng@gmail.com`). Which alias corresponds to "XiaoJing" vs "Meng" (and how "Carac M. Cheng" maps) is unconfirmed. See [[project-team]].
+- **Role of h.zhu@uva.nl unconfirmed** — A UvA address cc'd throughout; plausibly the UvA academic supervisor/coordinator, but the role is not stated (could also be a fifth participant). See [[project-team]].
+- **"Mentor" role still not explicitly assigned** — Sanne is the explicit *point of contact* and Evertjan the *introducer*, but no source names either "technical mentor." The brief's "technical mentor (TBD)" is now closer but not formally closed.
+- **Kickoff meeting notes not ingested** — Gemini-generated kick-off notes (2026-04-13) and kickoff slides (`20260413 UvA.pdf`, `KickstartAI x UvA - Kick-off.pdf`) are referenced as attachments but their *content* is not ingested; decisions made at kickoff are undocumented.
+- **Assignment 1 content not ingested** — `Assignment 1 - project definition.pdf` and the team's presentation (`Living Project Wiki.pptx`) are referenced but bodies not ingested; the actual project-definition scope/decisions are unread. See [[assignment-1-project-definition]].
+- **Slack as a communication/source channel** — The KickstartAI community Slack is now a live project channel; whether it will be an ingestion source for the Living Wiki is unspecified.
 
 ## Surfaced from KickstartAI homepage ingest (2026-05-07 clipping)
 - **Pillar terminology drift** — KickstartAI uses two parallel vocabularies for its three pillars ("We do / We share / We connect" vs "Apply / Amplify / Activate"). Documented as equivalent on [[kickstartai]] based on semantic mapping, but this equivalence is *inferred, not stated* by any source. Flag for confirmation.

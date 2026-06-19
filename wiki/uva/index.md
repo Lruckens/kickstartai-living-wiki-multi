@@ -1,7 +1,7 @@
 # Wiki index — Living Wiki (UvA)
 
-Last updated: 2026-06-16
-Total pages: 16
+Last updated: 2026-06-19
+Total pages: 18
 
 > Maintained by Claude.
 
@@ -14,6 +14,7 @@ Total pages: 16
 - [[kickstartai-projects]]
 - [[techdays]]
 - [[uva-ai4business-lab]]
+- [[project-team]]
 
 ## Concepts
 - [[living-wiki]]
@@ -30,7 +31,9 @@ Total pages: 16
 - [[gap-detector]]
 - [[permission-layer]]
 - [[evaluation-deliverable]]
+- [[assignment-1-project-definition]]
 
 ## Saved queries
 
 ## Generated outputs
+- [[2026-06-19-project-onboarding-summary]] — Project / onboarding summary — type: onboarding-summary — date: 2026-06-19

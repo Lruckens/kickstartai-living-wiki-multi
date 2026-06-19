@@ -48,3 +48,22 @@ Append-only. One entry per operation: ingest, query, or lint.
 **Pages created:** [[kickstartai-projects]]
 **Pages updated:** kickstartai.md, kickstartai-blog.md, _reuse.md, _gaps.md, index.md
 **Notes:** No substantive conflicts. 11 listed projects vs "15+ completed" (homepage) treated as consistent — a curated, non-exhaustive showcase, flagged as point-in-time. **bol**, **Philips**, and **NL4AI** surfaced as recurring collaborators/participants but kept explicitly distinct from the four founding partners (Ahold Delhaize, ING, KLM, NS); no separate entity pages created — relationships undocumented (new gap). Index-only granularity: created a single portfolio page rather than per-project pages. Total pages now 16.
+
+## [2026-06-19] generate | onboarding-summary — New team member
+
+**File:** `wiki/uva/generator/2026-06-19-project-onboarding-summary.md`
+**Output type:** onboarding-summary
+**Variant:** N/A
+**Stakeholder:** New team member
+**Wiki pages consulted:** [[_overview]], [[index]], [[evaluation-deliverable]], [[gap-detector]], [[generator-module]], [[ingestion-pipeline]], [[permission-layer]], [[wiki-generation-engine]]
+
+---
+
+---
+
+## 2026-06-19 — INGEST
+**Source:** 2026-04-10-Intro-email.md (KickstartAI x UvA kickoff email thread, 2026-04-10 → 2026-04-20)
+**Action:** Ingested the kickoff email thread — the project's human/process scaffolding. Created [[project-team]] consolidating the named UvA student team (Quinten van den Heuvel — coordinator, Laurenz Ruckensteiner, + two members as email aliases), KickstartAI POC Sanne Wielinga, introducer Evertjan Peer, and likely supervisor h.zhu@uva.nl. Created [[assignment-1-project-definition]] stub anchoring the first milestone (kickoff 2026-04-13; Assignment 1 presentation ~2026-04-22). Added Sanne Wielinga to the org roster ([[kickstartai-team]]) and updated the Evertjan note. Added the named team + supervisor to [[uva-ai4business-lab]]. Updated [[_overview]] status (kickoff held), team, and timeline anchors. Resolved/refined the two largest standing gaps and added finer-grained gaps.
+**Pages created:** [[project-team]], [[assignment-1-project-definition]]
+**Pages updated:** _overview.md, kickstartai-team.md, uva-ai4business-lab.md, _gaps.md, index.md
+**Notes:** No hard contradictions. Two ambiguities deliberately not over-asserted: (1) student name↔email mapping — greeting names "Quinten, XiaoJing, Laurenz, Meng" but two members appear only as aliases (lee89953@, carac.m.cheng@); documented separately, mapping flagged unconfirmed. (2) Neither Sanne nor Evertjan is explicitly called "technical mentor" — documented roles as stated (Sanne = POC, Evertjan = introducer). Kept [[project-team]] distinct from org roster [[kickstartai-team]], consistent with prior separation discipline. Kickoff notes, kickoff slides, Assignment 1 PDF, and presentation deck referenced but bodies not ingested — flagged as pending. Total pages now 18.
