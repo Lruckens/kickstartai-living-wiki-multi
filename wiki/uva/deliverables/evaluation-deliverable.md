@@ -11,6 +11,9 @@ See the concept page [[evaluation-framework]] for the four dimensions. The blog 
 
 KickstartAI's existing public technical and domain blogs (see [[kickstartai-blog]]) are a *candidate* corpus for the required human-written baseline. This is a possibility only; no specific article has been selected or ingested as the baseline. See [[_gaps]].
 
+### Candidate evaluation / test dataset (2026-05-18)
+The delivered **student-materials corpus** (`llm-wiki-student-materials`; see [[student-materials-corpus]], [[laurenz-sanne-email-2026-05-15]]) is a strong candidate evaluation/ingestion-test dataset. Crucially, its **README** (deliberately **withheld from ingestion**) summarises what the tool is *supposed to discover on its own* — effectively a **known ground truth** against which coverage, accuracy, and gap-detection can be measured. This is distinct from (and complementary to) the blog-baseline candidate for the *generated-vs-human* comparison. See [[gap-detector]], [[_gaps]].
+
 ### MoSCoW prioritization (Assignment 1, 2026-04-22)
 - **Must Have:** a **basic evaluation framework measuring accuracy + freshness**.
 - **Could Have:** **comparative evaluation of generated vs. human-written content** (the blog-baseline comparison) and **human-in-the-loop feedback integration**.
@@ -26,6 +29,7 @@ The written report states **all four members collaboratively design and execute*
 ## Related
 - [[evaluation-framework]]
 - [[generator-module]]
+- [[student-materials-corpus]]
 - [[kickstartai-blog]]
 - [[supervisor-kickoff-2026-04-16]]
 - [[assignment-1-presentation-2026-04-22]]
@@ -37,3 +41,4 @@ The written report states **all four members collaboratively design and execute*
 - 2026-04-16-supervisor-kickoff.md (UvA-internal student↔supervisor kickoff meeting notes, 2026-04-16)
 - 2026-04-22-presentation-slides.md (Assignment 1 project-definition presentation deck, text-extractable)
 - 2026-04-22-problem-definition.md (Assignment 1a written project-definition report, text-extractable)
+- 2026-05-15-Laurenz-Sanne-email-content.md (KickstartAI x UvA demo follow-up email thread, 2026-05-15 → 2026-05-18)

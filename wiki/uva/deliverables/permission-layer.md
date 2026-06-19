@@ -10,6 +10,11 @@ Design (and optionally partial implementation) of document-level access control 
 Privacy and permissions are a first-class concern. The design should allow deployment to a sensitive project via configuration, not a rewrite. See concept page [[permission-model]] for design intent.
 
 - **Privacy surfaced live in the MVP (2026-05-14):** At the first development-phase team meeting (see [[team-meeting-2026-05-14]]), **"document privacy may be an issue"** was raised as a live concern in the demoed MVP — corroborating the design-first framing.
+- **External-data-flow concern — concrete (2026-05-15):** The MVP runs on **Claude Code + Anthropic API** (see [[wiki-generation-engine]]), so **any ingested document is passed to Anthropic's LLM via API**. Laurenz flagged that this is fine for the team's own project docs but becomes a real concern for a **deployable artifact handling sensitive partner data / NDA-covered materials**. See [[laurenz-sanne-email-2026-05-15]].
+- **Design directions from Sanne (2026-05-15):**
+  - **Zero-data-retention (ZDR)** — Anthropic's enterprise/API tiers have different data-handling terms than consumer products (e.g. ZDR available on the API); check what tier Claude Code falls under and whether enabling ZDR is feasible.
+  - **Configurable / swappable backend** — the deployment story for sensitive projects might involve a configurable backend so a **self-hosted or VPC-deployed model** can be swapped in when needed while keeping the rest of the architecture intact. This **connects directly to the permission layer** (Member 4 scope) and the configuration-not-rewrite reuse model (see [[_reuse]], [[permission-model]]).
+  - **Data-flow documentation as a thesis artifact** — documenting **which operations send data externally vs. stay local** would be a useful artifact even if the full solution is out of scope. A concrete Member 4 sub-task candidate.
 - **Deployment governance — admin-per-project (2026-05-14):** The team proposed a deployment model where each project is assigned an **admin who governs the wiki page**. Recorded as a proposal/design decision; the mechanism (how the admin governs, relationship to RBAC/ACL) is unspecified — see [[permission-model]], [[_gaps]]. Ties to the configuration-not-rewrite reuse model (see [[_reuse]]).
 - **MoSCoW (Assignment 1, 2026-04-22):** Permission-layer **design** = **Should Have**; a **fully working/programmed permission layer** = **Won't Have (this iteration)**. Consistent with the existing "design-only" framing.
 - **Research framing (Member 4 RQ):** "How can a permission-aware architecture be designed for an LLM-maintained knowledge base to mitigate **information leakage from restricted source documents into synthesized wiki pages**?" The written report sharpens the problem: because the wiki serves **synthesised/summarised content rather than raw documents**, **traditional access control is insufficient** — restricted information can leak to unauthorised users. The member defines leakage in the LLM-synthesis context, designs an architecture to prevent it, and evaluates it; the result is a document-level permission layer making the system suitable for confidential/partner-sensitive projects. See [[assignment-1-report-2026-04-22]].
@@ -23,6 +28,8 @@ Privacy and permissions are a first-class concern. The design should allow deplo
 - [[kickoff-meeting-2026-04-13]]
 - [[supervisor-kickoff-2026-04-16]]
 - [[team-meeting-2026-05-14]]
+- [[laurenz-sanne-email-2026-05-15]]
+- [[wiki-generation-engine]]
 - [[assignment-1-presentation-2026-04-22]]
 - [[assignment-1-report-2026-04-22]]
 - [[project-team]]
@@ -35,3 +42,4 @@ Privacy and permissions are a first-class concern. The design should allow deplo
 - 2026-04-22-presentation-slides.md (Assignment 1 project-definition presentation deck, text-extractable)
 - 2026-04-22-problem-definition.md (Assignment 1a written project-definition report, text-extractable)
 - 2026-05-14-meeting-notes.md (internal UvA team working meeting notes, development phase)
+- 2026-05-15-Laurenz-Sanne-email-content.md (KickstartAI x UvA demo follow-up email thread, 2026-05-15 → 2026-05-18)

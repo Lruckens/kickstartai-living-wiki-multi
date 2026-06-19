@@ -19,6 +19,13 @@ The kickoff meeting and deck specified concrete starting sources:
 
 The specific "lab materials" set (UvA AI4Business Lab docs) remains un-ingested/unspecified — see [[_gaps]]. This aligns with the "document itself first" strategy (see [[living-wiki]], [[kickoff-meeting-2026-04-13]]).
 
+### Dedicated test corpus delivered (2026-05-18)
+Sanne delivered a **purpose-built ingestion test corpus** — `llm-wiki-student-materials` (~65K), a **fictional but realistic ~7-month** project corpus including the **"Bakkie"** sub-corpus with example meeting notes (see [[student-materials-corpus]], [[laurenz-sanne-email-2026-05-15]]). Key handling notes:
+- It is a **separate** representative test set, **not** the team's own project documents (the "document itself first" cold-start corpus) — a *second* corpus, recorded to avoid conflation.
+- It is **heavier on PM/business artifacts** than engineering material (no PR threads / code reviews); the team should **supplement with their own repo** for engineering content.
+- ⚠️ The corpus **README must NOT be ingested** — it summarises what the tool is meant to discover on its own (would contaminate gap/coverage evaluation). See [[gap-detector]], [[evaluation-deliverable]].
+- Documents **not yet ingested** — flagged for future ingest. See [[_gaps]].
+
 ### MoSCoW & ownership (Assignment 1, 2026-04-22)
 - **Must Have:** ingestion pipeline supporting **PDFs, markdown, and meeting notes** (a minimum file-type set for this iteration).
 - **Ownership:** Assigned to **Member 1**, bundled with the [[wiki-generation-engine]]. The Member 1 RQ concerns **detecting changes in a heterogeneous document corpus** to produce a continuously updated structured knowledge base. See [[assignment-1-presentation-2026-04-22]], [[assignment-1-report-2026-04-22]], [[project-team]].
@@ -27,8 +34,10 @@ The specific "lab materials" set (UvA AI4Business Lab docs) remains un-ingested/
 - [[living-wiki]]
 - [[wiki-generation-engine]]
 - [[user-journeys]]
+- [[student-materials-corpus]]
 - [[kickoff-meeting-2026-04-13]]
 - [[kickoff-deck-2026-04-13]]
+- [[laurenz-sanne-email-2026-05-15]]
 - [[assignment-1-presentation-2026-04-22]]
 - [[assignment-1-report-2026-04-22]]
 
@@ -38,3 +47,4 @@ The specific "lab materials" set (UvA AI4Business Lab docs) remains un-ingested/
 - 2026-04-13-KAI-UvA-Kickoff.md (KickstartAI x UvA kickoff slide deck, text-extractable)
 - 2026-04-22-presentation-slides.md (Assignment 1 project-definition presentation deck, text-extractable)
 - 2026-04-22-problem-definition.md (Assignment 1a written project-definition report, text-extractable)
+- 2026-05-15-Laurenz-Sanne-email-content.md (KickstartAI x UvA demo follow-up email thread, 2026-05-15 → 2026-05-18)

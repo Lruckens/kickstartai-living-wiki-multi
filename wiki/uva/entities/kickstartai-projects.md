@@ -1,11 +1,13 @@
 # Entity: KickstartAI Projects Portfolio
 
-**Last updated:** 2026-06-16
+**Last updated:** 2026-06-19
 
 ## Summary
 KickstartAI's public project portfolio (https://kickstart.ai/projects) — a curated showcase of applied AI projects run with industry, government, and societal partners. This page is based on an **index-only** clipping (2026-05-07): only project titles, one-line descriptions, and participating partners were captured — no per-project case-study detail, outcomes, or dates. See [[_gaps]].
 
 The list (11 projects) is a non-exhaustive snapshot, consistent with the homepage's "15+ projects completed" impact stat (see [[kickstartai]]). The Living Wiki / UvA AI4Business Lab project does not appear here (expected — it is in scoping/internal).
+
+> ⚠️ **Note — "Bakkie" is FICTIONAL, not a portfolio project.** A fictional project named **"Bakkie"** appears in the delivered student-materials test corpus (see [[student-materials-corpus]]). It is a synthetic ingestion-test artifact and must **never** be merged into this real portfolio. See [[laurenz-sanne-email-2026-05-15]].
 
 ## Details
 - **Type:** Public project portfolio / showcase run by KickstartAI.
@@ -34,7 +36,9 @@ The list (11 projects) is a non-exhaustive snapshot, consistent with the homepag
 ## Related
 - [[kickstartai]]
 - [[kickstartai-blog]]
+- [[student-materials-corpus]]
 - [[_reuse]]
 
 ## Sources
 - KickstartAI_Projects.md (https://kickstart.ai/projects, created 2026-05-07)
+- 2026-05-15-Laurenz-Sanne-email-content.md (KickstartAI x UvA demo follow-up email thread, 2026-05-15 → 2026-05-18)

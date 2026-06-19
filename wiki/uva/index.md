@@ -1,7 +1,7 @@
 # Wiki index — Living Wiki (UvA)
 
 Last updated: 2026-06-19
-Total pages: 28
+Total pages: 31
 
 > Maintained by Claude.
 
@@ -16,6 +16,8 @@ Total pages: 28
 - [[uva-ai4business-lab]]
 - [[project-team]]
 - [[kickoff-deck-2026-04-13]]
+- [[student-materials-corpus]]
+- [[kickstartai-pm-ops]]
 
 ## Concepts
 - [[living-wiki]]
@@ -30,6 +32,7 @@ Total pages: 28
 - [[supervisor-kickoff-2026-04-16]]
 - [[checkin-scheduling-2026-04-30]]
 - [[team-meeting-2026-05-14]]
+- [[laurenz-sanne-email-2026-05-15]]
 
 ## Deliverables
 - [[ingestion-pipeline]]
