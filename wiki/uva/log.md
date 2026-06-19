@@ -39,3 +39,12 @@ Append-only. One entry per operation: ingest, query, or lint.
 **Pages created:** [[kickstartai-blog]]
 **Pages updated:** kickstartai.md, generator-module.md, evaluation-deliverable.md, _gaps.md, index.md
 **Notes:** No conflicts. Employee-spotlight names corroborate the existing [[kickstartai-team]] roster with consistent spelling — no new staff names added. Index-only source: explicitly flagged that article bodies are not ingested (new gap). Venue and baseline-corpus links to [[generator-module]] / [[evaluation-deliverable]] kept as possibilities only — no source connects Living Wiki output to the blog. Total pages now 15.
+
+---
+
+## 2026-06-16 — INGEST
+**Source:** KickstartAI_Projects.md (public projects index web clipping, https://kickstart.ai/projects, created 2026-05-07)
+**Action:** Low-risk enrichment ingest of the KickstartAI project portfolio *index* (titles, one-liners, partner lists only — no project bodies). Created a standalone portfolio entity page listing 11 example projects and their partners. Linked it from [[kickstartai]] (new "Projects / portfolio" subsection + "Public channels" note, and the Apply pillar). Strengthened the blog↔project correspondence on [[kickstartai-blog]] (NS object detection, Ampère parcels, ING chatbot, food-insecurity, healthcare). Added a "breadth of target projects" note to [[_reuse]] reinforcing the configuration-not-rewrite principle. Added four gaps.
+**Pages created:** [[kickstartai-projects]]
+**Pages updated:** kickstartai.md, kickstartai-blog.md, _reuse.md, _gaps.md, index.md
+**Notes:** No substantive conflicts. 11 listed projects vs "15+ completed" (homepage) treated as consistent — a curated, non-exhaustive showcase, flagged as point-in-time. **bol**, **Philips**, and **NL4AI** surfaced as recurring collaborators/participants but kept explicitly distinct from the four founding partners (Ahold Delhaize, ING, KLM, NS); no separate entity pages created — relationships undocumented (new gap). Index-only granularity: created a single portfolio page rather than per-project pages. Total pages now 16.

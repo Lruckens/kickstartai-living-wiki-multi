@@ -20,10 +20,19 @@ KickstartAI's public news/blog channel (https://kickstart.ai/news) — the concr
 - **Domain blogs** — EU AI Act, open-source LLMs, AI in healthcare, smart cities, energy sector, gaming, education.
 - **Community spotlights** — various Dutch AI ecosystem members.
 
+### Blog ↔ project correspondence
+Several technical/domain blog topics map directly to concrete projects in the [[kickstartai-projects]] portfolio, strengthening the blog↔project correspondence:
+- "unattended object detection (NS)" ↔ **Unattended object detection at train stations (NS)**
+- "parcel volume predictions (Ampère)" ↔ **Automating parcel volume predictions (Ampère)**
+- "ING financial health chatbot" ↔ **Supporting financial health with a GenAI chatbot (ING)**
+- "food insecurity AI" ↔ **A data-driven approach to combat poverty (Voedselbanken)**
+- "AI in healthcare" (domain) ↔ **AI-supported wound reports (LUMC)**
+
 (Index snapshot, 2026-05-07; no article bodies ingested — content will drift. See [[_gaps]].)
 
 ## Related
 - [[kickstartai]]
+- [[kickstartai-projects]]
 - [[generator-module]]
 - [[evaluation-deliverable]]
 - [[techdays]]
@@ -31,3 +40,4 @@ KickstartAI's public news/blog channel (https://kickstart.ai/news) — the concr
 
 ## Sources
 - KickstartAI_News.md (https://kickstart.ai/news, created 2026-05-07)
+- KickstartAI_Projects.md (https://kickstart.ai/projects, created 2026-05-07)

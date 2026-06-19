@@ -1,7 +1,7 @@
 # Wiki index — Living Wiki (UvA)
 
 Last updated: 2026-06-16
-Total pages: 15
+Total pages: 16
 
 > Maintained by Claude.
 
@@ -11,6 +11,7 @@ Total pages: 15
 - [[kickstartai]]
 - [[kickstartai-team]]
 - [[kickstartai-blog]]
+- [[kickstartai-projects]]
 - [[techdays]]
 - [[uva-ai4business-lab]]
 

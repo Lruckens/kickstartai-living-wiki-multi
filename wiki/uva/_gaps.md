@@ -21,3 +21,9 @@ Underdocumented areas and open questions.
 
 ## Surfaced from KickstartAI news/blog index ingest (2026-05-07 clipping)
 - **Blog article bodies not ingested** — Only the news *index* was clipped (2026-05-07). No individual article content has been ingested, so the actual content and voice of the "GenAI project management lessons" and technical blogs (see [[kickstartai-blog]]) are referenced but unread/undocumented.
+
+## Surfaced from KickstartAI projects index ingest (2026-05-07 clipping)
+- **Project bodies not ingested** — Only the projects *index* was clipped (2026-05-07): titles, one-liners, and partner lists only. No case-study detail, outcomes, dates, or per-project write-ups. The content/voice of these projects is referenced but unread. See [[kickstartai-projects]].
+- **Additional collaborator orgs undocumented** — **bol**, **Philips**, and **NL4AI** recur as project collaborators but are not described anywhere; their relationship to KickstartAI (partner vs. participant vs. vendor) and to the four founding partners is unspecified. No entity pages created yet.
+- **Project portfolio is non-exhaustive / point-in-time** — 11 projects listed (see [[kickstartai-projects]]) vs. "15+ completed" on the homepage; the projects page carries no "as-of" date on the source itself (clipping created 2026-05-07). The list will drift and is not a full inventory.
+- **No Living Wiki project listed** — The Living Wiki / UvA AI4Business Lab project does not appear in the public portfolio (expected — it is in scoping/internal), so the public list excludes it.
