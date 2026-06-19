@@ -26,7 +26,7 @@ Both student-authored Assignment 1 artifacts — the presentation deck (see [[as
 - **Member 1** — **Ingestion Pipeline + Wiki Engine** (counted as one component)
 - **Member 2** — **Generator Module**
 - **Member 3** — **Gap Detector**
-- **Member 4** — **Permission Layer**
+- **Member 4** — **Permission Layer** — the design is now concretely realized (two leakage types + a paragraph-level tier model + pre-filtering + self-audit, built & evaluated 2026-06-07). See [[permission-layer]], [[xiaojing-sanne-permission-email-2026-06-07]].
 - **Evaluation Framework** — the **collaborative/shared deliverable** (all four design & execute it; each contributes component-level results into their own thesis).
 
 The report’s cleanest framing: **five member-owned components + the evaluation framework as the shared/collaborative deliverable**. This reconciles the 6-deliverable architecture with 4 students by (a) bundling ingestion + wiki engine under Member 1 and (b) treating evaluation as a group deliverable rather than a sixth member-owned module.
@@ -34,12 +34,14 @@ The report’s cleanest framing: **five member-owned components + the evaluation
 ### Division-scheme discrepancy — RESOLVED-BY-PRECEDENCE
 The supervisor-kickoff scheme (2026-04-16) recorded the **Permission Layer as collaborative** and **evaluation as per-member-into-thesis**. The two later, mutually-consistent student-authored sources (deck + report) instead assign the **Permission Layer to Member 4 individually** and name the **evaluation framework as the collaborative deliverable**. With two agreeing student-authored sources against one supervisor-kickoff note, the **Member-4-individual / evaluation-collaborative** split is treated as **confirmed**; the superseded supervisor-kickoff note is recorded (not deleted). See [[_gaps]], [[permission-layer]], [[project-team]].
 
-Neither artifact names which *named student* is Member 1/2/3/4 — owners-by-component are resolved, but owners-by-person remain open. See [[_gaps]].
+Neither artifact names which *named student* is Member 1/2/3/4. As of 2026-06-07, **Xiaojing has self-asserted ownership of the Permission Layer (Member 4)** (see [[xiaojing-sanne-permission-email-2026-06-07]]); **Laurenz↔M1** and **Quinten↔M2** remain build-activity soft signals, and **Cara↔M3** is a by-elimination inference. Owners-by-component are resolved; the full owners-by-person mapping remains mostly inferential. See [[_gaps]].
 
 ## Related
 - [[living-wiki]]
 - [[generator-module]]
 - [[gap-detector]]
+- [[permission-layer]]
+- [[xiaojing-sanne-permission-email-2026-06-07]]
 - [[kickoff-deck-2026-04-13]]
 - [[supervisor-kickoff-2026-04-16]]
 - [[assignment-1-presentation-2026-04-22]]
@@ -51,3 +53,4 @@ Neither artifact names which *named student* is Member 1/2/3/4 — owners-by-com
 - 2026-04-16-supervisor-kickoff.md (UvA-internal student↔supervisor kickoff meeting notes, 2026-04-16)
 - 2026-04-22-presentation-slides.md (Assignment 1 project-definition presentation deck, text-extractable)
 - 2026-04-22-problem-definition.md (Assignment 1a written project-definition report, text-extractable)
+- 2026-06-07-Xiaojing-Sanne-email-content.md (Xiaojing ↔ Sanne permission-layer design review email thread, 2026-06-07 → 2026-06-08)

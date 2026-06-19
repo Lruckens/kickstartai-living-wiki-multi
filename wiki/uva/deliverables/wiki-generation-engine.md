@@ -11,10 +11,14 @@ An LLM-powered, **RAG-grounded** system that processes ingested documents into s
 - **MVP finished; UI layer planned (2026-06-04):** At the 2026-06-04 meeting (see [[team-meeting-2026-06-04]]), Laurenz had **finished his MVP version** and planned to **build a UI on top of the GitHub** to make it more user-friendly — the **first mention of a UI / front-end dimension**. Whether the UI is a thesis deliverable or a convenience layer, and its scope/framework, are unspecified — see [[_gaps]]. (Soft signal toward Laurenz = Member 1 strengthened, not asserted — see [[project-team]], [[_gaps]].)
 - **GitHub repo — URL known (2026-05-15):** The repo is `https://github.com/Lruckens/kickstartai-living-wiki` (shared in the demo follow-up thread — see [[laurenz-sanne-email-2026-05-15]]). The repo **body/schema is still not ingested** — flagged for future ingest. See [[_gaps]].
 - **LLM backend — RESOLVED (2026-05-15):** The repo is **directly linked to Claude Code** (Anthropic's terminal-based agent), which **performs all operations and generates the wiki pages**; ingested documents are passed to **Anthropic's LLM via API**. This closes the 2026-05-14 "what LLM do they use and is this possible?" question: the engine runs on **Anthropic (Claude) via Claude Code**, and it is working. See [[laurenz-sanne-email-2026-05-15]], [[_gaps]].
+  - ⚠️ **Note — permission-layer evaluation used a *different* model.** Xiaojing's permission-layer experiments (2026-06-07) ran on **gpt-5.1 via the UvA API**, not Claude — an *experimental/evaluation* environment, distinct from this production backend. Production intends Claude end-to-end. See [[permission-layer]], [[xiaojing-sanne-permission-email-2026-06-07]], [[_gaps]].
 - **RAG-grounded (Assignment 1, 2026-04-22):** The presentation describes the Wiki Engine as **"LLM-powered, RAG-grounded page generation & refresh"** — a retrieval-augmented-generation approach grounding pages in source documents (Lewis et al., 2020; Gao et al., 2023). See [[assignment-1-presentation-2026-04-22]], [[assignment-1-report-2026-04-22]].
 - **Persistent compiled layer:** Rather than re-synthesising from raw documents on every query, the engine compiles content into structured pages **once** and **updates them as new information arrives**, so understanding compounds over time (overcoming RAG statelessness; see [[living-wiki]]).
 - **Member 1 research focus (report):** Bundled with the [[ingestion-pipeline]] under **Member 1**, whose RQ is: "How can a wiki generation system be designed to detect changes in a heterogeneous document corpus and produce a continuously updated structured knowledge base?" The thesis researches **change-detection mechanisms, document versioning approaches, and wiki update strategies**, explicitly **comparing full page regeneration against incremental updates** to evaluate their effect on the quality and consistency of the knowledge base. See [[assignment-1-report-2026-04-22]].
 - **MoSCoW (Must Have):** An LLM-powered wiki generation engine with **daily refresh** is a Must-Have for this iteration. (Real-time / sub-daily updates are explicitly **Won't Have**.)
+
+### Permission-layer integration (2026-06-07)
+The [[permission-layer]] operates on the **source paragraph pool before generation** — pre-filtering to only the paragraphs a target user is authorized to see (by `project_id` + `user_id`), so the engine never receives unauthorized content. In the **current Claude Code implementation**, Claude reads the updated permission configuration from a **markdown file** (vs SQL paragraph-table updates in a full pipeline). See [[permission-layer]], [[xiaojing-sanne-permission-email-2026-06-07]].
 
 ### Generator integration (2026-06-04)
 The [[generator-module]] (built by Quinten) must integrate with this GitHub architecture. As of 2026-06-04 the integration is an **active, explicitly at-risk** task — the team anticipates problems connecting the generator to the existing GitHub. See [[generator-module]], [[team-meeting-2026-06-04]], [[_gaps]].
@@ -33,6 +37,7 @@ For sensitive-project deployment, Sanne suggested a **configurable backend** tha
 - [[gap-detector]]
 - [[team-meeting-2026-05-14]]
 - [[team-meeting-2026-06-04]]
+- [[xiaojing-sanne-permission-email-2026-06-07]]
 - [[laurenz-sanne-email-2026-05-15]]
 - [[permission-layer]]
 - [[generator-module]]
@@ -47,3 +52,4 @@ For sensitive-project deployment, Sanne suggested a **configurable backend** tha
 - 2026-05-14-meeting-notes.md (internal UvA team working meeting notes, development phase)
 - 2026-05-15-Laurenz-Sanne-email-content.md (KickstartAI x UvA demo follow-up email thread, 2026-05-15 → 2026-05-18)
 - 2026-06-04-meeting-notes.md (internal UvA team working meeting notes, development phase)
+- 2026-06-07-Xiaojing-Sanne-email-content.md (Xiaojing ↔ Sanne permission-layer design review email thread, 2026-06-07 → 2026-06-08)

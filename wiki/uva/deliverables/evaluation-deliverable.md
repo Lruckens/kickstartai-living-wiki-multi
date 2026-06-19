@@ -14,6 +14,9 @@ KickstartAI's existing public technical and domain blogs (see [[kickstartai-blog
 ### Candidate evaluation / test dataset (2026-05-18)
 The delivered **student-materials corpus** (`llm-wiki-student-materials`; see [[student-materials-corpus]], [[laurenz-sanne-email-2026-05-15]]) is a strong candidate evaluation/ingestion-test dataset. Crucially, its **README** (deliberately **withheld from ingestion**) summarises what the tool is *supposed to discover on its own* — effectively a **known ground truth** against which coverage, accuracy, and gap-detection can be measured. This is distinct from (and complementary to) the blog-baseline candidate for the *generated-vs-human* comparison. See [[gap-detector]], [[_gaps]].
 
+### Component-level evaluation example — permission layer (2026-06-07)
+Xiaojing's permission-layer design (see [[permission-layer]], [[xiaojing-sanne-permission-email-2026-06-07]]) includes a concrete **component-level evaluation** — a **20-scenario leakage-detection experiment** (Set A pre-filtering off / Set B pre-filtering on; 5 vertical + 5 horizontal each), comparing **two audit-prompt versions** for the **detection-rate / false-positive-rate** tradeoff. This is a concrete instance of the report's model in which **each member contributes component-level evaluation results into their own thesis**. Caveats flagged by Sanne: the eval is small (5/type → 20% per-miss swing — frame as an illustrative PoC), groundedness is an imperfect proxy for leakage, and the experiment used **gpt-5.1 as both generator and judge** (same-model blind spot). See [[_gaps]].
+
 ### MoSCoW prioritization (Assignment 1, 2026-04-22)
 - **Must Have:** a **basic evaluation framework measuring accuracy + freshness**.
 - **Could Have:** **comparative evaluation of generated vs. human-written content** (the blog-baseline comparison) and **human-in-the-loop feedback integration**.
@@ -29,6 +32,8 @@ The written report states **all four members collaboratively design and execute*
 ## Related
 - [[evaluation-framework]]
 - [[generator-module]]
+- [[permission-layer]]
+- [[xiaojing-sanne-permission-email-2026-06-07]]
 - [[student-materials-corpus]]
 - [[kickstartai-blog]]
 - [[supervisor-kickoff-2026-04-16]]
@@ -42,3 +47,4 @@ The written report states **all four members collaboratively design and execute*
 - 2026-04-22-presentation-slides.md (Assignment 1 project-definition presentation deck, text-extractable)
 - 2026-04-22-problem-definition.md (Assignment 1a written project-definition report, text-extractable)
 - 2026-05-15-Laurenz-Sanne-email-content.md (KickstartAI x UvA demo follow-up email thread, 2026-05-15 → 2026-05-18)
+- 2026-06-07-Xiaojing-Sanne-email-content.md (Xiaojing ↔ Sanne permission-layer design review email thread, 2026-06-07 → 2026-06-08)
