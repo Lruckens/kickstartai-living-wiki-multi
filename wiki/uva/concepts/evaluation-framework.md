@@ -18,13 +18,18 @@ Human feedback / evaluation logs collected during the project refine generation 
 - Sanne is to **check whether a knowledge base or additional/better evaluation criteria can be provided** — outcome pending (see [[_gaps]]).
 - Sanne advised the students **not to rely solely on LLMs** for building the evaluation framework — it specifically requires their critical thinking.
 
+### Production approach (supervisor kickoff, 2026-04-16)
+Enumerated as **Sub-deliverable 6 (Evaluation Method)**: per the UvA supervisor kickoff, **each student selects a different evaluation method**, researches it individually, and reports it in their **own thesis** (see [[supervisor-kickoff-2026-04-16]]). The framework is thus produced via parallel per-member research rather than as a single shared build module.
+
 This concept is also tracked as a deliverable — see [[evaluation-deliverable]].
 
 ## Related
 - [[evaluation-deliverable]]
 - [[generator-module]]
 - [[kickoff-meeting-2026-04-13]]
+- [[supervisor-kickoff-2026-04-16]]
 
 ## Sources
 - 2026-04-02-UvA-AI4BusinessLab-Living-Wiki-Brief.md
 - 2026-04-13-KAI-UvA-Kickoff-meeting-notes.md (Gemini-generated kickoff meeting notes)
+- 2026-04-16-supervisor-kickoff.md (UvA-internal student↔supervisor kickoff meeting notes, 2026-04-16)
