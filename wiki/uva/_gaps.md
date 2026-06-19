@@ -27,9 +27,15 @@ Underdocumented areas and open questions.
 ## Surfaced from KickstartAI intro deck ingest (2026-04-13)
 - **Deck is largely image-only** — Substantive content (six-phase adoption model, partner-ripple diagram, challenge→solution mappings) is embedded as JPGs with no extractable text. Diagram contents **not ingested**, **not fabricated**. Flag for OCR/re-ingest. See [[kickstartai]], [[adoption-journey]].
 - **Six-phase adoption model contents unknown** — Named in the deck but its phases/order/structure are image-locked. [[adoption-journey]] is a contents-pending stub.
-- **Kickoff-deck identity unconfirmed** — Whether `KAI-Intro` is specifically `20260413 UvA.pdf` or `KickstartAI x UvA - Kick-off.pdf` is inferred from shared dating, not stated. See [[assignment-1-project-definition]].
+- **`KAI-Intro` ↔ `20260413 UvA.pdf` mapping unconfirmed** — The image-heavy `KAI-Intro` strategy deck is *distinct from* the now-ingested text deck `KickstartAI x UvA - Kick-off.pdf` (see [[kickoff-deck-2026-04-13]]). Whether `KAI-Intro` corresponds to the other named kickoff file `20260413 UvA.pdf` remains inferred from shared dating, not stated. See [[assignment-1-project-definition]].
 - **Societal stats are point-in-time / undated-source** — ~2024 snapshots from a pitch deck; they will drift and are not authoritative. See [[kickstartai]].
 - **Strategy framing vs. pillar vocabulary** — The deck's three strategic aspirations are *adjacent to but not asserted equivalent to* the documented three pillars. Relationship unconfirmed.
+
+## Surfaced from kickoff slide deck ingest (2026-04-13; text-extractable; ingested 2026-06-19)
+- **Kickoff-deck identity — partially resolved** — The text-extractable deck is confirmed as **`KickstartAI x UvA - Kick-off.pdf`** (see [[kickoff-deck-2026-04-13]]), resolving its prior inferred-only identity. The mapping of the *image-heavy* `KAI-Intro` to `20260413 UvA.pdf` remains separately open (see above).
+- **Five-vs-six deliverable framing** — The deck names **five build modules** (ingestion, generation engine, generator, gap detector, permission layer) and omits the **evaluation framework**, which "runs throughout." The wiki reads this as 5 build modules + 1 cross-cutting framework = 6 deliverables; confirm this is the intended structure. See [[user-journeys]], [[kickoff-deck-2026-04-13]].
+- **"Day one" source set** — The deck says ingestion "starts with KickstartAI docs and lab materials on day one"; the specific **lab-materials set** (UvA AI4Business Lab docs) remains un-ingested/unspecified. See [[ingestion-pipeline]], [[uva-ai4business-lab]].
+- **Collaboration model deliberately open** — The deck's closing "How we'll work together – TBD" slide confirms cadence/collaboration was deliberately left open at kickoff; specific check-in frequency still TBD (already tracked).
 
 ## Surfaced from kickoff meeting notes ingest (2026-04-13; ingested 2026-06-19)
 - **"Averion" handover unexplained** — The kickoff notes state the project was handed over to Sanne Wielinga "from Averion." No other source mentions "Averion." Possibly a transcription error for "Evertjan" (the documented introducer), possibly a genuine predecessor party/org. **Unconfirmed; no entity created.** See [[project-team]], [[kickoff-meeting-2026-04-13]].

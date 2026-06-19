@@ -1,22 +1,23 @@
 # Living Wiki (UvA) — Overview
 
-**Status:** scoping (kickoff held 2026-04-13; meeting notes now ingested)
+**Status:** scoping (kickoff held 2026-04-13; meeting notes + kickoff slide deck now ingested)
 **Last updated:** 2026-06-19
 
 ## What this project is about
 The Living Project Wiki is a self-documenting GenAI system that continuously ingests heterogeneous project documents (PDFs, markdown, GitHub repos, meeting notes, emails, slide decks) and produces a living, auto-updating knowledge base. Inspired by Andrej Karpathy's "LLM Wiki" concept, it goes beyond document search to synthesize, summarize, detect changes, and surface connections across a project's knowledge base.
 
-The recursive twist: the first project this system documents is *itself*. See [[living-wiki]] for the core concept. The kickoff clarified *why* self-documentation is the first task: it avoids sharing sensitive data and provides an intuitive evaluation method.
+The recursive twist: the first project this system documents is *itself*. See [[living-wiki]] for the core concept. The kickoff clarified *why* self-documentation is the first task: it avoids sharing sensitive data and provides an intuitive evaluation method. The kickoff deck (see [[kickoff-deck-2026-04-13]]) names the underlying problem verbatim — knowledge in people's heads/scattered docs, manual status compilation, and **learnings rarely reaching the next project**.
 
 The project is run for [[kickstartai]] by students at the [[uva-ai4business-lab]]. The architecture is explicitly designed for reuse across all KickstartAI projects once the initial use case is complete.
 
 ## Current status
-Scoping / kickoff. Founding brief received 2026-04-02. **Kickoff meeting held 2026-04-13** (10:00 CEST) — its **Gemini meeting notes are now ingested** (see [[kickoff-meeting-2026-04-13]]), supplying the first concrete kickoff decisions, participant backgrounds, technical guidance, and action items. First deliverable — **Assignment 1: project definition** — presented ~2026-04-22 (main goals + role assignments; see [[assignment-1-project-definition]]). The project follows the **CRISP-DM framework**; **regular check-ins** (weekly or bi-weekly) agreed in principle, exact cadence TBD. Student identities are now largely resolved (see [[project-team]]). A **project Gantt chart** (dated 2026-04-13) is a CRISP-DM draft needing revision (assumed April-1 start; chart image still un-OCR'd — see [[project-timeline]]). A **KickstartAI intro/strategy deck** (dated 2026-04-13) is partially ingested (titles/stats only; diagrams unread). Tech stack and role assignments not yet documented.
+Scoping / kickoff. Founding brief received 2026-04-02. **Kickoff meeting held 2026-04-13** (10:00 CEST) — its **Gemini meeting notes are ingested** (see [[kickoff-meeting-2026-04-13]]), and the **kickoff slide deck** (`KickstartAI x UvA - Kick-off.pdf`) is now ingested text-extractably (see [[kickoff-deck-2026-04-13]]), supplying verbatim problem framing and the five-module build ask. First deliverable — **Assignment 1: project definition** — presented ~2026-04-22 (main goals + role assignments; see [[assignment-1-project-definition]]). The project follows the **CRISP-DM framework**; **regular check-ins** (weekly or bi-weekly) agreed in principle, exact cadence TBD (the deck's "How we'll work together – TBD" slide corroborates this was left open). Student identities are now largely resolved (see [[project-team]]). A **project Gantt chart** (dated 2026-04-13) is a CRISP-DM draft needing revision (assumed April-1 start; chart image still un-OCR'd — see [[project-timeline]]). A **KickstartAI intro/strategy deck** (`KAI-Intro`, dated 2026-04-13) is partially ingested (titles/stats only; diagrams unread). Tech stack and role assignments not yet documented.
 
 ## Timeline anchors
 - 2026-04-02 — founding brief received.
 - ~2026-04-01 — assumed CRISP-DM project start (per draft Gantt; needs revision due to selection delay).
 - 2026-04-13 — kickoff meeting (KickstartAI x UvA), 10:00 CEST; **meeting notes ingested** (see [[kickoff-meeting-2026-04-13]]).
+- 2026-04-13 — kickoff slide deck (`KickstartAI x UvA - Kick-off.pdf`) ingested, **text-extractable** (see [[kickoff-deck-2026-04-13]]).
 - 2026-04-13 — project Gantt chart produced (draft; image-only — see [[project-timeline]]).
 - 2026-04-13 — KickstartAI intro/strategy deck (`KAI-Intro`) partially ingested (image-heavy; diagrams not ingested).
 - ~2026-04-22 (Wed) — Assignment 1 (project definition) presentation, 9–11 AM (main goals + role assignments).
@@ -26,10 +27,11 @@ Scoping / kickoff. Founding brief received 2026-04-02. **Kickoff meeting held 20
 - **Document the project itself first** — avoids sensitive data and gives an intuitive evaluation method.
 - Blog post drafts must be evaluated against a human-written baseline.
 - **Don't rely solely on LLMs** for the core tool — critical thinking required, especially for the permission layer and evaluation framework.
-- Initial input data: two-pager + slides, scrape KickstartAI website + LinkedIn, then add own PRs/notes/decisions.
+- Initial input data: two-pager + slides, scrape KickstartAI website + LinkedIn, then add own PRs/notes/decisions ("starts with KickstartAI docs + lab materials on day one").
+- **Five build modules + one cross-cutting evaluation framework** — the kickoff deck names five build modules (ingestion, generation engine, generator, gap detector, permission layer) and omits evaluation, which "runs throughout" (6 deliverables total). See [[_gaps]].
 
 ## Open questions
-See [[_gaps]] for the full list (tech stack, role assignments, check-in cadence, regeneration cadence, tone spec, the "Averion" handover, the "Meng" name discrepancy, lee89953@ mapping, supervisor role, evaluation data/KB, unsigned legal docs, un-OCR'd Gantt chart, un-OCR'd intro-deck diagrams / six-phase adoption model).
+See [[_gaps]] for the full list (tech stack, role assignments, check-in cadence, regeneration cadence, tone spec, the "Averion" handover, the "Meng" name discrepancy, lee89953@ mapping, supervisor role, evaluation data/KB, unsigned legal docs, un-OCR'd Gantt chart, un-OCR'd intro-deck diagrams / six-phase adoption model, `KAI-Intro` ↔ `20260413 UvA.pdf` mapping).
 
 ## Key concepts
 - [[living-wiki]] — the core self-updating LLM Wiki concept

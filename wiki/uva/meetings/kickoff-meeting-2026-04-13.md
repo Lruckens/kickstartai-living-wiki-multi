@@ -6,7 +6,7 @@
 **Status:** ingested (notes body); 3 embedded screenshots image-only, not ingested
 
 ## Summary
-The kickoff meeting for the Living Wiki project between KickstartAI and the UvA AI4Business Lab students. This is the **first ingested source carrying actual kickoff decisions, participant backgrounds, technical guidance, and action items** — much of which was previously flagged as image-locked or pending. Source: Gemini meeting notes (`2026-04-13-KAI-UvA-Kickoff-meeting-notes.md`).
+The kickoff meeting for the Living Wiki project between KickstartAI and the UvA AI4Business Lab students. This is the **first ingested source carrying actual kickoff decisions, participant backgrounds, technical guidance, and action items** — much of which was previously flagged as image-locked or pending. Source: Gemini meeting notes (`2026-04-13-KAI-UvA-Kickoff-meeting-notes.md`). The **presentation deck used at this meeting** (`KickstartAI x UvA - Kick-off.pdf`) is now separately ingested and text-extractable — see [[kickoff-deck-2026-04-13]].
 
 ## Attendees
 - **Sanne Wielinga** — Senior ML Engineer, KickstartAI; confirmed **main contact** for the students. The project was **handed over to Sanne from "Averion"** (see ambiguity note below).
@@ -22,8 +22,8 @@ All four students are **business analytics students** working on this as a **the
 
 ## Key decisions / agreements
 - **Self-documentation first** — the project's first task is to **document itself**, chosen because it avoids sharing sensitive data and provides an intuitive evaluation method.
-- **Regular check-ins** agreed in principle (weekly or bi-weekly) given the short timeline; specific cadence TBD, to be emailed to Sanne.
-- **Five core modules confirmed** (now sourced from a second independent document): ingestion pipeline, generation engine, generator module, gap detector, permission layer; the **evaluation framework runs throughout** the project. See [[user-journeys]] and the deliverable pages.
+- **Regular check-ins** agreed in principle (weekly or bi-weekly) given the short timeline; specific cadence TBD, to be emailed to Sanne. (The kickoff deck's closing **"How we'll work together – TBD"** slide corroborates that the collaboration model was deliberately left open — see [[kickoff-deck-2026-04-13]].)
+- **Five core modules confirmed** (also named verbatim in the kickoff deck): ingestion pipeline, generation engine, generator module, gap detector, permission layer; the **evaluation framework runs throughout** the project. See [[user-journeys]], [[kickoff-deck-2026-04-13]], and the deliverable pages.
 - **Permission layer need not be fully working** due to the short timeline — but students **must design** how it would handle sensitive data from the start. See [[permission-layer]].
 
 ## Technical guidance (from Sanne)
@@ -38,7 +38,7 @@ All four students are **business analytics students** working on this as a **the
 - **Presentation scheduled for April 22nd**, covering main goals and role assignments. See [[assignment-1-project-definition]].
 
 ## Implementation strategy (concrete)
-- **Initial input data:** ingest the two-pager and slides; **scrape KickstartAI website + LinkedIn posts** for public documents; then continuously add the team's own PRs, meeting notes, design decisions, and presentations. See [[ingestion-pipeline]].
+- **Initial input data:** ingest the two-pager and slides; **scrape KickstartAI website + LinkedIn posts** for public documents; then continuously add the team's own PRs, meeting notes, design decisions, and presentations. The kickoff deck frames this as ingestion that "starts with KickstartAI docs and lab materials on day one" and grows as "every PR, meeting note, and decision feeds in." See [[ingestion-pipeline]], [[kickoff-deck-2026-04-13]].
 
 ## Action items
 - **[Sanne]** Add students to the KickstartAI Slack community channel (today).
@@ -53,7 +53,7 @@ All four students are **business analytics students** working on this as a **the
 
 ## Context corroborated
 - Sanne reiterated KickstartAI's societal-challenges framing (tripling healthcare costs, reduced GDP growth, strained infrastructure, rising income inequality, climate impact) → practical AI roles (AI tutors, predictive diagnostics, smart infrastructure), with solutions intended to be **adopted and replicated across the Netherlands and beyond**. Corroborates the intro-deck framing on [[kickstartai]] — no new facts.
-- The knowledge-management problem statement (documentation scattered across multiple concurrent AI projects) corroborates [[living-wiki]].
+- The knowledge-management problem statement (documentation scattered across multiple concurrent AI projects) corroborates [[living-wiki]] and the verbatim three-bullet problem statement in [[kickoff-deck-2026-04-13]].
 
 ## Ambiguities / not ingested
 - **"Averion" handover** — named as the party Sanne took the project over from; not in any other source. Possibly a transcription error for "Evertjan" (Evertjan Peer is the documented introducer), possibly a genuine predecessor. **Unconfirmed; no entity created.** See [[_gaps]].
@@ -62,6 +62,7 @@ All four students are **business analytics students** working on this as a **the
 ## Related
 - [[project-team]]
 - [[assignment-1-project-definition]]
+- [[kickoff-deck-2026-04-13]]
 - [[project-timeline]]
 - [[permission-layer]]
 - [[ingestion-pipeline]]
@@ -72,3 +73,4 @@ All four students are **business analytics students** working on this as a **the
 
 ## Sources
 - 2026-04-13-KAI-UvA-Kickoff-meeting-notes.md (Gemini-generated kickoff meeting notes/transcript summary; 3 embedded screenshots image-only, not ingested)
+- 2026-04-13-KAI-UvA-Kickoff.md (KickstartAI x UvA kickoff slide deck, text-extractable; presentation artifact used at the meeting)
