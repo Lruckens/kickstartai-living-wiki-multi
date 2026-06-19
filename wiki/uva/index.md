@@ -1,7 +1,7 @@
 # Wiki index — Living Wiki (UvA)
 
 Last updated: 2026-06-19
-Total pages: 19
+Total pages: 20
 
 > Maintained by Claude.
 
@@ -21,6 +21,7 @@ Total pages: 19
 - [[user-journeys]]
 - [[permission-model]]
 - [[evaluation-framework]]
+- [[adoption-journey]]
 
 ## Meetings
 

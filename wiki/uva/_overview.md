@@ -11,12 +11,13 @@ The recursive twist: the first project this system documents is *itself*. See [[
 The project is run for [[kickstartai]] by students at the [[uva-ai4business-lab]]. The architecture is explicitly designed for reuse across all KickstartAI projects once the initial use case is complete.
 
 ## Current status
-Scoping / kickoff. Founding brief received 2026-04-02 (`2026-04-02-UvA-AI4BusinessLab-Living-Wiki-Brief.md`). **Kickoff meeting held 2026-04-13** (10:00 CEST). First deliverable — **Assignment 1: project definition** — presented ~2026-04-22 (see [[assignment-1-project-definition]]). Scope, user journeys, and sub-deliverables defined; the team is now named (see [[project-team]]). A **project Gantt chart / timeline artifact now exists** (dated 2026-04-13), but it was ingested as an image only — its actual phases/milestones/end date are unread (see [[project-timeline]]). Full timeline detail and tech stack not yet documented.
+Scoping / kickoff. Founding brief received 2026-04-02 (`2026-04-02-UvA-AI4BusinessLab-Living-Wiki-Brief.md`). **Kickoff meeting held 2026-04-13** (10:00 CEST). First deliverable — **Assignment 1: project definition** — presented ~2026-04-22 (see [[assignment-1-project-definition]]). Scope, user journeys, and sub-deliverables defined; the team is now named (see [[project-team]]). A **project Gantt chart / timeline artifact now exists** (dated 2026-04-13), but it was ingested as an image only — its actual phases/milestones/end date are unread (see [[project-timeline]]). A **KickstartAI intro/strategy deck** (dated 2026-04-13) is now partially ingested (titles/stats only; diagrams unread — see [[kickstartai]], [[adoption-journey]]). Full timeline detail and tech stack not yet documented.
 
 ## Timeline anchors
 - 2026-04-02 — founding brief received.
 - 2026-04-13 — kickoff meeting (KickstartAI x UvA), 10:00 CEST (Gemini meeting notes exist, not yet ingested).
 - 2026-04-13 — project Gantt chart produced (image-only; contents not ingested — see [[project-timeline]]).
+- 2026-04-13 — KickstartAI intro/strategy deck (`KAI-Intro`) partially ingested (image-heavy; diagrams not ingested — see [[kickstartai]], [[adoption-journey]]).
 - ~2026-04-22 (Wed) — Assignment 1 (project definition) presentation, 9–11 AM.
 
 ## Key decisions
@@ -24,7 +25,7 @@ Scoping / kickoff. Founding brief received 2026-04-02 (`2026-04-02-UvA-AI4Busine
 - Blog post drafts must be evaluated against a human-written baseline.
 
 ## Open questions
-See [[_gaps]] for the full list (full timeline detail, tech stack, source connectors, regeneration cadence, tone spec, student name-mapping, supervisor role, mentor labeling, un-OCR'd Gantt chart).
+See [[_gaps]] for the full list (full timeline detail, tech stack, source connectors, regeneration cadence, tone spec, student name-mapping, supervisor role, mentor labeling, un-OCR'd Gantt chart, un-OCR'd intro-deck diagrams / six-phase adoption model).
 
 ## Key concepts
 - [[living-wiki]] — the core self-updating LLM Wiki concept
