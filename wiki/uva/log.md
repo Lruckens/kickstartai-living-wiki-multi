@@ -30,3 +30,12 @@ Append-only. One entry per operation: ingest, query, or lint.
 **Pages created:** [[techdays]]
 **Pages updated:** kickstartai.md, generator-module.md, _gaps.md, index.md
 **Notes:** No substantive conflicts. One minor numeric reconciliation: ~7,500 (marketing) vs 7,407+ (impact counter) — consistent, documented both with snapshot date rather than overwriting. Pillar-label equivalence is inferred, not stated by source — flagged in [[_gaps]]. TechDays kept as standalone stub (consistent with separating [[kickstartai-team]] from [[kickstartai]]); its relevance to the project's content outputs noted only as a possibility. Total pages now 14.
+
+---
+
+## 2026-06-16 — INGEST
+**Source:** KickstartAI_News.md (public news/blog index web clipping, https://kickstart.ai/news, created 2026-05-07)
+**Action:** Low-risk enrichment ingest of the KickstartAI news/blog *index* (listing only — no article bodies). Created a standalone channel stub for the blog, enumerating its content categories (GenAI project-management lessons, partner interviews, employee spotlights, technical blogs, domain blogs, community spotlights). Linked it from [[kickstartai]] under the "We share / Amplify" pillar and a new "Public channels" note. Strengthened [[generator-module]]'s publication-venue picture (blog as the more plausible channel vs [[techdays]]) and noted the blog as a candidate human-baseline corpus on [[evaluation-deliverable]]. Refined three gaps.
+**Pages created:** [[kickstartai-blog]]
+**Pages updated:** kickstartai.md, generator-module.md, evaluation-deliverable.md, _gaps.md, index.md
+**Notes:** No conflicts. Employee-spotlight names corroborate the existing [[kickstartai-team]] roster with consistent spelling — no new staff names added. Index-only source: explicitly flagged that article bodies are not ingested (new gap). Venue and baseline-corpus links to [[generator-module]] / [[evaluation-deliverable]] kept as possibilities only — no source connects Living Wiki output to the blog. Total pages now 15.
