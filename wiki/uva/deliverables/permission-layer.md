@@ -1,7 +1,7 @@
 # Deliverable: Permission Layer
 
 **Last updated:** 2026-06-19
-**Status:** scoped (design required; full implementation explicitly out of scope this iteration)
+**Status:** scoped (design required; full implementation explicitly out of scope this iteration); **first concrete mechanism signal (user-id, 2026-06-04)**
 
 ## Summary
 Design (and optionally partial implementation) of document-level access control so the system is ready for sensitive projects. The 2026-04-13 kickoff clarified the permission layer **need not be a fully working architecture** — but the students **must design** how it would handle sensitive data from the start. The Assignment 1 presentation and written report (2026-04-22) confirm this via **MoSCoW**: permission-layer **design** is a **Should Have**, while a **completely working permission layer** is explicitly a **Won't Have** (this iteration). See [[assignment-1-presentation-2026-04-22]], [[assignment-1-report-2026-04-22]].
@@ -10,6 +10,7 @@ Design (and optionally partial implementation) of document-level access control 
 Privacy and permissions are a first-class concern. The design should allow deployment to a sensitive project via configuration, not a rewrite. See concept page [[permission-model]] for design intent.
 
 - **Privacy surfaced live in the MVP (2026-05-14):** At the first development-phase team meeting (see [[team-meeting-2026-05-14]]), **"document privacy may be an issue"** was raised as a live concern in the demoed MVP — corroborating the design-first framing.
+- **User-id connection — first concrete mechanism signal (2026-06-04):** At the 2026-06-04 meeting (see [[team-meeting-2026-06-04]]), **Xiaojing** proposed adding the possibility of a **connection to a user-id** for the permission layer — the **first specific implementation detail** (identity/auth binding) for this component. This complements (does not replace) the ZDR / configurable-backend directions below; the full auth model (RBAC/ACL), identity provider, and how a user-id binds to *synthesised* content remain unspecified — see [[permission-model]], [[_gaps]]. (Soft signal toward Xiaojing = Member 4, not asserted — see [[project-team]], [[_gaps]].)
 - **External-data-flow concern — concrete (2026-05-15):** The MVP runs on **Claude Code + Anthropic API** (see [[wiki-generation-engine]]), so **any ingested document is passed to Anthropic's LLM via API**. Laurenz flagged that this is fine for the team's own project docs but becomes a real concern for a **deployable artifact handling sensitive partner data / NDA-covered materials**. See [[laurenz-sanne-email-2026-05-15]].
 - **Design directions from Sanne (2026-05-15):**
   - **Zero-data-retention (ZDR)** — Anthropic's enterprise/API tiers have different data-handling terms than consumer products (e.g. ZDR available on the API); check what tier Claude Code falls under and whether enabling ZDR is feasible.
@@ -21,13 +22,14 @@ Privacy and permissions are a first-class concern. The design should allow deplo
 - **Ownership — RESOLVED-BY-PRECEDENCE (Member 4 individual):** The 2026-04-16 supervisor kickoff recorded this sub-deliverable (#5) as **collaborative**. Both later student-authored sources — the presentation deck AND the written report — assign it **individually to Member 4** (own component + individual RQ) and instead name the **evaluation framework as the collaborative deliverable**. With two agreeing student-authored sources against one supervisor-kickoff note, the **Member-4-individual** split is treated as confirmed; the superseded “collaborative” note is recorded, not deleted. See [[project-team]], [[user-journeys]], [[_gaps]].
 - **Design principles grounding (report):** security, privacy & data protection grounded in GDPR (EU 2016), NIST SP 800-53, ISO/IEC 27001:2013, and Kroll et al. (2017) on accountable algorithms. See [[assignment-1-report-2026-04-22]].
 - **Critical-thinking emphasis:** Sanne advised the students **not to rely solely on LLMs** here — the permission layer (and the evaluation framework) specifically require the students' own critical thinking.
-- Specific mechanism (RBAC, ACLs) not yet decided — see [[_gaps]].
+- Specific mechanism (RBAC, ACLs) not yet decided; the 2026-06-04 user-id idea is the first concrete hint — see [[_gaps]].
 
 ## Related
 - [[permission-model]]
 - [[kickoff-meeting-2026-04-13]]
 - [[supervisor-kickoff-2026-04-16]]
 - [[team-meeting-2026-05-14]]
+- [[team-meeting-2026-06-04]]
 - [[laurenz-sanne-email-2026-05-15]]
 - [[wiki-generation-engine]]
 - [[assignment-1-presentation-2026-04-22]]
@@ -43,3 +45,4 @@ Privacy and permissions are a first-class concern. The design should allow deplo
 - 2026-04-22-problem-definition.md (Assignment 1a written project-definition report, text-extractable)
 - 2026-05-14-meeting-notes.md (internal UvA team working meeting notes, development phase)
 - 2026-05-15-Laurenz-Sanne-email-content.md (KickstartAI x UvA demo follow-up email thread, 2026-05-15 → 2026-05-18)
+- 2026-06-04-meeting-notes.md (internal UvA team working meeting notes, development phase)

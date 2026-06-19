@@ -157,3 +157,12 @@ Append-only. One entry per operation: ingest, query, or lint.
 **Pages created:** [[laurenz-sanne-email-2026-05-15]], [[student-materials-corpus]], [[kickstartai-pm-ops]]
 **Pages updated:** wiki-generation-engine.md, permission-layer.md, permission-model.md, ingestion-pipeline.md, generator-module.md, evaluation-deliverable.md, project-team.md, kickstartai-projects.md, _overview.md, _gaps.md, index.md
 **Notes:** ⚠️ Resolutions/soft-signals, not hard contradictions. LLM-choice gap closed; GitHub-repo gap downgraded. New gaps: student-materials corpus + PM Ops folder not yet ingested, data-privacy directions open, Google Drive structure pending, Sanne email-domain inconsistency. Bakkie flagged as FICTIONAL (kept out of real portfolio). Laurenz=M1 soft signal strengthened, not asserted. Total pages now 31.
+
+---
+
+## 2026-06-19 — INGEST
+**Source:** 2026-06-04-meeting-notes.md (internal UvA team working meeting notes, development phase)
+**Action:** Ingested the second **development-phase** team meeting. Created Meetings page [[team-meeting-2026-06-04]] capturing per-member build progress: Laurenz finished his MVP and is building a **UI on top of the GitHub**; Quinten is building the **generator module** (untested; integration with the GitHub now an explicit at-risk task); Xiaojing proposes a **user-id connection** for the **permission layer**; Cara reports an **MVP is infeasible** for her component ("already delivers a final product"). Updated [[generator-module]] (integration risk + build status), [[wiki-generation-engine]] (UI plan + MVP-finished status), [[permission-layer]] (user-id mechanism signal), [[project-team]] (2026-06-04 build split + strengthened person↔member soft signals), [[_overview]], [[_gaps]].
+**Pages created:** [[team-meeting-2026-06-04]]
+**Pages updated:** generator-module.md, wiki-generation-engine.md, permission-layer.md, project-team.md, _overview.md, _gaps.md, index.md
+**Notes:** ⚠️ Settledness/feasibility tensions (generator↔GitHub integration; Cara MVP feasibility) flagged, not overwriting facts. Person↔member mapping soft signal STRENGTHENED (3/4 aligned) but NOT asserted; Cara→M3 by-elimination kept out of body pages, recorded only as a _gaps soft signal. UI and user-id recorded as emerging sub-features of existing deliverables, not new entities. New gaps added. Total pages now 32.

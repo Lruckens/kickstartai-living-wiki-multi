@@ -1,7 +1,7 @@
 # Wiki index — Living Wiki (UvA)
 
 Last updated: 2026-06-19
-Total pages: 31
+Total pages: 32
 
 > Maintained by Claude.
 
@@ -33,6 +33,7 @@ Total pages: 31
 - [[checkin-scheduling-2026-04-30]]
 - [[team-meeting-2026-05-14]]
 - [[laurenz-sanne-email-2026-05-15]]
+- [[team-meeting-2026-06-04]]
 
 ## Deliverables
 - [[ingestion-pipeline]]
