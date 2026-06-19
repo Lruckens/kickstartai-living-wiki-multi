@@ -1,19 +1,27 @@
 # Deliverable: Permission Layer
 
 **Last updated:** 2026-06-19
-**Status:** scoped (Assignment-1 MoSCoW: design = Should, fully-working = Won't); **a two-layer proof-of-concept is now BUILT & EVALUATED (Xiaojing, 2026-06-07)**; **being integrated into the wiki architecture (2026-06-11)**
+**Status:** scoped (Assignment-1 MoSCoW: design = Should, fully-working = Won't); **two-layer leakage PoC BUILT & EVALUATED (Xiaojing, 2026-06-07)**; **UI + auth layer BUILT (2026-06-12)**; **being integrated into the wiki architecture (2026-06-11)**
 
 ## Summary
-Design (and now a working proof-of-concept implementation) of document-level access control so the system is ready for sensitive projects. The 2026-04-13 kickoff clarified the permission layer **need not be a fully working architecture** — but the students **must design** how it would handle sensitive data from the start. The Assignment 1 presentation and written report (2026-04-22) confirm this via **MoSCoW**: permission-layer **design** is a **Should Have**, while a **completely working permission layer** is explicitly a **Won't Have** (this iteration). As of **2026-06-07**, Xiaojing has gone beyond "design-only" and built **and evaluated** a concrete two-layer permission architecture (pre-filtering + self-audit) — see below. See [[assignment-1-presentation-2026-04-22]], [[assignment-1-report-2026-04-22]], [[xiaojing-sanne-permission-email-2026-06-07]].
+Design (and now a working proof-of-concept implementation with a UI) of document-level access control so the system is ready for sensitive projects. The 2026-04-13 kickoff clarified the permission layer **need not be a fully working architecture** — but the students **must design** how it would handle sensitive data from the start. The Assignment 1 presentation and written report (2026-04-22) confirm this via **MoSCoW**: permission-layer **design** is a **Should Have**, while a **completely working permission layer** is explicitly a **Won't Have** (this iteration). As of **2026-06-07**, Xiaojing built **and evaluated** a concrete two-layer permission architecture (pre-filtering + self-audit); as of **2026-06-12** she has also built a **UI + authentication layer** (see below). See [[assignment-1-presentation-2026-04-22]], [[assignment-1-report-2026-04-22]], [[xiaojing-sanne-permission-email-2026-06-07]], [[mockup-artifact-2026-06-12]].
 
 ## Details
 Privacy and permissions are a first-class concern. The design should allow deployment to a sensitive project via configuration, not a rewrite. See concept page [[permission-model]] for design intent.
+
+### UI + authentication layer — BUILT (2026-06-12)
+The 2026-06-12 mock-up artifact (see [[mockup-artifact-2026-06-12]]) adds a concrete **UI + auth** dimension on top of the two-layer leakage design:
+- **Login** with `user_id` + password; for KickstartAI, **`user_id` = email** in the format `first_name.last_name@kickstart.ai`. The session identifies the user automatically for all subsequent actions.
+- Two tabs: **Ingestion** (upload a document, assign a visibility label **public / internal / restricted**; restricted documents require selecting an existing project from a dropdown or typing a new project name) and **Generator** (request a wiki page; for restricted pages the user selects a project from a dropdown that **only shows authorized projects**, so **cross-project access is impossible**).
+- **User lifecycle:** when a user joins the company/project they are added to the auth system (granted the corresponding restricted access); when they leave, their account is removed and access revoked.
+- **Three passwordless demo accounts** demonstrate the prototype; **production authentication is explicitly out of scope** (KickstartAI future work). Xiaojing plans to add all group members + Sanne to the system for the final artifact.
+- Sanne's 2026-06-07 suggestions folded in: **email-as-user-id** and **dummy accounts** (Sanne advised against assigning separate IDs/passwords to every member for this thesis).
 
 ### Integration into the wiki architecture (2026-06-11)
 At the 2026-06-11 team meeting (see [[team-meeting-2026-06-11]]) the permission layer entered **integration**: **Xiaojing shares her MVP + a precise description** of what it does, and **Laurenz merges it** into the wiki architecture (using **Claude and VS Code**). Xiaojing is to **fold Sanne's 2026-06-07 feedback** (the five critiques below) into the version she sends to Laurenz before integration. See [[wiki-generation-engine]], [[_gaps]].
 
 ### Concrete two-layer design — BUILT & EVALUATED (Xiaojing, 2026-06-07)
-The most detailed source on this component to date is the 2026-06-07 → 2026-06-08 design-review thread between Xiaojing and Sanne (see [[xiaojing-sanne-permission-email-2026-06-07]]). Xiaojing **self-identifies as the permission-layer owner** and presents a fully-articulated, evaluated proof-of-concept. This realizes the 2026-06-04 "user-id connection" hint as `user_id` + `project_id` pre-filtering.
+The most detailed source on this component is the 2026-06-07 → 2026-06-08 design-review thread between Xiaojing and Sanne (see [[xiaojing-sanne-permission-email-2026-06-07]]). Xiaojing **self-identifies as the permission-layer owner** and presents a fully-articulated, evaluated proof-of-concept. This realizes the 2026-06-04 "user-id connection" hint as `user_id` + `project_id` pre-filtering.
 
 **Problem:** when an LLM synthesizes source documents into wiki pages, **traditional file-level access control is insufficient** — sensitive content can appear paraphrased in a page with no restriction label. Two leakage types are defined:
 - **Vertical leakage** — higher-tier content (restricted) appears in a lower-tier page (public/internal).
@@ -36,23 +44,24 @@ The most detailed source on this component to date is the 2026-06-07 → 2026-06
 
 ### Earlier signals & directions
 - **Privacy surfaced live in the MVP (2026-05-14):** At the first development-phase team meeting (see [[team-meeting-2026-05-14]]), **"document privacy may be an issue"** was raised in the demoed MVP — corroborating the design-first framing.
-- **User-id connection — first concrete mechanism signal (2026-06-04):** At the 2026-06-04 meeting (see [[team-meeting-2026-06-04]]), **Xiaojing** proposed a **connection to a user-id**. This is now fully realized in the two-layer design above (`user_id` + `project_id` pre-filtering). See [[permission-model]], [[_gaps]].
+- **User-id connection — first concrete mechanism signal (2026-06-04):** At the 2026-06-04 meeting (see [[team-meeting-2026-06-04]]), **Xiaojing** proposed a **connection to a user-id**. This is now fully realized in the two-layer design + UI auth above (`user_id`/email + `project_id`). See [[permission-model]], [[_gaps]].
 - **External-data-flow concern — concrete (2026-05-15):** The MVP runs on **Claude Code + Anthropic API** (see [[wiki-generation-engine]]), so **any ingested document is passed to Anthropic's LLM via API**. Fine for the team's own project docs, but a real concern for a **deployable artifact handling sensitive partner data / NDA-covered materials**. See [[laurenz-sanne-email-2026-05-15]].
 - **Design directions from Sanne (2026-05-15):**
   - **Zero-data-retention (ZDR)** — check what Anthropic tier Claude Code falls under and whether ZDR is feasible.
   - **Configurable / swappable backend** — swap in a **self-hosted or VPC-deployed model** when needed; connects directly to the permission layer (Member 4 scope) and the configuration-not-rewrite reuse model (see [[_reuse]], [[permission-model]]).
   - **Data-flow documentation as a thesis artifact** — document which operations send data externally vs. stay local.
 - **Deployment governance — admin-per-project (2026-05-14):** each project assigned an **admin who governs the wiki page** (mechanism unspecified — see [[permission-model]], [[_gaps]]).
-- **MoSCoW (Assignment 1, 2026-04-22):** Permission-layer **design** = **Should Have**; a **fully working/programmed permission layer** = **Won't Have (this iteration)**. The 2026-06-07 PoC **exceeds** the "design-only" framing; recorded as a thesis-level component prototype, consistent with "design + optional partial implementation." The MoSCoW record is **kept, not overwritten** — see [[_gaps]].
+- **MoSCoW (Assignment 1, 2026-04-22):** Permission-layer **design** = **Should Have**; a **fully working/programmed permission layer** = **Won't Have (this iteration)**. The 2026-06-07 PoC and 2026-06-12 UI **exceed** the "design-only" framing; recorded as a thesis-level component prototype, consistent with "design + optional partial implementation." The MoSCoW record is **kept, not overwritten** — see [[_gaps]].
 - **Research framing (Member 4 RQ):** "How can a permission-aware architecture be designed for an LLM-maintained knowledge base to mitigate **information leakage from restricted source documents into synthesized wiki pages**?" The report sharpens it: because the wiki serves **synthesised content rather than raw documents**, **traditional access control is insufficient**. The 2026-06-07 design directly operationalizes this. See [[assignment-1-report-2026-04-22]].
-- **Ownership — RESOLVED-BY-PRECEDENCE (Member 4 individual), now self-asserted:** The 2026-04-16 supervisor kickoff recorded sub-deliverable #5 as **collaborative**. Both later student-authored sources (deck + report) assign it **individually to Member 4** and name the **evaluation framework** as the collaborative deliverable. The 2026-06-07 thread adds **self-asserted ownership by Xiaojing**, strengthening Xiaojing ↔ Member 4 from soft signal to self-asserted (still not an explicit course "Member 4" label). See [[project-team]], [[user-journeys]], [[_gaps]].
+- **Ownership — RESOLVED-BY-PRECEDENCE (Member 4 individual), self-asserted:** The 2026-04-16 supervisor kickoff recorded sub-deliverable #5 as **collaborative**. Both later student-authored sources (deck + report) assign it **individually to Member 4** and name the **evaluation framework** as the collaborative deliverable. The 2026-06-07 thread adds **self-asserted ownership by Xiaojing**. See [[project-team]], [[user-journeys]], [[_gaps]].
 - **Design principles grounding (report):** security, privacy & data protection grounded in GDPR (EU 2016), NIST SP 800-53, ISO/IEC 27001:2013, and Kroll et al. (2017). See [[assignment-1-report-2026-04-22]].
 - **Critical-thinking emphasis:** Sanne advised the students **not to rely solely on LLMs** here — corroborated by her detailed 2026-06-07 critique.
-- **Mechanism — now substantially specified:** effectively a **paragraph-level tier model (public/internal/restricted) + pre-filtering ACL by `project_id`/`user_id` + LLM self-audit**. Open refinements (aggregation leakage, label correctness, eval scale, cross-model audit) — see [[_gaps]].
+- **Mechanism — now substantially specified:** effectively a **paragraph-level tier model (public/internal/restricted) + pre-filtering ACL by `project_id`/`user_id` + LLM self-audit**, with an **email-based login + project-scoped UI**. Open refinements (aggregation leakage, label correctness, eval scale, cross-model audit, usability for non-technical staff) — see [[_gaps]].
 
 ## Related
 - [[permission-model]]
 - [[xiaojing-sanne-permission-email-2026-06-07]]
+- [[mockup-artifact-2026-06-12]]
 - [[kickoff-meeting-2026-04-13]]
 - [[supervisor-kickoff-2026-04-16]]
 - [[team-meeting-2026-05-14]]
@@ -77,3 +86,4 @@ The most detailed source on this component to date is the 2026-06-07 → 2026-06
 - 2026-06-04-meeting-notes.md (internal UvA team working meeting notes, development phase)
 - 2026-06-07-Xiaojing-Sanne-email-content.md (Xiaojing ↔ Sanne permission-layer design review email thread, 2026-06-07 → 2026-06-08)
 - 2026-06-11-meeting-notes.md (internal UvA team working meeting notes, development phase)
+- 2026-06-12-mock-up-artifact.md (Living Wiki UI mock-up artifact description + Sanne feedback, development phase)

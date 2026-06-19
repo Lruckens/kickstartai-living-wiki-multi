@@ -2,141 +2,148 @@
 
 Underdocumented areas and open questions.
 
+## Surfaced from 2026-06-12 mock-up artifact ingest (ingested 2026-06-19)
+- **Cara's component = Gap Detector — RESOLVED (positively confirmed).** The long-standing "Cara's component still unnamed" gap is **closed**: the 2026-06-12 mock-up artifact attributes a full **6-layer hybrid Gap Detector** design to Cara/Meng Cheng. Cara ↔ Member 3 is now **positively evidenced**, not by-elimination. See [[gap-detector]], [[mockup-artifact-2026-06-12]], [[project-team]], [[user-journeys]].
+- **UI scope/existence — substantially RESOLVED (residual on deliverable status).** The 2026-06-04 "UI planned" gap is resolved: a **React/Vite + FastAPI UI is built** (Wiki + Operations + Generator + Permission + Gap surfaces). Residual: is the UI a **graded thesis deliverable or a convenience layer**? Still partly open. See [[wiki-generation-engine]], [[mockup-artifact-2026-06-12]].
+- **Generator sourcing approach — RESOLVED toward "from the wiki."** The 2026-05-14 wiki-vs-source-documents question is answered for the implemented MVP: a **wiki-reader module** gathers wiki pages/content as generation context. See [[generator-module]].
+- **GitHub repo schema/mechanics — substantially RESOLVED.** The artifact reveals the repo mechanics: **markdown-on-disk (no DB)**, 3-phase Ingest (Analyse/Apply/Push), **git-worktree "Wiki Bot" push** to `main`, FastAPI thin layer. Residual: full code body still un-ingested. See [[wiki-generation-engine]].
+- **Backend deployment / laptop-local dependency — NEW (key durability risk).** The generator (and likely permission/gap) backends run **on individual laptops**; the system only works while the owner runs it. Sanne suggested **Vercel** (free plan likely sufficient); deployment is out of scope but to be attempted. Track outcome. See [[generator-module]], [[wiki-generation-engine]], [[project-team]].
+- **Multi-component integration into one system — NEW.** Each component has its own UI/backend; Sanne and the team flag **integrating them into one working system** as the biggest challenge (extends the Claude + VS Code manual-merge durability gap). See [[wiki-generation-engine]].
+- **Gap-detector scoring transparency — NEW (Sanne's feedback).** Manually-defined weights (0.45/0.40/0.15) + risk multipliers + Precision/Recall/F1 thresholds lack empirical/justified basis; importance vs. confidence are conflated and should be separated. See [[gap-detector]], [[evaluation-deliverable]].
+- **Evaluation metric selection — refined (Sanne, ~3 metrics).** Sanne advises picking **circa three metrics** from academic/internet sources and applying them; systematic evaluation may be hard. Refines the existing metric-selection gap (alongside Quinten's options list). See [[evaluation-deliverable]], [[evaluation-framework]].
+- **Vercel deployment direction — NEW.** A concrete (out-of-scope-but-attempted) deployment direction; track the outcome. See [[wiki-generation-engine]].
+- **Usability vs. technicality — NEW (UX requirement).** Sanne's warning that the tool must be usable by non-technical company staff (esp. gap detector + permission layer) is now on record. See [[gap-detector]], [[permission-layer]].
+- **Production authentication out of scope — NEW.** The permission-layer UI uses **passwordless demo accounts**; real password/access-control integration is explicitly future work for KickstartAI. See [[permission-layer]].
+- **Generator output types fixed with KickstartAI — NEW.** A discussion fixed the generator output types; the specific list is referenced but not enumerated in extractable form. See [[generator-module]].
+- **`.env` / API-key handling — NEW (secret management).** KickstartAI-provided Anthropic API key stored in a gitignored `.env` (`.env.example` template committed) — a per-deployment secret-management detail relevant to reuse. See [[_reuse]].
+- **~15 UI screenshots not ingested — NEW.** The 2026-06-12 artifact's embedded PNG UI screenshots are image-only; contents not ingested, not fabricated. Re-ingest/OCR flag. See [[mockup-artifact-2026-06-12]].
+
 ## Surfaced from 2026-06-11 team-meeting ingest (ingested 2026-06-19)
-- **Generator↔GitHub integration risk — RESOLVED.** The 2026-06-04 "active, at-risk" generator↔GitHub integration task is now **resolved**: per the 2026-06-11 meeting, **Quinten's generator module and Laurenz's wiki architecture are integrated and functional**. See [[generator-module]], [[wiki-generation-engine]], [[team-meeting-2026-06-11]].
-- **Integration tooling / durability — NEW.** Laurenz is integrating the remaining modules (permission layer + Cara's component) by **merging MVPs manually using Claude + VS Code**. The robustness/repeatability/reproducibility of this manual, Claude-assisted merge is unspecified — relevant to whether the integrated artifact is reproducible. See [[wiki-generation-engine]], [[team-meeting-2026-06-11]].
-- **Evaluation-framework metric selection / two-family split — NEW.** Quinten is to share a **list of metric options**; the **specific metrics** mapping to the four dimensions (coverage/freshness/accuracy/usefulness) are not yet chosen. Also track the recorded **two-family** structure: Laurenz+Quinten (LLM text-generation → comparable frameworks) vs. Cara+Xiaojing (different frameworks). See [[evaluation-framework]], [[evaluation-deliverable]].
-- **Cara's component MVP description still unspecified — NEW.** Cara is to provide "a precise description of what her MVP does" for Laurenz to merge, but the **component is still not named** in any source (the by-elimination Gap-Detector inference gains no positive evidence). Track whether the forthcoming MVP description finally identifies Cara's component. See [[project-team]], [[gap-detector]].
-- **Cara MVP-feasibility — status evolved.** The 2026-06-04 "MVP not feasible" friction now sits alongside a 2026-06-11 expectation that Cara **shares an MVP** for merging — implying the friction was worked around or "MVP" means a shareable component version. The methodology-reconciliation gap (below) remains open.
+- **Generator↔GitHub integration risk — RESOLVED.** Quinten's generator module and Laurenz's wiki architecture are integrated and functional (re-confirmed via PR in the 2026-06-12 artifact). See [[generator-module]], [[wiki-generation-engine]], [[team-meeting-2026-06-11]].
+- **Integration tooling / durability — NEW.** Laurenz integrates the remaining modules by **merging MVPs manually using Claude + VS Code**; robustness/repeatability unspecified. See [[wiki-generation-engine]], [[team-meeting-2026-06-11]].
+- **Evaluation-framework two-family split — NEW.** Recorded **two-family** structure: Laurenz+Quinten (LLM text-generation → comparable frameworks) vs. Cara+Xiaojing (different frameworks). See [[evaluation-framework]], [[evaluation-deliverable]].
+- **Cara MVP-feasibility — status evolved/RESOLVED-in-practice.** The 2026-06-04 "MVP not feasible" friction was worked around; Cara shares an MVP (the Gap Detector). The methodology-reconciliation note remains for thesis framing. See [[team-meeting-2026-06-11]], [[gap-detector]].
 
 ## Surfaced from 2026-06-07 permission-layer design review thread ingest (ingested 2026-06-19)
-- **Permission mechanism (RBAC/ACL) — substantially RESOLVED.** The design is now concrete: a **paragraph-level tier model** (public / internal / restricted-by-`project_id`) + a **pre-filtering ACL** (by `project_id` + `user_id`) + an **LLM self-audit** (regex blacklist then LLM judge, severity escalation, logging). Effectively a paragraph-level ACL + tier model. The 2026-06-04 user-id hint is now fully realized. Downgraded from "undecided" to "concrete design proposed & evaluated; refinements pending." See [[permission-layer]], [[permission-model]], [[xiaojing-sanne-permission-email-2026-06-07]].
-- **Permission-layer PoC vs. MoSCoW "Won't-Have working layer" — NEW (reconcile).** A working, *evaluated* two-layer PoC now exists, exceeding the Assignment-1 "design-only / Won't-Have fully-working" framing; as of 2026-06-11 it is being **integrated** into the wiki architecture. Track whether this is scoped as "partial implementation" or genuine scope-growth. The MoSCoW record is kept (not overwritten). See [[permission-layer]], [[_overview]].
-- **Aggregation / inference leakage — NEW (unaddressed hard problem).** Sanne's sharpest point: the audit flags *ungrounded* claims, but **grounded aggregation** of allowed paragraphs revealing restricted info passes the audit. A classic hard access-control problem; not yet in Xiaojing's threat model. See [[permission-layer]], [[permission-model]].
-- **Paragraph-label assignment mechanism — NEW (Sanne's biggest-risk point).** The entire pre-filtering guarantee rests on correct ingestion-time paragraph tier labels. Who assigns them, and how (manual vs automated)? A single mislabeled restricted paragraph defeats Layer 1. Unspecified. See [[permission-layer]].
-- **Cross-project connections vs. strict project filtering — NEW (tension).** The project pitches cross-project learnings as a feature (see [[_reuse]], one-page-per-project / shared-topics framing), but strict `project_id` filtering prevents exactly that. The tier model implicitly resolves this; it should be made explicit, and aggregation can still combine internal facts across projects. See [[permission-model]].
-- **Evaluation environment = gpt-5.1 via UvA API (not Claude) — NEW (tech detail + limitation).** Xiaojing's permission-layer experiments used **gpt-5.1 as both generator and judge** (same-model blind spot, self-acknowledged); production intends Claude end-to-end. Sanne notes the same-model blind spot **persists even on Claude end-to-end** — a cross-model-family audit is preferable; same- vs cross-model detection untested. Distinct from the production Claude Code + Anthropic API stack. See [[wiki-generation-engine]], [[permission-layer]].
-- **Permission-layer evaluation scale — NEW (illustrative PoC).** 5 scenarios/leak-type → one miss = 20% detection-rate swing; frame results as an illustrative proof of concept; make ground-truth establishment and false-positive-rate negatives explicit. See [[evaluation-deliverable]], [[permission-layer]].
-- **Claude-Code permission config via markdown file — NEW (implementation detail).** The current implementation reads updated access config from a **markdown file** (vs SQL paragraph-table updates in a full pipeline). Durability/scalability of the markdown-config approach unspecified. See [[wiki-generation-engine]], [[permission-layer]].
-- **Person↔member mapping — M4 now SELF-ASSERTED; M1/M2/M3 still soft.** Xiaojing **self-identifies** as the permission-layer owner (→ Member 4) — the first positive, self-asserted person↔component evidence. **Laurenz≈M1** and **Quinten≈M2** remain build/integration-activity soft signals (reinforced 2026-06-11); **Cara≈M3** remains a by-elimination inference with no positive evidence. The full mapping is not formally asserted. See [[project-team]], [[user-journeys]].
-- **Xiaojing ↔ lee89953@gmail.com — RE-CORROBORATED (again).** The thread independently corroborates the alias. See [[project-team]].
-- **Sanne email domain — one more `@kickstart.ai` data point.** The 2026-06-07 thread is consistently `@kickstart.ai`; the `@kickstartai.org` variant remains unreconciled. See [[project-team]].
+- **Permission mechanism (RBAC/ACL) — substantially RESOLVED.** A **paragraph-level tier model** (public / internal / restricted-by-`project_id`) + a **pre-filtering ACL** + an **LLM self-audit**, now with an **email-based login + project-scoped UI** (2026-06-12). See [[permission-layer]], [[permission-model]], [[xiaojing-sanne-permission-email-2026-06-07]].
+- **Permission-layer PoC vs. MoSCoW "Won't-Have working layer" — reconcile (kept).** A working, *evaluated* two-layer PoC + UI now exists, exceeding the Assignment-1 framing; scoped as partial implementation / scope-growth, MoSCoW record kept. See [[permission-layer]], [[_overview]].
+- **Aggregation / inference leakage — NEW (unaddressed hard problem).** Grounded aggregation of allowed paragraphs revealing restricted info passes the audit; not yet in the threat model. See [[permission-layer]], [[permission-model]].
+- **Paragraph-label assignment mechanism — NEW.** The pre-filtering guarantee rests on correct ingestion-time paragraph tier labels; who assigns them and how is unspecified. See [[permission-layer]].
+- **Cross-project connections vs. strict project filtering — NEW (tension).** Strict `project_id` filtering is in tension with the cross-project-learnings feature; tier model implicitly resolves it but should be explicit. See [[permission-model]].
+- **Evaluation environment = gpt-5.1 via UvA API (not Claude) — NEW.** Permission-layer experiments used gpt-5.1 as both generator and judge (same-model blind spot, persists even on Claude end-to-end); cross-model audit preferable. See [[wiki-generation-engine]], [[permission-layer]].
+- **Permission-layer evaluation scale — NEW.** 5 scenarios/leak-type → one miss = 20% swing; frame as illustrative PoC. See [[evaluation-deliverable]], [[permission-layer]].
+- **Claude-Code permission config via markdown file — NEW.** Current implementation reads access config from a markdown file (vs SQL paragraph-table updates). See [[wiki-generation-engine]], [[permission-layer]].
+- **Person↔member mapping — M3 & M4 now resolved; M1/M2 soft.** **Xiaojing = M4** (self-asserted 2026-06-07) and **Cara = M3** (positively confirmed 2026-06-12). **Laurenz≈M1** and **Quinten≈M2** remain build/integration-activity soft signals. See [[project-team]], [[user-journeys]].
+- **Xiaojing ↔ lee89953@gmail.com — RE-CORROBORATED.** See [[project-team]].
+- **Sanne email domain — `@kickstart.ai` accumulating.** The `@kickstartai.org` variant remains unreconciled. See [[project-team]].
 
 ## Surfaced from 2026-06-04 development-phase team meeting ingest (ingested 2026-06-19)
-- **UI / front-end layer — NEW.** Laurenz plans to build a **UI on top of the GitHub repo** to make it more user-friendly (2026-06-04). Scope, framework, and whether the UI is a **thesis deliverable or a convenience layer** are unspecified. Note: a UI was **not** in the Assignment-1 MoSCoW/deliverables list — track whether it is net-new scope. See [[wiki-generation-engine]], [[team-meeting-2026-06-04]].
-- **Permission-layer user-id mechanism — RESOLVED.** Xiaojing's 2026-06-04 user-id proposal is now fully realized as `user_id` + `project_id` pre-filtering in the 2026-06-07 two-layer design. See [[permission-layer]], [[permission-model]], [[xiaojing-sanne-permission-email-2026-06-07]].
-- **Generator↔GitHub integration risk — RESOLVED (see 2026-06-11 entry above).** Was active/at-risk 2026-06-04; integrated & functional 2026-06-11. See [[generator-module]], [[wiki-generation-engine]], [[team-meeting-2026-06-11]].
-- **MVP-vs-final-product feasibility (Cara) — NEW.** Cara (Meng Cheng) reports the CRISP-DM mock-up→MVP→artifact step is **infeasible** for her component because she "already delivers a final product." Open whether this reflects a component-specific scoping reality or needs methodology reconciliation (status evolved 2026-06-11 — see above). See [[assignment-1-report-2026-04-22]], [[team-meeting-2026-06-04]].
-- **Person↔member mapping — see 2026-06-07 entry above (M4 now self-asserted).** See [[project-team]], [[user-journeys]], [[team-meeting-2026-06-04]].
+- **UI / front-end layer — RESOLVED (built 2026-06-12).** See above.
+- **Permission-layer user-id mechanism — RESOLVED.** Realized as `user_id`(email) + `project_id` pre-filtering + UI login. See [[permission-layer]], [[permission-model]].
+- **MVP-vs-final-product feasibility (Cara) — evolved.** See 2026-06-11 entry. The Gap Detector is built; methodology-reconciliation note retained for thesis framing.
 
 ## Surfaced from 2026-05-15 demo follow-up thread ingest (ingested 2026-06-19)
-- **Tech stack / LLM choice — RESOLVED.** The system runs on **Claude Code + Anthropic API** (the GitHub repo is directly linked to Claude Code, which performs all operations and generates wiki pages; ingested documents are passed to Anthropic's LLM via API). This closes the 2026-05-14 "what LLM do they use and is this possible?" open question. **Residual:** specific **vector store / embedding model / RAG framework** still unspecified. Note also the permission-layer *evaluation* used gpt-5.1 via the UvA API (see 2026-06-07 above). See [[wiki-generation-engine]], [[team-meeting-2026-05-14]], [[laurenz-sanne-email-2026-05-15]].
-- **Data-privacy / external-data-flow — OPEN, with concrete directions.** Because ingested docs go to Anthropic's API, sensitive partner/NDA data is a concern for a deployable artifact. Directions (Sanne): (a) **zero-data-retention (ZDR)** API tier; (b) **configurable/swappable self-hosted or VPC-deployed backend**; (c) **document which operations send data externally vs. stay local** as a thesis artifact. The 2026-06-07 permission design partly operationalizes this (pre-filtering keeps unauthorized content out of the prompt). See [[permission-layer]], [[permission-model]], [[laurenz-sanne-email-2026-05-15]].
-- **Student-materials corpus not yet ingested — NEW.** `llm-wiki-student-materials.zip` (~65K, **fictional but realistic ~7 months**, **Bakkie** sub-corpus + meeting notes) received 2026-05-18 but its documents are **not yet ingested**. ⚠️ The corpus **README must be EXCLUDED** from ingestion (it summarises what the tool should self-discover). PM/business-heavy (no PR threads) — supplement with own repo. Flag for future ingest. See [[student-materials-corpus]], [[ingestion-pipeline]], [[evaluation-deliverable]].
-- **PM Ops folder not yet ingested — NEW.** `New Templates 2026 [Apr - June]...zip` (~15.8MB) — KickstartAI's per-project Project Management Ops folder structure. Contents not provided as text; flag for ingest. Relevant to [[_reuse]]. See [[kickstartai-pm-ops]].
-- **GitHub repo body — URL known, contents still un-ingested (DOWNGRADED).** URL now captured: `github.com/Lruckens/kickstartai-living-wiki`. The repo's code/schema is still not ingested. Flag retained but downgraded. See [[wiki-generation-engine]], [[laurenz-sanne-email-2026-05-15]].
+- **Tech stack / LLM choice — RESOLVED.** Claude Code + Anthropic API (repo linked to Claude Code; React/Vite + FastAPI UI as of 2026-06-12). **Residual:** specific **vector store / embedding model / RAG framework** still unspecified (though the gap detector uses embeddings + NetworkX). See [[wiki-generation-engine]], [[laurenz-sanne-email-2026-05-15]].
+- **Data-privacy / external-data-flow — OPEN, with directions.** ZDR API tier; configurable/swappable self-hosted/VPC backend; document local-vs-external operations. See [[permission-layer]], [[permission-model]], [[laurenz-sanne-email-2026-05-15]].
+- **Student-materials corpus not yet ingested — NEW.** `llm-wiki-student-materials.zip` received 2026-05-18; documents not yet ingested. ⚠️ README must be EXCLUDED. See [[student-materials-corpus]], [[ingestion-pipeline]], [[evaluation-deliverable]].
+- **PM Ops folder not yet ingested — NEW.** See [[kickstartai-pm-ops]].
 - **Google Drive structure — pending delivery** from Sanne. See [[laurenz-sanne-email-2026-05-15]].
-- **"Ways of working" / project flow — partially answered.** The PM Ops folder answers most kickoff/problem-definition/goal-setting questions; **day-to-day collaboration** to be discussed Thursday/on a call — outcome pending. See [[laurenz-sanne-email-2026-05-15]].
-- **Sanne email-domain inconsistency — NEW (minor).** Appears as both `sanne.wielinga@kickstart.ai` and `sanne.wielinga@kickstartai.org` across sources; canonical form unconfirmed (more `@kickstart.ai` data points accumulating). See [[project-team]].
-- **"Bakkie" is FICTIONAL — guardrail.** The Bakkie corpus is a synthetic ingestion-test artifact and must **never** be merged into the real [[kickstartai-projects]] portfolio. See [[student-materials-corpus]].
-- **Agentic vs. pipeline — partially clarified, still open.** The chosen tool (Claude Code) is itself an agentic terminal-based agent; whether to build further agentic structure on top vs. a pipeline remains a live design choice. See [[wiki-generation-engine]], [[team-meeting-2026-05-14]].
-- **Person↔member mapping — see 2026-06-07 entry above.** See [[project-team]], [[user-journeys]].
+- **"Bakkie" is FICTIONAL — guardrail.** Must never be merged into the real [[kickstartai-projects]] portfolio. See [[student-materials-corpus]].
+- **Agentic vs. pipeline — partially clarified.** Claude Code is itself agentic; further agentic structure vs. pipeline remains a live design choice. See [[wiki-generation-engine]].
 
 ## Surfaced from 2026-05-14 development-phase team meeting ingest (ingested 2026-06-19)
-- **Generator sourcing approach — open design question.** Should the [[generator-module]] generate content **from the wiki** (compiled knowledge base) or **search through the underlying source documents** the wiki is built from? Undecided (Quinten's point). See [[team-meeting-2026-05-14]].
-- **Data-understanding scope — open question.** With little data and little preprocessing, what belongs in the CRISP-DM data-understanding phase given the cold-start corpus? Unresolved. See [[team-meeting-2026-05-14]].
-- **Admin-per-project governance — (proposal recorded, mechanism unspecified).** The team proposed assigning an **admin per project who governs the wiki page**. How the admin governs, and the relationship to the [[permission-model]] (now a paragraph-level tier/ACL model), is unspecified. See [[permission-layer]], [[team-meeting-2026-05-14]].
-- **One-page-per-project vs. per-topic granularity — terminology note.** The 2026-05-14 "one wiki page = one project, linked by shared topics" framing is a coarser, multi-project granularity than the within-project per-topic pages described in [[living-wiki]]. Recorded precisely to avoid conflation; not a contradiction. See [[wiki-generation-engine]], [[_reuse]].
+- **Data-understanding scope — open question.** What belongs in the CRISP-DM data-understanding phase given the cold-start corpus? See [[team-meeting-2026-05-14]].
+- **Admin-per-project governance — (proposal recorded, mechanism unspecified).** See [[permission-layer]], [[team-meeting-2026-05-14]].
+- **One-page-per-project vs. per-topic granularity — terminology note.** See [[wiki-generation-engine]], [[_reuse]].
 
 ## Surfaced from check-in scheduling thread ingest (2026-04-30 → 2026-05-04; ingested 2026-06-19)
-- **Second UvA group ("both groups" / "the other group") — UNRESOLVED.** Sanne's 2026-04-30 email references **two groups** working with KickstartAI in parallel — strongly implying a **second UvA team** beyond the four-person Living Wiki team. Its identity, project, relationship to the Living Wiki team, and whether it shares the [[uva-ai4business-lab]] context are all **unknown**. Recorded as an observation; no entity created. See [[checkin-scheduling-2026-04-30]], [[project-team]].
-- **Delft office visit — date TBD.** A KickstartAI Delft office visit was invited for "both groups"; specific date(s) not yet set. See [[checkin-scheduling-2026-04-30]].
-- **Standing check-in cadence — still open (refined).** A concrete one-off post-break check-in call (Thursday 11:00 AM) was scheduled via the 2026-04-30 thread, but the **recurring** weekly-vs-bi-weekly cadence agreed "in principle" at kickoff remains **undecided**. See [[checkin-scheduling-2026-04-30]], [[project-team]].
-- **Xiaojing ↔ lee89953@gmail.com alias — RE-CORROBORATED.** The thread independently corroborates the alias. See [[project-team]].
+- **Second UvA group ("both groups") — UNRESOLVED.** Implies a second UvA team beyond the four-person Living Wiki team; identity/project/relationship unknown. See [[checkin-scheduling-2026-04-30]], [[project-team]].
+- **Delft office visit — date TBD.** See [[checkin-scheduling-2026-04-30]].
+- **Standing check-in cadence — still open.** A one-off Thursday 11:00 call was scheduled; recurring weekly-vs-bi-weekly cadence undecided. See [[checkin-scheduling-2026-04-30]], [[project-team]].
 
 ## Surfaced from Assignment 1 written report ingest (2026-04-22; ingested 2026-06-19)
-- **Member ↔ named-student mapping (#1–4) — PARTIALLY RESOLVED.** Both the presentation deck and the written report map RQs/components to **"Member 1–4"** but neither binds each Member number to a *named student*. Owners-by-component resolved; owners-by-person: **M4 = Xiaojing self-asserted (2026-06-07)**; M1≈Laurenz, M2≈Quinten (build/integration-activity soft signals); M3≈Cara (by elimination). See [[user-journeys]], [[project-team]], [[assignment-1-report-2026-04-22]].
-- **Permission-layer division-scheme conflict — RESOLVED-BY-PRECEDENCE.** Two later, mutually-consistent student-authored sources (deck + written report) assign the **Permission Layer to Member 4 individually** and name the **evaluation framework as the collaborative deliverable**, against the single supervisor-kickoff (2026-04-16) note that called the Permission Layer "collaborative." Treated as confirmed; the superseded note is recorded, not deleted. See [[permission-layer]], [[user-journeys]], [[project-team]].
-- **GAPS diagram — framework IDENTIFIED, image contents still locked.** The deck's image-only "DAPS diagram" is textually identified as a **GenAI-Analytic Problem Structure (GAPS) diagram** per **de Mast & Lokkerbol (2024)**. The framework's identity/origin is now closed (see [[gaps-diagram]]), but the **diagram image's actual node/layer contents remain in an un-OCR'd JPG** — re-ingest flag retained.
-- **"Meng Cheng" ↔ "Cara"/"Carac M. Cheng" — NARROWED (alias relationship inferred).** The report's author list gives **Meng Cheng** (#14025906) in the exact roster slot earlier sources gave "Cara"/"Carac M. Cheng" (same surname Cheng, same email). Near-certainly the same person. The explicit alias mapping is **inferred, not stated**. See [[project-team]], [[uva-ai4business-lab]].
-- **Laurenz surname variant.** The report gives **Ruckensteiner-Geyer** (#13762931); earlier sources used the shorter "Ruckensteiner." Updated to the fuller form, shorter noted as a variant.
-- **Literature/citation set — bodies not ingested.** The report cites Karpathy (2026), Lewis et al. (2020), Gao et al. (2023), Brown et al. (2020), Ji et al. (2023), Hevner (2007), Chapman et al. (2000), Martínez-Plumed et al. (2021), de Mast & Lokkerbol (2024), Bass/Clements/Kazman (2012), Parisi et al. (2019), Dean & Ghemawat (2008), GDPR/NIST/ISO/Kroll et al. — recorded as citations only; external bodies not ingested.
-- **Assignment 1 PDF body — RESOLVED.** Now ingested as `2026-04-22-problem-definition.md` (see [[assignment-1-report-2026-04-22]]).
+- **Member ↔ named-student mapping — RESOLVED for M3/M4, soft for M1/M2.** M4 = Xiaojing (self-asserted), M3 = Cara (confirmed 2026-06-12); M1≈Laurenz, M2≈Quinten (build/integration soft signals). See [[user-journeys]], [[project-team]].
+- **Permission-layer division-scheme conflict — RESOLVED-BY-PRECEDENCE.** Deck + report assign the Permission Layer to Member 4 individually and name evaluation as collaborative, against the supervisor-kickoff note. See [[permission-layer]], [[user-journeys]], [[project-team]].
+- **GAPS diagram — framework IDENTIFIED, image contents still locked.** GenAI-Analytic Problem Structure (GAPS) diagram per de Mast & Lokkerbol (2024); image contents un-OCR'd. See [[gaps-diagram]].
+- **"Meng Cheng" ↔ "Cara"/"Carac M. Cheng" — NARROWED (alias inferred).** Same roster slot, surname, email. See [[project-team]], [[uva-ai4business-lab]].
+- **Laurenz surname variant.** Report gives **Ruckensteiner-Geyer** (#13762931); shorter "Ruckensteiner" noted as a variant.
+- **Literature/citation set — bodies not ingested.** Karpathy (2026), Lewis et al. (2020), Gao et al. (2023), Brown et al. (2020), Ji et al. (2023), Hevner (2007), Chapman et al. (2000), Martínez-Plumed et al. (2021), de Mast & Lokkerbol (2024), Bass/Clements/Kazman (2012), Parisi et al. (2019), Dean & Ghemawat (2008), GDPR/NIST/ISO/Kroll et al. — citations only.
+- **Assignment 1 PDF body — RESOLVED.** Ingested as `2026-04-22-problem-definition.md`. See [[assignment-1-report-2026-04-22]].
 
 ## Surfaced from Assignment 1 presentation ingest (2026-04-22; ingested 2026-06-19)
-- **5 embedded JPGs not ingested (deck).** The presentation contains 5 image-only JPGs — the **GAPS/DAPS diagram** + 4 "Core Problem" icons. Flag for OCR/re-ingest; contents not fabricated. See [[assignment-1-presentation-2026-04-22]].
-- **12-week timeline vs. un-OCR'd Gantt.** The presentation/report give a **3-phase / 12-week** structure; whether this matches the still-unread (revised) Gantt image is unconfirmed; **absolute start/end dates are not pinned** (week numbers only). See [[project-timeline]].
-- **MoSCoW Could-haves are stretch goals.** HITL feedback integration, blog-draft tone alignment, and comparative generated-vs-human evaluation are **Could Have** — track whether they survive scoping. See [[evaluation-deliverable]], [[generator-module]].
+- **5 embedded JPGs not ingested (deck).** GAPS/DAPS diagram + 4 "Core Problem" icons. See [[assignment-1-presentation-2026-04-22]].
+- **12-week timeline vs. un-OCR'd Gantt.** Absolute start/end dates not pinned. See [[project-timeline]].
+- **MoSCoW Could-haves are stretch goals.** HITL feedback, blog-draft tone alignment, comparative generated-vs-human evaluation. See [[evaluation-deliverable]], [[generator-module]].
 
 ## Surfaced from founding brief (2026-04-02)
-- **Project-team mapping — largely resolved** — See [[project-team]]: Sanne Wielinga is the KickstartAI **main contact**, Evertjan Peer made the **introduction**.
-- **UvA student team — resolved** — Four UvA business-analytics students named & identified with student numbers: Quinten van den Heuvel (#15150658, coordinator), Xiaojing Li (#14851199, lee89953@), Laurenz Ruckensteiner-Geyer (#13762931), Meng Cheng (#14025906, = "Cara"/"Carac M. Cheng"). See [[project-team]].
-- **Tech stack — narrowed.** LLM backend now resolved (Claude Code + Anthropic API); vector store / embedding model / specific RAG framework still unspecified.
-- **Source connectors** — Kickoff named initial public sources (website scrape + LinkedIn posts, two-pager, slides) and ongoing internal sources (PRs, meeting notes, design decisions, presentations), but the specific connectors/tooling are unspecified. Slack is a live project channel.
-- **Regeneration cadence** — Presentation sets **daily refresh** as a Must and **sub-daily/real-time** as Won't, but exact cadence config not finalized.
-- **Tone/voice spec** — "KickstartAI's voice" referenced but not defined. A Content Strategist (Ioanna Lykiardopoulou — see [[kickstartai-team]]) exists on staff, but whether the voice spec will come from them is unconfirmed. See [[generator-module]].
-- **Human baseline for blog eval** — Required but no baseline document exists yet (now a Could-Have comparative eval). KickstartAI's published blogs (see [[kickstartai-blog]]) are a *candidate* source, but no specific article has been selected or ingested. (Possibility only.)
-- **Permission model specifics** — Now substantially specified (paragraph-level tiers + pre-filtering ACL + self-audit; see 2026-06-07 above). Design-only deliverable confirmed (MoSCoW: design = Should, fully working = Won't), though an evaluated PoC now exists and is being integrated. See [[permission-model]], [[permission-layer]].
-- **Pending source material** — The KickstartAI two-pager and UvA AI4Business Lab documentation are referenced as data sources but not yet ingested. The supervisor kickoff confirmed a **cold-start** situation.
+- **Project-team mapping — resolved** — See [[project-team]].
+- **UvA student team — resolved** — Four students named & identified with student numbers. See [[project-team]].
+- **Tech stack — narrowed.** LLM backend resolved (Claude Code + Anthropic API); vector store / embedding model still partly unspecified.
+- **Source connectors** — specific connectors/tooling unspecified; Slack is a live project channel.
+- **Regeneration cadence** — daily refresh a Must; exact cadence config not finalized.
+- **Tone/voice spec** — "KickstartAI's voice" referenced but not defined. See [[generator-module]].
+- **Human baseline for blog eval** — no baseline document exists yet (now a Could-Have comparative eval). See [[evaluation-deliverable]].
+- **Permission model specifics** — now substantially specified (see 2026-06-07/06-12). Design-only deliverable confirmed though an evaluated PoC + UI now exists. See [[permission-model]], [[permission-layer]].
+- **Pending source material** — two-pager and UvA AI4Business Lab documentation not yet ingested. Cold-start situation.
 
 ## Surfaced / updated from kickoff email thread + supervisor kickoff ingests
-- **UvA supervisor — RESOLVED** — h.zhu@uva.nl is **Hongyi Zhu**, **confirmed as the UvA academic supervisor**. See [[supervisor-kickoff-2026-04-16]].
-- **lee89953@gmail.com — RESOLVED** — The 2026-04-16 supervisor participant list **explicitly maps lee89953@gmail.com → Xiaojing Li**, re-corroborated by the 2026-04-30 scheduling thread and the 2026-06-07 permission thread. See [[project-team]].
-- **"Meng" — RECONCILED (alias inferred)** — The 2026-04-10 greeting named "Meng," now reconciled to **Meng Cheng** (= "Cara"/"Carac M. Cheng") via the report's author list. Alias relationship inferred, not stated.
-- **"Mentor" role still not explicitly assigned** — Sanne is the explicit *main contact* and Evertjan the *introducer*, but no source names either "technical mentor."
-- **Slack as a communication/source channel** — The KickstartAI community Slack is a live project channel; whether it will be an ingestion source for the Living Wiki is unspecified.
+- **UvA supervisor — RESOLVED** — h.zhu@uva.nl is **Hongyi Zhu**. See [[supervisor-kickoff-2026-04-16]].
+- **lee89953@gmail.com — RESOLVED** — → Xiaojing Li. See [[project-team]].
+- **"Meng" — RECONCILED (alias inferred)** — = **Meng Cheng** (= "Cara"/"Carac M. Cheng").
+- **"Mentor" role still not explicitly assigned** — Sanne is the explicit main contact; no source names a "technical mentor."
+- **Slack as a communication/source channel** — whether it will be an ingestion source is unspecified.
 
 ## Surfaced from supervisor kickoff ingest (2026-04-16)
-- **Individual supervisor progress meetings** — Scheduled "after next week's presentation" (i.e., after Apr 22); specific dates/cadence unspecified. See [[project-team]].
+- **Individual supervisor progress meetings** — Scheduled after Apr 22; dates/cadence unspecified. See [[project-team]].
 
 ## Surfaced from Gantt chart ingest (2026-04-13)
-- **Gantt chart image not OCR'd** — `2026-04-13-Gantt_chart.md` is a single embedded JPG with no extractable text. The presentation/report supply a 3-phase/12-week structure textually, but the visual Gantt's specific task breakdown, durations, dependencies, and milestone dates remain unread. Flag for OCR/re-ingest. See [[project-timeline]].
-- **Gantt is a draft needing revision** — Per the kickoff notes the plan needs updating due to a project-selection delay.
+- **Gantt chart image not OCR'd** — `2026-04-13-Gantt_chart.md` is a single embedded JPG. See [[project-timeline]].
+- **Gantt is a draft needing revision** — due to a project-selection delay.
 
 ## Surfaced from KickstartAI intro deck ingest (2026-04-13)
-- **Deck is largely image-only** — Substantive content (six-phase adoption model, partner-ripple diagram, challenge→solution mappings) is embedded as JPGs with no extractable text. Diagram contents **not ingested**, **not fabricated**. Flag for OCR/re-ingest. See [[kickstartai]], [[adoption-journey]].
-- **Six-phase adoption model contents unknown** — Named in the deck but its phases/order/structure are image-locked. [[adoption-journey]] is a contents-pending stub.
-- **`KAI-Intro` ↔ `20260413 UvA.pdf` mapping unconfirmed** — inferred from shared dating, not stated. See [[assignment-1-project-definition]].
-- **Societal stats are point-in-time / undated-source** — ~2024 snapshots from a pitch deck; they will drift. See [[kickstartai]].
-- **Strategy framing vs. pillar vocabulary** — The deck's three strategic aspirations are *adjacent to but not asserted equivalent to* the documented three pillars. Relationship unconfirmed.
+- **Deck is largely image-only** — diagram contents not ingested, not fabricated. See [[kickstartai]], [[adoption-journey]].
+- **Six-phase adoption model contents unknown** — image-locked. [[adoption-journey]] is a contents-pending stub.
+- **`KAI-Intro` ↔ `20260413 UvA.pdf` mapping unconfirmed.** See [[assignment-1-project-definition]].
+- **Societal stats are point-in-time / undated-source.** See [[kickstartai]].
+- **Strategy framing vs. pillar vocabulary** — relationship unconfirmed.
 
 ## Surfaced from kickoff slide deck ingest (2026-04-13; text-extractable)
-- **Five-vs-six deliverable framing — RECONCILED** — The report's framing settles this: **five member-owned components (ingestion+wiki engine = one) + the evaluation framework as the collaborative/shared deliverable = 6 deliverables**. See [[user-journeys]].
-- **"Day one" source set** — The specific **lab-materials set** (UvA AI4Business Lab docs) remains un-ingested/unspecified. See [[ingestion-pipeline]], [[uva-ai4business-lab]].
-- **Collaboration model deliberately open** — Check-in cadence (weekly vs bi-weekly) still TBD (a concrete one-off call was scheduled 2026-04-30; recurring cadence still open).
+- **Five-vs-six deliverable framing — RECONCILED** — five member-owned components + the evaluation framework = 6 deliverables. See [[user-journeys]].
+- **"Day one" source set** — the lab-materials set remains un-ingested. See [[ingestion-pipeline]], [[uva-ai4business-lab]].
+- **Collaboration model deliberately open** — recurring check-in cadence still TBD.
 
 ## Surfaced from kickoff meeting notes ingest (2026-04-13)
-- **"Averion" handover unexplained** — The kickoff notes state the project was handed over to Sanne "from Averion." No other source mentions "Averion." Possibly a transcription error for "Evertjan," possibly a genuine predecessor party. **Unconfirmed; no entity created.** See [[project-team]], [[kickoff-meeting-2026-04-13]].
-- **Check-in cadence undecided** — Weekly vs bi-weekly agreed in principle; specific frequency TBD. See [[project-team]].
-- **Evaluation data / knowledge base pending** — Sanne is to check whether additional evaluation criteria or a knowledge base can be provided; outcome pending. (A test corpus was subsequently delivered 2026-05-18 — see [[student-materials-corpus]].) See [[evaluation-framework]].
-- **Legal / project documents unsigned** — A signature process for project legal documents is pending; the specific documents are unspecified.
-- **Embedded screenshots not ingested** — The meeting notes contain 3 CDN-hosted JPGs (likely the same image-locked deck/Gantt diagrams already flagged); contents not ingested, not fabricated.
+- **"Averion" handover unexplained** — possibly a transcription error for "Evertjan." Unconfirmed; no entity created. See [[project-team]], [[kickoff-meeting-2026-04-13]].
+- **Check-in cadence undecided** — weekly vs bi-weekly. See [[project-team]].
+- **Evaluation data / knowledge base pending** — a test corpus was delivered 2026-05-18. See [[evaluation-framework]], [[student-materials-corpus]].
+- **Legal / project documents unsigned** — signature process pending.
+- **Embedded screenshots not ingested** — 3 CDN-hosted JPGs.
 
 ## Surfaced from KickstartAI homepage ingest (2026-05-07 clipping)
-- **Pillar terminology drift** — Two parallel vocabularies ("We do / share / connect" vs "Apply / Amplify / Activate"); equivalence is *inferred, not stated*. Flag for confirmation.
-- **Impact stats are point-in-time** — 10+ partners, 7,407+ community, 15+ projects are a 2026-05-07 snapshot with no "as-of" date; figures will drift.
-- **Generator publication venue unconfirmed** — [[kickstartai-blog]] (more likely) and [[techdays]] are both documented as possibilities only; no source connects the Living Wiki's outputs to either.
+- **Pillar terminology drift** — two parallel vocabularies; equivalence inferred.
+- **Impact stats are point-in-time** — figures will drift.
+- **Generator publication venue unconfirmed** — [[kickstartai-blog]] and [[techdays]] possibilities only.
 
 ## Surfaced from KickstartAI news/blog index ingest (2026-05-07 clipping)
-- **Blog article bodies not ingested** — Only the news *index* was clipped; article content/voice are referenced but unread. See [[kickstartai-blog]].
+- **Blog article bodies not ingested** — only the index was clipped. See [[kickstartai-blog]].
 
 ## Surfaced from KickstartAI projects index ingest (2026-05-07 clipping)
-- **Project bodies not ingested** — Only the projects *index* was clipped (titles, one-liners, partner lists). No case-study detail, outcomes, or dates. See [[kickstartai-projects]].
-- **Additional collaborator orgs undocumented** — **bol**, **Philips**, and **NL4AI** recur as collaborators but are not described; their relationship to KickstartAI and the founders is unspecified.
-- **Project portfolio is non-exhaustive / point-in-time** — 11 projects listed vs "15+ completed"; no "as-of" date on the source. The list will drift.
-- **No Living Wiki project listed** — Expected; it is in scoping/internal, so the public list excludes it.
-- [ ] **stale-output-tracking** — The stale onboarding summary's superseded state is not yet tracked as a gap and should be flagged or resolved by regeneration. — source: [[lint]] — flagged: 2026-06-19
-- [ ] **missing-concept-page** — Aggregation/inference leakage is the most-discussed open hard problem yet lacks its own concept page. — source: [[lint]] — flagged: 2026-06-19
-- [ ] **missing-concept-page** — RAG (Retrieval-Augmented Generation) is the core technical lineage but has no dedicated concept page. — source: [[lint]] — flagged: 2026-06-19
+- **Project bodies not ingested** — only the index was clipped. See [[kickstartai-projects]].
+- **Additional collaborator orgs undocumented** — bol, Philips, NL4AI.
+- **Project portfolio is non-exhaustive / point-in-time.**
+- **No Living Wiki project listed** — expected (internal/scoping).
+- [ ] **stale-output-tracking** — The stale onboarding summary's superseded state is not yet resolved by regeneration; now contradicts even more facts (UI built, all four components, team mapped). — source: [[lint]] / [[mockup-artifact-2026-06-12]] — flagged: 2026-06-19
+- [ ] **missing-concept-page** — Aggregation/inference leakage lacks its own concept page. — source: [[lint]] — flagged: 2026-06-19
+- [ ] **missing-concept-page** — RAG (Retrieval-Augmented Generation) has no dedicated concept page. — source: [[lint]] — flagged: 2026-06-19
 - [ ] **missing-concept-page** — CRISP-DM and Design Science Research dual methodology is referenced on 6+ pages without a concept page. — source: [[lint]] — flagged: 2026-06-19
-- [ ] **missing-concept-page** — Claude Code is the confirmed production backend but is only described inline without its own entity page. — source: [[lint]] — flagged: 2026-06-19
+- [ ] **missing-concept-page** — Claude Code is the confirmed production backend but is only described inline. — source: [[lint]] — flagged: 2026-06-19
 - [ ] **undocumented-decision** — The 'one wiki page = one project' information architecture decision lacks a structured rationale/alternatives record. — source: [[lint]] — flagged: 2026-06-19
-- [ ] **undocumented-decision** — Admin-per-project governance has no decision page documenting mechanism, rationale, or alternatives. — source: [[lint]] — flagged: 2026-06-19
-- [ ] **undocumented-decision** — The Claude Code + Anthropic API tech-stack choice lacks a decision page explaining why it was chosen over alternatives. — source: [[lint]] — flagged: 2026-06-19
-- [ ] **undocumented-decision** — The permission model design lacks a record of rejected alternatives such as pure RBAC or document-level ACL. — source: [[lint]] — flagged: 2026-06-19
+- [ ] **undocumented-decision** — Admin-per-project governance has no decision page. — source: [[lint]] — flagged: 2026-06-19
+- [ ] **undocumented-decision** — The Claude Code + Anthropic API tech-stack choice lacks a decision page. — source: [[lint]] — flagged: 2026-06-19
+- [ ] **undocumented-decision** — The permission model design lacks a record of rejected alternatives. — source: [[lint]] — flagged: 2026-06-19
+- [ ] **undocumented-decision** — The markdown-on-disk / git-worktree "Wiki Bot" architecture choice lacks a decision page. — source: [[mockup-artifact-2026-06-12]] — flagged: 2026-06-19
 - [ ] **missing-cross-reference** — gap-detector does not link to student-materials-corpus despite the corpus being its ground-truth evaluation source. — source: [[lint]] — flagged: 2026-06-19
-- [ ] **open-question** — It is unspecified who assigns paragraph tier labels at ingestion and whether the process is automated, blocking deployment claims. — source: [[lint]] — flagged: 2026-06-19
-- [ ] **open-question** — The underlying vector store, embedding model, and RAG framework of the engine remain unspecified. — source: [[lint]] — flagged: 2026-06-19
-- [ ] **open-question** — It is unclear whether the UI is a thesis deliverable or convenience layer, requiring a scope ruling against MoSCoW. — source: [[lint]] — flagged: 2026-06-19
-- [ ] **open-question** — Whether the onboarding summary is auto-regenerated on a schedule needs verification to test the generator's freshness dimension. — source: [[lint]] — flagged: 2026-06-19
-- [ ] **methodology-reconciliation** — Cara's claim that her component 'already delivers a final product' conflicts with the CRISP-DM mock-up-to-MVP progression and needs reconciliation. — source: [[lint]] — flagged: 2026-06-19
+- [ ] **open-question** — It is unspecified who assigns paragraph tier labels at ingestion and whether the process is automated. — source: [[lint]] — flagged: 2026-06-19
+- [ ] **open-question** — The underlying vector store, embedding model, and RAG framework remain partly unspecified. — source: [[lint]] — flagged: 2026-06-19
+- [ ] **open-question** — Whether the UI is a thesis deliverable or convenience layer needs a scope ruling. — source: [[lint]] / [[mockup-artifact-2026-06-12]] — flagged: 2026-06-19
+- [ ] **methodology-reconciliation** — Cara's earlier claim that her component 'already delivers a final product' vs. the CRISP-DM mock-up-to-MVP progression needs reconciliation in the thesis framing (Gap Detector now built). — source: [[lint]] / [[mockup-artifact-2026-06-12]] — flagged: 2026-06-19

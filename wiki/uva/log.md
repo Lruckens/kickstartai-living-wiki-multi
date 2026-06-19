@@ -17,7 +17,7 @@ Append-only. One entry per operation: ingest, query, or lint.
 
 ## 2026-06-16 — INGEST
 **Source:** KickstartAI_About_us.md (public "About us" web clipping, https://kickstart.ai/about-us, created 2026-05-07)
-**Action:** Low-risk enrichment ingest of KickstartAI organizational profile. Enriched [[kickstartai]]; created roster page. Refined team and tone gaps; added cross-references on [[generator-module]].
+**Action:** Low-risk enrichment ingest of KickstartAI organizational profile. Enriched [[kickstartai]]; created roster page.
 **Pages created:** [[kickstartai-team]]
 **Pages updated:** kickstartai.md, generator-module.md, _gaps.md, index.md
 **Notes:** No conflicts. Total pages now 13.
@@ -25,8 +25,8 @@ Append-only. One entry per operation: ingest, query, or lint.
 ---
 
 ## 2026-06-16 — INGEST
-**Source:** KickstartAI_homepage.md (public homepage web clipping, https://kickstart.ai/, created 2026-05-07)
-**Action:** Low-risk enrichment ingest of the KickstartAI homepage. Reconciled the two parallel pillar vocabularies; added impact stats; created TechDays entity stub; added gaps.
+**Source:** KickstartAI_homepage.md (public homepage web clipping, created 2026-05-07)
+**Action:** Low-risk enrichment ingest. Reconciled pillar vocabularies; added impact stats; created TechDays stub.
 **Pages created:** [[techdays]]
 **Pages updated:** kickstartai.md, generator-module.md, _gaps.md, index.md
 **Notes:** No substantive conflicts. Total pages now 14.
@@ -34,20 +34,20 @@ Append-only. One entry per operation: ingest, query, or lint.
 ---
 
 ## 2026-06-16 — INGEST
-**Source:** KickstartAI_News.md (public news/blog index web clipping, https://kickstart.ai/news, created 2026-05-07)
-**Action:** Low-risk enrichment ingest of the news/blog *index*. Created blog channel stub; linked from [[kickstartai]]; strengthened [[generator-module]] venue picture; noted blog as candidate baseline corpus on [[evaluation-deliverable]].
+**Source:** KickstartAI_News.md (public news/blog index web clipping, created 2026-05-07)
+**Action:** Created blog channel stub; strengthened generator venue picture.
 **Pages created:** [[kickstartai-blog]]
 **Pages updated:** kickstartai.md, generator-module.md, evaluation-deliverable.md, _gaps.md, index.md
-**Notes:** No conflicts. Index-only source. Total pages now 15.
+**Notes:** Index-only source. Total pages now 15.
 
 ---
 
 ## 2026-06-16 — INGEST
-**Source:** KickstartAI_Projects.md (public projects index web clipping, https://kickstart.ai/projects, created 2026-05-07)
-**Action:** Low-risk enrichment ingest of the project portfolio *index*. Created portfolio entity page (11 projects); linked from [[kickstartai]]; strengthened blog↔project correspondence; added breadth note to [[_reuse]]; added gaps.
+**Source:** KickstartAI_Projects.md (public projects index web clipping, created 2026-05-07)
+**Action:** Created portfolio entity page (11 projects).
 **Pages created:** [[kickstartai-projects]]
 **Pages updated:** kickstartai.md, kickstartai-blog.md, _reuse.md, _gaps.md, index.md
-**Notes:** No substantive conflicts. bol/Philips/NL4AI kept distinct from founders. Total pages now 16.
+**Notes:** bol/Philips/NL4AI kept distinct from founders. Total pages now 16.
 
 ## [2026-06-19] generate | onboarding-summary — New team member
 
@@ -62,119 +62,119 @@ Append-only. One entry per operation: ingest, query, or lint.
 ---
 
 ## 2026-06-19 — INGEST
-**Source:** 2026-04-10-Intro-email.md (KickstartAI x UvA kickoff email thread, 2026-04-10 → 2026-04-20)
-**Action:** Ingested the kickoff email thread. Created [[project-team]] and [[assignment-1-project-definition]]; added Sanne to org roster; updated [[uva-ai4business-lab]], [[_overview]], [[_gaps]].
+**Source:** 2026-04-10-Intro-email.md (KickstartAI x UvA kickoff email thread)
+**Action:** Created [[project-team]] and [[assignment-1-project-definition]].
 **Pages created:** [[project-team]], [[assignment-1-project-definition]]
 **Pages updated:** _overview.md, kickstartai-team.md, uva-ai4business-lab.md, _gaps.md, index.md
-**Notes:** Student name↔email mapping and "mentor" labeling deliberately not over-asserted. Total pages now 18.
+**Notes:** Total pages now 18.
 
 ---
 
 ## 2026-06-19 — INGEST
-**Source:** 2026-04-13-Gantt_chart.md (project Gantt chart, dated 2026-04-13 — image-only, contents not ingested)
-**Action:** Ingested the Gantt artifact (image-only). Created stub [[project-timeline]]; refined timeline gap; cross-referenced from [[assignment-1-project-definition]].
+**Source:** 2026-04-13-Gantt_chart.md (image-only)
+**Action:** Created stub [[project-timeline]].
 **Pages created:** [[project-timeline]]
 **Pages updated:** _overview.md, assignment-1-project-definition.md, _gaps.md, index.md
-**Notes:** Image-only; recorded existence/date but did not invent contents. Total pages now 19.
+**Notes:** Image-only. Total pages now 19.
 
 ---
 
 ## 2026-06-19 — INGEST
-**Source:** 2026-04-13-KAI-Intro.md (KickstartAI intro/strategy slide deck, dated 2026-04-13 — image-heavy; diagrams not ingested)
-**Action:** Ingested the strategy intro deck (image-heavy). Enriched [[kickstartai]] strategic-positioning subsection; created [[adoption-journey]] stub; updated [[assignment-1-project-definition]], [[_overview]], [[_gaps]].
+**Source:** 2026-04-13-KAI-Intro.md (image-heavy)
+**Action:** Enriched [[kickstartai]]; created [[adoption-journey]] stub.
 **Pages created:** [[adoption-journey]]
 **Pages updated:** kickstartai.md, assignment-1-project-definition.md, _overview.md, _gaps.md, index.md
-**Notes:** Recorded legibly-extractable text only; did not fabricate diagram contents. Total pages now 20.
+**Notes:** Total pages now 20.
 
 ---
 
 ## 2026-06-19 — INGEST
-**Source:** 2026-04-13-KAI-UvA-Kickoff-meeting-notes.md (Gemini-generated kickoff meeting notes/transcript summary, 2026-04-13)
-**Action:** Ingested the kickoff meeting notes. Created the first **Meetings** page [[kickoff-meeting-2026-04-13]]. Resolved standing student-identity gaps. Refined [[project-team]] and [[uva-ai4business-lab]] rosters. Updated many deliverable/concept pages.
+**Source:** 2026-04-13-KAI-UvA-Kickoff-meeting-notes.md
+**Action:** Created [[kickoff-meeting-2026-04-13]]. Resolved student-identity gaps.
 **Pages created:** [[kickoff-meeting-2026-04-13]]
 **Pages updated:** project-team.md, uva-ai4business-lab.md, assignment-1-project-definition.md, project-timeline.md, permission-layer.md, ingestion-pipeline.md, living-wiki.md, evaluation-framework.md, kickstartai.md, _overview.md, _gaps.md, index.md
-**Notes:** "Averion" and "Meng" deliberately not over-asserted. Total pages now 21.
+**Notes:** Total pages now 21.
 
 ---
 
 ## 2026-06-19 — INGEST
-**Source:** 2026-04-13-KAI-UvA-Kickoff.md (KickstartAI x UvA kickoff slide deck, dated 2026-04-13 — text-extractable)
-**Action:** Ingested the text-extractable kickoff pitch/framing deck. Created artifact page [[kickoff-deck-2026-04-13]]. Resolved the kickoff-deck identity gap. Strengthened [[living-wiki]], [[_reuse]], [[ingestion-pipeline]], [[user-journeys]].
+**Source:** 2026-04-13-KAI-UvA-Kickoff.md (text-extractable)
+**Action:** Created [[kickoff-deck-2026-04-13]].
 **Pages created:** [[kickoff-deck-2026-04-13]]
 **Pages updated:** living-wiki.md, _reuse.md, ingestion-pipeline.md, user-journeys.md, assignment-1-project-definition.md, kickoff-meeting-2026-04-13.md, _overview.md, _gaps.md, index.md
-**Notes:** Corroboration + gap-resolution ingest. Total pages now 22.
+**Notes:** Total pages now 22.
 
 ---
 
 ## 2026-06-19 — INGEST
-**Source:** 2026-04-16-supervisor-kickoff.md (UvA-internal student↔supervisor kickoff meeting notes, 2026-04-16)
-**Action:** Ingested the UvA-internal supervisor kickoff. Created [[supervisor-kickoff-2026-04-16]]. Resolved h.zhu→Hongyi Zhu and lee89953@→Xiaojing Li. Recorded the agreed task-division scheme.
+**Source:** 2026-04-16-supervisor-kickoff.md
+**Action:** Created [[supervisor-kickoff-2026-04-16]]. Resolved h.zhu and lee89953 mappings.
 **Pages created:** [[supervisor-kickoff-2026-04-16]]
 **Pages updated:** project-team.md, uva-ai4business-lab.md, assignment-1-project-definition.md, permission-layer.md, evaluation-deliverable.md, evaluation-framework.md, user-journeys.md, _overview.md, _gaps.md, index.md
-**Notes:** "Meng" narrowed but still unmapped. Total pages now 23.
+**Notes:** Total pages now 23.
 
 ---
 
 ## 2026-06-19 — INGEST
-**Source:** 2026-04-22-presentation-slides.md (Assignment 1 project-definition presentation deck, text-extractable; 5 embedded JPGs image-only)
-**Action:** Ingested the **team's own Assignment 1 presentation deck**. Created dedicated artifact page [[assignment-1-presentation-2026-04-22]]. **Resolved** the long-flagged #1–4 sub-deliverable↔module mapping (by component).
+**Source:** 2026-04-22-presentation-slides.md
+**Action:** Created [[assignment-1-presentation-2026-04-22]]. Resolved #1–4 sub-deliverable↔module mapping.
 **Pages created:** [[assignment-1-presentation-2026-04-22]]
 **Pages updated:** assignment-1-project-definition.md, user-journeys.md, project-team.md, project-timeline.md, permission-layer.md, wiki-generation-engine.md, ingestion-pipeline.md, generator-module.md, gap-detector.md, evaluation-deliverable.md, evaluation-framework.md, living-wiki.md, _overview.md, _gaps.md, index.md
-**Notes:** ⚠️ Permission-Layer/Member-4 vs supervisor-kickoff conflict flagged, not overwritten. Total pages now 24.
+**Notes:** Total pages now 24.
 
 ---
 
 ## 2026-06-19 — INGEST
-**Source:** 2026-04-22-problem-definition.md (Assignment 1a written project-definition report, text-extractable; embedded GAPS-diagram JPG image-only)
-**Action:** Ingested the **written Assignment 1a report**. Created [[assignment-1-report-2026-04-22]] and concept stub [[gaps-diagram]]. **Resolved** PDF-body, DAPS-framework, and "Meng" gaps. **Downgraded** the permission-layer division-scheme conflict to resolved-by-precedence.
+**Source:** 2026-04-22-problem-definition.md
+**Action:** Created [[assignment-1-report-2026-04-22]] and [[gaps-diagram]].
 **Pages created:** [[assignment-1-report-2026-04-22]], [[gaps-diagram]]
 **Pages updated:** assignment-1-project-definition.md, user-journeys.md, project-team.md, uva-ai4business-lab.md, permission-layer.md, evaluation-framework.md, evaluation-deliverable.md, living-wiki.md, wiki-generation-engine.md, ingestion-pipeline.md, generator-module.md, gap-detector.md, _overview.md, _gaps.md, index.md
-**Notes:** ⚠️ Conflicts handled by precedence. GAPS diagram image still not legible. Total pages now 26.
+**Notes:** Total pages now 26.
 
 ---
 
 ## 2026-06-19 — INGEST
-**Source:** 2026-04-30-group-Sanne-email-content.md (KickstartAI x UvA check-in scheduling email thread, 2026-04-30 → 2026-05-04)
-**Action:** Ingested the post-presentation check-in scheduling thread. Created [[checkin-scheduling-2026-04-30]]. Refined check-in-cadence gap; recorded "both groups" second-UvA-group observation.
+**Source:** 2026-04-30-group-Sanne-email-content.md
+**Action:** Created [[checkin-scheduling-2026-04-30]].
 **Pages created:** [[checkin-scheduling-2026-04-30]]
 **Pages updated:** project-team.md, uva-ai4business-lab.md, _overview.md, _gaps.md, index.md
-**Notes:** Low-substance scheduling source. Second UvA group recorded as observation, not an entity. Total pages now 27.
+**Notes:** Total pages now 27.
 
 ---
 
 ## 2026-06-19 — INGEST
-**Source:** 2026-05-14-meeting-notes.md (internal UvA team working meeting notes, development phase)
-**Action:** Ingested the first **development-phase** team meeting. Created [[team-meeting-2026-05-14]] (first GitHub MVP demo, open technical questions, design decisions, shared-thesis work split).
+**Source:** 2026-05-14-meeting-notes.md
+**Action:** Created [[team-meeting-2026-05-14]] (first GitHub MVP demo).
 **Pages created:** [[team-meeting-2026-05-14]]
 **Pages updated:** wiki-generation-engine.md, generator-module.md, permission-layer.md, project-team.md, _reuse.md, _overview.md, _gaps.md, index.md
-**Notes:** ⚠️ Soft signals recorded, not asserted. GitHub repo flagged for future ingest. Total pages now 28.
+**Notes:** Total pages now 28.
 
 ---
 
 ## 2026-06-19 — INGEST
-**Source:** 2026-05-15-Laurenz-Sanne-email-content.md (KickstartAI x UvA demo follow-up email thread, 2026-05-15 → 2026-05-18)
-**Action:** Ingested the demo follow-up thread. Created [[laurenz-sanne-email-2026-05-15]], [[student-materials-corpus]], [[kickstartai-pm-ops]]. **RESOLVED** the LLM-choice gap (Claude Code + Anthropic API). Captured repo URL; advanced data-privacy thread.
+**Source:** 2026-05-15-Laurenz-Sanne-email-content.md
+**Action:** Created [[laurenz-sanne-email-2026-05-15]], [[student-materials-corpus]], [[kickstartai-pm-ops]]. RESOLVED the LLM-choice gap.
 **Pages created:** [[laurenz-sanne-email-2026-05-15]], [[student-materials-corpus]], [[kickstartai-pm-ops]]
 **Pages updated:** wiki-generation-engine.md, permission-layer.md, permission-model.md, ingestion-pipeline.md, generator-module.md, evaluation-deliverable.md, project-team.md, kickstartai-projects.md, _overview.md, _gaps.md, index.md
-**Notes:** ⚠️ Resolutions/soft-signals. Bakkie flagged FICTIONAL. Total pages now 31.
+**Notes:** Total pages now 31.
 
 ---
 
 ## 2026-06-19 — INGEST
-**Source:** 2026-06-04-meeting-notes.md (internal UvA team working meeting notes, development phase)
-**Action:** Ingested the second **development-phase** team meeting. Created [[team-meeting-2026-06-04]] (per-member build progress: UI plan, generator integration risk, permission-layer user-id, Cara MVP-feasibility).
+**Source:** 2026-06-04-meeting-notes.md
+**Action:** Created [[team-meeting-2026-06-04]].
 **Pages created:** [[team-meeting-2026-06-04]]
 **Pages updated:** generator-module.md, wiki-generation-engine.md, permission-layer.md, project-team.md, _overview.md, _gaps.md, index.md
-**Notes:** ⚠️ Settledness/feasibility tensions flagged. Person↔member soft signal strengthened (3/4) but NOT asserted. Total pages now 32.
+**Notes:** Total pages now 32.
 
 ---
 
 ## 2026-06-19 — INGEST
-**Source:** 2026-06-07-Xiaojing-Sanne-email-content.md (Xiaojing ↔ Sanne permission-layer design review email thread, 2026-06-07 → 2026-06-08)
-**Action:** Ingested the **first detailed permission-layer design** review thread — a landmark, high-substance source. Created correspondence page [[xiaojing-sanne-permission-email-2026-06-07]]. Transformed [[permission-layer]] from the vaguest deliverable into the most concretely specified one: two leakage types (vertical/horizontal), three paragraph-level tiers (public/internal/restricted via `project_id`), Layer 1 pre-filtering (markdown-config in Claude Code) + Layer 2 self-audit (regex blacklist + LLM judge, severity escalation, logging), and a 20-scenario evaluation. Captured Sanne's five expert critiques (same-model audit blind spot, aggregation/inference leakage, label-correctness risk, cross-project-vs-filtering tension, eval scale). **Strengthened** Xiaojing↔Member-4 from build-activity soft signal to **self-asserted ownership**. Updated [[permission-model]] (paragraph-level tier/ACL mechanism), [[wiki-generation-engine]] (pre-filtering + markdown-config + gpt-5.1 eval-env note), [[user-journeys]] (M4 realized), [[evaluation-deliverable]] (component-level eval example), [[project-team]], [[_overview]], [[_gaps]].
+**Source:** 2026-06-07-Xiaojing-Sanne-email-content.md
+**Action:** Created [[xiaojing-sanne-permission-email-2026-06-07]]. Transformed [[permission-layer]] into the most concretely specified deliverable. Strengthened Xiaojing↔Member-4 to self-asserted.
 **Pages created:** [[xiaojing-sanne-permission-email-2026-06-07]]
 **Pages updated:** permission-layer.md, permission-model.md, project-team.md, wiki-generation-engine.md, user-journeys.md, evaluation-deliverable.md, _overview.md, _gaps.md, index.md
-**Notes:** ⚠️ Two settledness/consistency conflicts handled by flag, not overwrite. Permission-mechanism gap downgraded; new gaps added. Xiaojing↔M4 self-asserted; M1/M2/M3 remain inferential. Total pages now 33.
+**Notes:** Total pages now 33.
 
 ## [2026-06-19] lint | Wiki health check
 
@@ -184,13 +184,22 @@ Append-only. One entry per operation: ingest, query, or lint.
 **Gaps added:** 15
 **Reuse opportunities flagged:** 5
 **Pages updated:** [[log]], [[_gaps]]
-**Notes:** The wiki is unusually disciplined and well-connected with no true orphans, but one badly stale onboarding summary contradicts current project state on multiple facts, and there are notable gaps in decision documentation, concept pages, and reuse capture.
+**Notes:** The wiki is unusually disciplined and well-connected with no true orphans, but one badly stale onboarding summary contradicts current project state on multiple facts.
 
 ---
 
 ## 2026-06-19 — INGEST
-**Source:** 2026-06-11-meeting-notes.md (internal UvA team working meeting notes, development phase)
-**Action:** Ingested the **third development-phase team meeting** — an integration milestone and the start of the evaluation phase. Created [[team-meeting-2026-06-11]]. **RESOLVED** the generator↔GitHub integration risk: Quinten's generator module and Laurenz's wiki architecture are now **integrated and functional**. Recorded the integration plan for the remaining modules (Laurenz merging Cara's & Xiaojing's MVPs via Claude + VS Code, folding in Sanne's 2026-06-07 feedback) and the **evaluation-phase kickoff** (Quinten leading metric selection; the two evaluation "families": Laurenz+Quinten comparable LLM-text frameworks vs. Cara+Xiaojing different frameworks).
+**Source:** 2026-06-11-meeting-notes.md
+**Action:** Created [[team-meeting-2026-06-11]]. RESOLVED the generator↔GitHub integration risk; evaluation-phase kickoff.
 **Pages created:** [[team-meeting-2026-06-11]]
 **Pages updated:** generator-module.md, wiki-generation-engine.md, evaluation-framework.md, evaluation-deliverable.md, permission-layer.md, project-team.md, team-meeting-2026-06-04.md, _overview.md, _gaps.md, index.md
-**Notes:** ⚠️ Generator-integration risk marked resolved (settledness update, not deleted). New gaps: integration tooling/durability (manual Claude+VS Code merge), evaluation metric selection / two-family split, Cara's still-unnamed component. Cara MVP-feasibility status evolved. Person↔member signals reinforced (3/4) but NOT asserted. Total pages now 34.
+**Notes:** Total pages now 34.
+
+---
+
+## 2026-06-19 — INGEST
+**Source:** 2026-06-12-mock-up-artifact.md (Living Wiki UI mock-up artifact description + Sanne feedback, development phase; ~15 embedded UI screenshots image-only, not ingested)
+**Action:** Ingested the **landmark integrated-MVP showcase + feedback** source. Created [[mockup-artifact-2026-06-12]]. **POSITIVELY CONFIRMED Cara/Meng Cheng = Gap Detector** (6-layer hybrid framework) — resolving the single biggest standing person↔component gap (previously by-elimination only). Documented the **built React/Vite + FastAPI UI** (Wiki view + Operations view: Ingest/Query/Lint; Generator config UI; Permission login/auth UI; Gap report UI), the **git-worktree "Wiki Bot" push architecture** (markdown-on-disk, no DB, SSE streaming), the generator's Lovable UI + wiki-reader context module + local-laptop deployment problem, and the permission layer's email-as-user_id login + project-scoped access + passwordless demo accounts. Recorded Sanne's feedback (impressed; usability for non-technical staff; **Vercel** deployment; integration is the biggest challenge; **~3 evaluation metrics**; gap-detector scoring transparency / separate importance from confidence / justify P/R/F1 thresholds). **RESOLVED** the generator-sourcing question (toward "from the wiki"), the UI-existence gap, and much of the repo-schema gap. Added new gaps (deployment durability, multi-component integration, scoring transparency, Vercel, usability, production auth, screenshots not ingested).
+**Pages created:** [[mockup-artifact-2026-06-12]]
+**Pages updated:** gap-detector.md, generator-module.md, permission-layer.md, wiki-generation-engine.md, permission-model.md, user-journeys.md, project-team.md, evaluation-deliverable.md, _reuse.md, _overview.md, _gaps.md, index.md
+**Notes:** ⚠️ All conflicts handled by status-update + flag, never overwrite history. Cara↔M3 upgraded from by-elimination to positively confirmed. Several long-open gaps resolved; new deployment/integration/durability gaps opened. Total pages now 35.

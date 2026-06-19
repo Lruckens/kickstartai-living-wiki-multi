@@ -1,15 +1,20 @@
 # Deliverable: Evaluation Framework
 
 **Last updated:** 2026-06-19
-**Status:** scoped (basic framework = Must Have; comparative gen-vs-human eval = Could Have; the integrated framework is the collaborative/shared deliverable); **evaluation phase begun (2026-06-11)**
+**Status:** scoped (basic framework = Must Have; comparative gen-vs-human eval = Could Have; the integrated framework is the collaborative/shared deliverable); **evaluation phase begun (2026-06-11); Sanne metric guidance (2026-06-12)**
 
 ## Summary
-A framework measuring coverage, freshness, accuracy, and usefulness of the wiki, incorporating human-in-the-loop feedback to improve generation quality over time. The Assignment 1a report frames it as the team’s **collaboratively designed and executed shared deliverable**. As of **2026-06-11** the team has begun the evaluation phase (Quinten leading metric selection).
+A framework measuring coverage, freshness, accuracy, and usefulness of the wiki, incorporating human-in-the-loop feedback to improve generation quality over time. The Assignment 1a report frames it as the team’s **collaboratively designed and executed shared deliverable**. As of **2026-06-11** the team has begun the evaluation phase (Quinten leading metric selection); Sanne added concrete metric guidance on **2026-06-12**.
 
 ## Details
 See the concept page [[evaluation-framework]] for the four dimensions. The blog post draft from [[generator-module]] is to be evaluated against a human-written version to make the creativity/opinion angle measurable. Requires a human baseline document that does not yet exist — see [[_gaps]].
 
 KickstartAI's existing public technical and domain blogs (see [[kickstartai-blog]]) are a *candidate* corpus for the required human-written baseline. This is a possibility only; no specific article has been selected or ingested as the baseline. See [[_gaps]].
+
+### Sanne's metric guidance (2026-06-12)
+At the 2026-06-12 artifact review (see [[mockup-artifact-2026-06-12]]) Sanne noted that **systematic evaluation may be hard to implement** in this project, and advised the team to **find circa three metrics** in academic sources or online and **apply them** to see what comes out. This is a concrete refinement of the evaluation-metric-selection gap (alongside Quinten's metric-options list). See [[_gaps]].
+
+She also gave **gap-detector-specific** evaluation feedback: importance/significance and confidence/reliability are conflated into one score and should be **separated**; **Precision/Recall/F1 detection thresholds** should be justified or empirically validated; the manually-defined scoring **weights and risk multipliers** need supporting rationale, testing, or expert judgment. See [[gap-detector]].
 
 ### Evaluation phase begins — two evaluation "families" (2026-06-11)
 At the 2026-06-11 meeting (see [[team-meeting-2026-06-11]]) the team started operationalizing evaluation:
@@ -17,10 +22,10 @@ At the 2026-06-11 meeting (see [[team-meeting-2026-06-11]]) the team started ope
 - **Two evaluation "families"** reflect how the components differ: **Laurenz + Quinten** can use **comparable frameworks** (both generate text via LLMs), while **Cara + Xiaojing** use **different frameworks**. This corroborates the report's model in which **each member contributes component-level evaluation into their own thesis**. The specific metrics against the four dimensions are not yet chosen — see [[_gaps]].
 
 ### Candidate evaluation / test dataset (2026-05-18)
-The delivered **student-materials corpus** (`llm-wiki-student-materials`; see [[student-materials-corpus]], [[laurenz-sanne-email-2026-05-15]]) is a strong candidate evaluation/ingestion-test dataset. Crucially, its **README** (deliberately **withheld from ingestion**) summarises what the tool is *supposed to discover on its own* — effectively a **known ground truth** against which coverage, accuracy, and gap-detection can be measured. This is distinct from (and complementary to) the blog-baseline candidate for the *generated-vs-human* comparison. See [[gap-detector]], [[_gaps]].
+The delivered **student-materials corpus** (`llm-wiki-student-materials`; see [[student-materials-corpus]], [[laurenz-sanne-email-2026-05-15]]) is a strong candidate evaluation/ingestion-test dataset. Crucially, its **README** (deliberately **withheld from ingestion**) summarises what the tool is *supposed to discover on its own* — effectively a **known ground truth** against which coverage, accuracy, and gap-detection can be measured. See [[gap-detector]], [[_gaps]].
 
 ### Component-level evaluation example — permission layer (2026-06-07)
-Xiaojing's permission-layer design (see [[permission-layer]], [[xiaojing-sanne-permission-email-2026-06-07]]) includes a concrete **component-level evaluation** — a **20-scenario leakage-detection experiment** (Set A pre-filtering off / Set B pre-filtering on; 5 vertical + 5 horizontal each), comparing **two audit-prompt versions** for the **detection-rate / false-positive-rate** tradeoff. This is a concrete instance of the report's model in which **each member contributes component-level evaluation results into their own thesis**. Caveats flagged by Sanne: the eval is small (5/type → 20% per-miss swing — frame as an illustrative PoC), groundedness is an imperfect proxy for leakage, and the experiment used **gpt-5.1 as both generator and judge** (same-model blind spot). See [[_gaps]].
+Xiaojing's permission-layer design (see [[permission-layer]], [[xiaojing-sanne-permission-email-2026-06-07]]) includes a concrete **component-level evaluation** — a **20-scenario leakage-detection experiment** (Set A pre-filtering off / Set B pre-filtering on; 5 vertical + 5 horizontal each), comparing **two audit-prompt versions** for the **detection-rate / false-positive-rate** tradeoff. Caveats flagged by Sanne: the eval is small (5/type → 20% per-miss swing — frame as an illustrative PoC), groundedness is an imperfect proxy for leakage, and the experiment used **gpt-5.1 as both generator and judge** (same-model blind spot). See [[_gaps]].
 
 ### MoSCoW prioritization (Assignment 1, 2026-04-22)
 - **Must Have:** a **basic evaluation framework measuring accuracy + freshness**.
@@ -37,8 +42,10 @@ The written report states **all four members collaboratively design and execute*
 ## Related
 - [[evaluation-framework]]
 - [[generator-module]]
+- [[gap-detector]]
 - [[permission-layer]]
 - [[xiaojing-sanne-permission-email-2026-06-07]]
+- [[mockup-artifact-2026-06-12]]
 - [[team-meeting-2026-06-11]]
 - [[student-materials-corpus]]
 - [[kickstartai-blog]]
@@ -55,3 +62,4 @@ The written report states **all four members collaboratively design and execute*
 - 2026-05-15-Laurenz-Sanne-email-content.md (KickstartAI x UvA demo follow-up email thread, 2026-05-15 → 2026-05-18)
 - 2026-06-07-Xiaojing-Sanne-email-content.md (Xiaojing ↔ Sanne permission-layer design review email thread, 2026-06-07 → 2026-06-08)
 - 2026-06-11-meeting-notes.md (internal UvA team working meeting notes, development phase)
+- 2026-06-12-mock-up-artifact.md (Living Wiki UI mock-up artifact description + Sanne feedback, development phase)
