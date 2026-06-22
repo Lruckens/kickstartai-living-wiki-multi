@@ -239,3 +239,13 @@ Append-only. One entry per operation: ingest, query, or lint.
 **Pages created:** [[team-meeting-2026-06-18]]
 **Pages updated:** wiki-generation-engine.md, gap-detector.md, multi-project-app-2026-06-17.md, project-timeline.md, _reuse.md, _overview.md, _gaps.md, index.md
 **Notes:** ⚠️ Vercel gap closed as a deliberate decision (not a failure/deferral). "Baky"/"Bucky" transcription artefacts treated as Bakkie throughout. Total pages now 41.
+
+## [2026-06-22] lint | Wiki health check
+
+**Contradictions found:** 1
+**Orphan pages:** [[2026-06-19-project-onboarding-summary]]
+**Stale pages:** 3
+**Gaps added:** 2
+**Reuse opportunities flagged:** 5
+**Pages updated:** [[log]], [[_gaps]]
+**Notes:** The wiki is broadly coherent but has one critically stale and orphaned onboarding summary page, 1 confirmed contradiction, 3 stale pages, 12 missing cross-references, 8 underdocumented decisions, and 5 unrecorded reuse patterns, with two new actionable gaps not yet tracked in _gaps.md.
