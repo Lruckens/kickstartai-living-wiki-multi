@@ -3,7 +3,7 @@
 **Last updated:** 2026-06-19
 
 ## Summary
-Framework to measure wiki quality across four dimensions: coverage, freshness, accuracy, and usefulness, with human-in-the-loop feedback to improve generation over time. The kickoff meeting (2026-04-13) emphasized that this framework should **run throughout** the project. The Assignment 1a report confirms it as the team’s **collaboratively designed and executed shared deliverable**. As of **2026-06-11** the team has begun the evaluation phase (Quinten leading metric selection); by **2026-06-15** a concrete candidate metric shortlist exists and a new-project use-case experiment is planned.
+Framework to measure wiki quality across four dimensions: coverage, freshness, accuracy, and usefulness, with human-in-the-loop feedback to improve generation over time. The kickoff meeting (2026-04-13) emphasized that this framework should **run throughout** the project. The Assignment 1a report confirms it as the team's **collaboratively designed and executed shared deliverable**. As of **2026-06-11** the team has begun the evaluation phase (Quinten leading metric selection); by **2026-06-15** a concrete candidate metric shortlist exists and a new-project use-case experiment is planned; by **2026-06-19** a full formal evaluation runplan (C0/C1/C1r/C2, H1/H2, T1/T2/T3) is ingested and the cross-model judge design is finalized.
 
 ## Details
 Four dimensions (verbatim from the Assignment 1a report — see [[assignment-1-report-2026-04-22]]):
@@ -13,6 +13,35 @@ Four dimensions (verbatim from the Assignment 1a report — see [[assignment-1-r
 - **Usefulness** — Do users find what they need?
 
 Human feedback / evaluation logs collected during the project refine generation quality. The blog post draft (see [[generator-module]]) is specifically to be evaluated against a human-written version to make the creativity/opinion angle measurable.
+
+### Formal experiment design — Wiki vs. raw-context (2026-06-19)
+The evaluation runplan (see [[evaluation-runplan-2026-06-19]]) formalizes the headline experiment with a clean four-condition design:
+
+**Four conditions** (same answer model `claude-opus-4-8`; only context differs):
+
+| ID | Context | Represents |
+|---|---|---|
+| **C0** | none | closed-book floor / hallucination baseline |
+| **C1** | all raw `.md` sources dumped in | brute-force raw context |
+| **C1r** | top-k retrieved **raw chunks** | raw source + retrieval |
+| **C2** | top-k retrieved **wiki pages** | the artifact (compiled wiki) |
+
+**Isolation logic:** C1r vs C2 holds retrieval constant — varying only raw-source vs compiled-wiki directly tests the value of the persistent compiled knowledge layer. C1 vs C1r isolates the independent effect of retrieval.
+
+**Two hypotheses:**
+- **H1 (quality):** C2 > C1r on correctness; C2 abstains correctly more on unanswerable questions.
+- **H2 (cost/efficiency):** C2 token usage ≪ C1; raw-dump cost grows with corpus while retrieval stays bounded.
+
+**Question taxonomy (T1/T2/T3):**
+- **T1** single-fact ×10 — tests factual retrieval
+- **T2** synthesis ×10 — tests cross-document reasoning (where the compiled wiki should excel)
+- **T3** unanswerable/trap ×10 — tests abstention; correct answer = decline, not fabricate
+
+**Cross-model judge design:** the judge model is `claude-sonnet-4-6`, **deliberately different** from the answer model (`claude-opus-4-8`). This directly addresses Sanne's same-model audit blind-spot concern (first raised for the [[permission-layer]] evaluation at [[xiaojing-sanne-permission-email-2026-06-07]]). The judge model version (`claude-sonnet-4-6`) is the first specific Anthropic model identifier cited in the wiki for an evaluation role — see [[_gaps]].
+
+**Build cost / break-even framing:** `token_usage.md` build cost ÷ per-query token saving (C1 − C2) = N* — *"the wiki pays for itself after ~N* queries."* This is a novel evaluation dimension (cost/efficiency) beyond the four quality dimensions defined in the report. It grounds the persistent compiled knowledge layer in economic terms. See [[wiki-generation-engine]].
+
+**Judge validation (Sanne's requirement):** hand-rate ~20–30 items; compare to LLM judge scores (Spearman/κ); report agreement. Makes LLM-as-Judge defensible for the thesis. Pending — see [[_gaps]].
 
 ### Candidate evaluation-metric shortlist (2026-06-15)
 At the 2026-06-15 meeting (see [[team-meeting-2026-06-15]]) the team produced its **first concrete metric shortlist** — candidates under research, aligning with Sanne's "~3 metrics" advice (2026-06-12):
@@ -46,14 +75,17 @@ A **basic framework (accuracy + freshness)** is a **Must Have**, while the fulle
 - Sanne advised the students **not to rely solely on LLMs** for building the evaluation framework — it specifically requires their critical thinking.
 
 ### Production approach — collaborative shared deliverable (Assignment 1a report, 2026-04-22)
-The written report states that **all four members collaboratively design and execute** an integrated evaluation framework assessing the system as a whole across the four dimensions, and that **each member additionally contributes component-level evaluation results for their own sub-system** (enabling both local and end-to-end assessment). This supersedes-by-precedence the supervisor-kickoff’s “each member a different method into their own thesis” framing of evaluation as the (sole) individual track — the report makes the *framework itself* the collaborative deliverable, with component-level results in each thesis. See [[evaluation-deliverable]], [[user-journeys]], [[supervisor-kickoff-2026-04-16]].
+The written report states that **all four members collaboratively design and execute** an integrated evaluation framework assessing the system as a whole across the four dimensions, and that **each member additionally contributes component-level evaluation results for their own sub-system** (enabling both local and end-to-end assessment). This supersedes-by-precedence the supervisor-kickoff's "each member a different method into their own thesis" framing of evaluation as the (sole) individual track — the report makes the *framework itself* the collaborative deliverable, with component-level results in each thesis. See [[evaluation-deliverable]], [[user-journeys]], [[supervisor-kickoff-2026-04-16]].
 
 This concept is also tracked as a deliverable — see [[evaluation-deliverable]].
 
 ## Related
 - [[evaluation-deliverable]]
+- [[evaluation-runplan-2026-06-19]]
 - [[generator-module]]
 - [[gap-detector]]
+- [[permission-layer]]
+- [[xiaojing-sanne-permission-email-2026-06-07]]
 - [[team-meeting-2026-06-11]]
 - [[team-meeting-2026-06-15]]
 - [[mockup-artifact-2026-06-12]]
@@ -70,3 +102,4 @@ This concept is also tracked as a deliverable — see [[evaluation-deliverable]]
 - 2026-04-22-problem-definition.md (Assignment 1a written project-definition report, text-extractable)
 - 2026-06-11-meeting-notes.md (internal UvA team working meeting notes, development phase)
 - 2026-06-15-meeting-notes.md (internal UvA team working meeting notes, development → evaluation phase transition)
+- 2026-06-18-Laurenz-evaluation-plan.md (evaluation run plan / evaluation/RUN-PLAN.md, 2026-06-18)

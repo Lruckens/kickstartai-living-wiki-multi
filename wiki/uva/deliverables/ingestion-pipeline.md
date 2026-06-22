@@ -1,7 +1,7 @@
 # Deliverable: Ingestion Pipeline
 
 **Last updated:** 2026-06-19
-**Status:** scoped (Must Have); **multi-project app adds per-project scoped ingest + token logging (2026-06-17)**
+**Status:** scoped (Must Have); **multi-project app adds per-project scoped ingest + token logging (2026-06-17)**; **evaluation fairness invariant constrains to `.md`-only for the headline experiment (2026-06-19)**
 
 ## Summary
 A system that connects to internal document sources, handles heterogeneous file types, and maintains a versioned document index with change detection.
@@ -19,10 +19,13 @@ The kickoff meeting and deck specified concrete starting sources:
 
 The specific "lab materials" set (UvA AI4Business Lab docs) remains un-ingested/unspecified — see [[_gaps]]. This aligns with the "document itself first" strategy (see [[living-wiki]], [[kickoff-meeting-2026-04-13]]).
 
+### Evaluation fairness constraint — `.md`-only sources (2026-06-19)
+The evaluation headline experiment (see [[evaluation-runplan-2026-06-19]]) uses a **`.md`-only source constraint** as a deliberate fairness invariant: `/sources/uva/` holds only `.md` files so that C1/C1r (raw source conditions) and C2 (wiki pages) are built from exactly the same knowledge. ⚠️ **This is not a pipeline limitation** — the ingestion pipeline supports PDFs, slide decks, and other formats. The `.md`-only constraint is scoped to the evaluation experiment to avoid format-mismatch confounds (PDFs processed as both text and image would create an unequal comparison). See [[evaluation-runplan-2026-06-19]], [[evaluation-deliverable]].
+
 ### Multi-project scoped ingest + token logging (2026-06-17)
 The 2026-06-17 multi-project app (see [[multi-project-app-2026-06-17]]) advances the ingestion pipeline in two ways:
 - **Project-scoped ingest:** every ingest call carries `?project=<id>` and routes through `project_dirs(project)`, writing to `wiki/<project>/` and `sources/<project>/`. This enables **per-project clean-slate ingestion** — the primary mechanism for the evaluation experiment.
-- **Per-ingest token logging + prompt caching:** costs recorded in `token_usage.md` per project. Directly addresses the Anthropic API budget caution from [[team-meeting-2026-06-15]] and provides the **build cost** figure for the thesis evaluation. See [[evaluation-deliverable]], [[_gaps]].
+- **Per-ingest token logging + prompt caching:** costs recorded in `token_usage.md` per project. Directly addresses the Anthropic API budget caution from [[team-meeting-2026-06-15]] and provides the **build cost** figure for the thesis evaluation and break-even analysis. See [[evaluation-deliverable]], [[evaluation-runplan-2026-06-19]], [[_gaps]].
 
 ### Token-cost / pre-parsing requirement (2026-06-15)
 At the 2026-06-15 meeting (see [[team-meeting-2026-06-15]]) Sanne cautioned that the team must **avoid exhausting the Anthropic API quota** before the final new-project test ingestions. Mitigation: **pre-parse / convert all source documents into a lighter format** before ingestion. **PDFs (and similar formats) are especially expensive** — the model processes both the extracted text **and** converts the document into an **image**, consuming a lot of (unnecessary) tokens. This is an operational/durability consideration for the final demo and the re-ingest-from-scratch evaluation run. See [[evaluation-deliverable]], [[_gaps]].
@@ -52,6 +55,7 @@ Sanne delivered a **purpose-built ingestion test corpus** — `llm-wiki-student-
 - [[team-meeting-2026-06-15]]
 - [[multi-project-app-2026-06-17]]
 - [[evaluation-deliverable]]
+- [[evaluation-runplan-2026-06-19]]
 - [[assignment-1-presentation-2026-04-22]]
 - [[assignment-1-report-2026-04-22]]
 
@@ -64,3 +68,4 @@ Sanne delivered a **purpose-built ingestion test corpus** — `llm-wiki-student-
 - 2026-05-15-Laurenz-Sanne-email-content.md (KickstartAI x UvA demo follow-up email thread, 2026-05-15 → 2026-05-18)
 - 2026-06-15-meeting-notes.md (internal UvA team working meeting notes, development → evaluation phase transition)
 - 2026-06-17-MULTI-APP.md (multi-project Living Wiki app README / architecture overview, 2026-06-17)
+- 2026-06-18-Laurenz-evaluation-plan.md (evaluation run plan / evaluation/RUN-PLAN.md, 2026-06-18)

@@ -1,7 +1,7 @@
 # Deliverable: Wiki Generation Engine
 
 **Last updated:** 2026-06-19
-**Status:** scoped (Must Have); first MVP exists (GitHub, 2026-05-14); LLM backend confirmed (Claude Code + Anthropic API); **UI built — React/Vite + FastAPI (2026-06-12)**; generator module integrated (2026-06-11); **fully integrated wiki demoed (2026-06-15)**; **multi-project app built (2026-06-17)**
+**Status:** scoped (Must Have); first MVP exists (GitHub, 2026-05-14); LLM backend confirmed (Claude Code + Anthropic API); **UI built — React/Vite + FastAPI (2026-06-12)**; generator module integrated (2026-06-11); **fully integrated wiki demoed (2026-06-15)**; **multi-project app built (2026-06-17)**; **evaluation runplan ingested — break-even / build-cost framing confirmed (2026-06-19)**
 
 ## Summary
 An LLM-powered, **RAG-grounded** system that processes ingested documents into structured, interlinked wiki pages organized by topic. Pages regenerate or update on a configurable schedule (e.g., daily) as source material changes. It is the **persistent, compiled knowledge layer** that distinguishes the Living Wiki from stateless RAG (see [[living-wiki]]).
@@ -14,10 +14,17 @@ An LLM-powered, **RAG-grounded** system that processes ingested documents into s
 - **GitHub repo — URL known (2026-05-15):** The repo is `https://github.com/Lruckens/kickstartai-living-wiki` (shared in the demo follow-up thread — see [[laurenz-sanne-email-2026-05-15]]). The repo schema/mechanics are now substantially revealed by the 2026-06-12 and 2026-06-17 artifacts; the full code body remains un-ingested. See [[_gaps]].
 - **LLM backend — RESOLVED (2026-05-15):** The repo is **directly linked to Claude Code** (Anthropic's terminal-based agent), which **performs all operations and generates the wiki pages**; ingested documents are passed to **Anthropic's LLM via API**. The engine runs on **Anthropic (Claude) via Claude Code**, and it is working. See [[laurenz-sanne-email-2026-05-15]], [[_gaps]].
   - ⚠️ **Note — permission-layer evaluation used a *different* model.** Xiaojing's permission-layer experiments (2026-06-07) ran on **gpt-5.1 via the UvA API**, not Claude — an *experimental/evaluation* environment, distinct from this production backend. Production intends Claude end-to-end. See [[permission-layer]], [[xiaojing-sanne-permission-email-2026-06-07]], [[_gaps]].
+  - ⚠️ **Note — evaluation harness uses specific model versions.** The headline experiment (see [[evaluation-runplan-2026-06-19]]) names `claude-opus-4-8` (answer), `claude-haiku-4-5` (retrieval), `claude-sonnet-4-6` (judge). These are evaluation harness models; whether they match the production wiki-engine model is unspecified. See [[_gaps]].
 - **RAG-grounded (Assignment 1, 2026-04-22):** The presentation describes the Wiki Engine as **"LLM-powered, RAG-grounded page generation & refresh"** — a retrieval-augmented-generation approach grounding pages in source documents (Lewis et al., 2020; Gao et al., 2023). See [[assignment-1-presentation-2026-04-22]], [[assignment-1-report-2026-04-22]].
 - **Persistent compiled layer:** Rather than re-synthesising from raw documents on every query, the engine compiles content into structured pages **once** and **updates them as new information arrives**, so understanding compounds over time (overcoming RAG statelessness; see [[living-wiki]]).
 - **Member 1 research focus (report):** Bundled with the [[ingestion-pipeline]] under **Member 1**, whose RQ is: "How can a wiki generation system be designed to detect changes in a heterogeneous document corpus and produce a continuously updated structured knowledge base?" The thesis researches **change-detection mechanisms, document versioning approaches, and wiki update strategies**, explicitly **comparing full page regeneration against incremental updates**. See [[assignment-1-report-2026-04-22]].
 - **MoSCoW (Must Have):** An LLM-powered wiki generation engine with **daily refresh** is a Must-Have for this iteration. (Real-time / sub-daily updates are explicitly **Won't Have**.)
+
+### Build cost / break-even framing (2026-06-19)
+The evaluation runplan (see [[evaluation-runplan-2026-06-19]]) introduces an **economic framing** for the persistent compiled knowledge layer:
+- **H2 (efficiency):** C2 (wiki pages) uses far fewer tokens than C1 (full raw dump) per query; raw-dump cost grows linearly with corpus size while retrieval stays bounded.
+- **Build cost / break-even:** total ingestion cost from `token_usage.md` ÷ per-query token saving (C1 − C2) = **N\*** — *"the wiki pays for itself after ~N\* queries."*
+This is a novel evaluation dimension (cost/efficiency) that complements the four quality dimensions (coverage/freshness/accuracy/usefulness) defined in the report. It directly justifies the persistent compiled layer as an architectural choice, not just a quality benefit.
 
 ### UI + backend architecture (2026-06-12)
 The 2026-06-12 mock-up artifact (see [[mockup-artifact-2026-06-12]]) reveals the implemented architecture:
@@ -67,6 +74,7 @@ For sensitive-project deployment, Sanne suggested a **configurable backend** tha
 - [[mockup-artifact-2026-06-12]]
 - [[multi-project-app-2026-06-17]]
 - [[decision-multi-project-app-structure]]
+- [[evaluation-runplan-2026-06-19]]
 - [[team-meeting-2026-05-14]]
 - [[team-meeting-2026-06-04]]
 - [[team-meeting-2026-06-11]]
@@ -91,3 +99,4 @@ For sensitive-project deployment, Sanne suggested a **configurable backend** tha
 - 2026-06-12-mock-up-artifact.md (Living Wiki UI mock-up artifact description + Sanne feedback, development phase)
 - 2026-06-15-meeting-notes.md (internal UvA team working meeting notes, development → evaluation phase transition)
 - 2026-06-17-MULTI-APP.md (multi-project Living Wiki app README / architecture overview, 2026-06-17)
+- 2026-06-18-Laurenz-evaluation-plan.md (evaluation run plan / evaluation/RUN-PLAN.md, 2026-06-18)

@@ -221,3 +221,12 @@ Append-only. One entry per operation: ingest, query, or lint.
 **Pages created:** [[multi-project-app-2026-06-17]], [[decision-multi-project-app-structure]]
 **Pages updated:** wiki-generation-engine.md, ingestion-pipeline.md, permission-layer.md, evaluation-deliverable.md, _reuse.md, student-materials-corpus.md, project-timeline.md, _overview.md, _gaps.md, index.md
 **Notes:** ⚠️ "Bakkie" identity conflict handled as an ambiguity/gap, not asserted either way. The configuration-not-rewrite principle is now most concretely realized in the multi-project app. Total pages now 39.
+
+---
+
+## 2026-06-19 — INGEST
+**Source:** 2026-06-18-Laurenz-evaluation-plan.md (evaluation run plan / `evaluation/RUN-PLAN.md`, 2026-06-18)
+**Action:** Created [[evaluation-runplan-2026-06-19]]. **RESOLVED the `evaluation/RUN-PLAN.md not ingested` gap** from the multi-project app ingest. Documented the full **C0/C1/C1r/C2 four-condition experimental design**, **H1 (quality) and H2 (efficiency) hypotheses**, **T1/T2/T3 question taxonomy** (30 Qs with human reference answers), **metrics set** (correctness PRIMARY; faithfulness, answer relevancy, contextual recall, abstention), **cross-model judge design** (`claude-sonnet-4-6` ≠ `claude-opus-4-8` answer model — addresses Sanne's same-model blind-spot concern), **fairness invariant** (`.md`-only sources; same knowledge raw vs compiled), **corpus hygiene filter** (excludes Westerwoude/Bakkie cross-project sources), **build-cost/break-even framing** (N* queries to pay for the compilation), and **post-run judge validation protocol** (Sanne's requirement). Added new gaps: "Westerwoude" identity unresolved; specific model versions (eval-harness context only); evaluation harness files not ingested (`questions.json`, `reference-answers-worksheet.md`, `metrics.py`, `pipelines.py`, `run_eval.py`); `results.json` not yet available; judge validation pending. Updated [[multi-project-app-2026-06-17]] to note RUN-PLAN.md now ingested.
+**Pages created:** [[evaluation-runplan-2026-06-19]]
+**Pages updated:** evaluation-deliverable.md, evaluation-framework.md, wiki-generation-engine.md, ingestion-pipeline.md, multi-project-app-2026-06-17.md, _overview.md, _gaps.md, index.md
+**Notes:** ⚠️ "Westerwoude" treated as an unresolved new entity — no page created, gap flagged. `.md`-only constraint noted as evaluation fairness choice, not pipeline limitation. Specific model versions recorded with eval-harness caveat, not conflated with production stack. Total pages now 40.
