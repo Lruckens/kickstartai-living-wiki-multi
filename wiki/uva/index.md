@@ -1,7 +1,7 @@
 # Wiki index — Living Wiki (UvA)
 
 Last updated: 2026-06-19
-Total pages: 40
+Total pages: 41
 
 > Maintained by Claude.
 
@@ -40,6 +40,7 @@ Total pages: 40
 - [[mockup-artifact-2026-06-12]]
 - [[team-meeting-2026-06-15]]
 - [[multi-project-app-2026-06-17]]
+- [[team-meeting-2026-06-18]]
 - [[evaluation-runplan-2026-06-19]]
 
 ## Deliverables

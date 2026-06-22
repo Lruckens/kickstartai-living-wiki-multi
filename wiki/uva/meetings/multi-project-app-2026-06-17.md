@@ -10,6 +10,8 @@ A README-style document (`2026-06-17-MULTI-APP.md`) describing the **multi-proje
 
 The document references a decision record `[[decision-multi-project-app-structure]]` (see [[decision-multi-project-app-structure]]) and an `evaluation/RUN-PLAN.md` — the latter is **now ingested** as [[evaluation-runplan-2026-06-19]] (gap resolved). See [[_gaps]] for remaining open items.
 
+The four account types described here (anna.jansen / bram.bakker / carla.visser / gast.bezoeker) were **corroborated by the 2026-06-18 demo** to Sanne (see [[team-meeting-2026-06-18]]). Sanne also confirmed she and another engineer intend to use this work as a starting point for an internal KickstartAI project (see [[_reuse]]).
+
 ## Why it was built
 Two motivations are stated explicitly:
 1. **Reusability across KickstartAI projects** — rather than fork the app per project, one app serves all, each isolated and switchable from an in-app toggle. *Deploying a new project needs no code edits — just config.* This is the strongest concrete realization of the configuration-not-rewrite principle to date. See [[_reuse]].
@@ -50,7 +52,7 @@ Ingest/query/generate/lint are refused for a project the user is not a member of
 | `uva` | Living Wiki (UvA) | thesis project — fresh `.md` ingest for evaluation |
 | `bakkie` | Project Bakkie | second project — proves multi-project isolation |
 
-⚠️ **"Bakkie" identity ambiguity.** The existing wiki ([[student-materials-corpus]], [[kickstartai-projects]]) establishes "Bakkie" as a **fictional** student-materials test corpus that must never be merged into the real KickstartAI portfolio. This document calls it "a second, real project — proves multi-project isolation." The most plausible reading is that the same fictional corpus is being used as the second isolation-test project subtree (i.e. "real" means a real populated subtree, not a real KickstartAI client). The evaluation runplan (see [[evaluation-runplan-2026-06-19]]) lists "Westerwoude/Bakkie" as cross-project sources to exclude from the UvA corpus hygiene filter — suggesting Bakkie files exist in `/sources/` but should not be used for UvA evaluation. This is consistent with the fictional-corpus reading but does not fully resolve it. See [[_gaps]].
+⚠️ **"Bakkie" identity ambiguity.** The existing wiki ([[student-materials-corpus]], [[kickstartai-projects]]) establishes "Bakkie" as a **fictional** student-materials test corpus that must never be merged into the real KickstartAI portfolio. This document calls it "a second, real project — proves multi-project isolation." The most plausible reading is that the same fictional corpus is being used as the second isolation-test project subtree (i.e. "real" means a real populated subtree, not a real KickstartAI client). The evaluation runplan (see [[evaluation-runplan-2026-06-19]]) lists "Westerwoude/Bakkie" as cross-project sources to exclude from the UvA corpus hygiene filter — suggesting Bakkie files exist in `/sources/` but should not be used for UvA evaluation. The 2026-06-18 demo (see [[team-meeting-2026-06-18]]) confirmed a post-defence plan to demo the Bakkie project to Sanne, suggesting it is populated and functional. All of this is consistent with the fictional-corpus reading but does not fully resolve it. See [[_gaps]].
 
 ## Build sequence (6 steps)
 1. **Initial scaffold** — multi-project skeleton (UvA + Bakkie), empty per-project trees.
@@ -87,6 +89,7 @@ The `uva` project subtree is the **clean-slate corpus** for the wiki-vs-raw-cont
 - [[evaluation-deliverable]]
 - [[evaluation-runplan-2026-06-19]]
 - [[team-meeting-2026-06-15]]
+- [[team-meeting-2026-06-18]]
 - [[mockup-artifact-2026-06-12]]
 - [[student-materials-corpus]]
 - [[_reuse]]
@@ -94,3 +97,4 @@ The `uva` project subtree is the **clean-slate corpus** for the wiki-vs-raw-cont
 
 ## Sources
 - 2026-06-17-MULTI-APP.md (multi-project Living Wiki app README / architecture overview, 2026-06-17)
+- 2026-06-18-meeting-notes.md (Gemini-generated transcript summary, final UvA + Sanne check-in meeting, 2026-06-18; corroborates 4 account types)

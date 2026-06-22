@@ -7,6 +7,11 @@ The Living Wiki architecture is explicitly designed for reuse across all Kicksta
 
 The kickoff slide deck (see [[kickoff-deck-2026-04-13]]) articulates the cross-project reuse motivation at source level: one of the three stated problems is that **"learnings from one project rarely reach the next one."** The Living Wiki is the mechanism for carrying learnings forward across projects.
 
+## KickstartAI internal-use commitment (2026-06-18) — STRONGEST EVIDENCE TO DATE
+At the 2026-06-18 final demo check-in (see [[team-meeting-2026-06-18]]), **Sanne Wielinga explicitly stated** that she and **another KickstartAI engineer** intend to use this work as a **starting point for an internal KickstartAI project**. The wiki "provides valuable context on features and the decision-making process."
+
+This is the **first on-the-record, post-thesis internal-reuse commitment by KickstartAI** — confirming that the reuse vision is not merely architectural aspiration but a concrete near-term plan. The identity of the "another engineer" is unknown; see [[_gaps]].
+
 ## Concrete cross-project design choices (2026-05-14 dev meeting)
 The first development-phase team meeting (see [[team-meeting-2026-05-14]]) surfaced two concrete design choices that reinforce the configuration-not-rewrite, multi-project deployment vision:
 - **Admin-per-project governance** — "assign an admin per project who governs the wiki page." Each deployed project gets its own governing admin (mechanism unspecified — see [[permission-layer]], [[_gaps]]).
@@ -19,7 +24,9 @@ The 2026-06-12 mock-up artifact (see [[mockup-artifact-2026-06-12]]) surfaced co
 - **Config-via-UI** — output types, tone/stakeholder/length (generator) and visibility labels / project scoping (permission layer) are configured through a UI, supporting the configuration-not-rewrite goal.
 - **Permission config as a markdown file** (Claude Code implementation) — access rights change without code/prompt edits.
 - **Secret management via gitignored `.env`** (with a committed `.env.example` template) — a per-deployment API-key handling pattern.
-- ⚠️ **Open durability caveat:** component backends currently run on **individual laptops**; central deployment (e.g. **Vercel**) is needed for true multi-user reuse. See [[_gaps]].
+- **Obsidian graph integration** — a visual knowledge-graph of wiki page links, revealed at the 2026-06-18 demo (see [[team-meeting-2026-06-18]]). Implementation details unspecified; potentially reusable as a navigation/query-efficiency aid. See [[_gaps]].
+- **Cross-session learning pattern** — summarize project learnings → ingest the summary as an internal document → accessible to team in future sessions. Described by Xiaojing at the 2026-06-18 demo (see [[team-meeting-2026-06-18]]). Whether this is a dedicated UI flow or general wiki capability is unspecified. See [[_gaps]].
+- ⚠️ **Deployment note:** Vercel deployment was **decided against** (2026-06-18) to prioritize thesis work; the branch-per-member workflow lets any member run the UI locally. Central URL-hosted deployment remains future work for a production reuse scenario. See [[team-meeting-2026-06-18]], [[_gaps]].
 
 ## Multi-project app — configuration-not-rewrite fully realized (2026-06-17)
 The 2026-06-17 multi-project app (see [[multi-project-app-2026-06-17]], [[decision-multi-project-app-structure]]) is the **strongest concrete realization of the configuration-not-rewrite principle to date**:

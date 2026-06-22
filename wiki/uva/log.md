@@ -230,3 +230,12 @@ Append-only. One entry per operation: ingest, query, or lint.
 **Pages created:** [[evaluation-runplan-2026-06-19]]
 **Pages updated:** evaluation-deliverable.md, evaluation-framework.md, wiki-generation-engine.md, ingestion-pipeline.md, multi-project-app-2026-06-17.md, _overview.md, _gaps.md, index.md
 **Notes:** ⚠️ "Westerwoude" treated as an unresolved new entity — no page created, gap flagged. `.md`-only constraint noted as evaluation fairness choice, not pipeline limitation. Specific model versions recorded with eval-harness caveat, not conflated with production stack. Total pages now 40.
+
+---
+
+## 2026-06-19 — INGEST
+**Source:** 2026-06-18-meeting-notes.md (Gemini-generated transcript summary, final UvA + Sanne check-in meeting, 2026-06-18)
+**Action:** Created [[team-meeting-2026-06-18]]. **RESOLVED the Vercel deployment gap** (decided against — prioritizing thesis work + test cases). Documented: final integrated system demo to Sanne (4 account types corroborated); **KickstartAI internal-use intent confirmed** (Sanne + another engineer will use this as starting point for internal project); **Obsidian graph integration revealed** (visual wiki link-map — new, undocumented feature); **cross-session learning feature** described by Xiaojing (new framing); **Friday 2026-06-20 final integration demo** + post-defence Thursday meeting planned; thesis defence logistics (pass/fail, individual PowerPoints, supervisor at conference but generally positive). Added new gaps: Obsidian graph details; cross-session learning details; "another engineer" identity; post-defence Bakkie demo; 20.06 demo outcome; supervisor full feedback.
+**Pages created:** [[team-meeting-2026-06-18]]
+**Pages updated:** wiki-generation-engine.md, gap-detector.md, multi-project-app-2026-06-17.md, project-timeline.md, _reuse.md, _overview.md, _gaps.md, index.md
+**Notes:** ⚠️ Vercel gap closed as a deliberate decision (not a failure/deferral). "Baky"/"Bucky" transcription artefacts treated as Bakkie throughout. Total pages now 41.

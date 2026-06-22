@@ -1,7 +1,7 @@
 # Deliverable: Wiki Generation Engine
 
 **Last updated:** 2026-06-19
-**Status:** scoped (Must Have); first MVP exists (GitHub, 2026-05-14); LLM backend confirmed (Claude Code + Anthropic API); **UI built — React/Vite + FastAPI (2026-06-12)**; generator module integrated (2026-06-11); **fully integrated wiki demoed (2026-06-15)**; **multi-project app built (2026-06-17)**; **evaluation runplan ingested — break-even / build-cost framing confirmed (2026-06-19)**
+**Status:** scoped (Must Have); first MVP exists (GitHub, 2026-05-14); LLM backend confirmed (Claude Code + Anthropic API); **UI built — React/Vite + FastAPI (2026-06-12)**; generator module integrated (2026-06-11); **fully integrated wiki demoed (2026-06-15)**; **multi-project app built (2026-06-17)**; **evaluation runplan ingested — break-even / build-cost framing confirmed (2026-06-19)**; **final demo to Sanne (2026-06-18); Vercel decided against; Obsidian graph integration revealed**
 
 ## Summary
 An LLM-powered, **RAG-grounded** system that processes ingested documents into structured, interlinked wiki pages organized by topic. Pages regenerate or update on a configurable schedule (e.g., daily) as source material changes. It is the **persistent, compiled knowledge layer** that distinguishes the Living Wiki from stateless RAG (see [[living-wiki]]).
@@ -10,6 +10,7 @@ An LLM-powered, **RAG-grounded** system that processes ingested documents into s
 - **First MVP exists (2026-05-14):** At the 2026-05-14 development-phase team meeting (see [[team-meeting-2026-05-14]]), **Laurenz demoed a GitHub repo** containing the **wiki architecture and a first MVP of the system** — the first concrete evidence the system exists in code.
 - **MVP finished; UI built (2026-06-04 planned → 2026-06-12 built):** At the 2026-06-04 meeting (see [[team-meeting-2026-06-04]]), Laurenz had **finished his MVP version** and planned to **build a UI on top of the GitHub**. As of **2026-06-12** that UI is **built** — see the architecture below and [[mockup-artifact-2026-06-12]]. Whether the UI is a graded thesis deliverable or a convenience layer remains partly open — see [[_gaps]].
 - **Fully integrated wiki demoed (2026-06-15):** At the 2026-06-15 meeting (see [[team-meeting-2026-06-15]]), **Laurenz demoed the fully integrated wiki** — with the [[generator-module]], [[gap-detector]] (a dashboard + report page), and [[permission-layer]] (a login landing page) all wired into one UI. The integration effort tracked across 06-11/06-12 is now realized in one demoed artifact.
+- **Final demo to Sanne (2026-06-18):** Laurenz demoed the fully integrated multi-project system to Sanne (see [[team-meeting-2026-06-18]]). The demo included all four account types (UvA member, Bakkie member, combined, guest), the Obsidian graph integration, and the cross-session learning feature. The system received positive feedback.
 - **Multi-project app built (2026-06-17):** A **multi-project version of the app** was built (see [[multi-project-app-2026-06-17]]), refactoring the flat single-project layout into **per-project subtrees** (`wiki/<project>/` + `sources/<project>/`) with config-driven deployment. This is the **evaluation substrate** for the clean-slate ingest experiment and the strongest concrete realization of the configuration-not-rewrite reuse principle. See [[decision-multi-project-app-structure]], [[_reuse]].
 - **GitHub repo — URL known (2026-05-15):** The repo is `https://github.com/Lruckens/kickstartai-living-wiki` (shared in the demo follow-up thread — see [[laurenz-sanne-email-2026-05-15]]). The repo schema/mechanics are now substantially revealed by the 2026-06-12 and 2026-06-17 artifacts; the full code body remains un-ingested. See [[_gaps]].
 - **LLM backend — RESOLVED (2026-05-15):** The repo is **directly linked to Claude Code** (Anthropic's terminal-based agent), which **performs all operations and generates the wiki pages**; ingested documents are passed to **Anthropic's LLM via API**. The engine runs on **Anthropic (Claude) via Claude Code**, and it is working. See [[laurenz-sanne-email-2026-05-15]], [[_gaps]].
@@ -34,7 +35,9 @@ The 2026-06-12 mock-up artifact (see [[mockup-artifact-2026-06-12]]) reveals the
 - **Operations view (write path):** three operations as tabs with **live SSE streaming** — **Ingest** (3-phase: Analyse → Apply → Push), **Query** (answers from wiki content only with `[[page]]` citations), **Lint** (health-check report). These match the wiki's own `ingest`/`query`/`lint` operation types in [[log]].
 - **Ingest mechanics:** Claude analyses the uploaded doc vs. the existing wiki and streams its plan; a second Claude call outputs **JSON with complete file contents** for every affected page, written into `/wiki`; then a **push** phase.
 - **GitHub push — "Wiki Bot" via git worktree:** the backend fetches `origin/main`, checks it out into a **temporary git worktree**, copies the updated `wiki/` + new source file in, commits as a dedicated **Wiki Bot** identity, pushes `HEAD:main`, then deletes the worktree — keeping the developer's working branch untouched while `main` always reflects the latest knowledge, with an attributable, append-only commit history. A reusable pattern — see [[_reuse]].
-- ⚠️ **Deployment durability:** component backends currently run on **individual laptops**; Sanne suggested **Vercel** for central URL-hosted deployment (out of scope but to be attempted). See [[_gaps]].
+- **Obsidian graph integration (revealed 2026-06-18):** Laurenz showcased a **visual Obsidian graph of wiki page links** at the final demo (see [[team-meeting-2026-06-18]]), providing a visual knowledge-map demonstrating the interconnected nature of the documentation. Not previously documented; implementation details and production-vs-demo status unspecified. See [[_gaps]].
+- **Save-to-wiki feature:** users can save generated content or query responses directly to the wiki (stored in a generated outputs section). See [[team-meeting-2026-06-18]].
+- ✅ **Deployment — Vercel decided against (2026-06-18).** The team decided **not to deploy to Vercel**, prioritizing individual thesis work and test cases (see [[team-meeting-2026-06-18]]). Component backends currently run on **individual laptops**; the branch-per-member workflow lets any member run the UI locally. Central URL-hosted deployment remains future work for production reuse.
 
 ### Multi-project app architecture (2026-06-17)
 The 2026-06-17 multi-project app (see [[multi-project-app-2026-06-17]], [[decision-multi-project-app-structure]]) introduces the **per-project subtree model** that supersedes the flat single-project layout:
@@ -44,12 +47,12 @@ The 2026-06-17 multi-project app (see [[multi-project-app-2026-06-17]], [[decisi
 - **Frontend project switcher:** `App.tsx` keeps an **active project** in state (persisted to `localStorage`), shown as a switcher (bottom-left). Changing the project re-scopes every view. `VITE_BACKEND_URL` configures the backend URL.
 - **Per-project access control:** users carry a `projects` list; access refused for non-member projects. Demo accounts: `anna.jansen` (UvA), `bram.bakker` (Bakkie), `carla.visser` (both), `gast.bezoeker` (public guest). See [[permission-layer]].
 - **Token logging:** per-ingest token counts + prompt caching recorded in `token_usage.md` — directly addresses the Anthropic API budget caution from [[team-meeting-2026-06-15]].
-- ⚠️ **Deployment status unclear:** whether this multi-project app supersedes the single-project app entirely, runs alongside it, or has been deployed to Vercel is not stated. See [[_gaps]].
+- ⚠️ **Deployment status:** Vercel deployment decided against (2026-06-18). The multi-project app runs locally per the branch-per-member workflow. See [[team-meeting-2026-06-18]], [[_gaps]].
 
 ### Integrated UI + collaboration workflow (2026-06-15)
 At the 2026-06-15 meeting (see [[team-meeting-2026-06-15]]) the integrated wiki was demoed and a concrete collaboration workflow adopted:
 - **Integrated surfaces:** the UI now bundles the wiki read/write views, the **Generator** config UI, the **Gap Detector** as a **dashboard + report page**, and the **Permission Layer** as a **login landing page** (log in before entering the wiki).
-- **Branch-per-member workflow:** the UI runs on **any member's laptop** by creating a **separate branch** of the GitHub repo + downloading the repo docs locally. Members work on **their own branches**; **always ask Laurenz before a pull request / merge to `main`** — Laurenz is the **integration/merge gatekeeper**. This **partially mitigates** the single-laptop-owner durability risk (any member can run the integrated UI locally) but is **not** central/URL deployment — the **Vercel/central-deployment gap remains open**. See [[_gaps]].
+- **Branch-per-member workflow:** the UI runs on **any member's laptop** by creating a **separate branch** of the GitHub repo + downloading the repo docs locally. Members work on **their own branches**; **always ask Laurenz before a pull request / merge to `main`** — Laurenz is the **integration/merge gatekeeper**. This **partially mitigates** the single-laptop-owner durability risk.
 - **State of the live wiki:** currently holds **only public + internal pages** — **restricted pages still need to be added** to test the permission layer's full functionality (see [[permission-layer]], [[_gaps]]).
 - ⚠️ **Token-cost caution (Sanne):** to avoid exhausting the Anthropic API quota before the final new-project test ingestions, **pre-parse/convert source docs into a lighter format** — **PDFs especially** waste tokens (processed as text *and* converted to an image). See [[ingestion-pipeline]], [[_gaps]].
 
@@ -59,8 +62,8 @@ The [[permission-layer]] operates on the **source paragraph pool before generati
 ### Module integration (2026-06-04 → 2026-06-17)
 The [[generator-module]] (built by Quinten) integrates with this GitHub architecture. As of **2026-06-11** (see [[team-meeting-2026-06-11]]) **Quinten's and Laurenz's modules are integrated and functional** (the generator merged via PR into `main`, per [[mockup-artifact-2026-06-12]]) — the earlier at-risk integration task is **resolved**. Integration of the **remaining modules** (the [[permission-layer]] and Cara's [[gap-detector]]) was completed by 2026-06-15, when Laurenz **demoed the fully integrated wiki** (see [[team-meeting-2026-06-15]]); Cara and Xiaojing shared their MVPs + precise descriptions and Laurenz merged them **using Claude and VS Code**. Sanne flagged **integrating each component's separate UI/backend into one working system** as the biggest challenge. The robustness/repeatability of the manual, Claude-assisted merge is unspecified — see [[_gaps]].
 
-### Deployment / backend configurability (2026-05-15 → 2026-06-17)
-For sensitive-project deployment, Sanne suggested a **configurable backend** that can swap in a **self-hosted or VPC-deployed model** when needed while keeping the rest of the architecture intact — tying the engine's LLM backend to the [[permission-layer]] and the configuration-not-rewrite reuse model (see [[_reuse]]). The multi-project app's `project.config.json` + `PROJECT_ROOT` + `VITE_BACKEND_URL` env vars are concrete steps toward this (no code edits needed to redirect to a different backend or working tree). See [[laurenz-sanne-email-2026-05-15]].
+### Deployment / backend configurability (2026-05-15 → 2026-06-18)
+For sensitive-project deployment, Sanne suggested a **configurable backend** that can swap in a **self-hosted or VPC-deployed model** when needed while keeping the rest of the architecture intact — tying the engine's LLM backend to the [[permission-layer]] and the configuration-not-rewrite reuse model (see [[_reuse]]). The multi-project app's `project.config.json` + `PROJECT_ROOT` + `VITE_BACKEND_URL` env vars are concrete steps toward this. Vercel deployment was **decided against** at the 2026-06-18 final demo check-in (see [[team-meeting-2026-06-18]]) — central URL-hosted deployment remains future work. See [[laurenz-sanne-email-2026-05-15]].
 
 ### Open design questions (2026-05-14 team meeting)
 - **LLM choice — RESOLVED (see above).** Backend is Claude Code + Anthropic API. Residual: data residency / privacy of the external data flow; specific vector store and embedding model remain unspecified. See [[permission-layer]], [[_gaps]].
@@ -79,6 +82,7 @@ For sensitive-project deployment, Sanne suggested a **configurable backend** tha
 - [[team-meeting-2026-06-04]]
 - [[team-meeting-2026-06-11]]
 - [[team-meeting-2026-06-15]]
+- [[team-meeting-2026-06-18]]
 - [[xiaojing-sanne-permission-email-2026-06-07]]
 - [[laurenz-sanne-email-2026-05-15]]
 - [[permission-layer]]
@@ -100,3 +104,4 @@ For sensitive-project deployment, Sanne suggested a **configurable backend** tha
 - 2026-06-15-meeting-notes.md (internal UvA team working meeting notes, development → evaluation phase transition)
 - 2026-06-17-MULTI-APP.md (multi-project Living Wiki app README / architecture overview, 2026-06-17)
 - 2026-06-18-Laurenz-evaluation-plan.md (evaluation run plan / evaluation/RUN-PLAN.md, 2026-06-18)
+- 2026-06-18-meeting-notes.md (Gemini-generated transcript summary, final UvA + Sanne check-in meeting, 2026-06-18)
