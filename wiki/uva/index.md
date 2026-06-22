@@ -1,11 +1,12 @@
 # Wiki index — Living Wiki (UvA)
 
 Last updated: 2026-06-19
-Total pages: 36
+Total pages: 39
 
 > Maintained by Claude.
 
 ## Decisions
+- [[decision-multi-project-app-structure]]
 
 ## Entities
 - [[kickstartai]]
@@ -38,6 +39,7 @@ Total pages: 36
 - [[team-meeting-2026-06-11]]
 - [[mockup-artifact-2026-06-12]]
 - [[team-meeting-2026-06-15]]
+- [[multi-project-app-2026-06-17]]
 
 ## Deliverables
 - [[ingestion-pipeline]]

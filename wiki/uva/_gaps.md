@@ -2,10 +2,18 @@
 
 Underdocumented areas and open questions.
 
+## Surfaced from 2026-06-17 multi-project app ingest (ingested 2026-06-19)
+- **`evaluation/RUN-PLAN.md` not ingested — NEW.** The multi-project app README references `evaluation/RUN-PLAN.md` as the plan for the clean-slate UvA ingest experiment. Not yet ingested. See [[multi-project-app-2026-06-17]], [[evaluation-deliverable]].
+- **`token_usage.md` not ingested — NEW.** Per-ingest token logging file; directly relevant to the Anthropic API budget caution. Not yet ingested. See [[multi-project-app-2026-06-17]], [[ingestion-pipeline]].
+- **"Bakkie" identity in multi-project app — NEW (ambiguity).** The multi-project app registers `bakkie` as "a second, real project — proves multi-project isolation." The existing wiki treats "Bakkie" as a fictional student-materials test corpus that must never be merged into the real portfolio. Whether this is the same fictional corpus used as the second subtree (most plausible) or a different real KickstartAI project is unresolved. Fictional-Bakkie guardrail remains in force until positive evidence of a real project. See [[multi-project-app-2026-06-17]], [[student-materials-corpus]], [[kickstartai-projects]].
+- **`wiki/bakkie/` and `sources/bakkie/` contents not ingested — NEW.** The Bakkie project subtree exists in the multi-project app but its wiki contents are not ingested. See [[multi-project-app-2026-06-17]].
+- **Multi-project app deployment status — NEW.** Whether this multi-project app supersedes the single-project app entirely, runs alongside it, or has been deployed to Vercel is not stated. See [[multi-project-app-2026-06-17]], [[wiki-generation-engine]].
+- **`[[decision-multi-project-app-structure]]` stub only — NEW (partial resolution).** The document references this decision record as already existing; a stub page has been created but the full rationale/alternatives-considered record is not in the ingested sources. See [[decision-multi-project-app-structure]].
+
 ## Surfaced from 2026-06-15 team-meeting ingest (ingested 2026-06-19)
 - **Restricted-tier pages not yet implemented — NEW.** The integrated live wiki currently holds only **public + internal** pages; **restricted pages must be added** to test the permission layer's full leakage-prevention functionality end-to-end. See [[permission-layer]], [[team-meeting-2026-06-15]].
 - **Anthropic API budget / token-cost management — NEW (operational risk).** Risk of exhausting the Anthropic API quota before the final new-project test ingestions; mitigation = pre-parse/convert source docs to lighter formats (PDFs especially expensive — processed as text *and* image). Durability/reproducibility consideration for the final demo. See [[ingestion-pipeline]], [[team-meeting-2026-06-15]].
-- **Evaluation-metric shortlist proposed but not finalized/applied — NEW (advances existing gap).** Candidates: **Self-BLEU, BERTScore, LLM-as-Judge** (coherence / faithfulness / stakeholder-appropriateness). Final selection, thresholds, and mapping to the four dimensions (coverage/freshness/accuracy/usefulness) still pending. See [[evaluation-framework]], [[evaluation-deliverable]], [[team-meeting-2026-06-15]].
+- **Evaluation-metric shortlist proposed but not finalized/applied — NEW (advances existing gap).** Candidates: **Self-BLEU, BERTScore, LLM-as-Judge** (coherence / faithfulness / stakeholder-appropriateness). Final selection, thresholds, and mapping to the four dimensions still pending. See [[evaluation-framework]], [[evaluation-deliverable]], [[team-meeting-2026-06-15]].
 - **New-project use-case experiment design — NEW.** Plan to re-ingest all docs into an empty wiki, then ingest a **fake KickstartAI project** to test generalization; experiment specifics (success criteria, what's measured during ingestion) to be designed 17.06. See [[evaluation-deliverable]], [[team-meeting-2026-06-15]].
 - **Gap-detector "Team confirmed" label unclear — NEW (minor UX).** The label's meaning/behavior in the Gap Detector dashboard is unclear and should be clarified. See [[gap-detector]], [[team-meeting-2026-06-15]].
 - **Branch-per-member workflow durability — NEW (partial mitigation note).** Any member can run the UI via a personal branch + local repo, with Laurenz gatekeeping merges to main; mitigates single-laptop-owner risk but is **not** central/URL deployment (Vercel gap still open). Robustness/repeatability of local runs unspecified. See [[wiki-generation-engine]], [[project-team]], [[team-meeting-2026-06-15]].
@@ -34,7 +42,7 @@ Underdocumented areas and open questions.
 - **Cara MVP-feasibility — status evolved/RESOLVED-in-practice.** The 2026-06-04 "MVP not feasible" friction was worked around; Cara shares an MVP (the Gap Detector). The methodology-reconciliation note remains for thesis framing. See [[team-meeting-2026-06-11]], [[gap-detector]].
 
 ## Surfaced from 2026-06-07 permission-layer design review thread ingest (ingested 2026-06-19)
-- **Permission mechanism (RBAC/ACL) — substantially RESOLVED.** A **paragraph-level tier model** (public / internal / restricted-by-`project_id`) + a **pre-filtering ACL** + an **LLM self-audit**, now with an **email-based login + project-scoped UI** (2026-06-12). See [[permission-layer]], [[permission-model]], [[xiaojing-sanne-permission-email-2026-06-07]].
+- **Permission mechanism (RBAC/ACL) — substantially RESOLVED.** A **paragraph-level tier model** (public / internal / restricted-by-`project_id`) + a **pre-filtering ACL** + an **LLM self-audit**, now with an **email-based login + project-scoped UI** (2026-06-12) and **config-driven per-project membership** (2026-06-17). See [[permission-layer]], [[permission-model]], [[xiaojing-sanne-permission-email-2026-06-07]].
 - **Permission-layer PoC vs. MoSCoW "Won't-Have working layer" — reconcile (kept).** A working, *evaluated* two-layer PoC + UI now exists, exceeding the Assignment-1 framing; scoped as partial implementation / scope-growth, MoSCoW record kept. See [[permission-layer]], [[_overview]].
 - **Aggregation / inference leakage — NEW (unaddressed hard problem).** Grounded aggregation of allowed paragraphs revealing restricted info passes the audit; not yet in the threat model. See [[permission-layer]], [[permission-model]].
 - **Paragraph-label assignment mechanism — NEW.** The pre-filtering guarantee rests on correct ingestion-time paragraph tier labels; who assigns them and how is unspecified. See [[permission-layer]].
@@ -63,7 +71,7 @@ Underdocumented areas and open questions.
 ## Surfaced from 2026-05-14 development-phase team meeting ingest (ingested 2026-06-19)
 - **Data-understanding scope — open question.** What belongs in the CRISP-DM data-understanding phase given the cold-start corpus? See [[team-meeting-2026-05-14]].
 - **Admin-per-project governance — (proposal recorded, mechanism unspecified).** See [[permission-layer]], [[team-meeting-2026-05-14]].
-- **One-page-per-project vs. per-topic granularity — terminology note.** See [[wiki-generation-engine]], [[_reuse]].
+- **One-page-per-project vs. per-topic granularity — terminology note.** Now realized as per-project subtrees in the multi-project app. See [[wiki-generation-engine]], [[multi-project-app-2026-06-17]], [[_reuse]].
 
 ## Surfaced from check-in scheduling thread ingest (2026-04-30 → 2026-05-04; ingested 2026-06-19)
 - **Second UvA group ("both groups") — UNRESOLVED.** Implies a second UvA team beyond the four-person Living Wiki team; identity/project/relationship unknown. See [[checkin-scheduling-2026-04-30]], [[project-team]].
@@ -92,7 +100,7 @@ Underdocumented areas and open questions.
 - **Regeneration cadence** — daily refresh a Must; exact cadence config not finalized.
 - **Tone/voice spec** — "KickstartAI's voice" referenced but not defined. See [[generator-module]].
 - **Human baseline for blog eval** — no baseline document exists yet (now a Could-Have comparative eval). See [[evaluation-deliverable]].
-- **Permission model specifics** — now substantially specified (see 2026-06-07/06-12). Design-only deliverable confirmed though an evaluated PoC + UI now exists. See [[permission-model]], [[permission-layer]].
+- **Permission model specifics** — now substantially specified (see 2026-06-07/06-12/06-17). Design-only deliverable confirmed though an evaluated PoC + UI + config-driven per-project access now exists. See [[permission-model]], [[permission-layer]].
 - **Pending source material** — two-pager and UvA AI4Business Lab documentation not yet ingested. Cold-start situation.
 
 ## Surfaced / updated from kickoff email thread + supervisor kickoff ingests
@@ -141,7 +149,7 @@ Underdocumented areas and open questions.
 - **Additional collaborator orgs undocumented** — bol, Philips, NL4AI.
 - **Project portfolio is non-exhaustive / point-in-time.**
 - **No Living Wiki project listed** — expected (internal/scoping).
-- [ ] **stale-output-tracking** — The stale onboarding summary's superseded state is not yet resolved by regeneration; now contradicts even more facts (UI built, all four components, team mapped, fully integrated demo, dated final-demo schedule). — source: [[lint]] / [[mockup-artifact-2026-06-12]] / [[team-meeting-2026-06-15]] — flagged: 2026-06-19
+- [ ] **stale-output-tracking** — The stale onboarding summary's superseded state is not yet resolved by regeneration; now contradicts even more facts (UI built, all four components, team mapped, fully integrated demo, dated final-demo schedule, multi-project app). — source: [[lint]] / [[mockup-artifact-2026-06-12]] / [[team-meeting-2026-06-15]] / [[multi-project-app-2026-06-17]] — flagged: 2026-06-19
 - [ ] **missing-concept-page** — Aggregation/inference leakage lacks its own concept page. — source: [[lint]] — flagged: 2026-06-19
 - [ ] **missing-concept-page** — RAG (Retrieval-Augmented Generation) has no dedicated concept page. — source: [[lint]] — flagged: 2026-06-19
 - [ ] **missing-concept-page** — CRISP-DM and Design Science Research dual methodology is referenced on 6+ pages without a concept page. — source: [[lint]] — flagged: 2026-06-19

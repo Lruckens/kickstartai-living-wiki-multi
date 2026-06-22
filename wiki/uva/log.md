@@ -212,3 +212,12 @@ Append-only. One entry per operation: ingest, query, or lint.
 **Pages created:** [[team-meeting-2026-06-15]]
 **Pages updated:** wiki-generation-engine.md, generator-module.md, permission-layer.md, gap-detector.md, evaluation-framework.md, evaluation-deliverable.md, ingestion-pipeline.md, project-timeline.md, project-team.md, _overview.md, _gaps.md, index.md
 **Notes:** ⚠️ All conflicts handled as forward-progress status updates + flag, never overwriting history. 22.06 final-demo/defence date pinned (partial resolution of the absolute-dates timeline gap). Total pages now 36.
+
+---
+
+## 2026-06-19 — INGEST
+**Source:** 2026-06-17-MULTI-APP.md (multi-project Living Wiki app README / architecture overview, 2026-06-17)
+**Action:** Created [[multi-project-app-2026-06-17]] and [[decision-multi-project-app-structure]] (stub). Documented the **per-project subtree architecture** (`wiki/<project>/` + `sources/<project>/`), **config-driven deployment** (`project_config.py` + `project.config.json` + `PROJECT_ROOT` + `VITE_BACKEND_URL`), **per-project access control** (users carry a `projects` list), **per-ingest token logging** (`token_usage.md`), and the **clean-slate `uva` evaluation substrate**. Flagged "Bakkie" identity ambiguity (fictional test corpus vs. real project subtree). Added new gaps (`evaluation/RUN-PLAN.md` not ingested, `token_usage.md` not ingested, Bakkie identity, multi-project deployment status, decision page stub only). Updated [[wiki-generation-engine]], [[ingestion-pipeline]], [[permission-layer]], [[evaluation-deliverable]], [[_reuse]], [[student-materials-corpus]], [[project-timeline]], [[_overview]].
+**Pages created:** [[multi-project-app-2026-06-17]], [[decision-multi-project-app-structure]]
+**Pages updated:** wiki-generation-engine.md, ingestion-pipeline.md, permission-layer.md, evaluation-deliverable.md, _reuse.md, student-materials-corpus.md, project-timeline.md, _overview.md, _gaps.md, index.md
+**Notes:** ⚠️ "Bakkie" identity conflict handled as an ambiguity/gap, not asserted either way. The configuration-not-rewrite principle is now most concretely realized in the multi-project app. Total pages now 39.

@@ -1,6 +1,6 @@
 # Living Wiki (UvA) — Overview
 
-**Status:** scoping complete → **development phase complete; fully integrated system demoed; evaluation phase underway; final demo + thesis defence scheduled 2026-06-22** (Assignment 1 presented ~2026-04-22; first system MVP demoed 2026-05-14; tech stack confirmed 2026-05-15; per-member builds 2026-06-04; permission-layer PoC built & evaluated 2026-06-07; generator+wiki-engine integrated 2026-06-11; integrated UI + all four components showcased 2026-06-12; **fully integrated wiki demoed 2026-06-15**)
+**Status:** scoping complete → **development phase complete; fully integrated system demoed; evaluation phase underway; multi-project app built (2026-06-17); final demo + thesis defence scheduled 2026-06-22** (Assignment 1 presented ~2026-04-22; first system MVP demoed 2026-05-14; tech stack confirmed 2026-05-15; per-member builds 2026-06-04; permission-layer PoC built & evaluated 2026-06-07; generator+wiki-engine integrated 2026-06-11; integrated UI + all four components showcased 2026-06-12; **fully integrated wiki demoed 2026-06-15**; **multi-project app built 2026-06-17**)
 **Last updated:** 2026-06-19
 
 ## What this project is about
@@ -13,7 +13,9 @@ The project is run for [[kickstartai]] by students at the [[uva-ai4business-lab]
 ## Current status
 The team has a **fully integrated, demoed system** and is **in the evaluation phase (Phase 3)**, working toward a **final demo + individual thesis defence on 2026-06-22**.
 
-The **2026-06-15 meeting** (see [[team-meeting-2026-06-15]]) is the latest milestone: **Laurenz demoed the fully integrated wiki** — the [[generator-module]], [[gap-detector]] (a dashboard + report page), and [[permission-layer]] (a login landing page) all wired into one UI. The team adopted a **git-branch-per-member workflow** (Laurenz as merge gatekeeper), set a concrete **demo/evaluation run-up** (17–22 June), produced a **first concrete evaluation-metric shortlist** (Self-BLEU, BERTScore, LLM-as-Judge: coherence/faithfulness/stakeholder-appropriateness), and recorded an **Anthropic API budget caution** (pre-parse source docs, esp. PDFs, to save tokens).
+The **2026-06-17 multi-project app** (see [[multi-project-app-2026-06-17]]) is the latest milestone: a refactored version of the app hosting **several projects side-by-side** (`uva` + `bakkie`), each with an isolated subtree (`wiki/<project>/` + `sources/<project>/`), project-scoped operations (`?project=<id>`), and config-driven deployment (`project.config.json` + `project_config.py` DEFAULTS + `PROJECT_ROOT` + `VITE_BACKEND_URL`). **No code edits are needed to add a new project — only config.** This is the **evaluation substrate**: the clean-slate `uva` subtree is ingested from scratch for the thesis experiment, with per-ingest token logging (`token_usage.md`). See [[decision-multi-project-app-structure]], [[_reuse]].
+
+The **2026-06-15 meeting** (see [[team-meeting-2026-06-15]]) is the prior major milestone: **Laurenz demoed the fully integrated wiki** — the [[generator-module]], [[gap-detector]] (a dashboard + report page), and [[permission-layer]] (a login landing page) all wired into one UI. The team adopted a **git-branch-per-member workflow** (Laurenz as merge gatekeeper), set a concrete **demo/evaluation run-up** (17–22 June), produced a **first concrete evaluation-metric shortlist** (Self-BLEU, BERTScore, LLM-as-Judge: coherence/faithfulness/stakeholder-appropriateness), and recorded an **Anthropic API budget caution** (pre-parse source docs, esp. PDFs, to save tokens).
 
 The **2026-06-12 mock-up artifact** (see [[mockup-artifact-2026-06-12]]) is the highest-substance build source: a **built React/Vite + FastAPI web UI** (Wiki view + Operations view with Ingest/Query/Lint + Generator + Permission/Gap surfaces), the **git-worktree "Wiki Bot" push architecture** (markdown-on-disk, no database), and all four member components — **positively confirming Cara/Meng Cheng's component as the [[gap-detector]]** (a 6-layer hybrid framework), resolving the last person↔component gap.
 
@@ -36,14 +38,14 @@ Both student-authored Assignment 1 artifacts remain ingested: the **presentation
 - 2026-06-11 — internal team meeting; **generator + wiki-engine integrated**; evaluation phase begins.
 - ~2026-06-12 — **mock-up artifact + feedback**: integrated **UI built**; all four components showcased; **Cara = Gap Detector confirmed**; Sanne feedback (Vercel, ~3 metrics, usability).
 - 2026-06-15 — internal team meeting; **fully integrated wiki demoed**; branch-per-member workflow; evaluation-metric shortlist; demo/eval run-up scheduled.
-- 2026-06-17 — Quinten + Laurenz design the evaluation framework / ingestion-evaluation experiment.
+- **2026-06-17** — **multi-project app built** (per-project subtrees, config-driven deployment, clean-slate `uva` evaluation substrate, token logging). See [[multi-project-app-2026-06-17]], [[decision-multi-project-app-structure]].
 - 2026-06-18 — demo to Sanne + final feedback; re-ingest project docs into an empty wiki.
 - 2026-06-19 — ingest a fake KickstartAI project as a new-project use-case.
 - **2026-06-22 — final demo of the artifact + individual thesis defence.**
 - **Project plan:** 12 weeks / 3 phases — Phase 1 (wks 1–4) design; Phase 2 (wks 5–9) development; Phase 3 (wks 10–12) evaluation & synthesis.
 
 ## Key decisions
-- Privacy/permissions are a first-class design concern; the [[permission-layer]] is **design-required** (MoSCoW: design = Should, fully-working = Won't), but a **built-and-evaluated two-layer PoC + UI/auth layer** now exists (paragraph-level tiers + pre-filtering + self-audit; email-based login landing page), **integrated** into the wiki architecture. (Only public + internal pages exist in the live wiki so far; restricted pages still to be added — see [[_gaps]].)
+- Privacy/permissions are a first-class design concern; the [[permission-layer]] is **design-required** (MoSCoW: design = Should, fully-working = Won't), but a **built-and-evaluated two-layer PoC + UI/auth layer** now exists (paragraph-level tiers + pre-filtering + self-audit; email-based login landing page), **integrated** into the wiki architecture, and **config-driven per-project access** in the multi-project app. (Only public + internal pages exist in the live wiki so far; restricted pages still to be added — see [[_gaps]].)
 - **Document the project itself first** — avoids sensitive data and gives an intuitive evaluation method.
 - Blog post drafts evaluated against a human-written baseline (MoSCoW: a **Could** stretch goal).
 - **Don't rely solely on LLMs** for the core tool — critical thinking required.
@@ -51,14 +53,15 @@ Both student-authored Assignment 1 artifacts remain ingested: the **presentation
 - **Architecture:** **five member-owned components** (ingestion+wiki engine under Member 1) **+ the evaluation framework as the collaborative/shared deliverable**.
 - **Tech stack (2026-05-15):** **Claude Code + Anthropic API** (repo `github.com/Lruckens/kickstartai-living-wiki`). Permission-layer *evaluation* used gpt-5.1 via the UvA API (experimental).
 - **UI / backend (2026-06-12):** **React/Vite frontend + FastAPI backend**, **markdown-on-disk (no database)**, **git-worktree "Wiki Bot" push** to `main`, SSE-streamed Ingest/Query/Lint operations.
+- **Multi-project app (2026-06-17):** **per-project subtrees** (`wiki/<project>/` + `sources/<project>/`), **config-driven deployment** (`project.config.json` + `project_config.py` DEFAULTS + `PROJECT_ROOT` + `VITE_BACKEND_URL`), **per-project access control** (users carry a `projects` list), **per-ingest token logging** (`token_usage.md`). *No code edits needed to add a new project.* See [[decision-multi-project-app-structure]], [[_reuse]].
 - **Collaboration (2026-06-15):** **branch-per-member workflow**; Laurenz is the merge gatekeeper (ask before any PR to `main`).
-- **Evaluation (2026-06-15):** candidate metrics **Self-BLEU, BERTScore, LLM-as-Judge** (coherence/faithfulness/stakeholder-appropriateness); evaluation by re-ingesting all docs from scratch + a fake-project use-case; gap detector & permission layer evaluated at component level.
-- **Token budget (2026-06-15):** pre-parse/convert source docs (esp. PDFs) before ingestion to conserve the Anthropic API quota.
+- **Evaluation (2026-06-15→17):** candidate metrics **Self-BLEU, BERTScore, LLM-as-Judge** (coherence/faithfulness/stakeholder-appropriateness); evaluation by re-ingesting all docs from scratch + a fake-project use-case in the multi-project app's clean-slate `uva` subtree; gap detector & permission layer evaluated at component level.
+- **Token budget (2026-06-15→17):** pre-parse/convert source docs (esp. PDFs) before ingestion; per-ingest token logging now in place.
 - **Deployment (2026-06-12):** investigate **Vercel** for central backend hosting (currently laptop-local); production auth out of scope.
-- **Deployment governance (2026-05-14):** **admin-per-project**; **one wiki page = one project**, linked by shared topics.
+- **Deployment governance (2026-05-14):** **admin-per-project**; **one wiki page = one project**, realized as per-project subtrees in the multi-project app.
 
 ## Open questions
-See [[_gaps]] for the full list (Member 1/Member 2 person-mapping soft signals; backend/multi-component deployment durability (laptop-local; Vercel; branch-per-member partial mitigation); integration into one system; vector store/embedding model; gap-detector scoring transparency; permission-layer open problems (aggregation/inference leakage, paragraph-label assignment, eval scale, cross-model audit, gpt-5.1 eval environment, restricted pages not yet added); evaluation-metric finalization (~3 metrics; shortlist proposed); Anthropic API budget/token-cost; new-project use-case experiment design; UI deliverable-status; usability-for-non-technical-staff; un-ingested screenshots/Gantt/GAPS-diagram; un-ingested student-materials corpus & PM Ops folder; recurring check-in cadence; second UvA group; the "Averion" handover; etc.).
+See [[_gaps]] for the full list (Member 1/Member 2 person-mapping soft signals; backend/multi-component deployment durability (laptop-local; Vercel; branch-per-member partial mitigation); multi-project app deployment status; `evaluation/RUN-PLAN.md` not ingested; `token_usage.md` not ingested; "Bakkie" identity in multi-project app (real vs. fictional); vector store/embedding model; gap-detector scoring transparency; permission-layer open problems (aggregation/inference leakage, paragraph-label assignment, eval scale, cross-model audit, gpt-5.1 eval environment, restricted pages not yet added); evaluation-metric finalization (~3 metrics; shortlist proposed); new-project use-case experiment design; UI deliverable-status; usability-for-non-technical-staff; un-ingested screenshots/Gantt/GAPS-diagram; un-ingested student-materials corpus & PM Ops folder; recurring check-in cadence; second UvA group; the "Averion" handover; etc.).
 
 ## Key concepts
 - [[living-wiki]] — the core self-updating LLM Wiki concept

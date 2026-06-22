@@ -1,13 +1,19 @@
 # Deliverable: Permission Layer
 
 **Last updated:** 2026-06-19
-**Status:** scoped (Assignment-1 MoSCoW: design = Should, fully-working = Won't); **two-layer leakage PoC BUILT & EVALUATED (Xiaojing, 2026-06-07)**; **UI + auth layer BUILT (2026-06-12)**; **integrated as a login landing page (2026-06-15)**
+**Status:** scoped (Assignment-1 MoSCoW: design = Should, fully-working = Won't); **two-layer leakage PoC BUILT & EVALUATED (Xiaojing, 2026-06-07)**; **UI + auth layer BUILT (2026-06-12)**; **integrated as a login landing page (2026-06-15)**; **per-project access control in multi-project app (2026-06-17)**
 
 ## Summary
-Design (and now a working proof-of-concept implementation with a UI) of document-level access control so the system is ready for sensitive projects. The 2026-04-13 kickoff clarified the permission layer **need not be a fully working architecture** — but the students **must design** how it would handle sensitive data from the start. The Assignment 1 presentation and written report (2026-04-22) confirm this via **MoSCoW**: permission-layer **design** is a **Should Have**, while a **completely working permission layer** is explicitly a **Won't Have** (this iteration). As of **2026-06-07**, Xiaojing built **and evaluated** a concrete two-layer permission architecture (pre-filtering + self-audit); as of **2026-06-12** she has also built a **UI + authentication layer**; by **2026-06-15** it is integrated into the wiki as a **login landing page**. See [[assignment-1-presentation-2026-04-22]], [[assignment-1-report-2026-04-22]], [[xiaojing-sanne-permission-email-2026-06-07]], [[mockup-artifact-2026-06-12]], [[team-meeting-2026-06-15]].
+Design (and now a working proof-of-concept implementation with a UI) of document-level access control so the system is ready for sensitive projects. The 2026-04-13 kickoff clarified the permission layer **need not be a fully working architecture** — but the students **must design** how it would handle sensitive data from the start. The Assignment 1 presentation and written report (2026-04-22) confirm this via **MoSCoW**: permission-layer **design** is a **Should Have**, while a **completely working permission layer** is explicitly a **Won't Have** (this iteration). As of **2026-06-07**, Xiaojing built **and evaluated** a concrete two-layer permission architecture (pre-filtering + self-audit); as of **2026-06-12** she has also built a **UI + authentication layer**; by **2026-06-15** it is integrated into the wiki as a **login landing page**; by **2026-06-17** per-project access control is enforced at the API level in the multi-project app. See [[assignment-1-presentation-2026-04-22]], [[assignment-1-report-2026-04-22]], [[xiaojing-sanne-permission-email-2026-06-07]], [[mockup-artifact-2026-06-12]], [[team-meeting-2026-06-15]], [[multi-project-app-2026-06-17]].
 
 ## Details
 Privacy and permissions are a first-class concern. The design should allow deployment to a sensitive project via configuration, not a rewrite. See concept page [[permission-model]] for design intent.
+
+### Per-project access control in multi-project app (2026-06-17)
+The 2026-06-17 multi-project app (see [[multi-project-app-2026-06-17]]) adds an API-level enforcement layer on top of the existing UI/auth design:
+- Users carry a **`projects` list** — ingest/query/generate/lint are **refused** for a project the user is not a member of.
+- Demo accounts: `anna.jansen` (UvA only), `bram.bakker` (Bakkie only), `carla.visser` (both), `gast.bezoeker` (public guest, no projects).
+- This is a **config-driven** realization: accounts and project memberships are defined in `project_config.py` / `project.config.json`, no code change needed to add a project or user. See [[decision-multi-project-app-structure]], [[_reuse]].
 
 ### Integrated as a login landing page (2026-06-15)
 At the 2026-06-15 meeting (see [[team-meeting-2026-06-15]]) the permission layer was wired into the integrated wiki as a **login landing page** — users must **log in before entering the wiki**. **Dummy accounts** are used for the demo, with a suggestion to add **group members + Sanne** as real users in the wiki. ⚠️ Crucially, the live wiki currently contains **only public + internal pages** — **restricted pages still need to be added** to test the full leakage-prevention functionality end-to-end in the live app. See [[_gaps]].
@@ -54,18 +60,20 @@ The most detailed source on this component is the 2026-06-07 → 2026-06-08 desi
   - **Configurable / swappable backend** — swap in a **self-hosted or VPC-deployed model** when needed; connects directly to the permission layer (Member 4 scope) and the configuration-not-rewrite reuse model (see [[_reuse]], [[permission-model]]).
   - **Data-flow documentation as a thesis artifact** — document which operations send data externally vs. stay local.
 - **Deployment governance — admin-per-project (2026-05-14):** each project assigned an **admin who governs the wiki page** (mechanism unspecified — see [[permission-model]], [[_gaps]]).
-- **MoSCoW (Assignment 1, 2026-04-22):** Permission-layer **design** = **Should Have**; a **fully working/programmed permission layer** = **Won't Have (this iteration)**. The 2026-06-07 PoC and 2026-06-12 UI **exceed** the "design-only" framing; recorded as a thesis-level component prototype, consistent with "design + optional partial implementation." The MoSCoW record is **kept, not overwritten** — see [[_gaps]].
+- **MoSCoW (Assignment 1, 2026-04-22):** Permission-layer **design** = **Should Have**; a **fully working/programmed permission layer** = **Won't Have (this iteration)**. The 2026-06-07 PoC, 2026-06-12 UI, and 2026-06-17 API-level enforcement **exceed** the "design-only" framing; recorded as a thesis-level component prototype, consistent with "design + optional partial implementation." The MoSCoW record is **kept, not overwritten** — see [[_gaps]].
 - **Research framing (Member 4 RQ):** "How can a permission-aware architecture be designed for an LLM-maintained knowledge base to mitigate **information leakage from restricted source documents into synthesized wiki pages**?" The report sharpens it: because the wiki serves **synthesised content rather than raw documents**, **traditional access control is insufficient**. The 2026-06-07 design directly operationalizes this. See [[assignment-1-report-2026-04-22]].
 - **Ownership — RESOLVED-BY-PRECEDENCE (Member 4 individual), self-asserted:** The 2026-04-16 supervisor kickoff recorded sub-deliverable #5 as **collaborative**. Both later student-authored sources (deck + report) assign it **individually to Member 4** and name the **evaluation framework** as the collaborative deliverable. The 2026-06-07 thread adds **self-asserted ownership by Xiaojing**. See [[project-team]], [[user-journeys]], [[_gaps]].
 - **Design principles grounding (report):** security, privacy & data protection grounded in GDPR (EU 2016), NIST SP 800-53, ISO/IEC 27001:2013, and Kroll et al. (2017). See [[assignment-1-report-2026-04-22]].
 - **Critical-thinking emphasis:** Sanne advised the students **not to rely solely on LLMs** here — corroborated by her detailed 2026-06-07 critique.
-- **Mechanism — now substantially specified:** effectively a **paragraph-level tier model (public/internal/restricted) + pre-filtering ACL by `project_id`/`user_id` + LLM self-audit**, with an **email-based login + project-scoped UI** (a login landing page in the integrated app). Open refinements (aggregation leakage, label correctness, eval scale, cross-model audit, usability for non-technical staff, restricted pages not yet added to the live wiki) — see [[_gaps]].
+- **Mechanism — now substantially specified:** effectively a **paragraph-level tier model (public/internal/restricted) + pre-filtering ACL by `project_id`/`user_id` + LLM self-audit**, with an **email-based login + project-scoped UI** (a login landing page in the integrated app) and **config-driven per-project membership** in the multi-project app. Open refinements (aggregation leakage, label correctness, eval scale, cross-model audit, usability for non-technical staff, restricted pages not yet added to the live wiki) — see [[_gaps]].
 
 ## Related
 - [[permission-model]]
 - [[xiaojing-sanne-permission-email-2026-06-07]]
 - [[mockup-artifact-2026-06-12]]
 - [[team-meeting-2026-06-15]]
+- [[multi-project-app-2026-06-17]]
+- [[decision-multi-project-app-structure]]
 - [[kickoff-meeting-2026-04-13]]
 - [[supervisor-kickoff-2026-04-16]]
 - [[team-meeting-2026-05-14]]
@@ -92,3 +100,4 @@ The most detailed source on this component is the 2026-06-07 → 2026-06-08 desi
 - 2026-06-11-meeting-notes.md (internal UvA team working meeting notes, development phase)
 - 2026-06-12-mock-up-artifact.md (Living Wiki UI mock-up artifact description + Sanne feedback, development phase)
 - 2026-06-15-meeting-notes.md (internal UvA team working meeting notes, development → evaluation phase transition)
+- 2026-06-17-MULTI-APP.md (multi-project Living Wiki app README / architecture overview, 2026-06-17)

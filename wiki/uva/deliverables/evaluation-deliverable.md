@@ -1,15 +1,22 @@
 # Deliverable: Evaluation Framework
 
 **Last updated:** 2026-06-19
-**Status:** scoped (basic framework = Must Have; comparative gen-vs-human eval = Could Have; the integrated framework is the collaborative/shared deliverable); **evaluation phase begun (2026-06-11); Sanne metric guidance (2026-06-12); candidate metric shortlist + experiment plan (2026-06-15)**
+**Status:** scoped (basic framework = Must Have; comparative gen-vs-human eval = Could Have; the integrated framework is the collaborative/shared deliverable); **evaluation phase begun (2026-06-11); Sanne metric guidance (2026-06-12); candidate metric shortlist + experiment plan (2026-06-15); multi-project clean-slate substrate built (2026-06-17)**
 
 ## Summary
-A framework measuring coverage, freshness, accuracy, and usefulness of the wiki, incorporating human-in-the-loop feedback to improve generation quality over time. The Assignment 1a report frames it as the team’s **collaboratively designed and executed shared deliverable**. As of **2026-06-11** the team has begun the evaluation phase (Quinten leading metric selection); Sanne added concrete metric guidance on **2026-06-12**; by **2026-06-15** a concrete metric shortlist and a re-ingest-from-scratch + fake-project experiment plan exist.
+A framework measuring coverage, freshness, accuracy, and usefulness of the wiki, incorporating human-in-the-loop feedback to improve generation quality over time. The Assignment 1a report frames it as the team's **collaboratively designed and executed shared deliverable**. As of **2026-06-11** the team has begun the evaluation phase (Quinten leading metric selection); Sanne added concrete metric guidance on **2026-06-12**; by **2026-06-15** a concrete metric shortlist and a re-ingest-from-scratch + fake-project experiment plan exist; by **2026-06-17** the **multi-project app** provides the clean-slate evaluation substrate with per-ingest token logging.
 
 ## Details
 See the concept page [[evaluation-framework]] for the four dimensions. The blog post draft from [[generator-module]] is to be evaluated against a human-written version to make the creativity/opinion angle measurable. Requires a human baseline document that does not yet exist — see [[_gaps]].
 
 KickstartAI's existing public technical and domain blogs (see [[kickstartai-blog]]) are a *candidate* corpus for the required human-written baseline. This is a possibility only; no specific article has been selected or ingested as the baseline. See [[_gaps]].
+
+### Evaluation substrate — multi-project clean-slate app (2026-06-17)
+The 2026-06-17 multi-project app (see [[multi-project-app-2026-06-17]]) is the **evaluation substrate**:
+- A **clean-slate `uva` project subtree** (`wiki/uva/` + `sources/uva/`) built from scratch, isolated from the long-lived original wiki — providing controlled, known-provenance ingestion for the experiment.
+- **Per-ingest token logging + prompt caching** (`token_usage.md`) records the build cost for each ingest operation. Directly addresses the Anthropic API budget caution from [[team-meeting-2026-06-15]] and provides a concrete cost figure for the thesis.
+- Evaluation runs with `--project uva`. A `bakkie` project subtree is registered as the second isolation-test project. See [[student-materials-corpus]], [[_gaps]] ("Bakkie" identity ambiguity).
+- `evaluation/RUN-PLAN.md` is referenced but not yet ingested — see [[_gaps]].
 
 ### Candidate metric shortlist + experiment plan (2026-06-15)
 The 2026-06-15 meeting (see [[team-meeting-2026-06-15]]) produced the **first concrete candidate metric shortlist** (still under research, not finalized/applied):
@@ -45,7 +52,7 @@ So the human-baseline comparison is now framed as a **stretch (Could) goal** rat
 The report grounds evaluation in the **Design Science Research rigor cycle** (RAG architectures, knowledge-graph construction, LLM evaluation, document change detection literature) alongside the **CRISP-DM Evaluation phase** (coverage/freshness/accuracy/usefulness, potentially comparing with human-generated content). See [[assignment-1-report-2026-04-22]].
 
 ### Production approach — collaborative shared deliverable (Assignment 1a report, 2026-04-22)
-The written report states **all four members collaboratively design and execute** the integrated evaluation framework, and **each member additionally contributes component-level evaluation results for their own sub-system** into their own thesis. This is treated (resolved-by-precedence) as the authoritative reading over the supervisor-kickoff’s framing of evaluation as the sole per-member-into-thesis track. See [[evaluation-framework]], [[user-journeys]], [[supervisor-kickoff-2026-04-16]].
+The written report states **all four members collaboratively design and execute** the integrated evaluation framework, and **each member additionally contributes component-level evaluation results for their own sub-system** into their own thesis. This is treated (resolved-by-precedence) as the authoritative reading over the supervisor-kickoff's framing of evaluation as the sole per-member-into-thesis track. See [[evaluation-framework]], [[user-journeys]], [[supervisor-kickoff-2026-04-16]].
 
 ## Related
 - [[evaluation-framework]]
@@ -56,6 +63,7 @@ The written report states **all four members collaboratively design and execute*
 - [[mockup-artifact-2026-06-12]]
 - [[team-meeting-2026-06-11]]
 - [[team-meeting-2026-06-15]]
+- [[multi-project-app-2026-06-17]]
 - [[student-materials-corpus]]
 - [[ingestion-pipeline]]
 - [[kickstartai-blog]]
@@ -74,3 +82,4 @@ The written report states **all four members collaboratively design and execute*
 - 2026-06-11-meeting-notes.md (internal UvA team working meeting notes, development phase)
 - 2026-06-12-mock-up-artifact.md (Living Wiki UI mock-up artifact description + Sanne feedback, development phase)
 - 2026-06-15-meeting-notes.md (internal UvA team working meeting notes, development → evaluation phase transition)
+- 2026-06-17-MULTI-APP.md (multi-project Living Wiki app README / architecture overview, 2026-06-17)
