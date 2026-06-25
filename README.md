@@ -166,5 +166,10 @@ Powered by [Claude](https://www.anthropic.com/claude) (Anthropic API).
 The gap detector is a post-ingestion pipeline that analyses wiki documents for missing, incomplete, inconsistent, and disconnected knowledge. It runs six sequential layers — content normalisation, rule-based checks, semantic embedding, LLM evaluation, graph analysis, and classification & scoring — and produces a ranked report of detected gaps.
 
 Each gap is scored using:
+FinalScore = (0.45 × Severity + 0.40 × Impact + 0.15 × Frequency) × Category_Risk_Multiplier
+
+Five gap categories are detected: **Structural** (missing sections), **Explicit Expression** (empty sections), **Implicit Expression** (decisions without rationale), **Relational** (orphan pages, broken links), and **Semantic** (isolated or contradictory documents).
+
+In the app, the gap detector is exposed as a **Gaps** tab. Results are reconciled against `wiki/_gaps.md` — the team-maintained ledger — and each gap is tagged as *detected*, *confirmed*, or *team-logged*.
 
 
