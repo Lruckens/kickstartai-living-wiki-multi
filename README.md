@@ -159,3 +159,12 @@ and question set.
 - Andrej Karpathy — for the *LLM wiki* pattern that inspired the approach.
 
 Powered by [Claude](https://www.anthropic.com/claude) (Anthropic API).
+---
+
+## Gap Detector
+
+The gap detector is a post-ingestion pipeline that analyses wiki documents for missing, incomplete, inconsistent, and disconnected knowledge. It runs six sequential layers — content normalisation, rule-based checks, semantic embedding, LLM evaluation, graph analysis, and classification & scoring — and produces a ranked report of detected gaps.
+
+Each gap is scored using:
+
+
