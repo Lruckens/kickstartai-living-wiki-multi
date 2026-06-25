@@ -108,34 +108,6 @@ backend at `http://localhost:8010` — override with `VITE_BACKEND_URL` if neede
 
 ---
 
-## Permission layer
-
-Runs after the ingestion pipeline and wiki generation, controlling what gets produced and
-what gets shared. Enforced at two points, not as a separate settings page:
-
-- **Pre-filtering** — every source document and wiki page carries a label (`public` /
-  `internal` / `restricted`) and, if restricted, a `project_id`, stored in
-  `access_labels.json`. Before any generation call, the source pool is filtered
-  deterministically to what the target level and requesting user are allowed to see — no
-  LLM call involved.
-- **Self-audit** — after a page or output is drafted, it passes a regex blacklist check
-  (universal patterns plus a per-project blacklist auto-built from that project's
-  restricted documents at ingest time) and, if clean, an LLM audit that checks every claim
-  against the allowed source paragraphs. Flagged spans carry a severity: high blocks the
-  page and retries (escalating to human review after two attempts), medium holds it for
-  human review, low publishes with the flag logged.
-- **Audit log** — every check, published or held back, is appended to `audit_log.md`,
-  which is never edited or deleted — the evidence trail for the permission layer's
-  evaluation.
-
-Once a page or paragraph has cleared this filtering and audit, it is handed off as clean,
-labelled content: the **Generate** step turns it into digests, summaries, and LinkedIn
-drafts, and **Lint**'s gap detection scans it for underdocumented areas. Neither needs its
-own access-control logic — they only ever see what the permission layer has already
-allowed through.
-
----
-
 ## Evaluation
 
 The evaluation harness compares answering from the compiled wiki against answering from raw
@@ -149,6 +121,25 @@ python evaluation/run_eval.py --project uva
 
 See [`evaluation/README.md`](evaluation/README.md) for the full design, conditions, metrics,
 and question set.
+
+---
+
+## Permission layer
+
+Controls who can see what, from the moment a document is uploaded to the moment a
+generated page is shared:
+
+- When you upload a document, you choose who can see it — everyone, the KickstartAI team,
+  or just one project. That choice carries through to every wiki page generated from it.
+- Every wiki page shows its visibility at a glance, so it's never ambiguous who's allowed
+  to read it.
+- Before generating a digest, summary, or LinkedIn draft, you choose the audience, and the
+  system only draws on content that audience is allowed to see.
+- Every generated page is checked automatically before it's shared. If it accidentally
+  includes something the audience shouldn't see, it's held back for a person to review
+  instead of being published.
+- A read-only history records every check that's ever run — what was shared, what was held
+  back, and why — so the system stays auditable over time.
 
 ---
 
