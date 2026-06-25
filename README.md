@@ -126,6 +126,32 @@ generated page is shared:
   back, and why — so the system stays auditable over time.
 
 ---
+---
+
+## Gap Detector
+
+The gap detector scans your wiki and surfaces knowledge gaps — sections that are missing, empty, undocumented, or disconnected from the rest of the wiki. Instead of manually reviewing every page, you get a ranked report that tells you exactly what needs attention and why.
+
+### How to use it
+
+Open the **Gaps** tab in the app and click **Run Analysis**. The detector will scan all wiki pages and return a prioritised list of gaps grouped by severity: **Severe**, **High**, **Medium**, and **Low**.
+
+Each gap tells you:
+- **What page** it was found on and which section
+- **What type** of gap it is (missing content, broken link, undocumented decision, etc.)
+- **Why it matters** — a short explanation of the impact
+
+### Gap types
+
+| Type | What it means |
+|---|---|
+| Structural | A required section is missing from the page |
+| Explicit Expression | A section exists but is empty or has a placeholder |
+| Implicit Expression | A decision was recorded with no rationale or reason |
+| Relational | A page is orphaned or has broken links to other pages |
+| Semantic | A page is isolated or contradicts another page |
+
+Gaps are also cross-checked against `wiki/_gaps.md` — the team's own gap log — and tagged as *detected* (found automatically), *confirmed* (also in the team log), or *team-logged* (in the log but not caught automatically).
 
 ## Evaluation
 
@@ -151,16 +177,4 @@ and question set.
 
 Powered by [Claude](https://www.anthropic.com/claude) (Anthropic API).
 ---
-
-## Gap Detector
-
-The gap detector is a post-ingestion pipeline that analyses wiki documents for missing, incomplete, inconsistent, and disconnected knowledge. It runs six sequential layers — content normalisation, rule-based checks, semantic embedding, LLM evaluation, graph analysis, and classification & scoring — and produces a ranked report of detected gaps.
-
-Each gap is scored using:
-FinalScore = (0.45 × Severity + 0.40 × Impact + 0.15 × Frequency) × Category_Risk_Multiplier
-
-Five gap categories are detected: **Structural** (missing sections), **Explicit Expression** (empty sections), **Implicit Expression** (decisions without rationale), **Relational** (orphan pages, broken links), and **Semantic** (isolated or contradictory documents).
-
-In the app, the gap detector is exposed as a **Gaps** tab. Results are reconciled against `wiki/_gaps.md` — the team-maintained ledger — and each gap is tagged as *detected*, *confirmed*, or *team-logged*.
-
 
