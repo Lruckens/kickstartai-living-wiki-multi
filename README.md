@@ -151,7 +151,7 @@ Each gap tells you:
 | Semantic | A page is isolated or contradicts another page |
 
 Gaps are also cross-checked against `wiki/_gaps.md` — the team's own gap log — and tagged as *detected* (found automatically), *confirmed* (also in the team log), or *team-logged* (in the log but not caught automatically).
-
+---
 ## Evaluation
 
 The evaluation harness compares answering from the compiled wiki against answering from raw
