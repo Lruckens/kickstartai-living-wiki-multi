@@ -108,6 +108,34 @@ backend at `http://localhost:8010` — override with `VITE_BACKEND_URL` if neede
 
 ---
 
+## Permission layer
+
+Runs after the ingestion pipeline and wiki generation, controlling what gets produced and
+what gets shared. Enforced at two points, not as a separate settings page:
+
+- **Pre-filtering** — every source document and wiki page carries a label (`public` /
+  `internal` / `restricted`) and, if restricted, a `project_id`, stored in
+  `access_labels.json`. Before any generation call, the source pool is filtered
+  deterministically to what the target level and requesting user are allowed to see — no
+  LLM call involved.
+- **Self-audit** — after a page or output is drafted, it passes a regex blacklist check
+  (universal patterns plus a per-project blacklist auto-built from that project's
+  restricted documents at ingest time) and, if clean, an LLM audit that checks every claim
+  against the allowed source paragraphs. Flagged spans carry a severity: high blocks the
+  page and retries (escalating to human review after two attempts), medium holds it for
+  human review, low publishes with the flag logged.
+- **Audit log** — every check, published or held back, is appended to `audit_log.md`,
+  which is never edited or deleted — the evidence trail for the permission layer's
+  evaluation.
+
+Once a page or paragraph has cleared this filtering and audit, it is handed off as clean,
+labelled content: the **Generate** step turns it into digests, summaries, and LinkedIn
+drafts, and **Lint**'s gap detection scans it for underdocumented areas. Neither needs its
+own access-control logic — they only ever see what the permission layer has already
+allowed through.
+
+---
+
 ## Evaluation
 
 The evaluation harness compares answering from the compiled wiki against answering from raw
