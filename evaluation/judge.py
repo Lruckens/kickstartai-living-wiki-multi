@@ -3,7 +3,7 @@ judge.py — a Claude-backed DeepEval judge.
 
 DeepEval defaults to an OpenAI judge; we only have an Anthropic key, so all
 G-Eval / RAG metrics run through this wrapper. We deliberately use a *different*
-model than the one that answers/ingests (Sonnet here vs Opus for answers) to
+model than the one that answers/ingests (Opus here vs Sonnet for answers) to
 reduce self-preference bias — see the evaluation plan in wiki/deliverables/wiki-engine.md.
 """
 import json
@@ -13,7 +13,7 @@ import re
 from anthropic import Anthropic
 from deepeval.models import DeepEvalBaseLLM
 
-JUDGE_MODEL = "claude-sonnet-4-6"
+JUDGE_MODEL = "claude-opus-4-8"
 
 
 class ClaudeJudge(DeepEvalBaseLLM):
@@ -27,7 +27,7 @@ class ClaudeJudge(DeepEvalBaseLLM):
     def get_model_name(self) -> str:
         return self.model
 
-    def _call(self, prompt: str, max_tokens: int = 4000) -> str:
+    def _call(self, prompt: str, max_tokens: int = 16000) -> str:
         msg = self._client.messages.create(
             model=self.model,
             max_tokens=max_tokens,

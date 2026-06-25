@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 import { authFetch, withProject, getSession, Project } from "./src/api";
 
-const BACKEND_URL = "http://localhost:8000";
+const BACKEND_URL = "http://localhost:8010";
 
 // ---------------------------------------------------------------------------
 // Presets

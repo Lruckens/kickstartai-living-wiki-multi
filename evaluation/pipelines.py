@@ -20,8 +20,8 @@ from typing import Optional
 
 from anthropic import Anthropic
 
-ANSWER_MODEL = "claude-opus-4-8"          # the wiki's model (≠ the judge model)
-RETRIEVAL_MODEL = "claude-haiku-4-5"      # cheap model for index→page selection (C2)
+ANSWER_MODEL = "claude-sonnet-4-6"        # the wiki's model (≠ the Opus judge model)
+RETRIEVAL_MODEL = "claude-sonnet-4-6"     # page (C2) / chunk (C1r) selection — temperature=0 → deterministic
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 _client = Anthropic()
@@ -105,7 +105,7 @@ def _retrieve_wiki(question: str, project: str, k: int = 6):
     cat = _wiki_catalog(project)
     listing = "\n".join(f"{rel} — {title}" for rel, title in cat)
     sel = _client.messages.create(
-        model=RETRIEVAL_MODEL, max_tokens=400,
+        model=RETRIEVAL_MODEL, max_tokens=400, temperature=0,
         messages=[{"role": "user", "content": (
             f"From this wiki page catalog, choose the file paths most relevant to answering the "
             f"question. Return ONLY a JSON array of up to {k} paths, most relevant first.\n\n"
@@ -124,6 +124,47 @@ def _retrieve_wiki(question: str, project: str, k: int = 6):
     paths = [p for p in paths if p in valid][:k]
     ctx = "\n\n".join(f"=== {rel} ===\n{(wdir / rel).read_text(encoding='utf-8')}" for rel in paths)
     return ctx, paths
+
+
+def _retrieve_wiki_graph(question: str, project: str, k: int = 6,
+                         budget_tokens: int = 20000, max_pages: int = 14):
+    """C2+graph: seed with the same top-k pages as C2, then traverse their [[links]] ONE hop,
+    adding the most-linked neighbour pages. This finally lets the wiki use its cross-reference
+    graph. It is deliberately NOT retrieval-matched to a raw baseline (raw chunks have no links
+    to follow), so it answers the 'full wiki capability' question — not the controlled C1r-vs-C2
+    isolation. Traversal is capped by a TOKEN budget (≈2x C2, still well below the full dump) so
+    the context stays bounded and the scalability framing holds."""
+    import re
+    from collections import Counter
+    wdir = _wiki_dir(project)
+    cat = _wiki_catalog(project)
+    seed_ctx, seed = _retrieve_wiki(question, project, k)          # reuse C2's selector (1 LLM call)
+    if not seed:
+        return seed_ctx, seed
+    text = {rel: (wdir / rel).read_text(encoding="utf-8") for rel, _ in cat}
+    stem_to_rel: dict = {}
+    for rel, _ in cat:
+        stem_to_rel.setdefault(rel.rsplit("/", 1)[-1][:-3], rel)   # filename stem (drop .md) → path
+    seen = set(seed)
+    linked: Counter = Counter()
+    for rel in seed:                                              # one hop out from each seed page
+        for raw in re.findall(r"\[\[([^\]]+)\]\]", text.get(rel, "")):
+            slug = raw.split("|")[0].split("#")[0].strip()
+            slug = slug[:-3] if slug.endswith(".md") else slug
+            tgt = stem_to_rel.get(slug)
+            if tgt and tgt not in seen:
+                linked[tgt] += 1                                  # rank neighbours by link frequency
+    budget_chars = budget_tokens * 4                             # ~4 chars/token
+    total = sum(len(text[r]) for r in seed if r in text)
+    pages = list(seed)
+    for rel, _ in linked.most_common():                          # add neighbours, most-linked first
+        if len(pages) >= max_pages:
+            break
+        if total + len(text.get(rel, "")) > budget_chars:        # skip pages that would bust the budget
+            continue
+        pages.append(rel); total += len(text[rel])
+    ctx = "\n\n".join(f"=== {rel} ===\n{text.get(rel, '')}" for rel in pages)
+    return ctx, pages
 
 
 def _chunk(text: str, words: int = 600) -> list:
@@ -169,7 +210,7 @@ def _retrieve_raw(question: str, project: str, k: int = 8):
         return "", []
     listing = "\n".join(f"{cid} — {' '.join(text.split()[:20])}" for cid, text in chunks)
     sel = _client.messages.create(
-        model=RETRIEVAL_MODEL, max_tokens=400,
+        model=RETRIEVAL_MODEL, max_tokens=400, temperature=0,
         messages=[{"role": "user", "content": (
             f"From this list of raw document chunks, choose the chunk ids most relevant to "
             f"answering the question. Return ONLY a JSON array of up to {k} ids, most relevant first.\n\n"
@@ -234,6 +275,11 @@ def answer(question: str, condition: str, project: str = "") -> dict:
     if condition == "C2":                       # wiki + retrieval (index → top-k pages)
         ctx, pages = _retrieve_wiki(question, project)
         res = _ask(question, ctx, cache_context=False)   # context varies per question → caching N/A
+        res["retrieved_pages"] = pages
+        return res
+    if condition == "C2g":                      # wiki + retrieval + one-hop graph traversal (full capability)
+        ctx, pages = _retrieve_wiki_graph(question, project)
+        res = _ask(question, ctx, cache_context=False)
         res["retrieved_pages"] = pages
         return res
     raise ValueError(f"unknown condition: {condition}")

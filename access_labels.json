@@ -1,4 +1,326 @@
 {
-  "wiki": {},
-  "sources": {}
+  "wiki": {
+    "uva/concepts/living-wiki.md": {
+      "label": "internal",
+      "project_id": null
+    },
+    "uva/concepts/user-journeys.md": {
+      "label": "internal",
+      "project_id": null
+    },
+    "uva/concepts/permission-model.md": {
+      "label": "internal",
+      "project_id": null
+    },
+    "uva/concepts/evaluation-framework.md": {
+      "label": "internal",
+      "project_id": null
+    },
+    "uva/entities/kickstartai.md": {
+      "label": "internal",
+      "project_id": null
+    },
+    "uva/entities/uva-ai4business-lab.md": {
+      "label": "internal",
+      "project_id": null
+    },
+    "uva/deliverables/ingestion-pipeline.md": {
+      "label": "internal",
+      "project_id": null
+    },
+    "uva/deliverables/wiki-generation-engine.md": {
+      "label": "internal",
+      "project_id": null
+    },
+    "uva/deliverables/generator-module.md": {
+      "label": "internal",
+      "project_id": null
+    },
+    "uva/deliverables/gap-detector.md": {
+      "label": "internal",
+      "project_id": null
+    },
+    "uva/deliverables/permission-layer.md": {
+      "label": "internal",
+      "project_id": null
+    },
+    "uva/deliverables/evaluation-deliverable.md": {
+      "label": "internal",
+      "project_id": null
+    },
+    "bakkie/entities/gemeente-westerwoude.md": {
+      "label": "internal",
+      "project_id": null
+    },
+    "bakkie/entities/karin-mulders.md": {
+      "label": "internal",
+      "project_id": null
+    },
+    "bakkie/entities/bram-de-boer.md": {
+      "label": "internal",
+      "project_id": null
+    },
+    "bakkie/entities/marja-lievens.md": {
+      "label": "internal",
+      "project_id": null
+    },
+    "bakkie/entities/pieter-hoogstra.md": {
+      "label": "internal",
+      "project_id": null
+    },
+    "bakkie/entities/fatima-yildiz.md": {
+      "label": "internal",
+      "project_id": null
+    },
+    "bakkie/entities/joost-van-dijk.md": {
+      "label": "internal",
+      "project_id": null
+    },
+    "bakkie/entities/omgevingssoft-bv.md": {
+      "label": "internal",
+      "project_id": null
+    },
+    "bakkie/entities/afvalkern.md": {
+      "label": "internal",
+      "project_id": null
+    },
+    "bakkie/entities/mor.md": {
+      "label": "internal",
+      "project_id": null
+    },
+    "bakkie/concepts/scope-fase-1.md": {
+      "label": "internal",
+      "project_id": null
+    },
+    "bakkie/concepts/integrations.md": {
+      "label": "internal",
+      "project_id": null
+    },
+    "bakkie/concepts/avg-dpia.md": {
+      "label": "internal",
+      "project_id": null
+    },
+    "bakkie/concepts/budget-and-timeline.md": {
+      "label": "internal",
+      "project_id": null
+    },
+    "uva/entities/kickstartai-team.md": {
+      "label": "public",
+      "project_id": null
+    },
+    "uva/entities/techdays.md": {
+      "label": "public",
+      "project_id": null
+    },
+    "uva/entities/kickstartai-blog.md": {
+      "label": "public",
+      "project_id": null
+    },
+    "uva/entities/kickstartai-projects.md": {
+      "label": "public",
+      "project_id": null
+    },
+    "uva/entities/project-team.md": {
+      "label": "restricted",
+      "project_id": "uva"
+    },
+    "uva/deliverables/assignment-1-project-definition.md": {
+      "label": "restricted",
+      "project_id": "uva"
+    },
+    "uva/deliverables/project-timeline.md": {
+      "label": "internal",
+      "project_id": null
+    },
+    "uva/concepts/adoption-journey.md": {
+      "label": "restricted",
+      "project_id": "uva"
+    },
+    "uva/meetings/kickoff-meeting-2026-04-13.md": {
+      "label": "restricted",
+      "project_id": "uva"
+    },
+    "uva/entities/kickoff-deck-2026-04-13.md": {
+      "label": "restricted",
+      "project_id": "uva"
+    },
+    "uva/meetings/supervisor-kickoff-2026-04-16.md": {
+      "label": "restricted",
+      "project_id": "uva"
+    },
+    "uva/deliverables/assignment-1-presentation-2026-04-22.md": {
+      "label": "restricted",
+      "project_id": "uva"
+    },
+    "uva/deliverables/assignment-1-report-2026-04-22.md": {
+      "label": "restricted",
+      "project_id": "uva"
+    },
+    "uva/concepts/gaps-diagram.md": {
+      "label": "restricted",
+      "project_id": "uva"
+    },
+    "uva/meetings/checkin-scheduling-2026-04-30.md": {
+      "label": "restricted",
+      "project_id": "uva"
+    },
+    "uva/meetings/team-meeting-2026-05-14.md": {
+      "label": "restricted",
+      "project_id": "uva"
+    },
+    "uva/meetings/laurenz-sanne-email-2026-05-15.md": {
+      "label": "restricted",
+      "project_id": "uva"
+    },
+    "uva/entities/student-materials-corpus.md": {
+      "label": "restricted",
+      "project_id": "uva"
+    },
+    "uva/entities/kickstartai-pm-ops.md": {
+      "label": "restricted",
+      "project_id": "uva"
+    },
+    "uva/meetings/team-meeting-2026-06-04.md": {
+      "label": "restricted",
+      "project_id": "uva"
+    },
+    "uva/meetings/xiaojing-sanne-permission-email-2026-06-07.md": {
+      "label": "restricted",
+      "project_id": "uva"
+    },
+    "uva/meetings/team-meeting-2026-06-11.md": {
+      "label": "restricted",
+      "project_id": "uva"
+    },
+    "uva/meetings/mockup-artifact-2026-06-12.md": {
+      "label": "restricted",
+      "project_id": "uva"
+    },
+    "uva/meetings/team-meeting-2026-06-15.md": {
+      "label": "restricted",
+      "project_id": "uva"
+    },
+    "uva/meetings/multi-project-app-2026-06-17.md": {
+      "label": "restricted",
+      "project_id": "uva"
+    },
+    "uva/decisions/decision-multi-project-app-structure.md": {
+      "label": "restricted",
+      "project_id": "uva"
+    },
+    "uva/meetings/evaluation-runplan-2026-06-19.md": {
+      "label": "restricted",
+      "project_id": "uva"
+    },
+    "uva/meetings/team-meeting-2026-06-18.md": {
+      "label": "public",
+      "project_id": null
+    }
+  },
+  "sources": {
+    "uva/2026-04-02-UvA-AI4BusinessLab-Living-Wiki-Brief.md": {
+      "label": "internal",
+      "project_id": null
+    },
+    "bakkie/2025-10-08_intake-brief-westerwoude.md": {
+      "label": "internal",
+      "project_id": null
+    },
+    "uva/KickstartAI_About_us.md": {
+      "label": "public",
+      "project_id": null
+    },
+    "uva/KickstartAI_homepage.md": {
+      "label": "public",
+      "project_id": null
+    },
+    "uva/KickstartAI_News.md": {
+      "label": "public",
+      "project_id": null
+    },
+    "uva/KickstartAI_Projects.md": {
+      "label": "public",
+      "project_id": null
+    },
+    "uva/2026-04-10-Intro-email.md": {
+      "label": "restricted",
+      "project_id": "uva"
+    },
+    "uva/2026-04-13-Gantt_chart.md": {
+      "label": "internal",
+      "project_id": null
+    },
+    "uva/2026-04-13-KAI-Intro.md": {
+      "label": "restricted",
+      "project_id": "uva"
+    },
+    "uva/2026-04-13-KAI-UvA-Kickoff-meeting-notes.md": {
+      "label": "restricted",
+      "project_id": "uva"
+    },
+    "uva/2026-04-13-KAI-UvA-Kickoff.md": {
+      "label": "restricted",
+      "project_id": "uva"
+    },
+    "uva/2026-04-16-supervisor-kickoff.md": {
+      "label": "restricted",
+      "project_id": "uva"
+    },
+    "uva/2026-04-22-presentation-slides.md": {
+      "label": "restricted",
+      "project_id": "uva"
+    },
+    "uva/2026-04-22-problem-definition.md": {
+      "label": "restricted",
+      "project_id": "uva"
+    },
+    "uva/2026-04-30-group-Sanne-email-content.md": {
+      "label": "restricted",
+      "project_id": "uva"
+    },
+    "uva/2026-05-14-meeting-notes.md": {
+      "label": "restricted",
+      "project_id": "uva"
+    },
+    "uva/2026-05-15-Laurenz-Sanne-email-content.md": {
+      "label": "restricted",
+      "project_id": "uva"
+    },
+    "uva/2026-06-04-meeting-notes.md": {
+      "label": "restricted",
+      "project_id": "uva"
+    },
+    "uva/2026-06-07-Xiaojing-Sanne-email-content.md": {
+      "label": "restricted",
+      "project_id": "uva"
+    },
+    "uva/2026-06-10-meeting-notes.md": {
+      "label": "restricted",
+      "project_id": "uva"
+    },
+    "uva/2026-06-11-meeting-notes.md": {
+      "label": "restricted",
+      "project_id": "uva"
+    },
+    "uva/2026-06-12-mock-up-artifact.md": {
+      "label": "restricted",
+      "project_id": "uva"
+    },
+    "uva/2026-06-15-meeting-notes.md": {
+      "label": "restricted",
+      "project_id": "uva"
+    },
+    "uva/2026-06-18-meeting-notes.md": {
+      "label": "public",
+      "project_id": null
+    },
+    "uva/2026-06-17-MULTI-APP.md": {
+      "label": "restricted",
+      "project_id": "uva"
+    },
+    "uva/2026-06-18-Laurenz-evaluation-plan.md": {
+      "label": "restricted",
+      "project_id": "uva"
+    }
+  }
 }

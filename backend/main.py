@@ -219,7 +219,7 @@ def read_all_wiki(project: Optional[str] = None) -> str:
     return "\n\n".join(parts)
 
 
-RETRIEVAL_MODEL = "claude-haiku-4-5"   # cheap model for index→page selection
+RETRIEVAL_MODEL = "claude-sonnet-4-6"   # index→page selection (whole system on Sonnet)
 
 
 def retrieve_wiki_context(project: str, question: str, user: dict, k: int = 8):
@@ -576,7 +576,7 @@ async def generate(req: GenerateRequest, project: str, user: dict = Depends(curr
     for attempt in range(MAX_RETRIES + 1):
         try:
             message = client.messages.create(
-                model="claude-opus-4-8",
+                model="claude-sonnet-4-6",
                 max_tokens=16000,
                 messages=[{"role": "user", "content": prompt}],
             )
@@ -739,7 +739,7 @@ async def query_wiki(req: QueryRequest, project: str, user: dict = Depends(team_
         yield sse({"type": "pages", "pages": used_pages})  # which pages were retrieved
         try:
             with client.messages.stream(
-                model="claude-opus-4-8",
+                model="claude-sonnet-4-6",
                 max_tokens=16000,
                 system=QUERY_SYSTEM,
                 messages=[{"role": "user", "content": f"Retrieved wiki pages:\n\n{wiki}\n\n---\n\nQuestion: {req.question}"}],
@@ -943,7 +943,7 @@ async def lint_wiki(project: str, user: dict = Depends(team_member)):
         # Phase 1 — stream the health-check report
         try:
             with client.messages.stream(
-                model="claude-opus-4-8",
+                model="claude-sonnet-4-6",
                 max_tokens=16000,
                 system=LINT_SYSTEM,
                 messages=[{"role": "user", "content": f"Wiki content to audit:\n\n{wiki}"}],
@@ -964,7 +964,7 @@ async def lint_wiki(project: str, user: dict = Depends(team_member)):
         yield sse({"type": "applying"})
         try:
             with client.messages.stream(
-                model="claude-opus-4-8",
+                model="claude-sonnet-4-6",
                 max_tokens=4000,
                 system=LINT_APPLY_SYSTEM,
                 output_config={"format": {"type": "json_schema", "schema": LINT_RESULT_SCHEMA}},
@@ -1175,7 +1175,7 @@ async def ingest_source(req: IngestRequest, user: dict = Depends(team_member)):
         # Phase 1 — stream analysis
         try:
             with client.messages.stream(
-                model="claude-opus-4-8",
+                model="claude-sonnet-4-6",
                 max_tokens=16000,
                 system=[cached_context_block,
                         {"type": "text", "text": INGEST_ANALYSIS_SYSTEM}],
@@ -1205,7 +1205,7 @@ async def ingest_source(req: IngestRequest, user: dict = Depends(team_member)):
             # ingest's input cost. JSON is enforced via INGEST_APPLY_SYSTEM + the fence-
             # stripping below instead. (Verified: with output_config, phase-2 cache_read=0.)
             with client.messages.stream(
-                model="claude-opus-4-8",
+                model="claude-sonnet-4-6",
                 max_tokens=64000,
                 system=[cached_context_block,
                         {"type": "text", "text": INGEST_APPLY_SYSTEM}],

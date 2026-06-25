@@ -1,0 +1,949 @@
+[
+  {
+    "id": "T1-1",
+    "type": "T1",
+    "condition": "C2g",
+    "answer": "Based on the provided material, the Living Wiki app was **not deployed to any external platform**. The team decided **against deploying to Vercel** at the 2026-06-18 final demo check-in with Sanne, \"prioritizing individual thesis work and test cases.\" Instead, component backends continued to run on **individual laptops**, with the branch-per-member workflow allowing any member to run the UI locally.\n\nThis decision rejected Vercel specifically \u2014 which Sanne had recommended at the 2026-06-12 mock-up review, suggesting it as an \"AI cloud\" platform to \"deploy backends on a URL domain instead of local laptops,\" noting the free plan would likely be sufficient. Central URL-hosted deployment was explicitly left as **future work for production reuse**.",
+    "retrieved_pages": [
+      "decisions/decision-multi-project-app-structure.md",
+      "meetings/multi-project-app-2026-06-17.md",
+      "meetings/mockup-artifact-2026-06-12.md",
+      "meetings/team-meeting-2026-06-15.md",
+      "meetings/team-meeting-2026-06-11.md",
+      "deliverables/wiki-generation-engine.md",
+      "deliverables/permission-layer.md",
+      "deliverables/evaluation-deliverable.md"
+    ],
+    "scores": {
+      "contextual_recall": {
+        "score": 0.5,
+        "reason": "The score is 0.50 because the parenthetical claim in sentence 1 about the 18 June decision against deploying to Vercel is well supported by the 7th node in retrieval context, which matches the date and rationale of prioritizing individual thesis work and test cases. However, the main claim that Vercel was 'chosen' as the deployment platform on 10 June over AWS is unsupported\u2014the 6th node only shows Vercel was *recommended* for investigation (not chosen), the 7th node states Vercel was decided against, and AWS is never mentioned anywhere in the retrieval context."
+      },
+      "correctness": {
+        "score": 0.6,
+        "reason": "The question asks which platform was chosen and what it was chosen over. The reference states Vercel was chosen over complex enterprise cloud providers like AWS, while noting the team later decided against actually deploying. The actual output correctly captures the 18 June decision against deploying to Vercel and the reason (prioritizing individual thesis work and test cases), and correctly identifies Vercel as the recommended platform. However, it fails to mention what Vercel was chosen over (AWS/enterprise cloud providers), which is a key fact in the reference. It also reframes the answer to emphasize non-deployment rather than the original platform choice, and introduces some details (e.g., '2026-06-12 mock-up review', 'AI cloud') not in the reference. The core decision is partially aligned but the comparison element is missing."
+      }
+    },
+    "abstained": false,
+    "abstention_correct": null,
+    "tokens_fed": 22602,
+    "input_tokens": 22602,
+    "output_tokens": 174,
+    "cache_read_tokens": 0,
+    "cache_creation_tokens": 0,
+    "latency_s": 14.62
+  },
+  {
+    "id": "T1-2",
+    "type": "T1",
+    "condition": "C2g",
+    "answer": "Based on the provided material, the UvA academic supervisor is **Hongyi Zhu** (h.zhu@uva.nl).\n\nHis role was **confirmed via two sources**:\n1. The **2026-04-16 UvA supervisor kickoff meeting** (`supervisor-kickoff-2026-04-16.md`), which explicitly lists him as the academic supervisor and where he met with all four students.\n2. The **Assignment 1 written report title page** (`assignment-1-report-2026-04-22`), which names him as supervisor alongside the four student authors.\n\nPrior to the 2026-04-16 meeting, his role had been listed as \"unconfirmed\" \u2014 that meeting resolved it.",
+    "retrieved_pages": [
+      "meetings/supervisor-kickoff-2026-04-16.md",
+      "meetings/kickoff-meeting-2026-04-13.md",
+      "entities/project-team.md",
+      "deliverables/assignment-1-project-definition.md",
+      "entities/uva-ai4business-lab.md",
+      "generator/2026-06-19-project-onboarding-summary.md",
+      "_gaps.md",
+      "entities/kickoff-deck-2026-04-13.md",
+      "concepts/adoption-journey.md"
+    ],
+    "scores": {
+      "contextual_recall": {
+        "score": 1.0,
+        "reason": "The score is 1.00 because the expected output's only sentence (1st sentence) identifying 'Hongyi Zhu' as the UvA academic supervisor is fully supported, with the 1st node in retrieval context confirming the supervisor and the 3rd node corroborating it with contact details. Great job\u2014the retrieval context backs up the expected output completely!"
+      },
+      "correctness": {
+        "score": 1.0,
+        "reason": "The actual output correctly identifies Hongyi Zhu as the UvA thesis supervisor, matching the reference answer exactly on the key fact. The additional details (email, confirmation sources, and resolution of the previously unconfirmed status) provide supporting context without contradicting the reference or fabricating conflicting facts."
+      }
+    },
+    "abstained": false,
+    "abstention_correct": null,
+    "tokens_fed": 23941,
+    "input_tokens": 23941,
+    "output_tokens": 171,
+    "cache_read_tokens": 0,
+    "cache_creation_tokens": 0,
+    "latency_s": 5.72
+  },
+  {
+    "id": "T1-3",
+    "type": "T1",
+    "condition": "C2g",
+    "answer": "## Authentication Approach for the Prototype\n\n### What was chosen\n\nThe prototype uses **email-based login with passwordless demo accounts**. Specifically:\n\n- **`user_id` = email address** in the format `first_name.last_name@kickstart.ai` for KickstartAI users. The session identifies the user automatically for all subsequent actions.\n- **Three passwordless demo accounts** were created for the prototype (expanded to four named accounts in the multi-project app: `anna.jansen`, `bram.bakker`, `carla.visser`, and `gast.bezoeker`).\n\n### Why not full authentication\n\n**Production authentication (passwords, full access-control integration) is explicitly out of scope for the thesis** \u2014 it is recorded as **KickstartAI future work**.\n\nThe specific reason given for using dummy/passwordless accounts instead of assigning separate IDs and passwords to every member came directly from **Sanne Wielinga's advice on 2026-06-07**: she advised against assigning separate IDs/passwords to every member for the purposes of this thesis. Xiaojing folded this feedback into the 2026-06-12 UI build.\n\nThe mock-up artifact (2026-06-12) confirms this framing explicitly: the prototype uses \"three demo accounts without passwords\" and states that \"production authentication [is] explicitly out of scope (KickstartAI future work).\"",
+    "retrieved_pages": [
+      "concepts/permission-model.md",
+      "deliverables/permission-layer.md",
+      "meetings/xiaojing-sanne-permission-email-2026-06-07.md",
+      "decisions/decision-multi-project-app-structure.md",
+      "meetings/multi-project-app-2026-06-17.md",
+      "meetings/mockup-artifact-2026-06-12.md",
+      "_reuse.md",
+      "deliverables/wiki-generation-engine.md",
+      "meetings/team-meeting-2026-06-15.md"
+    ],
+    "scores": {
+      "contextual_recall": {
+        "score": 1.0,
+        "reason": "The score is 1.00 because both sentences in the expected output are fully supported by the retrieval context. Sentence 1 (using dummy accounts for team members) aligns with the 8th and 2nd nodes in retrieval context, which mention dummy accounts and suggestions to add group members plus Sanne as real users. Sentence 2 (full auth not necessary for the demo) is backed by the 2nd and 6th nodes, which state production authentication is explicitly out of scope and reference passwordless demo accounts. Great alignment all around!"
+      },
+      "correctness": {
+        "score": 0.6,
+        "reason": "The actual output aligns with the reference on the two key facts: dummy/demo accounts representing different team members were used, and full authentication was not necessary for the demo (out of scope). However, the response adds substantial specific details not present in the reference \u2014 exact email formats, named accounts (anna.jansen, bram.bakker, etc.), specific dates (2026-06-07, 2026-06-12), and named individuals (Sanne Wielinga, Xiaojing) with attributed advice. These fabricated-seeming specifics cannot be verified against the minimal reference and risk confident invention, which warrants a penalty despite the core facts being correct."
+      }
+    },
+    "abstained": false,
+    "abstention_correct": null,
+    "tokens_fed": 22608,
+    "input_tokens": 22608,
+    "output_tokens": 324,
+    "cache_read_tokens": 0,
+    "cache_creation_tokens": 0,
+    "latency_s": 9.54
+  },
+  {
+    "id": "T1-4",
+    "type": "T1",
+    "condition": "C2g",
+    "answer": "Based on the provided material, **Sanne Wielinga** is the confirmed main point of contact for the Living Wiki project. She is a **Senior Machine Learning Engineer** at KickstartAI.\n\nThis was established in the **2026-04-10 kickoff email thread** and confirmed at the **2026-04-13 kickoff meeting**, where she was described as the \"main contact\" for the students. The project was **handed over to Sanne from \"Averion\"** (an unidentified party \u2014 possibly a transcription error for \"Evertjan\"; see the ambiguity note in the kickoff meeting notes). The introduction itself was made by **Evertjan Peer**, KickstartAI's Tech Lead.\n\nOne important nuance: no source explicitly uses the word **\"mentor\"** for Sanne. The founding brief referenced a \"technical mentor (TBD),\" but all subsequent sources identify Sanne only as the \"main point of contact\" and as available for \"engineering questions.\" The \"technical mentor\" label therefore remains formally unresolved, even though Sanne is the closest match in practice.",
+    "retrieved_pages": [
+      "meetings/kickoff-meeting-2026-04-13.md",
+      "entities/kickstartai-team.md",
+      "entities/kickoff-deck-2026-04-13.md",
+      "meetings/supervisor-kickoff-2026-04-16.md",
+      "meetings/laurenz-sanne-email-2026-05-15.md",
+      "entities/kickstartai.md",
+      "_gaps.md",
+      "entities/project-team.md",
+      "concepts/adoption-journey.md"
+    ],
+    "scores": {
+      "contextual_recall": {
+        "score": 1.0,
+        "reason": "The score is 1.00 because the name in sentence 1 (Sanne Wielinga) is fully supported by both the 1st and 2nd nodes in retrieval context, which identify Sanne Wielinga as the main point of contact. Great job\u2014the retrieval context fully captures the expected output!"
+      },
+      "correctness": {
+        "score": 1.0,
+        "reason": "The actual output correctly identifies Sanne Wielinga as the main contact, matching the reference answer's key fact. It adds accurate supporting details (Senior ML Engineer at KickstartAI, established in the kickoff thread) and appropriately notes the nuance that no source explicitly uses the word 'mentor' for Sanne, which shows careful grounding rather than fabrication. The core fact aligns fully with the reference, and the additional context is consistent and properly hedged, not invented."
+      }
+    },
+    "abstained": false,
+    "abstention_correct": null,
+    "tokens_fed": 23712,
+    "input_tokens": 23712,
+    "output_tokens": 255,
+    "cache_read_tokens": 0,
+    "cache_creation_tokens": 0,
+    "latency_s": 11.75
+  },
+  {
+    "id": "T1-5",
+    "type": "T1",
+    "condition": "C2g",
+    "answer": "## Process Methodology\n\nThe project adopted a **dual-methodology framework** combining two complementary process models:\n\n### 1. CRISP-DM (Cross-Industry Standard Process for Data Mining)\nCited from **Chapman et al. (2000)** and **Mart\u00ednez-Plumed et al. (2021)**, structured as six phases:\n1. Business Understanding\n2. Data Understanding\n3. Data Preparation (extraction/cleaning/tokenisation/chunking)\n4. Modelling (mock-up \u2192 MVP \u2192 artifact)\n5. Evaluation (coverage/freshness/accuracy/usefulness)\n6. Deployment (integrated prototype + usage guide)\n\nCRISP-DM was present from the kickoff \u2014 Quinten shared a rough Gantt chart at the **2026-04-13 kickoff meeting** framed around it, and it maps directly to the project's **3-phase / 12-week** schedule.\n\n### 2. Design Science Research (DSR)\nCited from **Hevner (2007), \"three-cycle view\"**, operating across three cycles:\n- **Relevance Cycle** \u2014 grounded in KickstartAI's real knowledge-management challenges\n- **Rigor Cycle** \u2014 drawing on RAG architectures, LLM evaluation, and knowledge-graph literature\n- **Design Cycle** \u2014 iterative prototyping and evaluation of each sub-system\n\nDSR was **net-new** in the **Assignment 1 presentation deck (2026-04-22)** \u2014 only CRISP-DM had been documented prior to that point.\n\nThe written Assignment 1 report describes the combination explicitly as **\"DSR layered with CRISP-DM.\"**",
+    "retrieved_pages": [
+      "deliverables/assignment-1-project-definition.md",
+      "meetings/kickoff-meeting-2026-04-13.md",
+      "deliverables/project-timeline.md",
+      "meetings/supervisor-kickoff-2026-04-16.md",
+      "concepts/adoption-journey.md",
+      "deliverables/assignment-1-report-2026-04-22.md",
+      "_gaps.md",
+      "entities/kickoff-deck-2026-04-13.md",
+      "deliverables/assignment-1-presentation-2026-04-22.md"
+    ],
+    "scores": {
+      "contextual_recall": {
+        "score": 1.0,
+        "reason": "The score is 1.00 because the expected output is fully supported by the retrieval context\u2014the 1st node in retrieval context explicitly identifies the methodology as 'Design Science Research (DSR) (Hevner 2007) layered with CRISP-DM', and additional nodes (such as the 8th node) reinforce this 'dual framework'. Great alignment!"
+      },
+      "correctness": {
+        "score": 1.0,
+        "reason": "The actual output correctly identifies both key methodologies from the reference: Design Science Research (DSR) and CRISP-DM. It accurately captures the dual-methodology framework matching the expected answer. While the response adds substantial extra detail (citations, phases, dates, and the 'DSR layered with CRISP-DM' framing), these elaborations align with the core facts and do not contradict the reference. The key facts requested\u2014the process methodologies adopted\u2014are stated correctly."
+      }
+    },
+    "abstained": false,
+    "abstention_correct": null,
+    "tokens_fed": 23107,
+    "input_tokens": 23107,
+    "output_tokens": 397,
+    "cache_read_tokens": 0,
+    "cache_creation_tokens": 0,
+    "latency_s": 9.22
+  },
+  {
+    "id": "T1-6",
+    "type": "T1",
+    "condition": "C2g",
+    "answer": "The project kickoff meeting was held on **April 13, 2026** (2026-04-13). This was the KickstartAI x UvA Living Wiki kickoff meeting, held at 10:00 CEST, attended by Sanne Wielinga and the four UvA AI4Business Lab students.",
+    "retrieved_pages": [
+      "meetings/kickoff-meeting-2026-04-13.md",
+      "entities/kickoff-deck-2026-04-13.md",
+      "meetings/supervisor-kickoff-2026-04-16.md",
+      "deliverables/assignment-1-project-definition.md",
+      "generator/2026-06-19-project-onboarding-summary.md",
+      "index.md",
+      "_gaps.md",
+      "entities/project-team.md",
+      "concepts/adoption-journey.md",
+      "entities/techdays.md"
+    ],
+    "scores": {
+      "contextual_recall": {
+        "score": 1.0,
+        "reason": "The score is 1.00 because the date in sentence 1 is directly supported by the 1st node in retrieval context, which explicitly states '**Date:** 2026-04-13' and includes it in the title. Great alignment!"
+      },
+      "correctness": {
+        "score": 1.0,
+        "reason": "The actual output correctly states the kickoff meeting date as 2026-04-13, matching the reference answer exactly. The core key fact (the date) is accurate. While the response adds extra details (time, attendees, meeting name) not present in the reference, these do not contradict the expected answer and the central fact aligns perfectly."
+      }
+    },
+    "abstained": false,
+    "abstention_correct": null,
+    "tokens_fed": 23687,
+    "input_tokens": 23687,
+    "output_tokens": 78,
+    "cache_read_tokens": 0,
+    "cache_creation_tokens": 0,
+    "latency_s": 3.25
+  },
+  {
+    "id": "T1-7",
+    "type": "T1",
+    "condition": "C2g",
+    "answer": "## LLM Used and Fine-Tuning Status\n\n### Production Backend: Claude (Anthropic) via Claude Code\n\nThe system's production backend is **Claude, accessed via Anthropic's API through Claude Code** (Anthropic's terminal-based agent). This was confirmed on **2026-05-15** when Laurenz shared the GitHub repo (`https://github.com/Lruckens/kickstartai-living-wiki`) and the repo was found to be \"directly linked to Claude Code.\" The **KickstartAI-provided Anthropic API key** is stored in a gitignored `.env` file. The design intent is **Claude end-to-end** for production.\n\n### Evaluation Harness: Specific Model Versions Named\n\nThe evaluation runplan (`evaluation-runplan-2026-06-19`) names three specific models used in the evaluation harness:\n- **`claude-opus-4-8`** \u2014 answer generation\n- **`claude-haiku-4-5`** \u2014 retrieval\n- **`claude-sonnet-4-6`** \u2014 judge\n\nWhether these match the production wiki-engine model is explicitly noted as **unspecified**.\n\n### Exception: Permission-Layer Experiments Used a Different Model\n\nXiaojing's permission-layer experiments (2026-06-07) ran on **`gpt-5.1` via the UvA API** \u2014 explicitly described as an *experimental/evaluation* environment, distinct from the production backend.\n\n### Fine-Tuning\n\n**This is not documented in the provided material.** There is no mention anywhere of fine-tuning. The system uses standard API calls to Claude; the approach is prompt-based (via `CLAUDE.md` instructions) and RAG-grounded, not fine-tuning-based.",
+    "retrieved_pages": [
+      "generator/2026-06-19-project-onboarding-summary.md",
+      "deliverables/wiki-generation-engine.md",
+      "deliverables/generator-module.md",
+      "meetings/mockup-artifact-2026-06-12.md",
+      "meetings/team-meeting-2026-06-11.md",
+      "concepts/living-wiki.md",
+      "deliverables/permission-layer.md",
+      "meetings/team-meeting-2026-06-04.md",
+      "deliverables/gap-detector.md"
+    ],
+    "scores": {
+      "contextual_recall": {
+        "score": 0.5,
+        "reason": "The score is 0.50 because the 1st sentence regarding the Claude model Sonnet 4.6 from Anthropic is supported by the 2nd node in retrieval context, which names 'claude-sonnet-4-6' as a judge model and confirms Anthropic as the provider. However, the 2nd sentence stating the model is 'Not fine-tuned' cannot be attributed to any node, as the retrieval context discusses model versions and backends but never addresses fine-tuning status."
+      },
+      "correctness": {
+        "score": 0.8,
+        "reason": "The response correctly identifies Claude (Anthropic) as the LLM and correctly states it is not fine-tuned, aligning with the reference's key facts. The fine-tuning conclusion matches well. However, the reference specifies the production model as Sonnet 4.6, while the actual output is ambiguous about which Claude variant is used in production \u2014 it lists claude-opus-4-8, claude-haiku-4-5, and claude-sonnet-4-6 only in the evaluation harness context and explicitly notes the production model match is 'unspecified.' This introduces extra detail (gpt-5.1 experiments, repo links, API key storage) not in the reference and slightly muddies the core answer. Still, the two essential facts (Claude/Anthropic, not fine-tuned) are correctly conveyed without fabrication contradicting the reference."
+      }
+    },
+    "abstained": true,
+    "abstention_correct": null,
+    "tokens_fed": 22521,
+    "input_tokens": 22521,
+    "output_tokens": 407,
+    "cache_read_tokens": 0,
+    "cache_creation_tokens": 0,
+    "latency_s": 11.34
+  },
+  {
+    "id": "T1-8",
+    "type": "T1",
+    "condition": "C2g",
+    "answer": "Based on the provided material, the final demo and thesis defence are on **Monday, 2026-06-22**.\n\nSpecifically, as documented in both [[team-meeting-2026-06-15]] and [[project-timeline]], **2026-06-22** is the date of the **\"final demo of the artifact + individual thesis defence.\"**\n\nLeading up to that date, there is also a **Friday 2026-06-20 final integration demo** \u2014 a last pre-defence team review of all final details \u2014 which was added as a milestone at the 2026-06-18 meeting with Sanne (see [[team-meeting-2026-06-18]]).",
+    "retrieved_pages": [
+      "meetings/team-meeting-2026-06-18.md",
+      "deliverables/project-timeline.md",
+      "meetings/team-meeting-2026-06-15.md",
+      "generator/2026-06-19-project-onboarding-summary.md",
+      "deliverables/assignment-1-project-definition.md",
+      "log.md",
+      "deliverables/wiki-generation-engine.md",
+      "deliverables/generator-module.md"
+    ],
+    "scores": {
+      "contextual_recall": {
+        "score": 0.5,
+        "reason": "The score is 0.50 because the final demo date in sentence 1 (2026.06.18) is well supported by the 1st and 2nd nodes in retrieval context, which state 'Final demo to Sanne' on that date. However, the thesis deadline of 2026.06.25 in sentence 2 cannot be found anywhere in the retrieval context; the nodes only reference a thesis defence/final demo on 2026-06-22, with no mention of a 2026.06.25 deadline."
+      },
+      "correctness": {
+        "score": 0.0,
+        "reason": "The actual output contradicts the reference answer on both key dates. The reference states the final demo is on 2026.06.18 and the thesis deadline is 2026.06.25, but the actual output claims both the final demo and thesis defence are on 2026-06-22, which matches neither reference date. The answer also confidently fabricates supporting details (citing specific meeting notes and a 2026-06-20 integration demo) that do not align with the expected facts. This is a confident but incorrect response."
+      }
+    },
+    "abstained": false,
+    "abstention_correct": null,
+    "tokens_fed": 23649,
+    "input_tokens": 23649,
+    "output_tokens": 154,
+    "cache_read_tokens": 0,
+    "cache_creation_tokens": 0,
+    "latency_s": 5.17
+  },
+  {
+    "id": "T1-9",
+    "type": "T1",
+    "condition": "C2g",
+    "answer": "Based on the provided material, the team operates the wiki through a **React/TypeScript + Vite frontend** talking to a **FastAPI backend on `localhost:8000`**.\n\nThe interface has two main views:\n\n**Wiki view (read path):** A browser for the `/wiki` knowledge base with a sidebar grouping pages by category, live page counts, collapsible sections, and title search. It renders markdown via `react-markdown` and rewrites Obsidian-style `[[slug]]` cross-references into clickable in-app links.\n\n**Operations view (write path):** Three tabs, each with live Server-Sent-Events (SSE) streaming:\n- **Ingest** \u2014 drag-and-drop a source document; runs three streamed phases: Analyse \u2192 Apply \u2192 Push\n- **Query** \u2014 natural-language questions answered from wiki content only, with `[[page]]` citations streamed token-by-token\n- **Lint** \u2014 one-click wiki health check streaming a report on contradictions, orphan pages, underdocumented decisions, etc.\n\nAdditional surfaces added over time include:\n- A **Generator tab** (built by Quinten using **Lovable**) configuring output type, stakeholder, tone, and length\n- A **Gap Detector dashboard + report page**\n- A **Permission/login landing page** requiring login before wiki access\n- A **project switcher** (bottom-left, persisted to `localStorage`) in the multi-project app, scoping all views to the active project\n\nThe Generator UI was built with **Lovable** specifically. The backend uses **no database** \u2014 the wiki is the markdown files on disk; FastAPI is a thin read/call-Claude/write layer. The UI can be run on any team member's laptop via a separate branch of the GitHub repo.",
+    "retrieved_pages": [
+      "generator/2026-06-19-project-onboarding-summary.md",
+      "meetings/mockup-artifact-2026-06-12.md",
+      "meetings/multi-project-app-2026-06-17.md",
+      "concepts/living-wiki.md",
+      "decisions/decision-multi-project-app-structure.md",
+      "deliverables/wiki-generation-engine.md",
+      "deliverables/permission-layer.md",
+      "_reuse.md",
+      "meetings/team-meeting-2026-06-15.md"
+    ],
+    "scores": {
+      "contextual_recall": {
+        "score": 0.0,
+        "reason": "The score is 0.00 because although several elements of sentence 1 (React/Vite frontend, FastAPI backend, active-project switcher, the four views, and per-project ingest/query/lint/generate endpoints) and sentence 2 (port 8000 and local running) align with the mockup artifact node and multi-project app node in retrieval context, key details remain unsupported: 'run with uvicorn' in sentence 1 and the frontend port 5173 in sentence 2 are not mentioned anywhere in the retrieval context."
+      },
+      "correctness": {
+        "score": 0.9,
+        "reason": "The actual output aligns strongly with the reference on the key facts: a React/Vite frontend backed by a FastAPI service on port 8000, running locally, with operations for ingest/query/lint/generate and a project switcher. It correctly identifies the multiple views (Wiki, Operations, plus Gap Detector and Generator/Artifact surfaces), matching the reference's four-view structure. Minor discrepancies include omitting the frontend port 5173 and uvicorn explicitly (though it adds plausible detail like Lovable for the Generator and SSE streaming), but these elaborations do not contradict the reference and the core decision/tooling facts are accurate."
+      }
+    },
+    "abstained": false,
+    "abstention_correct": null,
+    "tokens_fed": 22233,
+    "input_tokens": 22233,
+    "output_tokens": 409,
+    "cache_read_tokens": 0,
+    "cache_creation_tokens": 0,
+    "latency_s": 11.26
+  },
+  {
+    "id": "T1-10",
+    "type": "T1",
+    "condition": "C2g",
+    "answer": "## Sub-deliverable 4 and its owner\n\n**Sub-deliverable 4 is the Permission Layer**, and it is owned by **Member 4 \u2014 Xiaojing Li (student number 14851199)**.\n\n### The numbering\nThe supervisor kickoff (2026-04-16) records six sub-deliverables with **#5 = Permission Layer** and **#6 = Evaluation Method**, but notably does **not** state which student owns sub-deliverables #1\u20134. However, the Assignment 1 presentation deck and written report (both 2026-04-22) provide the authoritative component-to-member mapping:\n\n- Member 1 \u2014 Ingestion Pipeline + Wiki Engine (Laurenz Ruckensteiner-Geyer)\n- Member 2 \u2014 Generator Module (Quinten van den Heuvel)\n- Member 3 \u2014 Gap Detector (Meng Cheng)\n- **Member 4 \u2014 Permission Layer (Xiaojing Li)**\n\n### The numbering discrepancy\nThere is a known conflict: the supervisor kickoff numbered the Permission Layer as **#5 (collaborative)**, while the later student-authored artifacts (the deck and the report, three days later) assign it as **Member 4's individual deliverable**, with the **Evaluation Framework** as the collaborative shared deliverable. The wiki treats the student-authored artifacts as **resolved-by-precedence** \u2014 they are later and more authoritative. Xiaojing also **self-asserted ownership** in the 2026-06-07 permission-layer design review thread with Sanne.",
+    "retrieved_pages": [
+      "deliverables/assignment-1-project-definition.md",
+      "deliverables/project-timeline.md",
+      "deliverables/assignment-1-report-2026-04-22.md",
+      "deliverables/assignment-1-presentation-2026-04-22.md",
+      "index.md",
+      "_overview.md",
+      "deliverables/permission-layer.md",
+      "meetings/team-meeting-2026-06-18.md",
+      "concepts/gaps-diagram.md",
+      "concepts/living-wiki.md",
+      "meetings/supervisor-kickoff-2026-04-16.md"
+    ],
+    "scores": {
+      "contextual_recall": {
+        "score": 0.5,
+        "reason": "The score is 0.50 because the ownership and core function in the expected output are well supported \u2014 the 8th node in retrieval context confirms Cara/Meng Cheng owns the Gap Detector, while the 4th and 3rd nodes back the claim that it surfaces undocumented decisions and knowledge holes and outputs a structured gap report highlighting missing/incomplete knowledge. However, the specific examples cited (decisions without rationale, PRs without explanations, meetings without recorded outcomes) cannot be attributed to any node in the retrieval context, which holds the score back."
+      },
+      "correctness": {
+        "score": 0.0,
+        "reason": "The actual output contradicts the reference answer on every key fact. The reference states sub-deliverable 4 is the Gap Detector owned by Cara, while the actual output claims it is the Permission Layer owned by Xiaojing Li (Member 4). The output also fabricates extensive detail (student numbers, dates, a numbering discrepancy, self-assertion threads) that conflicts with the reference. This is a confident fabrication that states the wrong deliverable and wrong owner, warranting the lowest score."
+      }
+    },
+    "abstained": false,
+    "abstention_correct": null,
+    "tokens_fed": 23212,
+    "input_tokens": 23212,
+    "output_tokens": 369,
+    "cache_read_tokens": 0,
+    "cache_creation_tokens": 0,
+    "latency_s": 9.34
+  },
+  {
+    "id": "T2-1",
+    "type": "T2",
+    "condition": "C2g",
+    "answer": "Based on the provided material, here is the ownership of each sub-deliverable:\n\n**Member-owned components (1\u20134):**\n\n1. **Ingestion Pipeline + Wiki Engine (Member 1)** \u2014 **Laurenz Ruckensteiner-Geyer** \u2014 soft signal based on his role as repo/GitHub owner and integration gatekeeper; not an explicit course label.\n2. **Generator Module (Member 2)** \u2014 **Quinten van den Heuvel** \u2014 soft signal based on him building and integrating the module via PR.\n3. **Gap Detector (Member 3)** \u2014 **Meng Cheng (\"Cara\")** \u2014 **positively confirmed** on 2026-06-12 via the mock-up artifact, which attributed a full 6-layer hybrid Gap Detector design to her.\n4. **Permission Layer (Member 4)** \u2014 **Xiaojing Li** \u2014 **self-asserted** on 2026-06-07 in the design-review email thread with Sanne.\n\n**Collaborative deliverable:**\n\n5. **Evaluation Framework** \u2014 **all four students collectively**. Each member contributes component-level results into their own individual thesis.\n\n> **Note on a discrepancy:** The supervisor kickoff on 2026-04-16 recorded the Permission Layer (#5 in its numbering) as collaborative and the Evaluation Method as per-member-into-thesis. However, both subsequent student-authored artifacts (the Assignment 1 presentation and written report, 2026-04-22) assign the Permission Layer to Member 4 individually and name the Evaluation Framework as the collaborative deliverable. The wiki treats the two agreeing student-authored sources as **resolved-by-precedence** over the supervisor-kickoff note.",
+    "retrieved_pages": [
+      "deliverables/project-timeline.md",
+      "entities/project-team.md",
+      "deliverables/assignment-1-project-definition.md",
+      "meetings/kickoff-meeting-2026-04-13.md",
+      "meetings/supervisor-kickoff-2026-04-16.md",
+      "generator/2026-06-19-project-onboarding-summary.md",
+      "_gaps.md",
+      "entities/kickstartai-team.md"
+    ],
+    "scores": {
+      "contextual_recall": {
+        "score": 1.0,
+        "reason": "The score is 1.00 because every sentence in the expected output is fully supported by the retrieval context. Sentences attributing Laurenz to ingestion + wiki engine, Quinten to the Generator module, Xiaojing to the Permission layer, and Cara to the Gap detector are all confirmed by the 2nd node (project-team.md), with the 3rd node reinforcing the ingestion + wiki engine assignment. Great alignment across the board!"
+      },
+      "correctness": {
+        "score": 0.9,
+        "reason": "The actual output correctly matches all four member-owned assignments in the reference: Laurenz (Ingestion + Wiki Engine), Quinten (Generator Module), Xiaojing (Permission Layer), and Cara (Gap Detector). These key facts align fully with the expected answer. The response adds extra detail about evidence sources and a discrepancy note, which is consistent and not contradictory. However, the question asks about 'six sub-deliverables' but the reference only lists four owners, and the actual output only clearly identifies five items (four members plus a collaborative Evaluation Framework), introducing some confusion about the sixth deliverable. Despite this minor over-elaboration, the core facts match the reference precisely without fabricating incorrect ownership."
+      }
+    },
+    "abstained": false,
+    "abstention_correct": null,
+    "tokens_fed": 24070,
+    "input_tokens": 24070,
+    "output_tokens": 405,
+    "cache_read_tokens": 0,
+    "cache_creation_tokens": 0,
+    "latency_s": 11.78
+  },
+  {
+    "id": "T2-2",
+    "type": "T2",
+    "condition": "C2g",
+    "answer": "The provided material does not document a **reworking** of the Gap Detector. There is no source describing a redesign, revision, or rework of the component.\n\nWhat the material does document is a **progressive build and integration sequence**:\n\n- **2026-06-12:** A working 6-layer hybrid framework was built (this appears to be the *initial* built design, not a rework of something prior).\n- **2026-06-15:** It was integrated into the wiki UI as a dashboard + report page.\n- **2026-06-18:** It was demoed to Sanne with additional detail on broken-link detection \u2014 described as providing the exact location of broken links and fix recommendations, which was noted as \"more specific detail than prior descriptions\" but is not framed as a rework.\n\nSanne did flag **feedback** on the scoring methodology at the 2026-06-12 session (specifically that importance/confidence scores should be separated, and that weights of 0.45/0.40/0.15 need empirical justification), and a minor UX issue about the \"Team confirmed\" label was flagged at the 2026-06-15 meeting \u2014 but whether either of these prompted actual changes to the system is not documented in the provided material.",
+    "retrieved_pages": [
+      "deliverables/gap-detector.md",
+      "_gaps.md",
+      "concepts/gaps-diagram.md",
+      "meetings/team-meeting-2026-06-11.md",
+      "meetings/team-meeting-2026-06-04.md",
+      "log.md",
+      "meetings/team-meeting-2026-06-18.md"
+    ],
+    "scores": {
+      "contextual_recall": {
+        "score": 0.0,
+        "reason": "The score is 0.00 because none of the sentences in the expected output could be attributed to the retrieval context. While the nodes in retrieval context confirm peripheral details (Cara/Meng Cheng owning the Gap Detector built on the wiki ingestion pipeline, the semantic analysis layer, and the ranking layer's scoring formula of 0.45/0.40/0.15), they provide no support for the core claims in sentence 1 that the detector was 'initially built for raw source data and not adapted for the structure of the wiki pages' or that integration 'surfaced too many and wrong gaps.' Similarly, sentence 2's claims that 'the semantic layer was changed,' 'the scoring formula was fine-tuned,' and 'the UI was made more user-friendly' are unsupported \u2014 the nodes only note usability as an OPEN gap flagged by Sanne, not a resolved improvement."
+      },
+      "correctness": {
+        "score": 0.2,
+        "reason": "The response declines to describe a rework, claiming the material does not document one. However, the reference clearly states the gap detector WAS reworked: it was initially built (by Cara) for raw source data, not adapted to wiki page structure, which caused it to surface too many/wrong gaps; the semantic layer was changed, the ranking layer's scoring formula was fine-tuned, and the UI was made more user-friendly. The actual output misses all these key facts \u2014 the reason for the rework, the specific changes to the semantic and ranking layers, and Cara's involvement. While it correctly identifies related elements (scoring methodology feedback, UI label issue, broken-link detection), it fails to connect them as the documented rework and instead incorrectly declines the question. This contradicts the reference, which treats the question as answerable."
+      }
+    },
+    "abstained": true,
+    "abstention_correct": null,
+    "tokens_fed": 23595,
+    "input_tokens": 23595,
+    "output_tokens": 286,
+    "cache_read_tokens": 0,
+    "cache_creation_tokens": 0,
+    "latency_s": 8.26
+  },
+  {
+    "id": "T2-3",
+    "type": "T2",
+    "condition": "C2g",
+    "answer": "## How the Permission Layer Controls Access to Generated Outputs\n\nThe provided material does not give a complete, direct answer specifically for LinkedIn posts or other generated outputs, but the documented architecture provides a clear basis for how access decisions work.\n\n### The Core Mechanism\n\nAccess is determined at **generation time via pre-filtering**, not at output-viewing time. Before the LLM generates any output, the **source paragraph pool is filtered to only paragraphs the requesting user is authorized to see**, based on their `user_id` (email) and `project_id` membership. The LLM never receives unauthorized content, so the generated output can only contain information the user was already permitted to access.\n\n### The Three-Tier Model\n\nContent is labeled at ingestion at **paragraph level** into three tiers:\n- **Public** \u2014 anyone can see it\n- **Internal** \u2014 KickstartAI members only\n- **Restricted** \u2014 specific project members only, identified by `project_id`\n\n### The UI Enforcement\n\nIn the Generator tab of the UI (as of the 2026-06-12 mock-up), **the restricted-page project dropdown only shows projects the user is authorized for** \u2014 so cross-project access is blocked at the interface level before a request is even submitted.\n\n### The Gap\n\nThe material does **not specifically document** a post-generation access control check on the saved output itself (e.g., who can later read a saved LinkedIn draft in `wiki/generator`). The documented control is on the **inputs to generation**, not on distribution of the finished output. This is not documented in the provided material as a resolved question.",
+    "retrieved_pages": [
+      "deliverables/permission-layer.md",
+      "concepts/permission-model.md",
+      "meetings/xiaojing-sanne-permission-email-2026-06-07.md",
+      "deliverables/generator-module.md",
+      "deliverables/wiki-generation-engine.md",
+      "concepts/user-journeys.md",
+      "meetings/mockup-artifact-2026-06-12.md",
+      "deliverables/assignment-1-report-2026-04-22.md",
+      "entities/techdays.md"
+    ],
+    "scores": {
+      "contextual_recall": {
+        "score": 0.6,
+        "reason": "The score is 0.60 because sentences 1-4 are well-supported: the visibility labels (public/internal/restricted) and document/wiki generation appear in the 1st and 7th nodes in retrieval context, the user identification via KickstartAI email login is confirmed by the 1st and 2nd nodes, and the restricted-to-project, no-cross-project access claim is backed by the 1st and 2nd nodes. However, the claim in sentence 3 that public and internal outputs are 'available to any logged-in user' with auto-selected documents isn't directly attributable\u2014the context limits internal to 'KickstartAI members only.' Also, sentence 5's claim that a LinkedIn post is generated from public content and visible to everyone isn't stated; the 4th node only mentions a LinkedIn draft as a generator output without tying it to public visibility."
+      },
+      "correctness": {
+        "score": 0.8,
+        "reason": "The actual output captures the key facts from the reference: the three-tier visibility model (public, internal, restricted), identification via user_id (KickstartAI email), project_id-based authorization for restricted content, and the crucial detail that the project dropdown only shows authorized projects to prevent cross-project access. It correctly conveys the core decision mechanism. However, it slightly diverges by framing the answer around 'pre-filtering at generation time' and explicitly claiming there is a 'gap' regarding post-generation access control, partly declining the question. The reference treats this as fully answerable and states that public-facing outputs like LinkedIn posts are generated from public content and thus visible to everyone \u2014 a specific key point the actual output omits and instead labels as 'not documented.' This introduces an unnecessary hedge that slightly contradicts the reference's confident answer, preventing a perfect score."
+      }
+    },
+    "abstained": true,
+    "abstention_correct": null,
+    "tokens_fed": 22740,
+    "input_tokens": 22740,
+    "output_tokens": 358,
+    "cache_read_tokens": 0,
+    "cache_creation_tokens": 0,
+    "latency_s": 10.8
+  },
+  {
+    "id": "T2-4",
+    "type": "T2",
+    "condition": "C2g",
+    "answer": "## How the System Turns Raw Documents into the Wiki\n\n### The Core Mechanism\n\nThe system uses **Claude Code (Anthropic's terminal-based agent)** as the engine that performs all operations. Ingested documents are passed to **Anthropic's LLM via API**, and Claude both processes the documents and generates the wiki pages. The architecture runs on **markdown files on disk \u2014 there is no database**; the backend is described as \"a thin read / call-Claude / write layer.\"\n\n### The Ingest Operation (3-Phase Process)\n\nWhen a document is uploaded via the React/Vite frontend, the FastAPI backend on `localhost:8000` handles it through three phases streamed live via **Server-Sent Events (SSE)**:\n\n1. **Analyse** \u2014 Claude examines the uploaded document against the existing wiki and streams its plan for what changes are needed.\n2. **Apply** \u2014 A second Claude call outputs **JSON with complete file contents** for every affected wiki page, which are then written into `/wiki`.\n3. **Push** \u2014 The updated files are committed and pushed to GitHub.\n\n### The GitHub Push \u2014 \"Wiki Bot\" via Git Worktree\n\nThe push phase uses a specific mechanism: the backend fetches `origin/main`, checks it out into a **temporary git worktree**, copies the updated `wiki/` directory and the new source file in, commits under a dedicated **\"Wiki Bot\" identity**, pushes `HEAD:main`, then deletes the worktree. This keeps the developer's working branch untouched while `main` always reflects the latest knowledge with an attributable, append-only commit history.\n\n### Project-Scoped Routing (Multi-Project App, 2026-06-17)\n\nIn the multi-project version, every ingest call carries `?project=<id>` and routes through `project_dirs(project)`, writing to `wiki/<project>/` and `sources/<project>/`. This enables **per-project clean-slate ingestion** \u2014 the primary mechanism for the evaluation experiment.\n\n### What the Wiki Actually Is\n\nThe wiki pages are **structured, interlinked markdown files** organised by topic, with `[[slug]]` cross-references. The frontend rewrites these into clickable in-app links using `react-markdown`. Pages regenerate or update on a configurable schedule as source material changes, so understanding **compounds over time rather than being rediscovered on every query** \u2014 the stated novel contribution over standard RAG (Lewis et al., 2020).",
+    "retrieved_pages": [
+      "deliverables/ingestion-pipeline.md",
+      "deliverables/wiki-generation-engine.md",
+      "deliverables/generator-module.md",
+      "generator/2026-06-19-project-onboarding-summary.md",
+      "concepts/living-wiki.md",
+      "_overview.md",
+      "deliverables/assignment-1-report-2026-04-22.md",
+      "meetings/team-meeting-2026-06-15.md"
+    ],
+    "scores": {
+      "contextual_recall": {
+        "score": 1.0,
+        "reason": "The score is 1.00 because every sentence in the expected output is fully grounded in the retrieval context. Sentence 1's claim about raw documents living in /sources per project is supported by the 1st node (`/sources/uva/` and `.md`-only constraint) and the 5th and 8th nodes (ingesting project documents as inputs). Sentence 2's description of Claude Code as Anthropic's terminal agent performing all operations and generating /wiki pages is confirmed by the 2nd node, with the wiki/uva/ structure backed by clean-slate `uva` subtree references. Sentence 3's claims about the wiki being the compiled form of the sources and the per-project separation of sources, wiki, and access labels are supported by the 1st node (`.md`-only constraint), the 7th and 2nd nodes (per-project subtrees), and the 5th node (per-project access control). Great alignment all around!"
+      },
+      "correctness": {
+        "score": 0.9,
+        "reason": "The actual output aligns strongly with the reference's key facts: Claude Code (Anthropic's terminal agent) performs all operations, reads raw documents and generates structured markdown pages in /wiki, with per-project routing (wiki/<project>/ and sources/<project>/, e.g. uva). It correctly captures that the wiki is the compiled form of the sources and that the multi-project app separates each project's sources and wiki into subtrees. It adds substantial accurate detail (3-phase ingest, SSE streaming, git worktree 'Wiki Bot' push, no database) that elaborates rather than contradicts the reference. Minor deduction because the reference emphasizes sources as immutable inputs, which the actual output does not explicitly state, and some extra details (scheduling, RAG comparison) go beyond the reference scope, but no clear fabrication contradicts the expected answer."
+      }
+    },
+    "abstained": false,
+    "abstention_correct": null,
+    "tokens_fed": 22561,
+    "input_tokens": 22561,
+    "output_tokens": 556,
+    "cache_read_tokens": 0,
+    "cache_creation_tokens": 0,
+    "latency_s": 17.65
+  },
+  {
+    "id": "T2-5",
+    "type": "T2",
+    "condition": "C2g",
+    "answer": "## Ingestion Pipeline Steps for a New Source Document\n\nBased on the provided material, the most detailed description of the ingest process comes from the **2026-06-12 mock-up artifact**, which describes the **Ingest operation as a 3-phase process** visible in the UI:\n\n### Three-Phase Ingest (UI-level description)\n\n1. **Analyse** \u2014 Claude analyses the uploaded document against the existing wiki, streaming its plan to the UI via live SSE (Server-Sent Events).\n2. **Apply** \u2014 A second Claude call outputs **JSON with complete file contents** for every affected wiki page; these are written into the `/wiki` directory.\n3. **Push** \u2014 The backend fetches `origin/main`, checks it out into a **temporary git worktree**, copies the updated `wiki/` folder and the new source file in, commits as the dedicated **\"Wiki Bot\"** identity, pushes `HEAD:main`, then deletes the worktree.\n\n### Additional Pipeline Mechanics\n\n- **Project scoping (added 2026-06-17):** Every ingest call carries `?project=<id>` and routes through `project_dirs(project)`, writing to `wiki/<project>/` and `sources/<project>/`.\n- **Token logging (added 2026-06-17):** Per-ingest token counts and prompt caching statistics are recorded in `token_usage.md` for the relevant project.\n\n### What is **not** fully documented\n\nThe material does not specify the internal **data-preparation transforms** (text extraction, cleaning, tokenization, chunking) as discrete numbered steps in the runtime pipeline \u2014 these are described at a conceptual level in the Assignment 1a report under the CRISP-DM data-preparation phase, but are not mapped to specific code-level pipeline stages. The exact handling of **PDFs** (which Claude processes as both text and image) is flagged as a cost concern, with a mitigation recommendation to **pre-parse/convert source documents into a lighter format before ingestion** (raised by Sanne at the 2026-06-15 meeting).",
+    "retrieved_pages": [
+      "deliverables/ingestion-pipeline.md",
+      "deliverables/wiki-generation-engine.md",
+      "deliverables/generator-module.md",
+      "generator/2026-06-19-project-onboarding-summary.md",
+      "meetings/team-meeting-2026-05-14.md",
+      "concepts/living-wiki.md",
+      "deliverables/permission-layer.md",
+      "deliverables/assignment-1-report-2026-04-22.md",
+      "entities/kickoff-deck-2026-04-13.md",
+      "entities/techdays.md"
+    ],
+    "scores": {
+      "contextual_recall": {
+        "score": 1.0,
+        "reason": "The score is 1.00 because every part of the expected output is fully supported by node 2 in retrieval context (wiki-generation-engine.md). Sentence 1's three-phase process (Analyse \u2192 Apply \u2192 Commit & push with live streaming) aligns with the node's '3-phase: Analyse \u2192 Apply \u2192 Push' and 'live SSE streaming' description; the Analyse phase matches Claude reading the new doc against the existing wiki and streaming classification, takeaways, conflicts, and planned changes; the Apply phase matches the second Claude call outputting complete file contents written into /wiki; and the Commit & push phase matches the Wiki Bot committing and pushing to main. Great job\u2014the retrieval context captured all the key details!"
+      },
+      "correctness": {
+        "score": 0.9,
+        "reason": "The actual output correctly identifies the three core phases matching the reference: Analyse (Claude reads/analyses the document against the existing wiki, streaming via SSE), Apply (writing complete wiki file contents), and Push/Commit (committed and pushed to main by the Wiki Bot). These align with the reference's three streamed phases. It also mentions sources directory handling. The answer adds extra accurate detail (project scoping, token logging, git worktree) which goes beyond the reference but does not contradict it. One minor gap: the reference emphasizes streamed classification, key takeaways, and conflicts in the Analyse phase, which the actual output mentions only generally. The closing caveats about undocumented transforms are reasonable and not fabricated. Overall strong factual alignment with the key decision/process steps."
+      }
+    },
+    "abstained": false,
+    "abstention_correct": null,
+    "tokens_fed": 22339,
+    "input_tokens": 22339,
+    "output_tokens": 475,
+    "cache_read_tokens": 0,
+    "cache_creation_tokens": 0,
+    "latency_s": 12.97
+  },
+  {
+    "id": "T2-6",
+    "type": "T2",
+    "condition": "C2g",
+    "answer": "## Relationship Between KickstartAI and the UvA AI4Business Lab\n\n### Basic Structure\nKickstartAI is the **originating client/industry partner**, and the UvA AI4Business Lab provides the **student team** that builds the system. The four students \u2014 Quinten van den Heuvel, Xiaojing Li, Laurenz Ruckensteiner-Geyer, and Meng Cheng \u2014 are BSc Business Analytics students doing this as a **thesis project**.\n\n### How the Relationship Was Established\nThe project was introduced via a kickoff email thread (2026-04-10) and formalized at the KickstartAI \u00d7 UvA kickoff meeting on **2026-04-13**. Evertjan Peer (KickstartAI Tech Lead) made the initial introduction; the project was then handed over to **Sanne Wielinga** (Senior ML Engineer, KickstartAI), who is the confirmed **main point of contact** for the students on the KickstartAI side.\n\n### Dual Supervision Structure\nThe students operate under two separate oversight relationships:\n- **KickstartAI side:** Sanne Wielinga provides technical guidance, engineering feedback, and access to project materials. She is available for engineering questions and attends key milestones (e.g., the April 22 presentation).\n- **UvA academic side:** **Hongyi Zhu** (h.zhu@uva.nl) serves as the academic supervisor, confirmed via the 2026-04-16 supervisor kickoff and the Assignment 1 report title page. Individual student progress meetings with Zhu were to be scheduled after the April 22 presentation.\n\n### Practical Collaboration Model\n- Students were added to KickstartAI's **Slack community channel** at the kickoff.\n- A **legal document signature process** was pending as of the kickoff.\n- Regular **check-ins with Sanne** were agreed in principle (weekly or bi-weekly), though the specific cadence was left TBD at the kickoff \u2014 the deck's closing slide explicitly read **\"How we'll work together \u2013 TBD.\"**\n- KickstartAI provided the students with a **KickstartAI-provided Anthropic API key** and, later (2026-05-18), a fictional test corpus and PM Ops folder.\n\n### Purpose of the Arrangement\nKickstartAI contributed the **problem brief** (knowledge scattered across concurrent AI projects) and the goal of building a reusable Living Wiki architecture. The students contribute the **build and research work** as their thesis. The resulting system is explicitly intended for **reuse across all KickstartAI projects**, with Sanne noting at the final demo (2026-06-18) that she and another KickstartAI engineer intend to use it as a starting point for an internal project.",
+    "retrieved_pages": [
+      "meetings/kickoff-meeting-2026-04-13.md",
+      "entities/kickstartai.md",
+      "entities/uva-ai4business-lab.md",
+      "deliverables/assignment-1-project-definition.md",
+      "entities/kickoff-deck-2026-04-13.md",
+      "meetings/supervisor-kickoff-2026-04-16.md",
+      "_gaps.md",
+      "entities/project-team.md",
+      "entities/techdays.md"
+    ],
+    "scores": {
+      "contextual_recall": {
+        "score": 0.5,
+        "reason": "The score is 0.50 because the 1st sentence's claims about KickstartAI being a non-profit accelerating AI adoption with partners like KLM, ING, Ahold Delhaize, and NS, plus originating the brief and providing project context, are well-supported by the 2nd node (kickstartai.md) and 5th node (kickoff deck). However, the same sentence's claim of providing a 'technical mentor' is not attributable \u2014 _gaps.md explicitly states 'no source uses the word \"mentor\"' and 'no source names a \"technical mentor,\"' with the 1st node only confirming engineering question availability. The 2nd sentence's points about the thesis project and architecture reuse are confirmed by the 2nd, 3rd, and 5th nodes."
+      },
+      "correctness": {
+        "score": 0.8,
+        "reason": "The actual output correctly captures the core relationship described in the reference: KickstartAI is the industry partner that set the challenge brief and provides context plus a technical mentor (Sanne Wielinga) for engineering guidance, while the UvA AI4Business Lab students build the Living Wiki as their thesis project, with the architecture intended for reuse across KickstartAI's other projects. These key facts align well. However, the reference frames KickstartAI as a non-profit accelerating AI adoption in the Dutch ecosystem with partners like KLM, ING, Ahold Delhaize, and NS \u2014 this characterization is missing from the output. Additionally, the output adds many specific details (names, dates, API keys, Slack channels, academic supervisor Hongyi Zhu) not present in the reference; while these may be plausible and don't contradict the reference, they introduce facts that cannot be verified against the expected answer, slightly risking fabrication. Overall the central relationship is accurately stated and consistent."
+      }
+    },
+    "abstained": false,
+    "abstention_correct": null,
+    "tokens_fed": 24013,
+    "input_tokens": 24013,
+    "output_tokens": 668,
+    "cache_read_tokens": 0,
+    "cache_creation_tokens": 0,
+    "latency_s": 16.57
+  },
+  {
+    "id": "T2-7",
+    "type": "T2",
+    "condition": "C2g",
+    "answer": "## How the Permission Layer Scope Changed Over the Project\n\nThe permission layer underwent a dramatic expansion from a design-only requirement to a substantially implemented, multi-feature system. Here is the progression:\n\n### Phase 1: Design-Only Framing (April 2026)\n\nAt the **April 13 kickoff**, Sanne explicitly stated the permission layer **\"need not be fully working\"** due to the short timeline, but students **must design** how it would handle sensitive data from the start. This was codified in the **April 22 Assignment 1 MoSCoW**: permission-layer **design** = **Should Have**; a **completely working permission layer** = **Won't Have (this iteration)**. The mechanism was entirely undecided at this point.\n\n### Phase 2: First Concrete Signal (June 4)\n\nAt the **June 4 team meeting**, Xiaojing proposed a **connection to a user-id** \u2014 the first concrete mechanism signal. Still conceptual, not built.\n\n### Phase 3: Built and Evaluated Two-Layer Architecture (June 7)\n\nIn the **June 7\u20138 email thread with Sanne**, Xiaojing presented a fully-articulated, **built and evaluated proof-of-concept** \u2014 far exceeding the design-only framing. This introduced:\n- **Three permission tiers** labeled at ingestion at paragraph level: public, internal, restricted\n- **Two leakage types**: vertical (restricted content in lower-tier pages) and horizontal (restricted content crossing project boundaries)\n- **Layer 1 \u2014 Pre-filtering**: filtering the paragraph pool by `project_id` + `user_id` before the LLM ever sees content\n- **Layer 2 \u2014 Self-audit**: a second LLM call with regex blacklist + LLM judge, escalating by severity (High/Medium/Low)\n- **20-scenario evaluation** across Set A (pre-filtering off) and Set B (pre-filtering on)\n\n### Phase 4: UI and Authentication Layer (June 12)\n\nThe **June 12 mock-up artifact** added a concrete front-end dimension:\n- **Email-based login** (`first_name.last_name@kickstart.ai` format)\n- **Project-scoped UI** with Ingestion and Generator tabs; restricted-page generation shows only authorized projects in a dropdown\n- **User lifecycle management**: access granted on joining, revoked on leaving\n- **Three passwordless demo accounts** for the prototype\n\n### Phase 5: Integrated as Login Landing Page (June 15)\n\nAt the **June 15 team meeting**, the permission layer was wired into the integrated wiki as a **login landing page** \u2014 users must log in before entering the wiki at all. A gap remained: the live wiki still contained only public and internal pages; restricted pages still needed to be added to test full leakage prevention end-to-end.\n\n### Phase 6: API-Level Per-Project Access Control (June 17)\n\nThe **June 17 multi-project app** added enforcement at the API level:\n- Users carry a **`projects` list**; ingest/query/generate/lint are **refused** for projects they are not members of\n- **Config-driven**: accounts and memberships defined in `project_config.py` / `project.config.json` \u2014 no code change needed to add a project or user\n- Demo accounts with differentiated access: `anna.jansen` (UvA only), `bram.bakker` (Bakkie only), `carla.visser` (both), `gast.bezoeker` (no projects)\n\n### Summary of Scope Growth\n\n| Date | Status |\n|---|---|\n| April 22 | MoSCoW: design = Should Have; working layer = Won't Have |\n| June 4 | First mechanism signal: user-id connection |\n| June 7 | Built + evaluated two-layer PoC (pre-filtering + self-audit) |\n| June 12 | UI + authentication layer built |\n| June 15 | Integrated as login landing page in full wiki |\n| June 17 | API-level per-project enforcement in multi-project app |\n\nThe project's own documentation explicitly notes that the MoSCoW \"Won't Have\" record is **kept, not overwritten**, treating the final result as a **thesis-level component prototype** consistent with \"design + optional partial implementation\" \u2014 the \"Won't Have\" referred to a fully production-integrated layer, not a proof-of-concept.",
+    "retrieved_pages": [
+      "deliverables/permission-layer.md",
+      "concepts/permission-model.md",
+      "meetings/xiaojing-sanne-permission-email-2026-06-07.md",
+      "meetings/kickoff-meeting-2026-04-13.md",
+      "meetings/team-meeting-2026-06-11.md",
+      "meetings/team-meeting-2026-05-14.md",
+      "_gaps.md"
+    ],
+    "scores": {
+      "contextual_recall": {
+        "score": 1.0,
+        "reason": "The score is 1.00 because every part of the expected output is well grounded in the retrieval context. Sentence 1's framing of preventing information leakage through LLM synthesis via document-level access control is supported by nodes 1 and 3 (permission-layer.md), which describe the insufficiency of file-level access control and the goal of mitigating leakage into synthesized wiki pages. Sentence 2's details \u2014 the public/internal/restricted visibility labels tied to projects, the user-id connection proposed by Xiaojing on 2026-06-04, login by email with passwordless demo accounts, and deferral of full authentication to KickstartAI \u2014 are all backed by node 1. Great alignment overall!"
+      },
+      "correctness": {
+        "score": 0.6,
+        "reason": "The actual output captures several key facts from the reference: the three visibility labels (public/internal/restricted), the user-id connection proposed by Xiaojing on June 4, login by email with dummy accounts, and the progression from design-only to partial implementation. It also correctly notes that full authentication was deferred. However, the output is enormously more detailed than the reference and asserts many specific facts (Phase-by-phase dates, 20-scenario evaluations, regex blacklist + LLM judge self-audit, specific demo account names like anna.jansen/bram.bakker, config file names, escalation severity levels) that are not in the reference answer. While these may be elaborations, they risk fabrication relative to the expected scope and cannot be verified against the reference. The core narrative aligns reasonably with the reference (leakage prevention ambition scoped down to labels + user-id + email login, full auth deferred), but the heavy embellishment and confident invention of unverified specifics is a notable concern under the penalize-fabrication criterion."
+      }
+    },
+    "abstained": false,
+    "abstention_correct": null,
+    "tokens_fed": 22711,
+    "input_tokens": 22711,
+    "output_tokens": 1027,
+    "cache_read_tokens": 0,
+    "cache_creation_tokens": 0,
+    "latency_s": 25.2
+  },
+  {
+    "id": "T2-8",
+    "type": "T2",
+    "condition": "C2g",
+    "answer": "## Open Deployment/Hosting Concern\n\nThe **central URL-hosted (production) deployment** of the system remains unresolved as future work.\n\n### What was decided and why\n\nAt the **2026-06-18 final demo check-in**, the team explicitly **decided against deploying to Vercel**, choosing instead to prioritize **individual thesis work and test cases**. This closed the long-standing Vercel deployment gap \u2014 not as a failure, but as a deliberate decision.\n\n### What remains open\n\nThe system currently runs **locally on individual laptops**. The 2026-06-15 meeting established a partial mitigation: a **branch-per-member workflow** where any team member can run the UI by cloning their own branch and running it locally, with **Laurenz as the merge gatekeeper** for changes to `main`. However, as the gaps document explicitly notes, this is **\"not central/URL deployment\"** \u2014 the system only works while a given member is actively running it.\n\nThe `_reuse.md` page states directly: **\"Central URL-hosted deployment remains future work for a production reuse scenario.\"**\n\n### Why it matters\n\nThis is particularly relevant given Sanne Wielinga's **2026-06-18 commitment** that she and another KickstartAI engineer intend to use this work as a starting point for an internal KickstartAI project. For that real-world reuse scenario, a locally-run system would not be practical \u2014 a proper hosted deployment would be required. The **robustness and repeatability of local runs** is also noted as unspecified in the gaps document.",
+    "retrieved_pages": [
+      "_gaps.md",
+      "meetings/team-meeting-2026-06-18.md",
+      "meetings/team-meeting-2026-06-15.md",
+      "meetings/multi-project-app-2026-06-17.md",
+      "decisions/decision-multi-project-app-structure.md",
+      "meetings/mockup-artifact-2026-06-12.md",
+      "_reuse.md",
+      "concepts/adoption-journey.md"
+    ],
+    "scores": {
+      "contextual_recall": {
+        "score": 1.0,
+        "reason": "The score is 1.00 because every part of the expected output is well supported by the retrieval context. Sentence 1's claim that the app runs locally on a laptop and needs central deployment for wider team use is confirmed by the mockup-artifact node, the _gaps node ('backend runs locally on Quinten's laptop \u2014 needs central deployment'), the team-meeting-2026-06-15 node (workflow 'not central/URL deployment'), and the internal-use commitment node. Sentence 2's points about Vercel being chosen and the team deliberately deciding against deploying it are backed by the team-meeting-2026-06-18 node ('decided against deploying to Vercel to prioritize individual thesis work and test cases') and the mockup node. Great job \u2014 the context aligns fully with the expected output!"
+      },
+      "correctness": {
+        "score": 0.9,
+        "reason": "The actual output aligns strongly with the reference on all key facts: the system runs locally (only the person running it can use it), central URL-hosted deployment remains the open concern, Vercel was chosen but the team deliberately decided against deploying to it near the deadline to prioritise individual thesis work and test cases. The 2026-06-18 date and the decision rationale match the reference. The additional details (branch-per-member workflow, Laurenz as gatekeeper, Sanne Wielinga's reuse commitment) are plausible elaborations that support rather than contradict the reference, though they cannot be verified against it. Overall the core decision, reasons, and value are accurately captured."
+      }
+    },
+    "abstained": false,
+    "abstention_correct": null,
+    "tokens_fed": 22714,
+    "input_tokens": 22714,
+    "output_tokens": 366,
+    "cache_read_tokens": 0,
+    "cache_creation_tokens": 0,
+    "latency_s": 10.97
+  },
+  {
+    "id": "T2-9",
+    "type": "T2",
+    "condition": "C2g",
+    "answer": "## Evaluation Approach for the Knowledge Pipeline (Ingestion + Wiki Engine)\n\n### Headline Experiment: Wiki vs. Raw-Context (Strand A)\n\nThe core evaluation is a **controlled four-condition comparison** designed by Laurenz, with the formal runplan authored 2026-06-18 and the experiment scheduled for 2026-06-19. It runs against the clean-slate `uva` project subtree of the multi-project app.\n\n**Four conditions** (same answer model `claude-opus-4-8`; only context differs):\n\n| ID | Context | Represents |\n|---|---|---|\n| C0 | none | hallucination baseline |\n| C1 | all raw `.md` sources dumped in | brute-force raw context |\n| C1r | top-k retrieved raw chunks | raw source + retrieval |\n| C2 | top-k retrieved wiki pages | the compiled wiki artifact |\n\nThe **key isolation** is C1r vs. C2: retrieval is held constant, so any quality difference isolates the value of the compiled wiki layer specifically. C1 vs. C1r separately measures what retrieval alone contributes.\n\n---\n\n### Two Hypotheses\n\n- **H1 (quality):** C2 beats C1r on correctness; C2 also abstains correctly more often on unanswerable questions (less hallucination).\n- **H2 (cost/efficiency):** C2 uses far fewer tokens than C1; raw-dump cost grows with corpus size while retrieval stays bounded.\n\n---\n\n### Question Set\n\n**30 questions** (`questions.json`) with human reference answers, in three types:\n- **T1** \u2014 single-fact \u00d710\n- **T2** \u2014 synthesis \u00d710 (where the compiled wiki is expected to excel)\n- **T3** \u2014 unanswerable/trap \u00d710 (correct behaviour = abstain, not fabricate)\n\nHuman reference answers are written from the `.md` sources directly, **without reading the wiki pages first** (which are the system output under test).\n\n---\n\n### Metrics\n\nThe **judge model is `claude-sonnet-4-6`**, deliberately different from the answer model (`claude-opus-4-8`). This directly addresses Sanne's same-model audit blind-spot concern (first raised for the permission-layer evaluation). Metrics include:\n\n- **Correctness** vs. human reference \u2014 **primary outcome** across all conditions\n- **Faithfulness** (grounding in given context) \u2014 secondary diagnostic\n- **Answer relevancy** \u2014 secondary\n- **Contextual recall** \u2014 C1r and C2 only\n- **Abstention** \u2014 deterministic, T3 questions only\n\n**Post-run judge validation (Sanne's requirement):** hand-rate ~20\u201330 items and compare to LLM judge scores (Spearman/\u03ba) to make LLM-as-Judge defensible for the thesis. Whether this has been completed and by whom is not yet stated.\n\n---\n\n### Fairness Invariant\n\nThe wiki (C2) must be compiled from **exactly the same sources** that C1/C1r read \u2014 same knowledge, raw vs. compiled, nothing more or less. Specific locked decisions:\n\n- **`.md`-only sources** in `/sources/uva/` \u2014 this is a deliberate fairness scoping choice, not a pipeline limitation (the ingestion pipeline supports PDFs and other formats).\n- **Fresh full ingest** into the empty UvA subtree \u2014 ensures clean, known-provenance ingestion.\n- **Corpus hygiene filter** (`pipelines.py`) excludes cross-project sources (Westerwoude/Bakkie), misplaced wiki dumps, and saved prior query responses (which would unfairly inflate C2 scores).\n\n---\n\n### Build Cost / Break-Even (H2 / Ingestion Pipeline Evaluation)\n\nThe ingestion pipeline's token logging (`token_usage.md`) records the **build cost** per ingest. The break-even formula is:\n\n> Total ingestion cost \u00f7 per-query token saving (C1 \u2212 C2) = **N\\*** \u2014 *\"the wiki pays for itself after ~N\\* queries.\"*\n\nThis provides an economic justification for the persistent compiled knowledge layer and directly addresses the Anthropic API budget caution Sanne raised at the 2026-06-15 meeting.\n\n---\n\n### Evaluation Substrate\n\nThe **multi-project app** (built 2026-06-17) is the evaluation substrate, providing:\n- A **clean-slate `uva` project subtree** isolated from the organically-grown original wiki.\n- **Per-project scoped ingest** via `?project=uva` and `project_dirs(project)`.\n- **Per-ingest token logging + prompt caching** in `token_usage.md`.\n\nThe experiment runs with `--project uva`; the `--project bakkie` subtree is excluded as it contains UvA-unrelated content.\n\n---\n\n### Candidate Quality Metrics (from 2026-06-15 meeting)\n\nAlongside the headline experiment, the team identified a shortlist of additional metrics under research (per Sanne's advice to find ~3",
+    "retrieved_pages": [
+      "meetings/evaluation-runplan-2026-06-19.md",
+      "deliverables/evaluation-deliverable.md",
+      "concepts/evaluation-framework.md",
+      "deliverables/ingestion-pipeline.md",
+      "deliverables/wiki-generation-engine.md",
+      "meetings/team-meeting-2026-06-18.md",
+      "meetings/team-meeting-2026-06-15.md",
+      "entities/student-materials-corpus.md",
+      "entities/kickstartai-team.md"
+    ],
+    "scores": {
+      "contextual_recall": {
+        "score": 1.0,
+        "reason": "The score is 1.00 because every sentence in the expected output is fully supported by the retrieval context. The headline experiment comparing the four conditions (C0, C1, C1r, C2) with the same answer model and prompt, including the C1r-vs-C2 isolation of the wiki's value (1st sentence), is explicitly described in node 1. The LLM-as-judge being a separate model, the Correctness and Faithfulness scoring, and the separate component-level evaluation of the gap detector and permission layer (2nd sentence) are confirmed by node 1 and node 2. Great alignment!"
+      },
+      "correctness": {
+        "score": 0.9,
+        "reason": "The actual output captures all the key facts from the reference: the four-condition comparison (C0 closed-book/hallucination baseline, C1 all raw sources, C1r retrieved raw chunks, C2 retrieved wiki pages), the same answer model with only context differing, and the C1r-vs-C2 isolation of the wiki's value. It correctly identifies the LLM-as-judge approach using a separate model (claude-sonnet-4-6 vs claude-opus-4-8) and the primary Correctness metric (vs human references written from sources) plus Faithfulness as a secondary diagnostic. It adds substantial corroborating detail (hypotheses, question types, fairness invariant, break-even formula) that is consistent and not contradictory. The only minor shortfall is that the reference notes the gap detector and permission layer are evaluated separately at the component level, which the actual output only alludes to indirectly rather than stating explicitly. No fabrications contradict the reference."
+      }
+    },
+    "abstained": false,
+    "abstention_correct": null,
+    "tokens_fed": 22840,
+    "input_tokens": 22840,
+    "output_tokens": 1200,
+    "cache_read_tokens": 0,
+    "cache_creation_tokens": 0,
+    "latency_s": 31.46
+  },
+  {
+    "id": "T2-10",
+    "type": "T2",
+    "condition": "C2g",
+    "answer": "The provided material does not frame this as a \"migration.\" However, the context does document specific Anthropic model versions and associated uncertainties:\n\nThe **evaluation harness** (per [[evaluation-runplan-2026-06-19]]) names three specific models:\n- `claude-opus-4-8` \u2014 the answer model\n- `claude-haiku-4-5` \u2014 the retrieval model\n- `claude-sonnet-4-6` \u2014 the judge model (chosen specifically because it differs from the answer model, addressing Sanne's same-model blind-spot concern)\n\n**What is uncertain:** As explicitly noted in [[wiki-generation-engine]], \"whether they match the production wiki-engine model is unspecified.\" The wiki records these as **evaluation harness models only**, and cautions against conflating them with the production stack. The production backend is confirmed as Claude Code + Anthropic API, but the specific production model version is not documented.\n\nThis is not documented in the provided material as a migration question \u2014 it is documented as an unresolved gap between evaluation harness model versions and the production deployment model.",
+    "retrieved_pages": [
+      "log.md",
+      "generator/2026-06-19-project-onboarding-summary.md",
+      "meetings/team-meeting-2026-06-18.md",
+      "meetings/team-meeting-2026-06-15.md",
+      "meetings/mockup-artifact-2026-06-12.md",
+      "meetings/multi-project-app-2026-06-17.md",
+      "deliverables/wiki-generation-engine.md",
+      "entities/kickstartai-team.md",
+      "entities/techdays.md"
+    ],
+    "scores": {
+      "contextual_recall": {
+        "score": 0.0,
+        "reason": "The score is 0.00 because none of the sentences in the expected output could be attributed to the retrieval context. While the 6th node (wiki-generation-engine.md) confirms the system uses 'Claude Code + Anthropic API' for generation, it never mentions 'Claude Sonnet' or 'Claude 3.5 Sonnet' as the generation model\u2014the only Sonnet reference (claude-sonnet-4-6) is the evaluation judge, not generation, so sentence 1 cannot be supported. Additionally, sentence 2's claims about a newer 'Fable 5' model, the shared API key tradeoff, and it performing better while using twice the tokens are entirely absent from any node and appear fabricated relative to the context."
+      },
+      "correctness": {
+        "score": 0.0,
+        "reason": "The actual output completely contradicts the reference answer. The expected answer states the system is migrating to Claude 3.5 Sonnet for generation, with uncertainty about whether to adopt the newer 'Fable 5' model (better performance but ~2x token cost). The actual output instead claims there is no migration, lists fabricated model versions (claude-opus-4-8, claude-haiku-4-5, claude-sonnet-4-6) tied to an evaluation harness, and describes a different uncertainty about production vs. harness model matching. None of the key facts (Claude 3.5 Sonnet, Fable 5, token cost tradeoff) appear, and the response invents specific details not in the reference, constituting confident fabrication."
+      }
+    },
+    "abstained": true,
+    "abstention_correct": null,
+    "tokens_fed": 23171,
+    "input_tokens": 23171,
+    "output_tokens": 247,
+    "cache_read_tokens": 0,
+    "cache_creation_tokens": 0,
+    "latency_s": 12.06
+  },
+  {
+    "id": "T3-1",
+    "type": "T3",
+    "condition": "C2g",
+    "answer": "This is not documented in the provided material.",
+    "retrieved_pages": [],
+    "scores": {
+      "correctness": {
+        "score": 1.0,
+        "reason": "The actual output correctly declines to answer, stating 'This is not documented in the provided material,' which aligns perfectly with the expected output indicating the question is unanswerable. The response avoids fabricating any budget figures and appropriately defers, matching the reference's expectation that the system should decline rather than guess."
+      }
+    },
+    "abstained": true,
+    "abstention_correct": true,
+    "tokens_fed": 82,
+    "input_tokens": 82,
+    "output_tokens": 12,
+    "cache_read_tokens": 0,
+    "cache_creation_tokens": 0,
+    "latency_s": 1.98
+  },
+  {
+    "id": "T3-2",
+    "type": "T3",
+    "condition": "C2g",
+    "answer": "This is not documented in the provided material.",
+    "retrieved_pages": [],
+    "scores": {
+      "correctness": {
+        "score": 1.0,
+        "reason": "The question is unanswerable per the reference, which states the system should decline rather than guess. The actual output correctly declines by stating 'This is not documented in the provided material,' which aligns perfectly with the expected behavior of declining for unanswerable questions. No facts were fabricated."
+      }
+    },
+    "abstained": true,
+    "abstention_correct": true,
+    "tokens_fed": 81,
+    "input_tokens": 81,
+    "output_tokens": 12,
+    "cache_read_tokens": 0,
+    "cache_creation_tokens": 0,
+    "latency_s": 2.28
+  },
+  {
+    "id": "T3-3",
+    "type": "T3",
+    "condition": "C2g",
+    "answer": "This is not documented in the provided material.\n\nThe Living Wiki is a BSc thesis project run by UvA students for KickstartAI \u2014 it is not a commercial product with paying customers. The provided material describes it as an internal/academic project, with KickstartAI's Sanne Wielinga confirming post-thesis internal reuse intent, but no commercial customer relationship is mentioned anywhere in the sources.",
+    "retrieved_pages": [
+      "entities/kickstartai.md",
+      "entities/kickstartai-projects.md",
+      "entities/kickstartai-blog.md",
+      "_overview.md",
+      "index.md",
+      "concepts/living-wiki.md",
+      "_gaps.md",
+      "_reuse.md",
+      "entities/techdays.md",
+      "concepts/adoption-journey.md"
+    ],
+    "scores": {
+      "contextual_recall": {
+        "score": 1.0,
+        "reason": "The score is 1.00 because sentence 1's claim that the answer is UNANSWERABLE and the system should decline rather than guess is fully supported by the nodes in retrieval context, particularly the 1st node and the _gaps node, which emphasize guardrails like 'do not assert', 'not fabricated', and abstaining deterministically on unanswerable/trap items. Great alignment between the expected output and the corpus!"
+      },
+      "correctness": {
+        "score": 0.9,
+        "reason": "The response correctly identifies the question as unanswerable, explicitly stating 'This is not documented in the provided material,' which aligns with the reference's expectation to decline rather than guess. It properly declines to fabricate a customer count. However, the additional context about the project being a BSc thesis for KickstartAI and the mention of Sanne Wielinga introduces some claims that go beyond simply declining; while these appear to provide supporting reasoning, they risk adding details not strictly necessary to the correct 'unanswerable' response. The core judgment matches the reference perfectly."
+      }
+    },
+    "abstained": true,
+    "abstention_correct": true,
+    "tokens_fed": 23394,
+    "input_tokens": 23394,
+    "output_tokens": 94,
+    "cache_read_tokens": 0,
+    "cache_creation_tokens": 0,
+    "latency_s": 7.33
+  },
+  {
+    "id": "T3-4",
+    "type": "T3",
+    "condition": "C2g",
+    "answer": "This is not documented in the provided material.",
+    "retrieved_pages": [],
+    "scores": {
+      "correctness": {
+        "score": 1.0,
+        "reason": "The actual output correctly declines to answer, stating 'This is not documented in the provided material,' which aligns perfectly with the expected output that marks the question as UNANSWERABLE and instructs the system to decline rather than guess. The response avoids fabrication and matches the reference's key requirement."
+      }
+    },
+    "abstained": true,
+    "abstention_correct": true,
+    "tokens_fed": 82,
+    "input_tokens": 82,
+    "output_tokens": 12,
+    "cache_read_tokens": 0,
+    "cache_creation_tokens": 0,
+    "latency_s": 1.27
+  },
+  {
+    "id": "T3-5",
+    "type": "T3",
+    "condition": "C2g",
+    "answer": "This is not documented in the provided material.\n\nThe project is run by **KickstartAI**, which is described as an **independent non-profit foundation** founded in 2019 by four large Dutch companies (Ahold Delhaize, ING, KLM, and NS). No venture-capital funding or VC firm is mentioned anywhere in the provided sources.",
+    "retrieved_pages": [
+      "entities/kickstartai.md",
+      "entities/kickoff-deck-2026-04-13.md",
+      "meetings/kickoff-meeting-2026-04-13.md",
+      "deliverables/assignment-1-project-definition.md",
+      "entities/kickstartai-blog.md",
+      "generator/2026-06-19-project-onboarding-summary.md",
+      "_gaps.md",
+      "deliverables/generator-module.md",
+      "concepts/adoption-journey.md"
+    ],
+    "scores": {
+      "contextual_recall": {
+        "score": 0.0,
+        "reason": "The score is 0.00 because the expected output's claim that the answer is 'UNANSWERABLE \u2014 not in the corpus' and that the system should decline rather than guess (sentence 1) cannot be attributed to any node in the retrieval context. While the nodes contain extensive documentation about KickstartAI, the Living Wiki project, gaps, and deliverables\u2014and even emphasize declining when information isn't available\u2014none directly support the specific assertion that a given query is unanswerable, since no question is provided to verify absence against."
+      },
+      "correctness": {
+        "score": 1.0,
+        "reason": "The actual output correctly declines to answer, stating 'This is not documented in the provided material,' which aligns perfectly with the reference's UNANSWERABLE designation. The response appropriately avoids fabricating a VC firm and instead clarifies that the project is run by a non-profit foundation with no VC funding mentioned. This additional context is grounded in the provided material and does not invent facts contradicting the reference, fully satisfying the requirement to decline rather than guess."
+      }
+    },
+    "abstained": true,
+    "abstention_correct": true,
+    "tokens_fed": 23261,
+    "input_tokens": 23261,
+    "output_tokens": 85,
+    "cache_read_tokens": 0,
+    "cache_creation_tokens": 0,
+    "latency_s": 3.81
+  },
+  {
+    "id": "T3-6",
+    "type": "T3",
+    "condition": "C2g",
+    "answer": "This is not documented in the provided material.",
+    "retrieved_pages": [],
+    "scores": {
+      "correctness": {
+        "score": 1.0,
+        "reason": "The actual output correctly declines to answer by stating 'This is not documented in the provided material,' which aligns perfectly with the expected output indicating the question is unanswerable and the system should decline. No fabrication occurred, and the privacy-sensitive personal phone number was appropriately not invented."
+      }
+    },
+    "abstained": true,
+    "abstention_correct": true,
+    "tokens_fed": 86,
+    "input_tokens": 86,
+    "output_tokens": 12,
+    "cache_read_tokens": 0,
+    "cache_creation_tokens": 0,
+    "latency_s": 1.32
+  },
+  {
+    "id": "T3-7",
+    "type": "T3",
+    "condition": "C2g",
+    "answer": "This is not documented in the provided material.",
+    "retrieved_pages": [],
+    "scores": {
+      "correctness": {
+        "score": 1.0,
+        "reason": "The expected answer indicates this question is unanswerable and the system should decline rather than guess. The actual output correctly states 'This is not documented in the provided material,' which aligns perfectly with the reference's instruction to decline. No facts were fabricated, and the response appropriately acknowledges the absence of information in the corpus."
+      }
+    },
+    "abstained": true,
+    "abstention_correct": true,
+    "tokens_fed": 85,
+    "input_tokens": 85,
+    "output_tokens": 12,
+    "cache_read_tokens": 0,
+    "cache_creation_tokens": 0,
+    "latency_s": 1.67
+  },
+  {
+    "id": "T3-8",
+    "type": "T3",
+    "condition": "C2g",
+    "answer": "This is not documented in the provided material.",
+    "retrieved_pages": [
+      "meetings/evaluation-runplan-2026-06-19.md",
+      "deliverables/evaluation-deliverable.md",
+      "concepts/evaluation-framework.md",
+      "meetings/mockup-artifact-2026-06-12.md",
+      "meetings/team-meeting-2026-06-11.md",
+      "meetings/team-meeting-2026-06-04.md",
+      "deliverables/generator-module.md",
+      "deliverables/wiki-generation-engine.md"
+    ],
+    "scores": {
+      "contextual_recall": {
+        "score": 0.0,
+        "reason": "The score is 0.00 because the expected output's assertion (sentence 1) that the question is UNANSWERABLE and absent from the corpus, with the system advised to decline rather than guess, cannot be directly attributed to any node in retrieval context. While the 1st, 2nd, and 3rd nodes describe T3 'unanswerable/trap' questions generally\u2014noting that correct behavior is to decline/abstain rather than fabricate\u2014none of them deliver the specific verdict that this particular posed question is not in the corpus."
+      },
+      "correctness": {
+        "score": 1.0,
+        "reason": "The expected answer indicates the question is unanswerable and the system should decline rather than guess. The actual output correctly states 'This is not documented in the provided material,' which aligns perfectly with the expected behavior of declining to answer. No facts were fabricated, matching the reference exactly."
+      }
+    },
+    "abstained": true,
+    "abstention_correct": true,
+    "tokens_fed": 22567,
+    "input_tokens": 22567,
+    "output_tokens": 12,
+    "cache_read_tokens": 0,
+    "cache_creation_tokens": 0,
+    "latency_s": 4.56
+  },
+  {
+    "id": "T3-9",
+    "type": "T3",
+    "condition": "C2g",
+    "answer": "This is not documented in the provided material.",
+    "retrieved_pages": [],
+    "scores": {
+      "correctness": {
+        "score": 1.0,
+        "reason": "The question is unanswerable per the reference, which states it is not in the corpus and the system should decline. The actual output correctly declines by stating 'This is not documented in the provided material,' matching the expected behavior precisely without fabricating any facts."
+      }
+    },
+    "abstained": true,
+    "abstention_correct": true,
+    "tokens_fed": 83,
+    "input_tokens": 83,
+    "output_tokens": 12,
+    "cache_read_tokens": 0,
+    "cache_creation_tokens": 0,
+    "latency_s": 1.35
+  },
+  {
+    "id": "T3-10",
+    "type": "T3",
+    "condition": "C2g",
+    "answer": "This is not documented in the provided material.",
+    "retrieved_pages": [],
+    "scores": {
+      "correctness": {
+        "score": 1.0,
+        "reason": "The actual output correctly declines to answer, stating 'This is not documented in the provided material,' which aligns perfectly with the expected output indicating the question is UNANSWERABLE and that the system should decline rather than guess. No facts are fabricated, and the response matches the reference's intent precisely."
+      }
+    },
+    "abstained": true,
+    "abstention_correct": true,
+    "tokens_fed": 82,
+    "input_tokens": 82,
+    "output_tokens": 12,
+    "cache_read_tokens": 0,
+    "cache_creation_tokens": 0,
+    "latency_s": 1.15
+  }
+]

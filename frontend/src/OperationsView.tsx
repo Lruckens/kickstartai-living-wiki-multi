@@ -196,47 +196,66 @@ const StreamOutput = ({
 // ---------------------------------------------------------------------------
 const ACCEPTED = ".pdf,.md,.txt,.docx,.pptx";
 
+type IngestStatus = "queued" | "uploading" | "running" | "done" | "error";
+
+type IngestItem = {
+  file: File;
+  name: string;                 // server-confirmed filename (set after upload)
+  status: IngestStatus;
+  created: string[];
+  updated: string[];
+  pushed: boolean;
+  pushError: string | null;
+  error: string | null;
+};
+
 const IngestTab = ({ onNavigate, project }: { onNavigate: (view: string) => void; project: string }) => {
   const fileRef  = useRef<HTMLInputElement>(null);
-  const [dragOver,  setDragOver]  = useState(false);
-  const [uploading, setUploading] = useState(false);
-  const [filename,  setFilename]  = useState<string | null>(null);
-  const [visibility,  setVisibility]  = useState<"public" | "internal" | "restricted">("internal");
+  const [dragOver,   setDragOver]   = useState(false);
+  const [visibility, setVisibility] = useState<"public" | "internal" | "restricted">("internal");
+
+  // The batch. Files are uploaded + ingested one at a time, in order, so each
+  // ingest sees the pages the previous one wrote (and token_usage.md keeps one
+  // row per source — the build-cost ledger the eval relies on).
+  const [queue,       setQueue]       = useState<IngestItem[]>([]);
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const [running,     setRunning]     = useState(false);
-  const [text,        setText]        = useState("");
-  const [applying,    setApplying]    = useState(false);
-  const [applyChars,  setApplyChars]  = useState(0);
-  const [applied,     setApplied]     = useState<{ created: string[]; updated: string[] } | null>(null);
-  const [pushing,     setPushing]     = useState(false);
-  const [pushed,      setPushed]      = useState(false);
-  const [pushError,   setPushError]   = useState<string | null>(null);
-  const [error,       setError]       = useState<string | null>(null);
+
+  // Live stream state for the file currently being ingested (reset per file).
+  const [text,       setText]       = useState("");
+  const [applying,   setApplying]   = useState(false);
+  const [applyChars, setApplyChars] = useState(0);
+  const [applied,    setApplied]    = useState<{ created: string[]; updated: string[] } | null>(null);
+  const [pushing,    setPushing]    = useState(false);
+  const [pushed,     setPushed]     = useState(false);
+  const [pushError,  setPushError]  = useState<string | null>(null);
+  const [error,      setError]      = useState<string | null>(null);
+
+  const patchItem = (i: number, patch: Partial<IngestItem>) =>
+    setQueue((q) => q.map((it, idx) => (idx === i ? { ...it, ...patch } : it)));
+
+  const resetActiveStream = () => {
+    setText(""); setApplying(false); setApplyChars(0); setApplied(null);
+    setPushing(false); setPushed(false); setPushError(null); setError(null);
+  };
 
   const reset = () => {
-    setFilename(null);
-    setText("");
-    setApplying(false);
-    setApplyChars(0);
-    setApplied(null);
-    setPushing(false);
-    setPushed(false);
-    setPushError(null);
-    setError(null);
+    setQueue([]); setActiveIndex(null); resetActiveStream();
     if (fileRef.current) fileRef.current.value = "";
   };
 
-  const uploadAndIngest = useCallback(async (file: File) => {
-    setUploading(true);
-    setError(null);
-    setText("");
-    setApplying(false);
-    setApplied(null);
+  // Upload + ingest one file, streaming its progress into the active-file state
+  // and recording the outcome on its queue row.
+  const ingestOne = useCallback(async (item: IngestItem, i: number) => {
+    resetActiveStream();
+    setActiveIndex(i);
 
     // 1. Upload (with the chosen visibility)
     let uploadedName: string;
+    patchItem(i, { status: "uploading" });
     try {
       const form = new FormData();
-      form.append("file", file);
+      form.append("file", item.file);
       form.append("project", project);
       form.append("label", visibility);
       const up = await authFetch(`/sources/upload`, { method: "POST", body: form });
@@ -246,16 +265,14 @@ const IngestTab = ({ onNavigate, project }: { onNavigate: (view: string) => void
       }
       const data = await up.json();
       uploadedName = data.filename;
-      setFilename(uploadedName);
+      patchItem(i, { name: uploadedName, status: "running" });
     } catch (e: any) {
       setError(e.message);
-      setUploading(false);
+      patchItem(i, { status: "error", error: e.message });
       return;
     }
-    setUploading(false);
 
-    // 2. Ingest
-    setRunning(true);
+    // 2. Ingest (stream analysis → apply → push)
     try {
       const resp = await authFetch(`/ingest`, {
         method:  "POST",
@@ -272,23 +289,43 @@ const IngestTab = ({ onNavigate, project }: { onNavigate: (view: string) => void
           setText((p) => p + `> 🛡 The protection list for this project was updated (${event.added} new item${event.added === 1 ? "" : "s"}).\n\n`);
         if (event.type === "applying")       { setApplying(true); setApplyChars(0); }
         if (event.type === "apply_progress") setApplyChars(event.chars);
-        if (event.type === "applied")        { setApplying(false); setApplied({ created: event.created, updated: event.updated }); }
+        if (event.type === "applied")        {
+          setApplying(false);
+          setApplied({ created: event.created, updated: event.updated });
+          patchItem(i, { created: event.created, updated: event.updated });
+        }
         if (event.type === "pushing")        setPushing(true);
-        if (event.type === "pushed")         { setPushing(false); setPushed(true); }
-        if (event.type === "push_error")     { setPushing(false); setPushError(event.message); }
-        if (event.type === "error")          { setError(event.message); setApplying(false); setPushing(false); }
+        if (event.type === "pushed")         { setPushing(false); setPushed(true); patchItem(i, { pushed: true }); }
+        if (event.type === "push_error")     { setPushing(false); setPushError(event.message); patchItem(i, { pushError: event.message }); }
+        if (event.type === "error")          { setError(event.message); setApplying(false); setPushing(false); patchItem(i, { status: "error", error: event.message }); }
         if (event.type === "done")           break;
       }
+      // Mark done only if no error flipped this row first.
+      setQueue((q) => q.map((it, idx) => (idx === i && it.status === "running" ? { ...it, status: "done" } : it)));
     } catch (e: any) {
       setError(e.message);
-    } finally {
-      setRunning(false);
+      patchItem(i, { status: "error", error: e.message });
     }
   }, [visibility, project]);
 
+  // Run the whole batch sequentially.
+  const runQueue = useCallback(async (files: File[]) => {
+    const items: IngestItem[] = files.map((f) => ({
+      file: f, name: f.name, status: "queued",
+      created: [], updated: [], pushed: false, pushError: null, error: null,
+    }));
+    setQueue(items);
+    setRunning(true);
+    for (let i = 0; i < items.length; i++) {
+      await ingestOne(items[i], i);
+    }
+    setRunning(false);
+    setActiveIndex(null);
+  }, [ingestOne]);
+
   const handleFiles = (files: FileList | null) => {
     if (!files || files.length === 0) return;
-    uploadAndIngest(files[0]);
+    runQueue(Array.from(files));
   };
 
   const onDrop = (e: DragEvent<HTMLDivElement>) => {
@@ -297,17 +334,22 @@ const IngestTab = ({ onNavigate, project }: { onNavigate: (view: string) => void
     handleFiles(e.dataTransfer.files);
   };
 
-  const busy = uploading || running;
+  const idle         = queue.length === 0 && !running;
+  const allDone      = queue.length > 0 && !running;
+  const totalCreated = queue.reduce((n, it) => n + it.created.length, 0);
+  const totalUpdated = queue.reduce((n, it) => n + it.updated.length, 0);
+  const okCount      = queue.filter((it) => it.status === "done").length;
+  const failCount    = queue.filter((it) => it.status === "error").length;
 
   return (
     <div className="space-y-5">
 
-      {/* Who can see this document? */}
-      {!filename && !busy && (
+      {/* Who can see these documents? */}
+      {idle && (
         <div className="bg-card rounded-2xl border border-border px-5 py-4 shadow-soft">
-          <div className="text-sm font-semibold text-foreground mb-1">Who can see this document?</div>
+          <div className="text-sm font-semibold text-foreground mb-1">Who can see these documents?</div>
           <p className="text-xs text-muted-foreground mb-3">
-            This also decides who can see the wiki pages created from it.
+            Applies to every file in this upload, and to the wiki pages created from them.
           </p>
           <div className="flex flex-wrap items-center gap-2">
             {([
@@ -327,14 +369,14 @@ const IngestTab = ({ onNavigate, project }: { onNavigate: (view: string) => void
           </div>
           {visibility === "restricted" && (
             <p className="text-xs text-muted-foreground mt-2">
-              Restricted to the active project — only its members will see this document and the pages made from it.
+              Restricted to the active project — only its members will see these documents and the pages made from them.
             </p>
           )}
         </div>
       )}
 
       {/* Drop zone */}
-      {!filename && !busy && (
+      {idle && (
         <div
           onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
           onDragLeave={() => setDragOver(false)}
@@ -353,66 +395,96 @@ const IngestTab = ({ onNavigate, project }: { onNavigate: (view: string) => void
           </div>
           <div className="text-center">
             <div className="text-base font-semibold text-foreground">
-              {dragOver ? "Drop to ingest" : "Drop a file or click to browse"}
+              {dragOver ? "Drop to ingest" : "Drop files or click to browse"}
             </div>
             <div className="text-sm text-muted-foreground mt-1">
-              PDF · MD · TXT · DOCX — saved to <span className="font-mono">/sources</span> then ingested automatically
+              One or many — PDF · MD · TXT · DOCX. Saved to <span className="font-mono">/sources</span> then ingested in order.
             </div>
           </div>
           <input
             ref={fileRef}
             type="file"
             accept={ACCEPTED}
+            multiple
             className="hidden"
             onChange={(e) => handleFiles(e.target.files)}
           />
         </div>
       )}
 
-      {/* Uploading state */}
-      {uploading && (
-        <div className="bg-card rounded-2xl border border-border p-8 flex flex-col items-center gap-3">
-          <Loader2 className="h-8 w-8 text-primary animate-spin" />
-          <div className="text-sm font-medium text-foreground">Uploading…</div>
+      {/* Batch queue */}
+      {queue.length > 0 && (
+        <div className="bg-card rounded-2xl border border-border shadow-soft divide-y divide-border">
+          <div className="px-5 py-3 flex items-center justify-between gap-3">
+            <div className="text-sm font-semibold text-foreground">
+              {running
+                ? `Ingesting ${queue.length} file${queue.length === 1 ? "" : "s"}…`
+                : `Ingested ${okCount}/${queue.length} file${queue.length === 1 ? "" : "s"}`}
+            </div>
+            <div className="flex items-center gap-3">
+              {running && activeIndex !== null && (
+                <span className="text-xs text-muted-foreground">File {activeIndex + 1} of {queue.length}</span>
+              )}
+              {allDone && (
+                <button onClick={reset}
+                  className="text-xs font-medium text-muted-foreground hover:text-foreground hover:bg-secondary rounded-lg px-2.5 py-1.5 flex items-center gap-1 transition-colors">
+                  <X className="h-3.5 w-3.5" /> Ingest more
+                </button>
+              )}
+            </div>
+          </div>
+          {queue.map((it, idx) => (
+            <div key={idx} className={`px-5 py-3 flex items-center gap-3 ${idx === activeIndex ? "bg-secondary/40" : ""}`}>
+              <div className="h-8 w-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0">
+                <FileText className="h-4 w-4" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="text-sm font-medium text-foreground truncate">{it.name}</div>
+                <div className="text-xs text-muted-foreground mt-0.5">
+                  {it.status === "queued"    && "Queued"}
+                  {it.status === "uploading" && <span className="flex items-center gap-1.5"><Loader2 className="h-3 w-3 animate-spin" /> Uploading…</span>}
+                  {it.status === "running"   && <span className="flex items-center gap-1.5"><Loader2 className="h-3 w-3 animate-spin" /> Ingesting…</span>}
+                  {it.status === "done"      && (
+                    <span className="text-accent font-medium flex items-center gap-1.5">
+                      <CheckCircle2 className="h-3 w-3" />
+                      {it.created.length} created · {it.updated.length} updated{it.pushError ? " · push failed" : ""}
+                    </span>
+                  )}
+                  {it.status === "error"     && <span className="text-destructive">Failed: {it.error}</span>}
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       )}
 
-      {/* File selected + running */}
-      {filename && (
-        <div className="bg-card rounded-2xl border border-border px-5 py-4 flex items-center gap-3 shadow-soft">
-          <div className="h-9 w-9 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0">
-            <FileText className="h-4 w-4" />
+      {/* Batch summary (multi-file) */}
+      {allDone && queue.length > 1 && (
+        <div className="bg-card rounded-2xl border border-border p-5 shadow-soft space-y-2">
+          <div className="flex items-center gap-2 text-sm font-semibold text-foreground flex-wrap">
+            <CheckCircle2 className="h-4 w-4 text-accent" />
+            {totalCreated} page{totalCreated === 1 ? "" : "s"} created · {totalUpdated} updated
+            {failCount > 0 && <span className="text-destructive font-medium">· {failCount} failed</span>}
           </div>
-          <div className="flex-1 min-w-0">
-            <div className="text-sm font-medium text-foreground truncate">{filename}</div>
-            <div className="text-xs text-muted-foreground mt-0.5">
-              {running ? (
-                <span className="flex items-center gap-1.5">
-                  <Loader2 className="h-3 w-3 animate-spin" />
-                  {applying ? "Applying wiki changes…" : "Analysing with Claude…"}
-                </span>
-              ) : applied ? (
-                <span className="text-accent font-medium flex items-center gap-1.5">
-                  <CheckCircle2 className="h-3 w-3" /> Ingested successfully
-                </span>
-              ) : error ? (
-                <span className="text-destructive">Failed</span>
-              ) : "Ready"}
-            </div>
-          </div>
-          {!running && (
-            <button onClick={reset} className="h-7 w-7 rounded-lg text-muted-foreground hover:text-foreground hover:bg-secondary flex items-center justify-center transition-colors">
-              <X className="h-4 w-4" />
+          {onNavigate && (
+            <button
+              onClick={() => onNavigate("wiki")}
+              className="text-xs font-medium text-primary hover:text-primary-glow flex items-center gap-1 transition-colors"
+            >
+              Open in Wiki viewer <ChevronRight className="h-3.5 w-3.5" />
             </button>
           )}
         </div>
       )}
 
-      <StreamOutput
-        text={text} applying={applying} applyChars={applyChars} applied={applied}
-        pushing={pushing} pushed={pushed} pushError={pushError}
-        error={error} empty={<></>} onNavigate={onNavigate}
-      />
+      {/* Live detail for the file currently streaming (and the single-file case) */}
+      {(running || queue.length === 1) && (
+        <StreamOutput
+          text={text} applying={applying} applyChars={applyChars} applied={applied}
+          pushing={pushing} pushed={pushed} pushError={pushError}
+          error={error} empty={<></>} onNavigate={queue.length === 1 ? onNavigate : undefined}
+        />
+      )}
     </div>
   );
 };

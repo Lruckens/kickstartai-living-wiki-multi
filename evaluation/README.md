@@ -23,7 +23,7 @@ test of the wiki's value. **C1 vs C1r** separately shows what retrieval alone bu
   so faithfulness ≠ correctness. Use it to locate *where* errors come from, not as the outcome.
 - **Answer Relevancy** (all conditions); **Contextual Recall** for the retrieval conditions
   (C1r/C2 — did retrieval fetch what the answer needed). **Abstention** recorded on T3.
-- Judge = **Claude Sonnet** (≠ the answer model, Opus) to reduce self-preference bias.
+- Judge = **Claude Opus** (≠ the answer model, Sonnet) to reduce self-preference bias.
 
 ## Reference answers (provenance matters — Sanne's point)
 Correctness vs reference is the main metric, so the references must be **written from the

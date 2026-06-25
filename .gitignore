@@ -29,5 +29,14 @@ wiki/.obsidian/workspace*.json
 wiki/.obsidian/cache
 wiki/.trash/
 
-# Evaluation run outputs
+# Evaluation run outputs (live file; dated archives are kept)
 evaluation/results.json
+
+# DeepEval cache
+.deepeval/
+
+# Claude Code local settings
+.claude/settings.local.json
+
+# Office temp / lock files
+~$*

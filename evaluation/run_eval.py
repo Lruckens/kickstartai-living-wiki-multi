@@ -64,9 +64,33 @@ def main() -> None:
 
     judge = ClaudeJudge()
     metrics = build_metrics(judge)
-    results = []
+
+    # Resume: if the output file already holds completed work (e.g. a prior run that hit
+    # an API limit), reload it and skip questions already fully scored for the requested
+    # conditions — so re-running picks up where it stopped instead of redoing everything.
+    # (Delete the --out file to force a fresh run.)
+    results, done_ids = [], set()
+    out_path = Path(args.out)
+    if out_path.exists():
+        try:
+            loaded = json.loads(out_path.read_text(encoding="utf-8"))
+            # drop incomplete records (a question whose judging was cut off mid-run)
+            results = [r for r in loaded
+                       if r.get("scores", {}).get("correctness", {}).get("score") is not None]
+            by_id: dict = {}
+            for r in results:
+                by_id.setdefault(r["id"], set()).add(r["condition"])
+            done_ids = {qid for qid, cs in by_id.items()
+                        if all(c in cs for c in args.conditions)}
+            if done_ids:
+                print(f"↻ resuming from {out_path.name}: {len(done_ids)} question(s) already "
+                      f"complete for {args.conditions} — skipping them")
+        except Exception:  # noqa: BLE001 — corrupt/partial file → start clean
+            results, done_ids = [], set()
 
     for q in questions:
+        if q["id"] in done_ids:
+            continue
         print(f"\n● {q['id']} [{q['type']}] {q['question']}")
         for cond in args.conditions:
             gen = pipelines.answer(q["question"], cond, args.project)
@@ -97,6 +121,9 @@ def main() -> None:
             sc = " ".join(f"{k}={v['score']}" for k, v in scores.items())
             print(f"   {cond}: {sc} | tokens_fed={gen['tokens_fed']} lat={gen['latency_s']}s"
                   + (f" | abstained={abstained}" if q["type"] == "T3" else ""))
+        # incremental save: flush after every question so a mid-run failure (e.g. hitting
+        # the API usage limit) preserves all completed work instead of losing the whole run
+        Path(args.out).write_text(json.dumps(results, indent=2), encoding="utf-8")
 
     Path(args.out).write_text(json.dumps(results, indent=2), encoding="utf-8")
     summarise(results)

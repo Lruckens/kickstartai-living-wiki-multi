@@ -55,4 +55,5 @@ CORE_FOR = {
     "C1":  ["faithfulness", "answer_relevancy", "correctness"],                      # raw dumped
     "C1r": ["faithfulness", "contextual_recall", "answer_relevancy", "correctness"], # raw + retrieval
     "C2":  ["faithfulness", "contextual_recall", "answer_relevancy", "correctness"], # wiki + retrieval
+    "C2g": ["contextual_recall", "correctness"], # wiki+graph: only the 2 informative metrics (faithfulness/relevancy are flat across conditions) → ~½ the judge cost
 }

@@ -282,7 +282,7 @@ AUDIT_SCHEMA = {
 def run_llm_audit(client, page_text: str, paragraphs_text: str, level: str) -> dict:
     audit_prompt = AUDIT_PROMPT_PATH.read_text(encoding="utf-8")
     message = client.messages.create(
-        model="claude-opus-4-8",
+        model="claude-sonnet-4-6",
         max_tokens=4000,
         system=audit_prompt,
         output_config={"format": {"type": "json_schema", "schema": AUDIT_SCHEMA}},

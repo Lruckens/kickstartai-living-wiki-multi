@@ -22,7 +22,7 @@ time — more correct, less hallucination, fewer tokens, and it scales as the co
 
 ---
 
-## Conditions (same answer model `claude-opus-4-8`, same prompt; only context differs)
+## Conditions (same answer model `claude-sonnet-4-6`, same prompt; only context differs)
 
 | ID | Context | Represents |
 |---|---|---|
@@ -41,7 +41,7 @@ the top-k items load. **C1r vs C2 isolates compiled-wiki vs raw-source** (retrie
 - **T1** single-fact ×10 · **T2** synthesis ×10 · **T3** unanswerable/trap ×10
   (correct behaviour on T3 = decline, not fabricate).
 
-## Metrics ([`metrics.py`](metrics.py)) — judge = `claude-sonnet-4-6` (≠ answer model)
+## Metrics ([`metrics.py`](metrics.py)) — judge = `claude-opus-4-8` (≠ answer model)
 
 - **Correctness** vs the human reference — **PRIMARY outcome**.
 - **Faithfulness** — secondary diagnostic (grounding in the given context; ≠ correctness).
