@@ -126,7 +126,6 @@ generated page is shared:
   back, and why — so the system stays auditable over time.
 
 ---
----
 
 ## Gap Detector
 
