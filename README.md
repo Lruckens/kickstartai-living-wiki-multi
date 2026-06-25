@@ -152,6 +152,12 @@ Each gap tells you:
 
 Gaps are also cross-checked against `wiki/_gaps.md` — the team's own gap log — and tagged as *detected* (found automatically), *confirmed* (also in the team log), or *team-logged* (in the log but not caught automatically).
 
+## Generator Module
+
+The generator module helps users turn project knowledge into ready-to-use communication drafts. From the app, a user chooses what they want to generate, for example a progress report, onboarding summary, weekly digest, LinkedIn post, or custom output, and selects the intended audience, tone, length, and focus.
+Behind the scenes, the system gathers the relevant information from the structured wiki, such as project overviews, decisions, deliverables, recent meetings, and open gaps. It then uses this wiki context to generate a draft that is adapted to the selected stakeholder.
+Because the generator works from the compiled wiki instead of raw project files, the output is based on the project’s structured knowledge base. If permissions are enabled, the module only uses content that the selected audience is allowed to see. The result is shown in the user-interface as a draft that can be reviewed, edited, copied, or shared.
+
 ---
 
 ## Evaluation
