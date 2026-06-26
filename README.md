@@ -160,22 +160,6 @@ Because the generator works from the compiled wiki instead of raw project files,
 
 ---
 
-## Evaluation
-
-The evaluation harness compares answering from the compiled wiki against answering from raw
-source context (conditions C0–C2g; correctness via a cross-model LLM judge plus RAGAS
-diagnostics).
-
-```bash
-pip install -r evaluation/requirements.txt
-python evaluation/run_eval.py --project uva
-```
-
-See [`evaluation/README.md`](evaluation/README.md) for the full design, conditions, metrics,
-and question set.
-
----
-
 ## Acknowledgements
 
 - **KickstartAI** — the Dutch applied-AI non-profit this project was built with.
